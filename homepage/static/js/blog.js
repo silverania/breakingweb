@@ -40,7 +40,7 @@ var spanBlogEsci=document.createElement("SPAN");
 //var bH5=document.createElement("span")
 //var spanUserName=document.createElement("SPAN");
 var post,post2=new Object()
-var isOpen
+var isOpen=false
 var bSection=document.createElement("SECTION")
 //var bSpan=document.createElement("SPAN");
 //var bSpanChild=document.createElement("SPAN");
@@ -468,6 +468,7 @@ create(){
 function initBlogSGang(login,tut,id="footer"){
   if(login=="False"||login=="false"||login=="none"||login=="AnonymousUser"){
     loginis="MisterX"
+    alert(login)
   }
   else{
     loginis=login
@@ -538,10 +539,12 @@ function makeModalWindow(mess){
   else{
     modal.style.display = "block";
   }
-
+  let txt
+  txt=$("#p_text").val()
   $('#but_confirm_title').click(function() {
+
+    alert(txt)
     try{
-      let txt=$("#p_text").val()
       if (!(txt=="Titolo Post ?")){
         mess.titled=txt
         mess.type="newpost"

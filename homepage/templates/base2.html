@@ -14,8 +14,8 @@
   <link rel="stylesheet" href="{% static "css/all.css" %}">
   <link rel="stylesheet" href="{% static "css/homepage.css" %}">
   <link rel="stylesheet" href="{% static "css/footer.css" %}">
-  <link rel="stylesheet" href="{% static "css/blog.css" %}">
   <script src="{% static 'js/all.min.js' %}"></script>
+  <link rel="stylesheet" href="/static/css/blog.css">
 
   <!--script  src="{% static 'js/jquery.min.js' %}"></script-->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -23,7 +23,7 @@
 
   <script  src="{% static 'js/aside.js' %}"></script>
   <script  src="{% static 'js/style.js' %}"></script>
-  <script  src="{% static 'js/blog.js' %}"></script>
+  <script  src="/static/js/blog.js"></script>
   <script  src="{% static 'js/bootstrap.min.js' %}"></script>
 </head>
 {% endblock head %}
@@ -197,19 +197,12 @@ function getIndex(e) {
   <div id="col_blog" class="col-12 col-md-12 col-lg-12">
 
 
-<!--section id="blog">
 
-<div  class="blog_title">
-  <span id="s_blog_icon" class="badge badge-info badge-outlined-info"><i class="fas fa-comments"></i>  <span id="s_blog_text" >
-</span></div>
-<form action="post/getpost">
-<div class="form-group" id="multiarea">
-<button type="button" id="button_blog" class="btn btn-block btn-outline-info" onclick="writeMsg(this.id,'{{login}}')">Commenta
-</button-->
 
 <script>
 
-//initBlogSGang("{{request.user}}",title);
+initBlogSGang("{{request.user}}", "{{title}}");
+alert("{{title}}"+"cazzo")
 </script>
 </div>
 
