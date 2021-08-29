@@ -48,7 +48,6 @@ def tutorial_detail(request, **kwargs):
     tutorial_all = Tutorial.objects.all()
     categorie = Category.objects.all()
     for tutorial in tutorial_all:
-
         author_tutorial = str(tutorial.author).replace(" ", "")
         for profile in Profile.objects.all():
             user_string = str(profile)

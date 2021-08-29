@@ -14,7 +14,8 @@ from django.urls import reverse
 photo = ""
 message = ""
 tu = Site()
-formatted_datetime = formats.date_format(datetime.now(), "SHORT_DATETIME_FORMAT")
+formatted_datetime = formats.date_format(
+    datetime.now(), "SHORT_DATETIME_FORMAT")
 
 
 class LazyEncoder(DjangoJSONEncoder):
@@ -51,6 +52,7 @@ def serializer(data):
 
 
 def getPost(request):
+
     print("entry in view getpost")
     global tu, formatted_datetime
     profile_list = []
@@ -67,7 +69,8 @@ def getPost(request):
         print("tut=" + str(tutorial))
         tu = Site.objects.get(title=tutorial)
         aggiornato = formatted_datetime
-        all_comments_for_page = Comment.objects.filter(site=tu).order_by("-publish")
+        all_comments_for_page = Comment.objects.filter(
+            site=tu).order_by("-publish")
         # tutti i commenti sul tutorial
         datac = list(all_comments_for_page)
         userLogged = list(userLogged)
