@@ -468,7 +468,7 @@ create(){
 
 function initBlogSGang(login,tut,id="footer"){
   if(login=="False"||login=="false"||login=="none"||login=="AnonymousUser"){
-    loginis="MisterX"
+    loginis="anonimo"
   }
   else{
     loginis=login
