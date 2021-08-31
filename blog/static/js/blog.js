@@ -12,7 +12,7 @@ var padre
 var user
 var loginis
 var lastUpdate
-var userLoggedPhoto
+var userLogged
 var butcloned
 var isChanged=false
 var bbutton=document.createElement("Button");
@@ -101,7 +101,7 @@ function createSectionDivSpan(){
   ulBlogReg.setAttribute("id","ul_blog")
   ulBlogReg.setAttribute("style","list-style: none;padding: 0;margin: 0;")
   parent=document.body.insertBefore(bSection,document.getElementsByTagName("footer")[0]);
-  if(loginis=="MisterX"){
+  if(loginis=="anonimo"){
     console.log(loginis)
     aBlogReg.appendChild(spanBlogReg)
     liBlogReg.appendChild(aBlogReg)
