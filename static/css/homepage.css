@@ -99,7 +99,7 @@ a ,a > span {
 #span_title_2{
 font-family: 'Carter_One';  font-weight:bold;
 font-style:italic;
-color:#008BE7;
+color:black; 
 }
 
 #span_title_w{
@@ -308,13 +308,11 @@ font-weight:bold;
   background-color:orange;
   color:orange;
 }
-
 #p_content{
   margin:0 auto;
   padding:20px;
-  background-color:#e6ffff;
+  background-color: white;
 }
-
 a:hover{
   cursor:pointer;
 }

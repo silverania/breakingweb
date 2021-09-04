@@ -108,10 +108,10 @@ def tutorial_detail(request, **kwargs):
     try:
         lastobj = Visite.objects.latest('visite')
         vis.visite = lastobj.visite+1
-    except:
+    except UnboundLocalError:
         vis.visite = 1
     vis.save()
-    return render(request, template, {'tutorial': tutorial, 'visitato': vis, 'login': login, 'tutorial_all': tutorial_all, 'categorie': categorie, 'photo': photo, 'users': users, 'autore': autore})
+    return render(request, template, {'tutorial': tutorial, 'visitato': vis, 'login': login, 'tutorial_all': tutorial_all, 'categorie': categorie, 'photo': photo, 'users': users, 'autore': autore, })
 
 
 def readInfoClient(request):

@@ -32,7 +32,7 @@ def getLoginName(request):
             myuser = Profile.objects.filter(user_id=request.user.id)
         else:
             user = request.GET.get("loginis")
-            myuser = Profile.objects.filter(first_name="anonimo")
+            myuser = Profile.objects.filter(first_name=user)
             # myuser.photo=settings.MEDIA_URL+"images/user-secret-solid.gif"
             print("SER NON AUTENT " + str(myuser))
     except:

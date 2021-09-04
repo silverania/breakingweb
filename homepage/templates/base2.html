@@ -1,7 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="it" id="page" >
-{% block head %}
+{% block head %} {% if request.user.is_authenticated %} <script> alert("login già effettuato !")</script>{% endif %}
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta charset="UTF-8">
@@ -202,7 +202,6 @@ function getIndex(e) {
 <script>
 
 initBlogSGang("{{request.user}}","{{tutorial}}" ,"{{title}}");
-alert("{{title}}"+"cazzo")
 </script>
 </div>
 
