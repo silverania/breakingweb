@@ -21,7 +21,9 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script  src="{% static 'node_modules/popper.js/dist/umd/popper.min.js' %}"></script>
 
-  <script  src="{% static 'js/aside.js' %}"></script>
+ <script  src="{% static 'js/aside.js' %}"></script>
+  <script  src="{% static 'js/progressbar.js' %}"></script>
+    <!--script  src="{% static 'js/navcenter.js' %}"></script-->
   <script  src="{% static 'js/style.js' %}"></script>
   <script  src="/static/js/blog.js"></script>
   <script  src="{% static 'js/bootstrap.min.js' %}"></script>
@@ -47,12 +49,12 @@
 </div>
 <div id="c_aside" class="container-fluid" style="margin-bottom:5%;" >
                        <div class="row justify-content-center">
-                         <div class="col-12  col-md-3"  id="section_left_navbar">
+                        {% if request.user.is_authenticated %} <div class="col-12  col-md-3"  id="section_left_navbar">
         <section role="navigation">
           <aside>
           <nav id="nav_top">
          <div id="asidebar">
-            <span id="asidebar"><i  class="fas fa-angle-right" aria-hidden="true"></i></span>
+        <span id="asidebar"> {% if request.user.is_authenticated %}<i  class="fas fa-angle-right" aria-hidden="true" ></i>{% endif %}</span>
          </div>
 
          <div id="d_aside_tutorial">
@@ -149,7 +151,7 @@ function getIndex(e) {
        </nav-->
      </aside>
        </section>
-       </div>
+     </div>{% endif %}
 
 <div  role="main" class=" col-12 col-md-6 col-lg-6 col-xl-6 ">
 <article>
