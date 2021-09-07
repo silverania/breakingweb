@@ -1,7 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="it" id="page" >
-{% block head %} {% if request.user.is_authenticated %} <script> alert("login già effettuato !")</script>{% endif %}
+{% block head %} {% if request.user.is_authenticated %} <script> alert("login effettuato !")</script>{% endif %}
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta charset="UTF-8">
@@ -49,7 +49,7 @@
 </div>
 <div id="c_aside" class="container-fluid" style="margin-bottom:5%;" >
                        <div class="row justify-content-center">
-                        {% if request.user.is_authenticated %} <div class="col-12  col-md-3"  id="section_left_navbar">
+                         <div class="col-12  col-md-3"  id="section_left_navbar">
         <section role="navigation">
           <aside>
           <nav id="nav_top">
@@ -151,7 +151,7 @@ function getIndex(e) {
        </nav-->
      </aside>
        </section>
-     </div>{% endif %}
+     </div>
 
 <div  role="main" class=" col-12 col-md-6 col-lg-6 col-xl-6 ">
 <article>
