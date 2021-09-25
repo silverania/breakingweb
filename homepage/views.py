@@ -49,7 +49,7 @@ def tutorial_detail(request, **kwargs):
     categorie = Category.objects.all()
     for tutorial in tutorial_all:
         author_tutorial = str(tutorial.author).replace(" ", "")
-        for profile in Profile.objects.all():
+    for profile in Profile.objects.all():
             user_string = str(profile)
             user_string = user_string.replace(" ", "")
             if user_string in author_tutorial:
@@ -59,8 +59,8 @@ def tutorial_detail(request, **kwargs):
                 print("error add profile in user's list")
             else:
                 continue
-        tutorials_user = users
-        print("Users CON ALMENO U NN TUTORIAL:"+str(tutorials_user))
+    tutorials_user = users
+    print("Users CON ALMENO U NN TUTORIAL:"+str(tutorials_user))
     #users=Profile.objects.all()
     try:
      for key, value in kwargs.items():
@@ -90,6 +90,7 @@ def tutorial_detail(request, **kwargs):
             print("ECCEZIONE : prendo l' ultimo tutorial scritto! ")
             tutorial = Tutorial.objects.latest('publish')
     user = tutorial.author
+    print("user= "+str(user))
     autore = str(user)
     photo = settings.MEDIA_URL+str(user.photo)
     #photo=user.photo

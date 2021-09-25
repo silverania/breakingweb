@@ -42,39 +42,7 @@
 
       <span class="badge badge-warning s_title_paragraph" style="color:white;">index.html
       </span><br>
-      <code>
-      <pre id="x_code">
-        &lt!DOCTYPE html>
-        &lt;html lang="it">
-        &lt;head>
-        &lt;link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        &lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        &lt;/head>
-        &lt;body>
-        &lt;div class="container-fluid" style="">
-        &lt;div id="asidebar" style="background-color:white;">
-           &lt;span id="asidebar" style="margin-top:5%;font-size:5vw" class="fa fa-angle-right" aria-hidden="true">&lt;/span>
-            &lt;/div> &lt;span id="s_left_tutorial" class="badge badge-info">Tutorial&lt;/span>
-        &lt;/div>
-         &lt;div  class="d_divaside" style="margin:0;padding:0;position:absolute;width:20%;max-width:20%;">
-           &lt;div class="list-group" id="d_asidemenu" role="tablist">
-             &lt;a  id="a_html2" class="list-group-item list-group-item-action" data-toggle="list" href="#d_inasidemenu" role="tab">&lt;span id="s_leftmenu" style="color:orange!important;">django&lt;/span>&lt;/a>
-             &lt;a id="a_html" class="list-group-item list-group-item-action" data-toggle="list" href="#d_html_inasidemenu" role="tab">&lt;span id="s_leftmenu" style="color:orange!important;">html&lt;/span>&lt;/a>
-           &lt;!-- Tab panes -->
-           &lt;div id="d_htmlmenu" class="list-group">
-               &lt;a id="a_html" class="list-group-item list-group-item-action"   href="#">
-                 &lt;span id="s_leftmenu" style="color:orange!important;">Menu Animato&lt;/span>
-             &lt;/a>
-           &lt;/div>
-        &lt;/div>
-           &lt;/div>
-        &lt;/div>
-        &lt;script  src="js/jquery.min.js">&lt;/script>
-        &lt;script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">&lt;/script>
-        &lt;script  src="js/aside.js">&lt;/script>
-        &lt;/body>
-        &lt;/html>
-       </pre></code>
+
        </p>
 
 
@@ -150,24 +118,19 @@
       $('#asidebar').hover(function(){
         $('#asidebar').animate({ "margin-left" : '14px','opacity' : '0.5',},400);
       },
-
     /* quando il mouse si allontenerà dalla freccia quest' ultima tornerà nella posizione iniziale e l' opacita tornerà a 1*/
-
       function(){
         $('#asidebar').animate({ "margin-left" : '0px','opacity' : '1',},400);});
-
     /* quando cliccheremo sulla freccia comparirà il menu .... a 0px torna visibile visto che la posizione iniziale era -700px: quindi era nascosta*/
-
       $('#asidebar').click(function(){
         $('.d_divaside').animate({ "left" : '0px',},400);});
-
     /* quando il mouse passera(hover) su #a_html , e il cursore del mouse diventerà a forma di mano*/
     $('#a_html').hover(function(){
       $('#d_htmlmenu').css('cursor','pointer');},
     function(){
       /*$('#d_htmlmenu').css('display','none');*/
     });
-  /* l' elemento #d_htmlmenu torna visibile quando si fa click sull elemento con id #a_html2 con "display:block" */+
+  /* l' elemento #d_htmlmenu torna visibile quando si fa click sull elemento con id #a_html2 con "display:block" */
     $('#a_html2').click(function(){
       $('#d_htmlmenu').css('display','block');
       $('#a_html').css('display','block');
@@ -182,16 +145,12 @@
       }
     });
     });
-
-
     </pre></code>
 </p>
-
 <p id="p_content" class="mt-1">
   se usate la versione fontawesome 4.7 vi troverete con una freccia (.fa fa-angle-right) diversa da quella su questa pagina, se volte la stessa freccia del tutorial dovete usare la versione<br>
     5 , che trovate <a href="https://fontawesome.com/">qui.</a>E ricordate che nella versione 5 "fa fa-angle-right" diventa : "fas fa-angle-right" e in una pagina html va inserita così :
     <code>&lt;i class="fas fa-angle-right">&lt;i></code>
-
 <hr><br><br>
 <h2><span class="badge badge-warning s_title_paragraph">Alternare i Menù Visualizzati</span></h2>
 <p id="p_content" class="mt-1">
@@ -202,57 +161,100 @@
    javascript , quella che gestisce <code>$(document).click(function(){ .....</code>
   Sotto i files : <mark>html,css,javascript</mark> modificati . La prima modifica riguarda il file
   html , in cui vanno aggiunte un paio di voci ai menu. Quindi di seguito il nuovo file html<br><br>
-
   <span class="badge badge-warning s_title_paragraph" style="color:white;">index.html
   </span><br>
-
   <pre id="x_code">
-    &lt;!DOCTYPE html>
-       &lt;html lang="it">
-       &lt;head>
-       &lt;link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-       &lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-       &lt;/head>
-            &lt;body>
-
-         &lt;div class="container-fluid" style="">
-           &lt;div id="asidebar" style="background-color:white;">
-             &lt;span id="asidebar" style="margin-top:5%;font-size:5vw" class="fas fa-angle-right" aria-hidden="true">&lt;/span>
-             &lt;/div> &lt;span id="s_left_tutorial" class="badge badge-info">Tutorial&lt;/span>
-           &lt;/div>
-           &lt;div  class="d_divaside">
-             &lt;div class="list-group" id="d_asidemenu" role="tablist">
-               &lt;a  id="a_html1" class="list-group-item list-group-item-action" data-toggle="list" href="#tutorial_django" role="tab">&lt;span id="s_leftmenu_django" style="color:orange!important;">Django&lt;/span>&lt;/a>
-               &lt;a id="a_html2" class="list-group-item list-group-item-action" data-toggle="list" href="#tutorial_html" role="tab">&lt;span id="s_leftmenu_html" style="color:orange!important;">Html&lt;/span>&lt;/a>
-               &lt;a id="a_html3" class="list-group-item list-group-item-action" data-toggle="list" href="#tutorial_linux" role="tab">&lt;span id="s_leftmenu_linux" style="color:orange!important;">Linux&lt;/span>&lt;/a>
-
-               &lt;div id="d_htmlmenu" class="list-group">
-                 &lt;a id="a_tutorial_html_menu" class="list-group-item list-group-item-action"   href="#">
-                   &lt;span id="s_leftmenu1" style="color:orange!important;">Menu Animato&lt;/span>
-                 &lt;/a>
-                 &lt;a id="a_tutorial_django_urls" class="list-group-item list-group-item-action"   href="#">
-                   &lt;span id="s_leftmenu2" style="color:orange!important;">urls.py in django&lt;/span>
-                 &lt;/a>
-                 &lt;a id="a_tutorial_pdf_converter" class="list-group-item list-group-item-action"  href="#">
-                   &lt;span id="s_leftmenu3" style="color:orange!important;">Converti Testo&lt;/span>
-                 &lt;/a>
-               &lt;/div>
-             &lt;/div>
-           &lt;/div>
-         &lt;/div>
-
-         &lt;script  src="js/jquery.min.js">&lt;/script>
-         &lt;script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">&lt;/script>
-         &lt;script  src="js/aside.js">&lt;/script>
-         &lt;/body>
-         &lt;/html>
+    &lt;section role="navigation">
+      &lt;aside>
+      &lt;nav id="nav_top">
+     &lt;div id="asidebar">
+    &lt;span id="asidebar"> {% if request.user.is_authenticated %}<i  class="fas fa-angle-right" aria-hidden="true" >
+    &lt;/i>{% endif %}
+  &lt;/span>
+     &lt;/div>
+     &lt;div id="d_aside_tutorial">
+     &lt;div id="d_tutorial_section">
+&lt;ul  class="w-100 list-group select_tutorial" id="selecFormAutori">
+{% for t in users %}
+  &lt;li  onclick="show(this.innerHTML)" id="option_autori_{{t.user.username}}" value="{{t.user.username}}" class="list-group-item option_autori " >{{t.user.username}}
+&lt;/li>
+  {% endfor %}
+&lt;/ul>
+&lt;/div>
+&lt;div id="d_inside_tutorial_section">
+&lt;ul  class="list-group" id="ul_in_selecFormAutori">
+&lt;/ul>
+&lt;/div>
+&lt;/div>
+&lt;script>
+$(document).ready(function(){
+var a = "{{tutorial.category}}";
+setActiveHeaderMenu(a);
+});
+&lt;/script>
+&lt;script>
+var name;
+var exist=0
+function show(e){
+getIndex(e);
+}
+function getIndex(e) {
+name=e
+var width=window.innerWidth;
+var autore=e.replace(/\s/g,'');
+var tag=document.getElementById('ul_in_selecFormAutori');
+if (exist==0){
+console.log("exist=0")
+{% for tut in tutorial_all %}
+toCompare="{{tut.author.user.username}}";
+toCompare=toCompare.replace(/\s/g,'');
+if (autore.localeCompare(toCompare)==0){
+var optio = document.createElement('LI');
+optio.setAttribute("id","tutorial_id_{{tut.id}}")
+//$('#ul_in_selecFormAutori').css("display","block")
+title="{{tut.title}}";
+base=width/2;
+base=base.toString()+"px";
+var url="{{tut.get_absolute_url}}"
+optio.setAttribute("class","list-group-item li_tutorials");
+optio.setAttribute("onclick","window.open("+"\""+url+"\""+")");
+optio.setAttribute('style','font-size:1rem');
+optio.setAttribute('style','width:'+base.toString());
+//optio.value=url;
+optio.innerHTML = title;
+tag.appendChild(optio);
+$('#d_inside_tutorial_section').css("display","block")
+let x=(parseInt($('#selecFormAutori').css('width')))/10;
+$('#d_inside_tutorial_section').animate({'left': x },400)
+exist=1
+}
+else{
+exist=0
+}
+{% endfor %}
+}
+}
+&lt;/script>
+      &lt;div  id="d_divaside" class="d_divaside">
+        &lt;div id="d_in_divaside" class="list-group"  role="tablist">
+            {% for c in categorie %}
+        &lt;div id="d_{{c.title}}_menu" class="list-group">
+          {% for a in c.tutorials.all %}
+            &lt;a id="a_tutorial_{{a.title}}" class="list-group-item list-group-item-action" href={{a.get_absolute_url}}>
+              &lt;span id="s_leftmenu1" >{{a.title}}&lt;/span>
+          &lt;/a>
+          {% endfor %}
+        &lt;/div>
+        {% endfor %}
+        &lt;/div>
+     &lt;/div>
+   &lt;/nav>
+ &lt;/aside>
+   &lt;/section>
          </pre>
-
          <br><br>
          <h2><span class="badge badge-warning s_title_paragraph">Qui Il file css</span></h2>
          <br><br>
-
-
         <code>
          <pre id="x_code">
          .d_divaside{
