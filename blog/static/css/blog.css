@@ -153,6 +153,11 @@ ul#ul_blog li{
   border:3px solid orange;
   border-radius:10px;
   background-color:white;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 }
 
 
