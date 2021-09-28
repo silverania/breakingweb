@@ -466,7 +466,7 @@ create(){
 }
 
 
-function initBlogSGang(login,tut,id="footer"){
+function initBlogSGang(login,tut,id="footer",tagTitle){
   if(login=="False"||login=="false"||login=="none"||login=="AnonymousUser"){
     loginis="anonimo"
   }
@@ -475,6 +475,7 @@ function initBlogSGang(login,tut,id="footer"){
   }
   idis=id;
   tutorial=tut
+  tagTitle=document.title
   createSectionDivSpan(idis);
 }
 
