@@ -57,6 +57,7 @@ class Comment(models.Model):
     updated = models.DateTimeField(auto_now=True)
     postType = models.CharField(max_length=10, default="post")
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default="bozza")
+    tagTitleInPage = models.CharField(max_length=100, default="tag_value")
 
     def get_absolute_url(self):
         return reverse(
