@@ -54,7 +54,7 @@ def serializer(data):
 def getPost(request):
 
     print("entry in view getpost")
-    global tu, formatted_datetime
+    global tu, formatted_datetime, tagTitle
     profile_list = []
     datac = []
     comments = Comment()
@@ -64,11 +64,10 @@ def getPost(request):
     comments_in_database = Comment.objects.all()
     userLogged = getLoginName(request)
     print("USERLOGGED=" + str(userLogged))
-    if "tutorial" in request.GET and request.GET["tutorial"]:
-        tutorial = request.GET.get("tutorial")
-        print("tut=" + str(tutorial))
-        tu = Site.objects.get(title=tutorial)
-        print("TU="+str(tu))
+    if "tagTitle" in request.GET and request.GET["tagTitle"]:
+        tagTitle = request.GET.get("tagTitle")
+        print("tagtitle=" + str(tagTitle))
+        tagTitleInPage = Site.objects.get(title=tagTitle)
         aggiornato = formatted_datetime
         all_comments_for_page = Comment.objects.filter(
             site=tu).order_by("-publish")
@@ -81,7 +80,7 @@ def getPost(request):
         print("data comment Json format=" + str(datac))
         print("comment_model_serialized=" + str(comment_model_serialized))
         for comment in all_comments_for_page:
-            print("body Comment" + str(comment))
+            print("TAGTITLE" + str())
             print()
             t_reverse_order = comment.risposte.all().order_by('publish')
             # t_order = comment.risposte.all().order_by('-publish')

@@ -56,6 +56,7 @@ var newPostId=0
 var elementToAppendPostArea
 var json_resps
 
+
 function createSectionDivSpan(){
   bForm.setAttribute("action","post/getpost");
   bForm.setAttribute("class","form_comment")
@@ -466,7 +467,7 @@ create(){
 }
 
 
-function initBlogSGang(login,tut,id="footer",tagTitle){
+function initBlogSGang(login,titleTag,id="footer"){
   if(login=="False"||login=="false"||login=="none"||login=="AnonymousUser"){
     loginis="anonimo"
   }
@@ -474,8 +475,8 @@ function initBlogSGang(login,tut,id="footer",tagTitle){
     loginis=login
   }
   idis=id;
-  tutorial=tut
-  tagTitle=document.title
+  //tutorial=tut
+  tagTitle=titleTag
   createSectionDivSpan(idis);
 }
 
@@ -681,6 +682,7 @@ $(document).ready(function(){
   var indexX=0
   var initial_y
   var y=0,s
+  var tagTitle="indefinito"
   mess=new Array()
   resps=new Array()
   var post = new Array()
@@ -711,7 +713,7 @@ $(document).ready(function(){
   $.ajax({
     url: '/post/showposts',
     data: {
-      'loginis': loginis,'tutorial':tutorial,
+      'loginis': loginis,'tagTitle' : tagTitle
     },
     dataType: 'json',
     success: function (data) {
