@@ -682,7 +682,7 @@ $(document).ready(function(){
   var indexX=0
   var initial_y
   var y=0,s
-  var tagTitle="indefinito"
+  var tagTitle=document.getElementsByTagName('title')[0]
   mess=new Array()
   resps=new Array()
   var post = new Array()
