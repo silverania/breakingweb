@@ -14,6 +14,7 @@ from django.urls import reverse
 photo = ""
 message = ""
 tu = Site()
+site = ""
 formatted_datetime = formats.date_format(
     datetime.now(), "SHORT_DATETIME_FORMAT")
 
@@ -54,35 +55,40 @@ def serializer(data):
 def getPost(request):
 
     print("entry in view getpost")
-    global tu, formatted_datetime, tagTitle
+    global tu, formatted_datetime, tagTitle , site
     profile_list = []
     datac = []
     comments = Comment()
+    site = Site()
     risposte = []
     risposte_serialized = []
     profiles_list = []
     comments_in_database = Comment.objects.all()
+    print("COMMENTS in DATABASES"+str(comments_in_database))
     userLogged = getLoginName(request)
     print("USERLOGGED=" + str(userLogged))
     if "tagTitle" in request.GET and request.GET["tagTitle"]:
         tagTitle = request.GET.get("tagTitle")
+        print("TAGTITLE & site "+str(tagTitle)+str(tagTitle))
+
         print("tagtitle=" + str(tagTitle))
-        tagTitleInPage = Site.objects.get(title=tagTitle)
-        aggiornato = formatted_datetime
-        all_comments_for_page = Comment.objects.filter(
-            site=tu).order_by("-publish")
+        #tagTitleInPage = Site.objects.get(title=tagTitle)
+        #aggiornato = formatted_datetime
+
+        #all_comments_for_page = Comment.objects.filter(title=tagTitle)
         # tutti i commenti sul tutorial
+        #all_comments_for_page = Comment.objects.get()
         datac = list(all_comments_for_page)
         userLogged = list(userLogged)
         userLogged = serializer(userLogged)
         data_comm = serializer(datac)
         comment_model_serialized = serializer(all_comments_for_page)
         print("data comment Json format=" + str(datac))
-        print("comment_model_serialized=" + str(comment_model_serialized))
-        for comment in all_comments_for_page:
-            print("TAGTITLE" + str())
-            print()
-            t_reverse_order = comment.risposte.all().order_by('publish')
+        print("comment_model_serialized=" + str(comment_model_serialized)+str("userLogged"+str(userLogged)))
+        for comment in comments_in_database:
+            print(" 84 TAGTITLE===" + str(tagTitle))
+            print("COMMENTO ===="+str(comment))
+            t_reverse_order = Comment.risposte.all().order_by('publish')
             # t_order = comment.risposte.all().order_by('-publish')
             t = list(t_reverse_order)
             print("Resp=" + str(t))
@@ -100,6 +106,7 @@ def getPost(request):
             risposte_serialized = serializer(t2)
             profiles = list(Profile.objects.all())
             profiles_list = serializer(profiles)
+            print("PROFIKLELIST"+str(profiles_list))
         except UnboundLocalError:
             print("Nessun commento per la pagina !")
         data = json.dumps(
@@ -130,6 +137,7 @@ def newPost(request):
         post = Resp()
     myuser = Profile()
     myuser.firstname = getLoginName(request)
+    post.site = tu
     if "newpost" in postType:
         post.site = tu
         if "title" in request.GET and request.GET["title"]:

@@ -20,12 +20,10 @@ class Site(models.Model):
     slug = models.SlugField(max_length=250, null=True, blank=True)
 
     def save(self, *args, **kwargs):
-        today = date.today()
-        self.slug = self.title + "_" + str(today)
         super(Site, self).save(*args, **kwargs)
 
     def __str__(self):
-        return self.slug
+        return self.title
 
 
 class Comment(models.Model):

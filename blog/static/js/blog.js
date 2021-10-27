@@ -17,6 +17,7 @@ var butcloned
 var isChanged=false
 var bbutton=document.createElement("Button");
 var resps
+var tagTitle
 //var bUserImg=document.createElement("IMG");
 var divFormChild=document.createElement("DIV");
 var bdiv=document.createElement("DIV");
@@ -40,7 +41,7 @@ var spanBlogEsci=document.createElement("SPAN");
 //var bH5=document.createElement("span")
 //var spanUserName=document.createElement("SPAN");
 var post,post2=new Object()
-var isOpen
+var isOpen=false
 var bSection=document.createElement("SECTION")
 //var bSpan=document.createElement("SPAN");
 //var bSpanChild=document.createElement("SPAN");
@@ -467,7 +468,7 @@ create(){
 }
 
 
-function initBlogSGang(login,titleTag,id="footer"){
+function initBlogSGang(login,parTagTitle,id){
   if(login=="False"||login=="false"||login=="none"||login=="AnonymousUser"){
     loginis="anonimo"
   }
@@ -476,7 +477,7 @@ function initBlogSGang(login,titleTag,id="footer"){
   }
   idis=id;
   //tutorial=tut
-  tagTitle=titleTag
+  tagTitle=parTagTitle
   createSectionDivSpan(idis);
 }
 
@@ -682,7 +683,6 @@ $(document).ready(function(){
   var indexX=0
   var initial_y
   var y=0,s
-  var tagTitle=document.getElementsByTagName('title')[0]
   mess=new Array()
   resps=new Array()
   var post = new Array()
@@ -702,6 +702,7 @@ $(document).ready(function(){
     }
     else {
       msgIsTexareaOpen()
+
     }
   })
   $('.mybut').hover(function(e){
@@ -713,8 +714,10 @@ $(document).ready(function(){
   $.ajax({
     url: '/post/showposts',
     data: {
-      'loginis': loginis,'tagTitle' : tagTitle
+      'loginis': loginis,'tagTitle' : tagTitle ,
     },
+
+
     dataType: 'json',
     success: function (data) {
       s = cleanJson(data)
@@ -730,8 +733,12 @@ $(document).ready(function(){
       }
       var photoResp
       var i=0
+
+
+
+
       //initial_y=(parseInt(obj3.length))-1
-      for (i;i<=comments_json.length-1;i=i+1){
+      for (i=0;i<=comments_json.length-1;i=i+1){
         for (z=0;z<=profiles_json.length-1;z=z+1){
           // if(obj5_photo[z].fields.user==obj2[i].fields.author){
           if(profiles_json[z].pk==comments_json[i].fields.author){
@@ -780,9 +787,10 @@ function createPostArea(messOrResp,elementToAppendArea){
   }
   else{
     msgIsTexareaOpen()
+
   }
   if(messOrResp.type == "newresp" || messOrResp.type=="newpost") {
-    isOpen=true
+    isOpen=false
   }
   else {
     if(messOrResp.type == "post" || messOrResp.type == "resp") {
@@ -804,7 +812,7 @@ function sendToServer(post=Object(),url){
   }
   else if (post.type=="newpost"){
     data={
-      'type':post.type,'tutorial':post.thisTutorialTitle,'username':loginis,'title': post.titled,'body':post.body,
+      'tagTitle':tagTile,'type':post.type,'tutorial':post.thisTutorialTitle,'username':loginis,'title': post.titled,'body':post.body,
     }
   }
   if(post.type=="newpost" || post.type=="newresp"){
