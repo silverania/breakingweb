@@ -87,6 +87,7 @@ def getPost(request):
             if str(tagTitle) in str(comment.site):
                 for resp in Resp.objects.all():
                     print("resp.commento"+str(resp.commento))
+                    print("resp_all="+str(resp.commento.risposte.all()))
                 # t_reverse_order = Comment.risposte.all().order_by('publish')
                 # t_order = comment.risposte.all().order_by('-publish')
                 # t = list(t_reverse_order)
@@ -96,7 +97,7 @@ def getPost(request):
                 # except UnboundLocalError:
                     # t2 = t
                 try:
-                    print("SERIALIZED :"+str(t2)+"PROFILKE_LIST="+str(profile_list))
+                    print("SERIALIZED :PROFILKE_LIST="+str(profile_list))
             #risposte_serialized = serializer(t2)
                     profiles = list(Profile.objects.all())
                     profiles_list = serializer(profiles)
