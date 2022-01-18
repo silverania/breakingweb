@@ -70,34 +70,37 @@ def getPost(request):
     if "tagTitle" in request.GET and request.GET["tagTitle"]:
         tagTitle = str(request.GET.get("tagTitle"))
 
-        # tagTitleInPage = Site.objects.get(title=tagTitle)
-        #aggiornato = formatted_datetime
+        tagTitleInPage = Site.objects.get(title=tagTitle)
+        aggiornato = formatted_datetime
 
-        #all_comments_for_page = Comment.objects.filter(site=tagTitle)
+        all_comments_for_page = Comment.objects.filter(site=tagTitle)
         # tutti i commenti sul tutorial
-        #all_comments_for_page = Comment.objects.get()
-        #datac = list(all_comments_for_page)
+        all_comments_for_page = Comment.objects.get()
+        datac = list(all_comments_for_page)
         userLogged = list(userLogged)
         userLogged = serializer(userLogged)
-        #data_comm = serializer(datac)
-        #comment_model_serialized = serializer(all_comments_for_page)
-        #print("data comment Json format=" + str(datac))
-        #print("comment_model_serialized=" + str(comment_model_serialized)+str("userLogged"+str(userLogged)))
+        data_comm = serializer(datac)
+        comment_model_serialized = serializer(all_comments_for_page)
+        print("data comment Json format=" + str(datac))
+        print("comment_model_serialized="
+              + str(comment_model_serialized)+str("userLogged"+str(userLogged)))
 
         for comment in comments_in_database:
-            print("tagtitle="+str(tagTitle)+"___"+"comment.site="+str(comment.site))
+            print("tagtitle="+str(tagTitle)+"___"
+                  + "comment.site="+str(comment.site))
             # breakpoint()
             if tagTitle in str(comment.site):
                 comments.append(comment)
-                print("COMMENTS="+ str(comments))
+                print("COMMENTS=" + str(comments))
                 # try:
-                    # commenti_pagina = commenti_pagina + str(comment)
-                    # print("COMMENTIPAGINA"+str(commenti_pagina))
+                # commenti_pagina = commenti_pagina + str(comment)
+                # print("COMMENTIPAGINA"+str(commenti_pagina))
                 # except UnboundLocalError:
-                    #commenti_pagina = str(comment)
+                #commenti_pagina = str(comment)
                 # + str(Resp.objects.filter(commento=comment)))
                 for resp in Resp.objects.all():
-                    print("resp.commento"+str(resp.commento)+"_____coment="+str(comment))
+                    print("resp.commento"+str(resp.commento)
+                          + "_____coment="+str(comment))
                     if str(resp.commento) in str(comment):
                         print("resp_all="+str(resp.commento.risposte.all()))
                 # t_reverse_order = Comment.risposte.all().order_by('publish')
@@ -118,11 +121,11 @@ def getPost(request):
                     print("Nessun commento per la pagina !")
         data = json.dumps(
                 {
-                "userLogged": userLogged,
-                "data_comm": data_comm,
-                "resps": risposte_serialized,
-                "profiles": profiles_list,
-            }
+                    "userLogged": userLogged,
+                    "data_comm": data_comm,
+                    "resps": risposte_serialized,
+                    "profiles": profiles_list,
+                    }
         )
         # showPost(tu)
     try:

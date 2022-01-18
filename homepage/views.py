@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate, login
 from .forms import LoginForm
 from django.shortcuts import render, get_object_or_404
-from .models import Tutorial, Visite
+from .models import Tutorial,Visite
 from django.urls import path
 from .models import Category
 from user.models import Profile
@@ -109,7 +109,7 @@ def tutorial_detail(request, **kwargs):
     try:
         lastobj = Visite.objects.latest('visite')
         vis.visite = lastobj.visite+1
-    except UnboundLocalError:
+    except :
         vis.visite = 1
     vis.save()
     return render(request, template, {'tutorial': tutorial, 'visitato': vis, 'login': login, 'tutorial_all': tutorial_all, 'categorie': categorie, 'photo': photo, 'users': users, 'autore': autore, })
