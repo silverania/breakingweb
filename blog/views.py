@@ -69,7 +69,7 @@ def getPost(request):
     print("USERLOGGED=" + str(userLogged))
     if "tagTitle" in request.GET and request.GET["tagTitle"]:
         tagTitle = str(request.GET.get("tagTitle"))
-
+        print("tagtitle=" + str(tagTitle))
         tagTitleInPage = Site.objects.get(title=tagTitle)
         aggiornato = formatted_datetime
 
@@ -148,6 +148,7 @@ def newPost(request):
     myuser = Profile()
     myuser.firstname = getLoginName(request)
     post.site = tu
+    breakpoint()
     if "newpost" in postType:
         post.site = tu
         if "title" in request.GET and request.GET["title"]:

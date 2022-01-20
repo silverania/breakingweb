@@ -16,11 +16,11 @@ class PersonManager(models.Manager):
 
 
 class Site(models.Model):
-    title = models.CharField(max_length=250)
+    title = models.CharField(max_length=250, null=True, blank=True)
     slug = models.SlugField(max_length=250, null=True, blank=True)
 
-    def save(self, *args, **kwargs):
-        super(Site, self).save(*args, **kwargs)
+    #def save(self, *args, **kwargs):
+    #    super(Site, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.title
@@ -54,13 +54,15 @@ class Comment(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     postType = models.CharField(max_length=10, default="post")
-    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default="bozza")
+    status = models.CharField(
+        max_length=10, choices=STATUS_CHOICES, default="bozza")
     tagTitleInPage = models.CharField(max_length=100, default="tag_value")
 
     def get_absolute_url(self):
         return reverse(
             "blog:newPost",
-            args=[self.publish.year, self.publish.month, self.publish.day, self.slug],
+            args=[self.publish.year, self.publish.month,
+                  self.publish.day, self.slug],
         )
 
     objects = PersonManager()
@@ -77,7 +79,8 @@ class Resp(models.Model):
         ("rigettato", "Rigettato"),
         ("publicato", "Publicato"),
     )
-    author = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name="resps")
+    author = models.ForeignKey(
+        Profile, on_delete=models.CASCADE, related_name="resps")
     body = models.TextField()
     publish = models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)
