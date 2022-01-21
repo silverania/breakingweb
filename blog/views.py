@@ -104,18 +104,19 @@ def getPost(request):
                     print("resp.commento"+str(resp.commento)
                           + "_____coment="+str(comment))
                     if str(resp.commento) in str(comment):
+                        breakpoint()
                         print("resp_all="+str(resp.commento.risposte.all()))
-                # t_reverse_order = Comment.risposte.all().order_by('publish')
-                # t_order = comment.risposte.all().order_by('-publish')
-                # t = list(t_reverse_order)
-                # print("Resp=" + str(t))
-                # try:
-                    # t2=t2+t
-                # except UnboundLocalError:
-                    # t2 = t
+                    t_reverse_order = Comment.risposte.all().order_by('publish')
+                    t_order = Comment.risposte.all().order_by('-publish')
+                    t = list(t_reverse_order)
+                    print("Resp=" + str(t))
+                    try:
+                        t2 = t2+t
+                    except UnboundLocalError:
+                        t2 = t
                 try:
                     print("SERIALIZED :PROFILKE_LIST="+str(profile_list))
-                    #risposte_serialized = serializer(t2)
+                    risposte_serialized = serializer(t2)
                     profiles = list(Profile.objects.all())
                     profiles_list = serializer(profiles)
                     print("PROFIKLELIST"+str(profiles_list))
