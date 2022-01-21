@@ -69,13 +69,15 @@ def getPost(request):
     print("USERLOGGED=" + str(userLogged))
     if "tagTitle" in request.GET and request.GET["tagTitle"]:
         tagTitle = str(request.GET.get("tagTitle"))
+        tu.title = tagTitle
+        tu.save()
         print("tagtitle=" + str(tagTitle))
-        tagTitleInPage = Site.objects.get(title=tagTitle)
+        #tagTitleInPage = Site.objects.get(title=tagTitle)
         aggiornato = formatted_datetime
 
-        all_comments_for_page = Comment.objects.filter(site=tagTitle)
+        all_comments_for_page = Comment.objects.filter(site__title=tagTitle)
         # tutti i commenti sul tutorial
-        all_comments_for_page = Comment.objects.get()
+        #all_comments_for_page = Comment.objects.get()
         datac = list(all_comments_for_page)
         userLogged = list(userLogged)
         userLogged = serializer(userLogged)
@@ -170,7 +172,7 @@ def newPost(request):
         commento = request.GET.get("commento")
         comment = Comment.objects.get(pk=commento)
         post.commento = comment
-    tu.save()
+    #tu.save()
     post.save()
     return HttpResponse("OK !")
     """
