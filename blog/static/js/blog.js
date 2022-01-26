@@ -391,7 +391,7 @@ class postArea {
     $(button_risposta_post).css('box-shadow', '0 0 0 white' );//#719ECE"
   },
   function(){
-  //  $(button_risposta_post).animate({'width':'100%'},200);
+    $(button_risposta_post).animate({'width':'100%'},200);
     $(button_risposta_post).css('box-shadow', '10px 10px 10px #719ECE' );
   }
 )

@@ -59,7 +59,7 @@ def getPost(request):
     profile_list = []
     datac = []
     comments = []
-    resps = Resp()
+    resps = Resp.objects.all()
     risposte = []
     risposte_serialized = []
     profiles_list = []
@@ -94,26 +94,18 @@ def getPost(request):
             if tagTitle in str(comment.site):
                 comments.append(comment)
                 print("COMMENTS=" + str(comments))
-                # try:
-                # commenti_pagina = commenti_pagina + str(comment)
-                # print("COMMENTIPAGINA"+str(commenti_pagina))
-                # except UnboundLocalError:
-                #commenti_pagina = str(comment)
-                # + str(Resp.objects.filter(commento=comment)))
-                for resp in Resp.objects.all():
-                    print("resp.commento"+str(resp.commento)
-                          + "_____coment="+str(comment))
-                    if str(resp.commento) in str(comment):
-                        breakpoint()
-                        print("resp_all="+str(resp.commento.risposte.all()))
-                    t_reverse_order = Comment.risposte.all().order_by('publish')
-                    t_order = Comment.risposte.all().order_by('-publish')
-                    t = list(t_reverse_order)
-                    print("Resp=" + str(t))
-                    try:
-                        t2 = t2+t
-                    except UnboundLocalError:
-                        t2 = t
+                #for resp in Resp.objects.all():
+
+                    #if str(resp.commento) in str(comment):
+                        #print("resp_all="+str())
+                t_reverse_order = comment.risposte.all().order_by('publish')
+                t_order = comment.risposte.all().order_by('-publish')
+                t = list(t_order)
+                print("Resp=" + str(t))
+                try:
+                    t2 = t2+t
+                except UnboundLocalError:
+                    t2 = t
                 try:
                     print("SERIALIZED :PROFILKE_LIST="+str(profile_list))
                     risposte_serialized = serializer(t2)
@@ -127,6 +119,7 @@ def getPost(request):
                     "userLogged": userLogged,
                     "data_comm": data_comm,
                     "resps": risposte_serialized,
+
                     "profiles": profiles_list,
                     }
         )
@@ -151,7 +144,7 @@ def newPost(request):
     myuser = Profile()
     myuser.firstname = getLoginName(request)
     post.site = tu
-    breakpoint()
+    #breakpoint()
     if "newpost" in postType:
         post.site = tu
         if "title" in request.GET and request.GET["title"]:
