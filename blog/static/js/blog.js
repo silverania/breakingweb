@@ -192,9 +192,11 @@ class postArea {
     this.isActive=false
     this.isChanged=isChanged
     this.postarea.onkeyup = function(){
+      isChanged=true
+      this.isChanged=true
       var callcount = 0;
       var action = function(){
-        isChanged=true
+
       }
       var delayAction = function(action, time){
         var expectcallcount = callcount;
@@ -317,7 +319,8 @@ class postArea {
         elementToAppendPostArea=elementToAppendPostArea
         postarea.postarea.setAttribute("id",mess.type+loginis+"_"+id_newresp)
         $(document).on('click', function(e){
-          if ($(e.target).closest("#divuserblog_"+id_newresp).length === 0) {
+          //if ($(e.target).closest("#divuserblog_"+id_newresp).length === 0) {
+        if ($(e.target).closest('*[id^="divuserblog"]').length===0){
             if (isChanged==false) {
               $("#divuserblog_"+id_newresp).remove()
               isOpen=false
@@ -812,7 +815,7 @@ function sendToServer(post=Object(),url){
   }
   else if (post.type=="newpost"){
     data={
-      'tagTitle':tagTile,'type':post.type,'tutorial':post.thisTutorialTitle,'username':loginis,'title': post.titled,'body':post.body,
+      'tagTitle':tagTitle,'type':post.type,'tutorial':post.thisTutorialTitle,'username':loginis,'title': post.titled,'body':post.body,
     }
   }
   if(post.type=="newpost" || post.type=="newresp"){
