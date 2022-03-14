@@ -38,7 +38,7 @@ class Comment(models.Model):
         null=True,
         blank=True,
     )
-    title = models.CharField(max_length=40)
+    title = models.CharField(max_length=100)
     slug = models.SlugField(
         max_length=250, unique_for_date="publish", blank=True, null=True
     )

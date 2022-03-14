@@ -56,10 +56,13 @@ textarea {
   font-size:1rem!important;
   padding:22px;
   color:black;
-  width:0;
+  width:100%!important;
+  min-width:100%;
   outline: none !important;
   border:1px solid red;
   box-shadow: 10px 10px 10px #719ECE;
+  border-radius:25px;
+  overflow:hidden;
 }
 
 img{
@@ -153,6 +156,11 @@ ul#ul_blog li{
   border:3px solid orange;
   border-radius:10px;
   background-color:white;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 }
 
 

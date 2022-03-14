@@ -191,7 +191,22 @@ class postArea {
     this.postarea=document.createElement("TEXTAREA");
     this.isActive=false
     this.isChanged=isChanged
+
     this.postarea.onkeyup = function(){
+      // textarea resize in base al testo inserito
+
+      //$("textarea").each(function () {
+        //this.setAttribute("style", "height:" + (this.scrollHeight) + "px;overflow-y:hidden;");
+      //})
+    //    this.on("input",
+      //  function () {
+        this.setAttribute("style", "height:" + (this.scrollHeight) + "px;overflow-y:hidden;");
+        this.style.height = "auto";
+        this.style.height = (this.scrollHeight) + "px";
+    //  }
+  //  )
+    //  })
+
       isChanged=true
       this.isChanged=true
       var callcount = 0;
@@ -778,6 +793,7 @@ $(document).ready(function(){
     }
   }
 );
+
 }
 );
 
@@ -786,6 +802,10 @@ function createPostArea(messOrResp,elementToAppendArea){
   if(!(isOpen==true)) {
     paPostOrResp=new postArea(messOrResp)
     paPostOrResp.makeHeadBlog(messOrResp,paPostOrResp,elementToAppendArea)
+    paPostOrResp.postarea.setAttribute("style", "height:" + (this.scrollHeight) + "px;overflow-y:hidden;");
+    paPostOrResp.postarea.style.height = "auto";
+    paPostOrResp.postarea.style.height = (paPostOrResp.postarea.scrollHeight) + "px";
+
     paPostOrResp.createButtonRispostaPost(messOrResp,paPostOrResp)
   }
   else{
@@ -837,8 +857,3 @@ function sendToServer(post=Object(),url){
 }
 return 0
 }
-/*function launchException(message) {
-this.message = message;
-this.name = 'launchException';
-alert ("non puoi inserire un messaggio vuoto !")
-}*/

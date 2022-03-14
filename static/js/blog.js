@@ -17,6 +17,7 @@ var butcloned
 var isChanged=false
 var bbutton=document.createElement("Button");
 var resps
+var tagTitle
 //var bUserImg=document.createElement("IMG");
 var divFormChild=document.createElement("DIV");
 var bdiv=document.createElement("DIV");
@@ -40,7 +41,7 @@ var spanBlogEsci=document.createElement("SPAN");
 //var bH5=document.createElement("span")
 //var spanUserName=document.createElement("SPAN");
 var post,post2=new Object()
-var isOpen
+var isOpen=false
 var bSection=document.createElement("SECTION")
 //var bSpan=document.createElement("SPAN");
 //var bSpanChild=document.createElement("SPAN");
@@ -55,6 +56,7 @@ var exist=false
 var newPostId=0
 var elementToAppendPostArea
 var json_resps
+
 
 function createSectionDivSpan(){
   bForm.setAttribute("action","post/getpost");
@@ -190,9 +192,25 @@ class postArea {
     this.isActive=false
     this.isChanged=isChanged
     this.postarea.onkeyup = function(){
+      // textarea resize in base al testo inserito
+    //  $("textarea").change(function(){
+      //$("textarea").each(function () {
+        //this.setAttribute("style", "height:" + (this.scrollHeight) + "px;overflow-y:hidden;");
+      //})
+    //    this.on("input",
+      //  function () {
+        this.setAttribute("style", "height:" + (this.scrollHeight) + "px;overflow-y:hidden;");
+        this.style.height = "auto";
+        this.style.height = (this.scrollHeight) + "px";
+    //  }
+  //  )
+    //  })
+
+      isChanged=true
+      this.isChanged=true
       var callcount = 0;
       var action = function(){
-        isChanged=true
+
       }
       var delayAction = function(action, time){
         var expectcallcount = callcount;
@@ -315,7 +333,8 @@ class postArea {
         elementToAppendPostArea=elementToAppendPostArea
         postarea.postarea.setAttribute("id",mess.type+loginis+"_"+id_newresp)
         $(document).on('click', function(e){
-          if ($(e.target).closest("#divuserblog_"+id_newresp).length === 0) {
+          //if ($(e.target).closest("#divuserblog_"+id_newresp).length === 0) {
+        if ($(e.target).closest('*[id^="divuserblog"]').length===0){
             if (isChanged==false) {
               $("#divuserblog_"+id_newresp).remove()
               isOpen=false
@@ -389,7 +408,7 @@ class postArea {
     $(button_risposta_post).css('box-shadow', '0 0 0 white' );//#719ECE"
   },
   function(){
-  //  $(button_risposta_post).animate({'width':'100%'},200);
+    $(button_risposta_post).animate({'width':'100%'},200);
     $(button_risposta_post).css('box-shadow', '10px 10px 10px #719ECE' );
   }
 )
@@ -466,7 +485,7 @@ create(){
 }
 
 
-function initBlogSGang(login,tut,id="footer"){
+function initBlogSGang(login,parTagTitle,id){
   if(login=="False"||login=="false"||login=="none"||login=="AnonymousUser"){
     loginis="anonimo"
   }
@@ -474,7 +493,8 @@ function initBlogSGang(login,tut,id="footer"){
     loginis=login
   }
   idis=id;
-  tutorial=tut
+  //tutorial=tut
+  tagTitle=parTagTitle
   createSectionDivSpan(idis);
 }
 
@@ -699,6 +719,7 @@ $(document).ready(function(){
     }
     else {
       msgIsTexareaOpen()
+
     }
   })
   $('.mybut').hover(function(e){
@@ -710,8 +731,10 @@ $(document).ready(function(){
   $.ajax({
     url: '/post/showposts',
     data: {
-      'loginis': loginis,'tutorial':tutorial,
+      'loginis': loginis,'tagTitle' : tagTitle ,
     },
+
+
     dataType: 'json',
     success: function (data) {
       s = cleanJson(data)
@@ -727,8 +750,12 @@ $(document).ready(function(){
       }
       var photoResp
       var i=0
+
+
+
+
       //initial_y=(parseInt(obj3.length))-1
-      for (i;i<=comments_json.length-1;i=i+1){
+      for (i=0;i<=comments_json.length-1;i=i+1){
         for (z=0;z<=profiles_json.length-1;z=z+1){
           // if(obj5_photo[z].fields.user==obj2[i].fields.author){
           if(profiles_json[z].pk==comments_json[i].fields.author){
@@ -765,6 +792,7 @@ $(document).ready(function(){
     }
   }
 );
+
 }
 );
 
@@ -777,9 +805,10 @@ function createPostArea(messOrResp,elementToAppendArea){
   }
   else{
     msgIsTexareaOpen()
+
   }
   if(messOrResp.type == "newresp" || messOrResp.type=="newpost") {
-    isOpen=true
+    isOpen=false
   }
   else {
     if(messOrResp.type == "post" || messOrResp.type == "resp") {
@@ -801,7 +830,7 @@ function sendToServer(post=Object(),url){
   }
   else if (post.type=="newpost"){
     data={
-      'type':post.type,'tutorial':post.thisTutorialTitle,'username':loginis,'title': post.titled,'body':post.body,
+      'tagTitle':tagTitle,'type':post.type,'tutorial':post.thisTutorialTitle,'username':loginis,'title': post.titled,'body':post.body,
     }
   }
   if(post.type=="newpost" || post.type=="newresp"){
@@ -823,8 +852,3 @@ function sendToServer(post=Object(),url){
 }
 return 0
 }
-/*function launchException(message) {
-this.message = message;
-this.name = 'launchException';
-alert ("non puoi inserire un messaggio vuoto !")
-}*/
