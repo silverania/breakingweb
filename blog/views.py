@@ -59,71 +59,80 @@ def getPost(request):
     profile_list = []
     datac = []
     comments = []
-    resps = Resp.objects.all()
-    risposte = []
-    risposte_serialized = []
-    profiles_list = []
-    comments_in_database = Comment.objects.all()
-    print("COMMENTS in DATABASES"+str(comments_in_database))
+    # resps = Resp.objects.all()
+    # risposte = []
+    # risposte_serialized = []
+    comments_in_database = Comment.objects.all().order_by('publish')
     userLogged = getLoginName(request)
-    print("USERLOGGED=" + str(userLogged))
-    if "tagTitle" in request.GET and request.GET["tagTitle"]:
-        tagTitle = str(request.GET.get("tagTitle"))
-        tu.title = tagTitle
-        tu.save()
-        print("tagtitle=" + str(tagTitle))
-        #tagTitleInPage = Site.objects.get(title=tagTitle)
-        aggiornato = formatted_datetime
+    userLogged = list(userLogged)
+    userLogged = serializer(userLogged)
+    profiles = list(Profile.objects.all())
+    profiles_list = serializer(profiles)
+    # breakpoint()
+    if comments_in_database.exists():
+        print("COMMENTS in DATABASES"+str(comments_in_database))
+        # userLogged = getLoginName(request)
+        print("USERLOGGED=" + str(userLogged))
+        resps = Resp.objects.all()
+        risposte = []
+        risposte_serialized = []
+        if "tagTitle" in request.GET and request.GET["tagTitle"]:
+            tagTitle = str(request.GET.get("tagTitle"))
+            tu.title = tagTitle
+            tu.save()
+            print("tagtitle=" + str(tagTitle))
+            #tagTitleInPage = Site.objects.get(title=tagTitle)
+            aggiornato = formatted_datetime
 
-        all_comments_for_page = Comment.objects.filter(site__title=tagTitle)
-        # tutti i commenti sul tutorial
-        #all_comments_for_page = Comment.objects.get()
-        datac = list(all_comments_for_page)
-        userLogged = list(userLogged)
-        userLogged = serializer(userLogged)
-        data_comm = serializer(datac)
-        comment_model_serialized = serializer(all_comments_for_page)
-        print("data comment Json format=" + str(datac))
-        print("comment_model_serialized="
-              + str(comment_model_serialized)+str("userLogged"+str(userLogged)))
-
-        for comment in comments_in_database:
-            print("tagtitle="+str(tagTitle)+"___"
-                  + "comment.site="+str(comment.site))
-            # breakpoint()
-            if tagTitle in str(comment.site):
-                comments.append(comment)
-                print("COMMENTS=" + str(comments))
-                #for resp in Resp.objects.all():
-
-                    #if str(resp.commento) in str(comment):
-                        #print("resp_all="+str())
-                t_reverse_order = comment.risposte.all().order_by('publish')
-                t_order = comment.risposte.all().order_by('-publish')
-                t = list(t_order)
-                print("Resp=" + str(t))
-                try:
-                    t2 = t2+t
-                except UnboundLocalError:
-                    t2 = t
-                try:
-                    print("SERIALIZED :PROFILKE_LIST="+str(profile_list))
-                    risposte_serialized = serializer(t2)
-                    profiles = list(Profile.objects.all())
-                    profiles_list = serializer(profiles)
-                    print("PROFIKLELIST"+str(profiles_list))
-                except UnboundLocalError:
-                    print("Nessun commento per la pagina !")
-        data = json.dumps(
+            all_comments_for_page = Comment.objects.filter(
+                site__title=tagTitle).order_by('-publish')
+            datac = list(all_comments_for_page)
+            # userLogged = list(userLogged)
+            # userLogged = serializer(userLogged)
+            data_comm = serializer(datac)
+            comment_model_serialized = serializer(all_comments_for_page)
+            print("data comment Json format=" + str(datac))
+            print("comment_model_serialized="
+                  + str(comment_model_serialized)+str("userLogged"+str(userLogged)))
+            for comment in comments_in_database:
+                print("tagtitle="+str(tagTitle)+"___"
+                      + "comment.site="+str(comment.site))
+                if tagTitle in str(comment.site):
+                    comments.append(comment)
+                    print("COMMENTS=" + str(comments))
+                    #t_order = comment.risposte.all().order_by('publish')
+                    t_order = comment.risposte.all().order_by('-publish')
+                    t = list(t_order)
+                    print("Resp=" + str(t))
+                    try:
+                        t2 = t2 + t
+                    except UnboundLocalError:
+                        t2 = t
+                    try:
+                        print("SERIALIZED :PROFILKE_LIST="+str(profile_list))
+                        risposte_serialized = serializer(t2)
+                        # profiles = list(Profile.objects.all())
+                        # profiles_list = serializer(profiles)
+                        print("PROFIKLELIST"+str(profiles_list))
+                    except UnboundLocalError:
+                        print("Nessun commento per la pagina !")
+            data = json.dumps(
                 {
                     "userLogged": userLogged,
                     "data_comm": data_comm,
                     "resps": risposte_serialized,
-
                     "profiles": profiles_list,
                     }
-        )
-        # showPost(tu)
+                )
+    else:
+        print("si e verificato else in getpost userlogged=  & profiles_list="
+              + userLogged+"_"+profiles_list)
+        data = json.dumps(
+                {
+                    "userLogged": userLogged,
+                    "profiles": profiles_list,
+                    }
+                )
     try:
         return JsonResponse(data, safe=False)
     except UnboundLocalError:
@@ -166,7 +175,7 @@ def newPost(request):
         commento = request.GET.get("commento")
         comment = Comment.objects.get(pk=commento)
         post.commento = comment
-    #tu.save()
+    tu.save()
     post.save()
     return HttpResponse("OK !")
     """

@@ -34,7 +34,7 @@ class Comment(models.Model):
     site = models.ForeignKey(
         Site,
         related_name="all_comments",
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
         null=True,
         blank=True,
     )
@@ -44,7 +44,7 @@ class Comment(models.Model):
     )
     author = models.ForeignKey(
         Profile,
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
         related_name="blog_posts",
         null=True,
         blank=True,

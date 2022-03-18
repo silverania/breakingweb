@@ -439,7 +439,8 @@ switch (mess.type){
     }
     //button_risposta_post.setAttribute('action','url')
     $(postarea.postarea).css("box-shadow","0 0 0 0")
-    button_risposta_post.textContent="Post Inserito"
+    mess.type=="newpost" ? button_risposta_post.textContent="Post Inserito" : button_risposta_post.textContent="Risposta Inserita"
+
     button_risposta_post.setAttribute("disabled","")
     postarea.postarea.setAttribute("disabled","")
     $(postarea.postarea).css("color" ,"rgba(0, 0, 0, 0.5)");
@@ -747,7 +748,9 @@ $(document).ready(function(){
         userLogged=JSON.parse(obj.userLogged);
       }
       catch(SyntaxError){
-        console.log("error in json!")
+        console.log("Dati inconsistenti ricevuti dal server , i commenti potrebbero non esistere !")
+        profiles_json = JSON.parse(obj.profiles);
+        userLogged=JSON.parse(obj.userLogged);
       }
       var photoResp
       var i=0
@@ -805,7 +808,6 @@ function createPostArea(messOrResp,elementToAppendArea){
     paPostOrResp.postarea.setAttribute("style", "height:" + (this.scrollHeight) + "px;overflow-y:hidden;");
     paPostOrResp.postarea.style.height = "auto";
     paPostOrResp.postarea.style.height = (paPostOrResp.postarea.scrollHeight) + "px";
-
     paPostOrResp.createButtonRispostaPost(messOrResp,paPostOrResp)
   }
   else{
