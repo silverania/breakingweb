@@ -302,7 +302,7 @@ class postArea {
         divUserBlog.setAttribute("id","divuserblog_"+id)
         divUserBlog.setAttribute("class","new_post_"+id)
         $(document).on('click', function(e){
-          if ($(e.target).closest("#divuserblog_"+id).length === 0 && $(e.target).closest("#but_confirm_title").length === 0 && $(e.target).closest(buttonCommentClick).length === 0) {
+          if ($(e.target).closest("#divuserblog_"+id).length === 0) {
             if (isChanged==false) {
               $("#divuserblog_"+id).remove()
               isOpen=false
@@ -521,6 +521,7 @@ function buttonCommentClick(){
     let mess=Object()
     //var titleNewPost=makeModalWindow(this.post=instancePostarea())
     if(!(mess instanceof Post)){
+      exist=false
       mess= new Post("newpost",loginis)
       if(exist==false){
       createNewComment(mess)
