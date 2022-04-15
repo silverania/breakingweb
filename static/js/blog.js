@@ -522,7 +522,7 @@ function buttonCommentClick(){
     //var titleNewPost=makeModalWindow(this.post=instancePostarea())
     if(!(mess instanceof Post)){
       mess= new Post("newpost",loginis)
-      mess=makeModalWindow(mess)
+      mess=createNewComment(mess)
       location.href="#blog"
     }
   }
@@ -534,49 +534,50 @@ function buttonCommentClick(){
   }
 }
 
-function makeModalWindow(mess){
-  newPostId=newPostId+1
-  if(exist==false){
-    divModalMain=document.createElement("DIV");
-    divInMain=document.createElement("DIV");
-    textAreaInDivInMain=document.createElement("TEXTAREA");
-    modalConfirmButton=document.createElement("Button");
+//function makeModalWindow(mess){
+  //newPostId=newPostId+1
+  //if(exist==false){
+    //divModalMain=document.createElement("DIV");
+    //divInMain=document.createElement("DIV");
+    //textAreaInDivInMain=document.createElement("TEXTAREA");
+    //modalConfirmButton=document.createElement("Button");
     //var checkValidity=false
-    modalConfirmButton.setAttribute('id','but_confirm_title')
-    modalConfirmButton.setAttribute('type','button')
-    divModalMain.setAttribute('class','modal')
-    divModalMain.setAttribute('id','myModal')
-    divInMain.setAttribute('class','modal-content')
-    textAreaInDivInMain.setAttribute("id","p_text")
-    textAreaInDivInMain.setAttribute("rows","1")
-    textAreaInDivInMain.value="Titolo Post ?"
-    divInMain.appendChild(textAreaInDivInMain)
-    divInMain.appendChild(modalConfirmButton)
-    divModalMain.appendChild(divInMain)
-    body.appendChild(divModalMain)
-    modal = document.getElementById("myModal");
-    modal.style.display = "block";
-    exist=true
-  }
-  else{
-    modal.style.display = "block";
-  }
-
-  $('#but_confirm_title').click(function() {
+    //modalConfirmButton.setAttribute('id','but_confirm_title')
+    //modalConfirmButton.setAttribute('type','button')
+    //divModalMain.setAttribute('class','modal')
+    //divModalMain.setAttribute('id','myModal')
+    //divInMain.setAttribute('class','modal-content')
+    //textAreaInDivInMain.setAttribute("id","p_text")
+    //textAreaInDivInMain.setAttribute("rows","1")
+    //textAreaInDivInMain.value="Titolo Post ?"
+    //divInMain.appendChild(textAreaInDivInMain)
+    //divInMain.appendChild(modalConfirmButton)
+    //divModalMain.appendChild(divInMain)
+    //body.appendChild(divModalMain)
+    //modal = document.getElementById("myModal");
+    //modal.style.display = "block";
+    //exist=true
+  //}
+  //else{
+    //modal.style.display = "block";
+  //}
+function createNewComment(mess){
     try{
-      let txt=$("#p_text").val()
-      if (!(txt=="Titolo Post ?")){
-        mess.titled=txt
+      //let txt=$("#p_text").val()
+      //if (!(txt=="Titolo Post ?")){
+        //mess.titled=txt
+        newPostId=newPostId+1
         mess.type="newpost"
         mess.publish=getDateFromDjangoDate()
         mess.author=loginis
         userLogged[0].fields.photo == "undefined" ? alert  ("non ho la photo dell user !") :  mess.photo=BASE_PHOTO_DIR+userLogged[0].fields.photo
         mess.pk=newPostId
-        if(mess.titled){
-          $('#myModal').remove()
-          createPostArea(mess)
-          exist=false
-        }
+      //  if(mess.titled){
+        //  $('#myModal').remove()
+        //  createPostArea(mess)
+        //  exist=false
+        //}
+        createPostArea(mess)
       }
       else{
         alert("Devi inserire un titolo Valido")
@@ -585,7 +586,7 @@ function makeModalWindow(mess){
     catch(Error){
       console.log("qualcosa è andato storto nel recupero del titolo")
     }
-  });
+  };
   window.onclick = function(event) {
     if (event.target == modal) {
       modal.style.display = "none";

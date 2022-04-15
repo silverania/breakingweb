@@ -83,7 +83,6 @@ def getPost(request):
             print("tagtitle=" + str(tagTitle))
             #tagTitleInPage = Site.objects.get(title=tagTitle)
             aggiornato = formatted_datetime
-
             all_comments_for_page = Comment.objects.filter(
                 site__title=tagTitle).order_by('-publish')
             datac = list(all_comments_for_page)

@@ -52,7 +52,7 @@ var wait=true
 var postTitle
 var tutorial
 var bbutton2=new Object();
-var exist=false
+var exist=new Boolean(false)
 var newPostId=0
 var elementToAppendPostArea
 var json_resps
@@ -302,7 +302,7 @@ class postArea {
         divUserBlog.setAttribute("id","divuserblog_"+id)
         divUserBlog.setAttribute("class","new_post_"+id)
         $(document).on('click', function(e){
-          if ($(e.target).closest("#divuserblog_"+id).length === 0 && $(e.target).closest("#but_confirm_title").length === 0 ) {
+          if ($(e.target).closest("#divuserblog_"+id).length === 0 && $(e.target).closest("#but_confirm_title").length === 0 && $(e.target).closest(buttonCommentClick).length === 0) {
             if (isChanged==false) {
               $("#divuserblog_"+id).remove()
               isOpen=false
@@ -522,9 +522,13 @@ function buttonCommentClick(){
     //var titleNewPost=makeModalWindow(this.post=instancePostarea())
     if(!(mess instanceof Post)){
       mess= new Post("newpost",loginis)
-      mess=makeModalWindow(mess)
+      if(exist==false){
+      createNewComment(mess)
       location.href="#blog"
     }
+    }
+    exist=true
+    Boolean(exist)
   }
 
   if (!(post instanceof postArea ))
@@ -534,70 +538,65 @@ function buttonCommentClick(){
   }
 }
 
-function makeModalWindow(mess){
-  newPostId=newPostId+1
-  if(exist==false){
-    divModalMain=document.createElement("DIV");
-    divInMain=document.createElement("DIV");
-    textAreaInDivInMain=document.createElement("TEXTAREA");
-    modalConfirmButton=document.createElement("Button");
+//function makeModalWindow(mess){
+  //newPostId=newPostId+1
+  //if(exist==false){
+    //divModalMain=document.createElement("DIV");
+    //divInMain=document.createElement("DIV");
+    //textAreaInDivInMain=document.createElement("TEXTAREA");
+    //modalConfirmButton=document.createElement("Button");
     //var checkValidity=false
-    modalConfirmButton.setAttribute('id','but_confirm_title')
-    modalConfirmButton.setAttribute('type','button')
-    divModalMain.setAttribute('class','modal')
-    divModalMain.setAttribute('id','myModal')
-    divInMain.setAttribute('class','modal-content')
-    textAreaInDivInMain.setAttribute("id","p_text")
-    textAreaInDivInMain.setAttribute("rows","1")
-    textAreaInDivInMain.value="Titolo Post ?"
-    divInMain.appendChild(textAreaInDivInMain)
-    divInMain.appendChild(modalConfirmButton)
-    divModalMain.appendChild(divInMain)
-    body.appendChild(divModalMain)
-    modal = document.getElementById("myModal");
-    modal.style.display = "block";
-    exist=true
-  }
-  else{
-    modal.style.display = "block";
-  }
-
-  $('#but_confirm_title').click(function() {
-    try{
-      let txt=$("#p_text").val()
-      if (!(txt=="Titolo Post ?")){
-        mess.titled=txt
+    //modalConfirmButton.setAttribute('id','but_confirm_title')
+    //modalConfirmButton.setAttribute('type','button')
+    //divModalMain.setAttribute('class','modal')
+    //divModalMain.setAttribute('id','myModal')
+    //divInMain.setAttribute('class','modal-content')
+    //textAreaInDivInMain.setAttribute("id","p_text")
+    //textAreaInDivInMain.setAttribute("rows","1")
+    //textAreaInDivInMain.value="Titolo Post ?"
+    //divInMain.appendChild(textAreaInDivInMain)
+    //divInMain.appendChild(modalConfirmButton)
+    //divModalMain.appendChild(divInMain)
+    //body.appendChild(divModalMain)
+    //modal = document.getElementById("myModal");
+    //modal.style.display = "block";
+    //exist=true
+  //}
+  //else{
+    //modal.style.display = "block";
+  //}
+function createNewComment(mess){
+  //  try{
+      //let txt=$("#p_text").val()
+      //if (!(txt=="Titolo Post ?")){
+        mess.titled="nuovo"
+        newPostId=newPostId+1
         mess.type="newpost"
         mess.publish=getDateFromDjangoDate()
         mess.author=loginis
         userLogged[0].fields.photo == "undefined" ? alert  ("non ho la photo dell user !") :  mess.photo=BASE_PHOTO_DIR+userLogged[0].fields.photo
         mess.pk=newPostId
-        if(mess.titled){
-          $('#myModal').remove()
-          createPostArea(mess)
-          exist=false
-        }
+      //  if(mess.titled){
+        //  $('#myModal').remove()
+        //  createPostArea(mess)
+        //  exist=false
+        //}
+        createPostArea(mess)
+        if(exist==false){
+          Boolean(exist)
+        return mess
       }
-      else{
-        alert("Devi inserire un titolo Valido")
-      }
     }
-    catch(Error){
-      console.log("qualcosa è andato storto nel recupero del titolo")
-    }
-  });
-  window.onclick = function(event) {
-    if (event.target == modal) {
-      modal.style.display = "none";
-    }
-  }
-  $('#p_text').focus( function() {
-    if ($('#p_text').val().search("Titolo Post ?")>=0){
-      $('#p_text').val("")
-    }
-  });
-  return mess
-}
+      //else{
+        //alert("Devi inserire un titolo Valido")
+      //}
+
+    //catch(Error){
+      //console.log("qualcosa è andato storto nel recupero del titolo")
+
+
+
+
 // se la variabile data non viene passata come parametro si presuppone che il client abbia creato un nuovo post , quindi //la data è now
 function getDateFromDjangoDate(data=""){
   var dateNow = new Date()
