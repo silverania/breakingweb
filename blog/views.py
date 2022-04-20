@@ -32,11 +32,11 @@ def getLoginName(request):
             print("id" + str(request.user.id))
             myuser = Profile.objects.filter(user_id=request.user.id)
         else:
-            user = request.GET.get("loginis")
-            myuser = Profile.objects.filter(first_name=user)
-            # myuser.photo=settings.MEDIA_URL+"images/user-secret-solid.gif"
-            print("SER NON AUTENT " + str(myuser))
-    except:
+            #user = request.GET.get("loginis")
+            myuser = Profile.objects.filter(first_name="anonimo")
+            myuser.photo = settings.MEDIA_URL+"images/user-secret-solid.gif"
+            print("SER NON AUTENT " + str(myuser.photo))
+    except UnboundLocalError:
         print("error in get users info ! contact the admin . myuser = " + str(myuser))
     return myuser
 

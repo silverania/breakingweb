@@ -115,7 +115,7 @@ function getIndex(e) {
     title="{{tut.title}}";
     base=width/2;
     base=base.toString()+"px";
-    var url="{{tut.get_absolute_url}}"
+    var url=title
     optio.setAttribute("class","list-group-item li_tutorials");
     optio.setAttribute("onclick","window.open("+"\""+url+"\""+")");
     optio.setAttribute('style','font-size:1rem');
@@ -140,7 +140,7 @@ function getIndex(e) {
                 {% for c in categorie %}
             <div id="d_{{c.title}}_menu" class="list-group">
               {% for a in c.tutorials.all %}
-                <a id="a_tutorial_{{a.title}}" class="list-group-item list-group-item-action" href={{a.get_absolute_url}}>
+                <a id="a_tutorial_{{a.title}}" class="list-group-item list-group-item-action" href={{tutorial.slug}}>
                   <span id="s_leftmenu1" >{{a.title}}</span>
               </a>
               {% endfor %}
