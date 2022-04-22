@@ -79,7 +79,6 @@ def getPost(request):
         if "tagTitle" in request.GET and request.GET["tagTitle"]:
             tagTitle = str(request.GET.get("tagTitle"))
             tu.title = tagTitle
-            tu.save()
             print("tagtitle=" + str(tagTitle))
             #tagTitleInPage = Site.objects.get(title=tagTitle)
             aggiornato = formatted_datetime

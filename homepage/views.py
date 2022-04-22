@@ -86,8 +86,8 @@ def tutorial_detail(request, slug=""):
     #photo=user.photo
     #print("anno?="+str(tutorial.publish.year)+str(tutorial.publish.day)+"autor="+str(tutorial.author)+"photo="+str(photo))
     #print("COMMENTI="+str(tutorial.all_comments.all()))
-
-    if "" in request.path:
+    mypath = str(request.path)
+    if not mypath:
         print("request PATH VUOTA")
         tutorial = Tutorial.objects.latest('publish')
     else:
