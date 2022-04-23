@@ -86,12 +86,12 @@ def tutorial_detail(request, slug=""):
     #photo=user.photo
     #print("anno?="+str(tutorial.publish.year)+str(tutorial.publish.day)+"autor="+str(tutorial.author)+"photo="+str(photo))
     #print("COMMENTI="+str(tutorial.all_comments.all()))
-    mypath = str(request.path)
+    mypath = str(request.path).replace("/", "")
     if not mypath:
-        print("request PATH VUOTA")
+        print("request PATH VUOTA"+mypath)
         tutorial = Tutorial.objects.latest('publish')
     else:
-        print("request PATH PIENA")
+        print("request PATH PIENA"+mypath)
         tutorial = Tutorial.objects.get(slug=slug)
         print("request PAth piena e Tutorial"+str(tutorial.slug))
     template = tutorial.slug.replace(" ", "_").lower()+".html"
