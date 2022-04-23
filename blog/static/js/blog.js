@@ -815,7 +815,7 @@ function createPostArea(messOrResp,elementToAppendArea){
 
   }
   if(messOrResp.type == "newresp" || messOrResp.type=="newpost") {
-    isOpen=false
+    isOpen=true
   }
   else {
     if(messOrResp.type == "post" || messOrResp.type == "resp") {
@@ -826,7 +826,7 @@ function createPostArea(messOrResp,elementToAppendArea){
 }
 
 function msgIsTexareaOpen(){
-  alert("Hai un post/risposta aperto ! se vuoi chiuderlo aggiorna la pagina con F5 , altrimenti completa prima il post/risposta in sospeso !")
+  alert("Hai un post già aperto !")
 }
 
 function sendToServer(post=Object(),url){
