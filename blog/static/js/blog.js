@@ -67,8 +67,8 @@ function createSectionDivSpan(){
   firstDivHead.setAttribute("style","width:45%;display:inline;")
   firstDivHead.setAttribute("id","firstDivHead")
   divExitLogin.setAttribute("style","width:45%;display:inline;")
-  //divCommentIcon.setAttribute("style","position:relative;width:10%;display:inline;left:45%;")
   divCommentIcon.setAttribute("id","div_comment_icon")
+  divCommentIcon.setAttribute("style","margin:0 auto")
   divRespTitle.setAttribute("class","div_resp")
   //divEmpty.setAttribute("style","width:20%;display:inline-block;")
   divFormChild.setAttribute("id","multiarea");
@@ -78,7 +78,7 @@ function createSectionDivSpan(){
   bdiv.setAttribute("id","bdiv")
   //bIcon.setAttribute('src',"../../../static/images/blog_comment.gif")
   //bIcon.setAttribute("WIDTH","50px")
-  bIcon.setAttribute("style","display:block;margin:0 auto;")
+  bIcon.setAttribute("style","text-align:center;font-weight:bold;")
   bIcon.setAttribute("id","blog_icon")
   bSection.setAttribute("id","blog");
   bSection.setAttribute("style","width:100%");
