@@ -3,8 +3,8 @@
 
 
 {% block title %}Creare Un Ambiente Virtuale Python{% endblock title %}
-  {% block keywords %}creare,inizializzare,ambiente,virtuale,python,django,pip{% endblock keywords %}
-  {% block description %}Creare Un Ambiente Virtuale Python Per Django{% endblock description%}
+  {% block keywords %}python,linux,venv,module,creare,inizializzare,ambiente,virtuale,pip{% endblock keywords %}
+  {% block description %}Creare Un Ambiente Virtuale Python su Linux con il modulo venv Per{% endblock description%}
 
 
 
@@ -14,15 +14,23 @@
 
      {% block photo %}{%static "/images/mestesso.jpg"%}{% endblock photo %}
      {% block tut_title %}
+
+
+
      <span class="badge badge-pill badge-light" style="width:100%;display:inline-block!important;margin:0 auto!important;">
-
-
-       <span id="s_title_2" style="display:inline-block;color:black;font-weight:bold;">Creare Un Ambinete Virtuale Python</span></span>
+     <span id="s_title_2" style="display:inline-block;color:black;font-weight:bold;">Creare Un Ambinete Virtuale Python <br>Con Il Modulo venv</span></span>
        {% endblock tut_title %}
 
-       {% block content %}
 
+            {% block content %}
              <p style="text-align:center;" id="p_content">
-        <span  class="badge badge-info s_title_paragraph">Assicuriamoci di aver installato Python sul sistema</span><br><br>
+        A partire dalla versione 3.5 di python l' uso del modulo <mark>venv</mark> nella creazione di ambienti virtuali python è raccomandata .<br> Assicuriamoci di aver installato Python sul sistema : da un terminale eseguite il comando python<br><br>
+        <code style="color:yellow;background-color:black;">mario@androgenic:~/$<span style="color:white"> python</code>
         </p>
-       {% endblock content %}
+
+        <p style="text-align:center;" id="p_content">
+          L' output nel terminale dovrà mostrare la versione di python che per , l' uso del modulo venv dovrà essere maggiore o uguale a 3.5 <br>per versioni inferiori a 3.5 di python va usato <mark>pyvenv</mark><br></br>
+            <img class="img img-thumbnail"id="img_8" width="100%" height="500px"src='{% static 'images/python_version.png' %}'>
+
+        </p>
+{% endblock content %}

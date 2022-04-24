@@ -52,7 +52,7 @@ var wait=true
 var postTitle
 var tutorial
 var bbutton2=new Object();
-var exist=new Boolean(false)
+var exist=false
 var newPostId=0
 var elementToAppendPostArea
 var json_resps
@@ -302,7 +302,7 @@ class postArea {
         divUserBlog.setAttribute("id","divuserblog_"+id)
         divUserBlog.setAttribute("class","new_post_"+id)
         $(document).on('click', function(e){
-          if ($(e.target).closest("#divuserblog_"+id).length === 0 && $(e.target).closest("#clone_button").length === 0 ) {
+          if ($(e.target).closest("#divuserblog_"+id).length === 0 && $(e.target).closest("#but_confirm_title").length === 0 ) {
             if (isChanged==false) {
               $("#divuserblog_"+id).remove()
               isOpen=false
@@ -521,15 +521,10 @@ function buttonCommentClick(){
     let mess=Object()
     //var titleNewPost=makeModalWindow(this.post=instancePostarea())
     if(!(mess instanceof Post)){
-      exist=false
       mess= new Post("newpost",loginis)
-      if(exist==false){
       createNewComment(mess)
       location.href="#blog"
     }
-    }
-    exist=true
-    Boolean(exist)
   }
 
   if (!(post instanceof postArea ))
@@ -567,11 +562,8 @@ function buttonCommentClick(){
     //modal.style.display = "block";
   //}
 function createNewComment(mess){
-  //  try{
-      //let txt=$("#p_text").val()
-      //if (!(txt=="Titolo Post ?")){
-        mess.titled="nuovo"
         newPostId=newPostId+1
+        mess.titled="nuovo"
         mess.type="newpost"
         mess.publish=getDateFromDjangoDate()
         mess.author=loginis
@@ -583,11 +575,8 @@ function createNewComment(mess){
         //  exist=false
         //}
         createPostArea(mess)
-        if(exist==false){
-          Boolean(exist)
-        return mess
+        exist=false
       }
-    }
       //else{
         //alert("Devi inserire un titolo Valido")
       //}
@@ -597,7 +586,7 @@ function createNewComment(mess){
 
 
 
-
+  return mess
 // se la variabile data non viene passata come parametro si presuppone che il client abbia creato un nuovo post , quindi //la data è now
 function getDateFromDjangoDate(data=""){
   var dateNow = new Date()
@@ -815,7 +804,7 @@ function createPostArea(messOrResp,elementToAppendArea){
 
   }
   if(messOrResp.type == "newresp" || messOrResp.type=="newpost") {
-    isOpen=true
+    isOpen=false
   }
   else {
     if(messOrResp.type == "post" || messOrResp.type == "resp") {
@@ -826,7 +815,7 @@ function createPostArea(messOrResp,elementToAppendArea){
 }
 
 function msgIsTexareaOpen(){
-  alert("Hai un post già aperto !")
+  alert("Hai un post/risposta aperto ! se vuoi chiuderlo aggiorna la pagina con F5 , altrimenti completa prima il post/risposta in sospeso !")
 }
 
 function sendToServer(post=Object(),url){
