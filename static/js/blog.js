@@ -45,7 +45,9 @@ var isOpen=false
 var bSection=document.createElement("SECTION")
 //var bSpan=document.createElement("SPAN");
 //var bSpanChild=document.createElement("SPAN");
-var bIcon=document.createElement("IMG");
+var bIcon = document.createElement("H1")
+    var t = document.createTextNode("InterBlog")
+    bIcon.appendChild(t)
 var bForm=document.createElement("FORM");
 var title=document.getElementsByTagName('title')[0].innerText
 var wait=true
@@ -65,8 +67,8 @@ function createSectionDivSpan(){
   firstDivHead.setAttribute("style","width:45%;display:inline;")
   firstDivHead.setAttribute("id","firstDivHead")
   divExitLogin.setAttribute("style","width:45%;display:inline;")
-  divCommentIcon.setAttribute("style","position:relative;width:10%;display:inline;left:45%;")
   divCommentIcon.setAttribute("id","div_comment_icon")
+  divCommentIcon.setAttribute("style","margin:0 auto")
   divRespTitle.setAttribute("class","div_resp")
   //divEmpty.setAttribute("style","width:20%;display:inline-block;")
   divFormChild.setAttribute("id","multiarea");
@@ -74,9 +76,9 @@ function createSectionDivSpan(){
   divExitLogin.setAttribute("id","d_blog_reg")
   divExitLogin.setAttribute("style","width:45%;display:inline-block")
   bdiv.setAttribute("id","bdiv")
-  bIcon.setAttribute('src',"../../../static/images/blog_comment.gif")
-  bIcon.setAttribute("WIDTH","50px")
-  //bIcon.setAttribute("style","display:block;margin:0 auto;")
+  //bIcon.setAttribute('src',"../../../static/images/blog_comment.gif")
+  //bIcon.setAttribute("WIDTH","50px")
+  bIcon.setAttribute("style","text-align:center;font-weight:bold;")
   bIcon.setAttribute("id","blog_icon")
   bSection.setAttribute("id","blog");
   bSection.setAttribute("style","width:100%");
