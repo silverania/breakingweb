@@ -138,7 +138,6 @@ def getPost(request):
 
 
 def newPost(request):
-    # global formatted_datetime
     postType = ""
     print("entrypoint to newPost")
     # thistutorial=Tutorial()

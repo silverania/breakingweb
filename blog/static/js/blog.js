@@ -300,7 +300,7 @@ class postArea {
         divUserBlog.setAttribute("id","divuserblog_"+id)
         divUserBlog.setAttribute("class","new_post_"+id)
         $(document).on('click', function(e){
-          if ($(e.target).closest("#divuserblog_"+id).length === 0 && $(e.target).closest("#clone_button").length === 0 ) {
+          if ($(e.target).closest("#divuserblog_"+id).length === 0 && $(e.target).closest("#clone_button").length === 0 && $(e.target).closest("#clone_button").length === 0 && $(e.target).closest("#button_post").length === 0) {
             if (isChanged==false) {
               $("#divuserblog_"+id).remove()
               isOpen=false
@@ -714,6 +714,7 @@ $(document).ready(function(){
   bdiv.appendChild(cln)[2];
   butcloned = document.getElementById('clone_button')
   $(butcloned).click(function(){
+    if(userLogged[0].fields.user!="anonimo"){
     if(isOpen==false) {
       buttonCommentClick()
     }
@@ -721,6 +722,8 @@ $(document).ready(function(){
       msgIsTexareaOpen()
 
     }
+  }
+  else { alert("Per aprire un post ti devi fare il login") }
   })
   $('.mybut').hover(function(e){
     $('.mybut').css("box-shadow","0 0 0 white")
