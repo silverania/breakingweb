@@ -97,7 +97,7 @@ class Tutorial(models.Model):
 
 @receiver(post_save, sender=Tutorial)
 def update_tutorial(sender, instance, **kwargs):
-    instance.slug = instance.title
+    instance.slug = instance.title.replace(" ", "_").lower()
     print(str(instance.slug))
     post_save.disconnect(update_tutorial, sender=Tutorial)
     instance.save(update_fields=['slug'])

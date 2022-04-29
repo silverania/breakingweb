@@ -1,0 +1,45 @@
+{% extends 'base2.html' %}
+{% load static %}
+
+
+{% block title %}Linux - Aggiornamento Automatico Dei Browser {% endblock title %}
+  {% block keywords %}Linux,aggiornamento,automatico,browsers,chrome,firefox,opera,chromium,browser,avvio,sistema,script,shell,terminale,eseguibile{% endblock keywords %}
+  {% block description %}Aggiornamento automatico di tutti i browsers su linux , all' avvio di sistema {% endblock description%}
+
+
+
+
+
+
+
+     {% block photo %}{%static "/images/mestesso.jpg"%}{% endblock photo %}
+     {% block tut_title %}
+
+
+
+     <span class="badge badge-pill badge-light" style="width:100%;display:inline-block!important;margin:0 auto!important;">
+     <span id="s_title_2" style="display:inline-block;color:black;font-weight:bold;">Linux - Script Per Aggiornare I Browsers All' Avvio</span></span>
+       {% endblock tut_title %}
+
+            {% block content %}
+            <br><br>
+            <mark><h2 style="text-align:center;">Premessa</h2></mark>
+            Le principali minacce sui Pc trovano accesso al sistema grazie ai Browsers: Chrome , firefox ecc... .
+            che sono programmi che comunicano continuamente con la rete , perchè i Browsers aprono
+            varie porte di comunicazione : 80 , 443 , 1080 , le porte ftp , le porte per il protocollo smtp
+            della posta elettronica , e si potrebbe continuare a lungo con la lista . I browser nei repository
+Linux ricevono aggiornamenti quasi giornalieri ma gli utenti Linux , spesso e comprensibilmente dimenticano
+di effettuare gli aggiornamenti di sistema . Certo possiamo attivare gli aggiornamenti automatici , ma personalmente
+la trovo una cosa poco pratica , perchè ti viene aggiornato tutto il sistema e magari non si vuole toccare alcuni software
+fondamentali . Per esempio io che ho un HTTP Server in esecuzione 24h , non voglio che un aggiornamento automatico mi tocchi
+l' HTTP server su cui devo avere il pieno controllo sulle versioni . Personalmente , per sicurezza , disattivo qualsiasi
+programma che acceda alla rete , che non mi è di alcuna utilità . Così facendo non apro porte di comunicazione inutilmente , offrendo
+il piacere ai software/malware di PortScanning di trovare entrate praticabili . Il problema principale rimangono i Browsers
+che tutti noi usiamo . Un hacker o un sistema automatico di acquisizione dati è informato sulle falle di sicurezza , e le sfrutta
+per aver accesso al nostro sistema . E' una lotta continua fra chi trova falle ( hacher e bot vari ) , e le case produttrici di browsers
+che le le chiudono con le patch . <mark>L' aspetto fondamentale in tutto ciò è che le patch devono essere applicate nel momento in cui
+vengono rilasciate , quindi l' aggiornamento automatico dei browsers di sistema è fondamentale</mark>. Ora vedremo come
+aggiornare i/il browser e solo il browser all' avvio di sistema , così da chiudere le falle appena le case produttrici di browser
+rilasciano le patch . 
+
+        {% endblock %}

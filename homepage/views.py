@@ -94,7 +94,7 @@ def tutorial_detail(request, slug=""):
         print("request PATH PIENA"+mypath)
         tutorial = Tutorial.objects.get(slug=slug)
         print("request PAth piena e Tutorial"+str(tutorial.slug))
-    template = tutorial.slug.replace(" ", "_").lower()+".html"
+    template = tutorial.slug+".html"
     user = tutorial.author
     autore = str(user)
     photo = settings.MEDIA_URL+str(user.photo)
