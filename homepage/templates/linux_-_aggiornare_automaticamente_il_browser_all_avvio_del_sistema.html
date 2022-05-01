@@ -15,31 +15,88 @@
      {% block photo %}{%static "/images/mestesso.jpg"%}{% endblock photo %}
      {% block tut_title %}
 
-
-
      <span class="badge badge-pill badge-light" style="width:100%;display:inline-block!important;margin:0 auto!important;">
-     <span id="s_title_2" style="display:inline-block;color:black;font-weight:bold;">Linux - Script Per Aggiornare I Browsers All' Avvio</span></span>
+     <span id="s_title_2" style="display:inline-block;color:black;font-weight:bold;">Linux - Aggiornare I browser <br>
+      All' Avvio Di Sistema</span></span>
+
+
        {% endblock tut_title %}
 
             {% block content %}
-            <br><br>
-            <mark><h2 style="text-align:center;">Premessa</h2></mark>
-            Le principali minacce sui Pc trovano accesso al sistema grazie ai Browsers: Chrome , firefox ecc... .
+
+
+  <p style="text-align:center;" id="p_content">
+  <mark>Premessa</mark>
+Le principali minacce sui Pc trovano accesso al sistema grazie ai Browsers: Chrome , firefox ecc... .
             che sono programmi che comunicano continuamente con la rete , perchè i Browsers aprono
             varie porte di comunicazione : 80 , 443 , 1080 , le porte ftp , le porte per il protocollo smtp
-            della posta elettronica , e si potrebbe continuare a lungo con la lista . I browser nei repository
-Linux ricevono aggiornamenti quasi giornalieri ma gli utenti Linux , spesso e comprensibilmente dimenticano
-di effettuare gli aggiornamenti di sistema . Certo possiamo attivare gli aggiornamenti automatici , ma personalmente
-la trovo una cosa poco pratica , perchè ti viene aggiornato tutto il sistema e magari non si vuole toccare alcuni software
-fondamentali . Per esempio io che ho un HTTP Server in esecuzione 24h , non voglio che un aggiornamento automatico mi tocchi
-l' HTTP server su cui devo avere il pieno controllo sulle versioni . Personalmente , per sicurezza , disattivo qualsiasi
-programma che acceda alla rete , che non mi è di alcuna utilità . Così facendo non apro porte di comunicazione inutilmente , offrendo
-il piacere ai software/malware di PortScanning di trovare entrate praticabili . Il problema principale rimangono i Browsers
-che tutti noi usiamo . Un hacker o un sistema automatico di acquisizione dati è informato sulle falle di sicurezza , e le sfrutta
-per aver accesso al nostro sistema . E' una lotta continua fra chi trova falle ( hacher e bot vari ) , e le case produttrici di browsers
-che le le chiudono con le patch . <mark>L' aspetto fondamentale in tutto ciò è che le patch devono essere applicate nel momento in cui
-vengono rilasciate , quindi l' aggiornamento automatico dei browsers di sistema è fondamentale</mark>. Ora vedremo come
-aggiornare i/il browser e solo il browser all' avvio di sistema , così da chiudere le falle appena le case produttrici di browser
-rilasciano le patch . 
+            della posta elettronica , e si potrebbe continuare a lungo con la lista . Questo tutorial è
+    indicato a chi volesse aggiornare automaticamente il browser all'avvio di sistema , così da essere certo
+    di avere applicate le ultime patch, prima di affacciarsi alla rete ed alle sue minacce , ed a chi preferisce mantenere
+    disattivati gli aggiornamenti automatici , per non essere costretto a comunicare continuamente con i server di aggiornamento ,
+    cosa questa che costringe ad avere delle porte di comunicazione sempre aperte .
+ I browser nei repository
+Linux ricevono aggiornamenti quasi giornalieri , ma gli utenti , spesso dimenticano di aggiornarli .
+Anche perchè farlo manualmente e spesso diventa pesante . Soluzione : <mark>
+Aggiornare I Browser All' Avvio Di Sistema In Modo Che Ci Si Possa Affacciare Alla Rete In Modo Sicuro</mark>
+</p>
+<p style="text-align:center;" id="p_content"><mark>Per raggiungere il nostro scopo
+non creeremo servizi Systemd aggiuntivi , non servono ! non installeremmo Cron
+andando ad allungare ulteriormente la lista di servizi sempre attivi , noto problema per la sicurezza .
+Un sistema informatico , più è snello , meno servizi attivi ha in esecuzione : PIÙ È SICURO !
+per raggiungere il nostro scopo porteremo a termine tre semplici step :
+
+</mark><br><ul style="background-color: white;padding:2%;">
+  <span class="badge badge-info" style="display:block;margin:3% auto;"></span>
+  <li><b>1) Useremo la possibilità di eseguire comandi all' avvio del sistema offerta da tutti i DM (Desktop Manager)
+ : "Gnome , Xfce , Kdm ecc.." per effettuare l' aggiornamento , senza lasciare servizi attivi e porte di comunicazione aperte </b> </li>
+  <br><li><b>2) <b>Il comando eseguito lancerà uno script Bash che piazzeremo in <code>/usr/bin/</code> in cui eseguiremo l' Aggiornamento dei/del Browser</b></li>
+  <li><b>3) Modificheremo il file /etc/sudoers in modo che lo script possa eseguire l' aggiornamento
+  senza inserire la password quando il comando sudo la chiederà , se la chiedesse all' interno dello
+  script , ciò ne provocherebbe il blocco </b> </li>
+</ul>
+<b>1)</b>&nbspLa procedura che illustrerò può essere effettuata anche in modalità grafica , il problema è che è diversa su ogni Desktop Manager .
+Eseguendola da terminale è sempre uguale invece . Aprite un Terminale ed eseguite :<code> <br>nano ~/.config/autostart/BrowserUp.desktop </code>
+<br><br>all' interno del file che si aprirà inserite il seguente contenuto <br><br><code style="display:block;background-color: black;margin:0 auto;"> <br><br>
+  [Desktop Entry]<br>
+  Encoding=UTF-8<br>
+  Version=0.9.4<br>
+  Type=Application<br>
+  Name=BrowserUp<br>
+  Comment=update<br>
+  Exec=/usr/bin/updatebrowser.sh<br>
+  OnlyShowIn=XFCE;<br>
+  RunHook=0<br>
+  StartupNotify=true<br>
+  Terminal=true<br>
+  Hidden=false<br>
+</code><br><br>
+Salva il file nel percorso dove l' hai aperto.
+se vuoi vedere il terminale all' avvio che mostra gli aggiornamenti in corso , imposta <code>Terminal=true</code>
+altrimenti a false<br><br><b>2)</b>
+
+ &nbspApri un Terminale ed esegui come amministratore : <code> <br># nano /usr/bin/updatebrowser.sh </code>
+<br><br>all' interno del file che si aprirà inserisci il seguente contenuto <br><br>
+<code style="display:block;background-color: black;margin:0 auto;">
+#!/bin/bash<br>
+sudo  apt-get update && sudo apt-get upgrade -y {listabrowser}
+</code><br>
+<mark>nello script non usare la versione abbreviata di apt-get : <code>sudo apt update</code>
+non funzionerà ! ma usa <code> sudo apt-get update </code>
+
+Ovviamente sostituisci <mark>{listabrowser}</mark> con i browser che vuoi aggiornare . Rendi il file eseguibile :
+<code>$ sudo chmod +x /usr/bin/updatebrowser.sh</code>
+
+<br><br><b>3)</b>
+
+ Sei arrivato al punto 3 , questo passo come detto è necessario perchè
+devi evitare che nello script venga chiesta la password quando si esegue sudo. Apri il file
+<mark>/etc/sudoers con il comando visudo , non usare nano perchè potresti
+danneggiare il file </mark> <br><br> <code># visudo </code>&nbsp&nbspvisudo apre il file /etc/sudoers per
+modificarlo senza rischi .<br><br>
+guarda l' immagine , è importante che la riga da inserire venga messa prima di <code>@includedir</code>
+ovviamente cambia l'user mario con il tuo username !<br><br>
+  <img class="img img-thumbnail"id="img_8" width="100%" src='{% static 'images/Kazam_screenshot_00009.png' %}'>
+</p>
 
         {% endblock %}

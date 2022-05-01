@@ -300,7 +300,7 @@ class postArea {
         divUserBlog.setAttribute("id","divuserblog_"+id)
         divUserBlog.setAttribute("class","new_post_"+id)
         $(document).on('click', function(e){
-          if ($(e.target).closest("#divuserblog_"+id).length === 0 && $(e.target).closest("#clone_button").length === 0 && && $(e.target).closest("#clone_button").length === 0 && $(e.target).closest("#button_post").length === 0) {
+          if ($(e.target).closest("#divuserblog_"+id).length === 0 && $(e.target).closest("#clone_button").length === 0 && $(e.target).closest("#clone_button").length === 0 && $(e.target).closest("#button_post").length === 0) {
             if (isChanged==false) {
               $("#divuserblog_"+id).remove()
               isOpen=false

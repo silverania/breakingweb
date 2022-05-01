@@ -49,13 +49,14 @@
 </div>
 </div>
 <div id="c_aside" class="container-fluid" style="margin-bottom:5%;" >
-                       <div class="row justify-content-center">
+                       <div class="row justify-content-left">
                          <div class="col-12  col-md-3"  id="section_left_navbar">
         <section role="navigation">
           <aside>
           <nav id="nav_top">
          <div id="asidebar">
-        <span id="asidebar"> {% if request.user.is_authenticated %}<i  class="fas fa-angle-right" aria-hidden="true" ></i>{% endif %}</span>
+        <span id="asidebar"> {% if request.user.is_authenticated %}<i  class="fas fa-angle-right" aria-hidden="true" >
+        </i>{% endif %}</span>
          </div>
 
          <div id="d_aside_tutorial">
@@ -163,15 +164,15 @@ function getIndex(e) {
              <img class="img img-fluid rounded-circle" src='{% block photo %}{% endblock photo %}'
              width="40px" alt="non posso caricare immaggini">
            </div>
-           <div  style="width:60px;"><span class="badge badge-pill badge-warning" id="s_nome_autore">{{autore}}</span></div>
+           <div  style="width:60px;">
+<span class="badge badge-secondary" id="s_nome_autore">{{autore}}</span></div>
          </div>
-             <a href="{{tutorial.slug}}">{% block tut_title %}{% endblock tut_title %} </a><h6 id="h_title2"> <span class="s_title" style="background-color:purple;display:inline-block;color:white;opacity:0.5;margin-top:30px;">&nbspDi&nbsp</span>
-             <span class="s_title" style="color:purple;font-family:ShareTechMono-Regular">{{tutorial.author}}</span>
-          <span style="color:grey;opacity:0.5;" class="s_title"> , </span><span  class="s_title" style="color:blue;">{{tutorial.publish}}</span></h6>
+             <a href="{{tutorial.slug}}">{% block tut_title %}{% endblock tut_title %} </a>
+          <span style="color:grey;opacity:0.5;" class="s_title"> , </span>
+      <span  class="s_title" style="color:blue;">{{tutorial.publish}}</span>
        </div>
 </header>
 <div class="d_content col-sm-12 col-md-12">
-
 {% block content %}
   {% endblock content %}
 
@@ -182,7 +183,8 @@ function getIndex(e) {
 
 <div id="d_amazon_1" class="mt-5 col-md-3 col-lg-3 col-xl-3" >
   <section id="section_right_aside">
-    <aside>
+
+    <!--aside>
   <div id="d-approfondimenti">
       <span id="s_approfondimenti" class="badge badge-pill badge-warning">Approfondimenti</span>
     </div>
@@ -190,7 +192,7 @@ function getIndex(e) {
   {% block amazon_right %}
       {% endblock %}
       </div>
-    </aside>
+    </aside-->
       </section>
     </div>
 

@@ -99,7 +99,7 @@ a ,a > span {
 #span_title_2{
 font-family: 'Carter_One';  font-weight:bold;
 font-style:italic;
-color:black; 
+color:black;
 }
 
 #span_title_w{
@@ -256,6 +256,11 @@ li #s_center_menu{
 #s_title{
   color:orange;
 }
+
+.s_title{
+margin-left:10%;
+}
+
 #s_title_2{
   color:black;
 }
@@ -310,6 +315,7 @@ font-weight:bold;
 }
 #p_content{
   margin:0 auto;
+  float:left;
   padding:20px;
   background-color: white;
 }
@@ -604,6 +610,9 @@ code#apt_install_build{
  .s_title_paragraph{
    font-size:1rem!important;
  }
+.s_title{
+font-size:0.7rem!important;
+}
  .fa-comments,#s_blog{
    font-size:0.7rem;
 }
@@ -706,7 +715,7 @@ code#apt_install_build{
  }
  #p_content{
    font-size:0.8rem;
-   margin-top:5%!important;
+   margin-top:0;
  }
  .s_title_paragraph{
    text-align: left;
@@ -774,11 +783,11 @@ code#apt_install_build{
  }
 
 #s_title,#s_title_2{
-   font-size:1.3rem;
+   font-size:1rem;
  }
  #p_content{
    font-size:0.9rem;
-   margin-top:1%!important;
+   margin-top:0;
  }
  #d_head > h4{
    font-size:1.2rem!important;
@@ -801,8 +810,11 @@ code#apt_install_build{
       font-size:1rem!important;
     }
  #s_title,#s_title_2{
-    font-size:1.8rem;
+    font-size:1.5rem;
   }
+  .s_title{
+margin-left: 3%;
+}
   #span_title{
     font-size:2.2rem;
     }
