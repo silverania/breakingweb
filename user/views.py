@@ -34,8 +34,11 @@ def dashboard(request):
     return render(request, ' user/dashboard.html', {'section': 'dashboard'})
 
 
+"""
 def user_login(request):
+    print("Entry In USER_LOGIN")
     if request.method == 'POST':
+        print("request="+str(request))
         form = LoginForm(request.POST)
         if form.is_valid():
             t = get_template('login_success.html')
@@ -57,6 +60,7 @@ def user_login(request):
             return HttpResponse("Utente gia autenticato !!")
         form = LoginForm()
     return render(request, 'user/login.html', {'form': form})
+"""
 
 
 class LogoutView():
@@ -68,22 +72,29 @@ class LogoutView():
 
 
 def user_register(request):
+
+    #print(data["user"])
+    #body = request.body.decode('utf-8')
+    #body = json.loads(str(body))
+    #data2 = body["password"]
+
     if request.method == 'POST':
-        user_form = UserRegistrationForm(request.POST)
-        if user_form.is_valid():
-            print("FORM VALIDO")
-            # Create a new user object but avoid saving it yet
-            new_user = user_form.save(commit=False)
-            # Set the chosen password
-            new_user.set_password(
-                user_form.cleaned_data['password'])
-            # Save the User object
-            new_user.save()
-            profile = Profile.objects.get(user=new_user)
-            print("PROFILE USERNAME "+profile.first_name)
-            profile.first_name = new_user.username
-            profile.save()
-            return render(request, 'user/register_done.html', {'new_user': new_user})
+        data = (dict(request.POST.lists()))
+        print(str(data["Nome"]))
+        print("FORM VALIDO")
+        breakpoint()
+        # Create a new user object but avoid saving it yet
+        # new_user = user_form.save(commit=False)
+        # Set the chosen password
+        new_user.set_password(
+                data['password'])
+        # Save the User object
+        new_user.save()
+        profile = Profile.objects.get(user=new_user)
+        print("PROFILE USERNAME "+profile.first_name)
+        profile.first_name = new_user.username
+        profile.save()
+        return render(request, 'user/register_done.html', {'new_user': new_user})
     else:
         user_form = UserRegistrationForm()
     return render(request, 'user/register.html', {'user_form': user_form})
@@ -91,6 +102,7 @@ def user_register(request):
 
 @login_required
 def edit(request):
+    print("request="+str(request))
     if request.method == 'POST':
         user_form = UserEditForm(instance=request.user,
                                  data=request.POST)

@@ -8,6 +8,7 @@
   <meta name="author" content="silverania">
   <meta name="keywords" content="{%block keywords%}{%endblock keywords%}">
   <meta name="description" content="{%block description%}{%endblock description%}">
+  {% block anteprima %}{% endblock %}
   <title>{{tutorial.title}}</title>
   <link rel="icon" type="image/x-icon" href="{% static "images/favicon.ico" %}">
   <link rel="stylesheet" href="{% static "css/reset.css"%}">
@@ -161,7 +162,7 @@ function getIndex(e) {
       <div id="d_title" style="position:relative;width:100%;">
            <div id="d_photo_author" style="position:absolute;top:-10%;">
              <div style="width:60px;">
-             <img class="img img-fluid rounded-circle" src='{% block photo %}{% endblock photo %}'
+             <img tabindex="100" class="img img-fluid rounded-circle" src='{% block photo %}{% endblock photo %}'
              width="40px" alt="non posso caricare immaggini">
            </div>
            <div  style="width:60px;">
