@@ -51,17 +51,10 @@
 					<div class="input-group">
 						<span class="input-group-addon"><span class="fas fa-user"></span></span>
             <label for="{{ form.username.id_for_label }}"></label>
-            <input type="input" class="form-control" name="user" id="inputUsername" placeholder="User" required >
+            <input type="input" class="form-control" name="Nome" id="inputUsername" placeholder="User" required >
             {{ form.username.errors }}
 					</div>
                     <hr />
-
-                    <div class="input-group">
-                      <span class="input-group-addon"><span class="fas fa-user"></span></span>
-                      <label for="{{ form.nome.id_for_label }}"></label>
-                      <input type="input" class="form-control" name="Nome" id="inputNome" placeholder="Nome" required >
-                      {{ form.name.errors }}
-                    </div>
 
                     <div class="input-group">
                       <span class="input-group-addon"><span class="fas fa-user"></span></span>
@@ -70,17 +63,19 @@
                       {{ form.username.errors }}
                     </div>
 
+                  <hr />
 
-
-					<div class="input-group">
-						<span class="input-group-addon"><span class="fa fa-key"></span></span>
-            <input type="password" class="form-control" name="password" id="inputEmail" placeholder="Password" required >
+					   <div class="input-group">
+						  <span class="input-group-addon"><span class="fa fa-key"></span></span>
+              <input type="password" class="form-control" name="password" id="inputPassword" placeholder="Password" required >
             {{ form.password.errors }}
 					</div>
 
+<hr />
+
           <div class="input-group">
             <span class="input-group-addon"><span class="fa fa-key"></span></span>
-            <input type="password" class="form-control" name="password" id="inputEmail" placeholder="Password" required >
+            <input type="password" class="form-control" name="password" id="inputPassword" placeholder="Password" required >
             {{ form.password.errors }}
           </div>
                     <hr />

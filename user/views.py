@@ -16,7 +16,7 @@ from django.http import HttpResponse, JsonResponse
 import json
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-
+from django.contrib.auth.models import User
 # Create your views here.
 
 
@@ -82,13 +82,13 @@ def user_register(request):
         data = (dict(request.POST.lists()))
         print(str(data["Nome"]))
         print("FORM VALIDO")
-        breakpoint()
         # Create a new user object but avoid saving it yet
         # new_user = user_form.save(commit=False)
         # Set the chosen password
-        new_user.set_password(
-                data['password'])
+        new_user = User.objects.create_user(
+          str(data['Nome']), str(data['Email']), str(data['password']))
         # Save the User object
+        new_user.set_password(str(data['password']))
         new_user.save()
         profile = Profile.objects.get(user=new_user)
         print("PROFILE USERNAME "+profile.first_name)
@@ -100,7 +100,7 @@ def user_register(request):
     return render(request, 'user/register.html', {'user_form': user_form})
 
 
-@login_required
+@ login_required
 def edit(request):
     print("request="+str(request))
     if request.method == 'POST':

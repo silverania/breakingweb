@@ -8,15 +8,15 @@ function setActiveHeaderMenu(element){
   switch (category){
     case "Django":
     django.addClass('active');
-    django.css('background-color','orange');
+    django.css('background-color','#6fffd9');
     break;
     case "Web":
     web.addClass('active');
-    web.css('background-color','orange');
+    web.css('background-color','#6fffd9');
     break;
     case "Linux":
     linux.addClass('active');
-    linux.css('background-color','orange');
+    linux.css('background-color','#6fffd9');
     break;
     default :
     return -1;

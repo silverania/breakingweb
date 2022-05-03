@@ -105,7 +105,7 @@ color:black;
 #span_title_w{
 font-family: 'Carter_One';
 /*color:#ff00bf;*/
-color:orange;
+color:black;
 margin-right:5px;
 }
 
@@ -189,7 +189,8 @@ margin-top:1%;
 
 li[id^="a-"]:hover{
   cursor:pointer!important;
-  background-color: black!important;
+  background-color: whitesmoke!important;
+  font-color:white;
 }
 
 .blog_title,#blog_title{
@@ -213,7 +214,7 @@ code{
 
 
 li #s_center_menu{
-  color:blue!important;
+  color:black!important;
 }
 
 #col_aside{
@@ -308,6 +309,7 @@ font-weight:bold;
   width:auto!important;
   background-color: black;
   color:white;
+  border-color: whitesmoke;
 }
 [id^="a_tutorial"]:hover{
   background-color:orange;
