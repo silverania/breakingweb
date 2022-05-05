@@ -16,7 +16,7 @@
      {% block tut_title %}
 
      <span class="badge badge-pill badge-light" style="width:100%;display:inline-block!important;margin:0 auto!important;">
-     <span id="s_title_2" style="display:inline-block;color:black;font-weight:bold;">Linux - Aggiornare I browser <br>
+     <span id="s_title_2" style="display:inline-block;color:black;font-weight:bold;">Linux - Aggiornare I browser
       All' Avvio Di Sistema</span></span>
 
 
@@ -44,6 +44,8 @@ Aggiornare I Browser All' Avvio Di Sistema In Modo Che Ci Si Possa Affacciare Al
 non creeremo servizi Systemd aggiuntivi , non servono ! non installeremmo Cron
 andando ad allungare ulteriormente la lista di servizi sempre attivi , noto problema per la sicurezza .
 Un sistema informatico , più è snello , meno servizi attivi ha in esecuzione : PIÙ È SICURO !
+inoltre avviare un comando all'avvio di sistema piazzoandolo in <code> $ ~/.config/autostart/ </code>
+aggiornerà i browser qualunque sia il Desktop Manager usato : ( Gnome , Xfce , Kde ecc..)
 per raggiungere il nostro scopo porteremo a termine tre semplici step :
 
 </mark><br><ul style="background-color: white;padding:2%;">
@@ -51,25 +53,28 @@ per raggiungere il nostro scopo porteremo a termine tre semplici step :
   <li><b>1) Useremo la possibilità di eseguire comandi all' avvio del sistema offerta da tutti i DM (Desktop Manager)
  : "Gnome , Xfce , Kdm ecc.." per effettuare l' aggiornamento , senza lasciare servizi attivi e porte di comunicazione aperte </b> </li>
   <br><li><b>2) <b>Il comando eseguito lancerà uno script Bash che piazzeremo in <code>/usr/bin/</code> in cui eseguiremo l' Aggiornamento dei/del Browser</b></li>
-  <li><b>3) Modificheremo il file /etc/sudoers in modo che lo script possa eseguire l' aggiornamento
+  <li><b><br>3) Modificheremo il file /etc/sudoers in modo che lo script possa eseguire l' aggiornamento
   senza inserire la password quando il comando sudo la chiederà , se la chiedesse all' interno dello
   script , ciò ne provocherebbe il blocco </b> </li>
 </ul>
+<hr>
+<br><br><h2 align="center"><mark>Cominciamo ! : Passo 1</mark></h2>
 <b>1)</b>&nbspLa procedura che illustrerò può essere effettuata anche in modalità grafica , il problema è che è diversa su ogni Desktop Manager .
 Eseguendola da terminale è sempre uguale invece . Aprite un Terminale ed eseguite :<code> <br>nano ~/.config/autostart/BrowserUp.desktop </code>
 <br><br>all' interno del file che si aprirà inserite il seguente contenuto <br><br><code style="display:block;background-color: black;margin:0 auto;"> <br><br>
-  [Desktop Entry]<br>
-  Encoding=UTF-8<br>
-  Version=0.9.4<br>
-  Type=Application<br>
-  Name=BrowserUp<br>
-  Comment=update<br>
-  Exec=/usr/bin/updatebrowser.sh<br>
-  OnlyShowIn=XFCE;<br>
-  RunHook=0<br>
-  StartupNotify=true<br>
-  Terminal=true<br>
-  Hidden=false<br>
+[Desktop Entry]<br>
+Encoding=UTF-8<br>
+Version=0.9.4<br>
+Type=Application<br>
+Name=BrowserUp<br>
+Comment=update<br>
+Exec=/usr/bin/updatebrowser.sh<br>
+OnlyShowIn=XFCE;GNOME;GTK;KDE;PLASMA<br>
+RunHook=0<br>
+StartupNotify=true<br>
+Terminal=true<br>
+Hidden=false<br>
+DBusActivatable=true<br>
 </code><br><br>
 Salva il file nel percorso dove l' hai aperto.
 se vuoi vedere il terminale all' avvio che mostra gli aggiornamenti in corso , imposta <code>Terminal=true</code>
