@@ -1,3 +1,13 @@
+{% static %}
+@font-face {
+  font-family: 'Alpha Slab One';
+  src: url('../Fonts/Alfa_Slab_One/AlfaSlabOne-Regular.ttf');
+}
+
+h1{
+font-family:'Alpha Slab One'
+}
+
 #blog{
   width:43%!important;
   max-width:43%!important;
@@ -11,6 +21,10 @@ div.modal-content {
   background-color:#e6ffff;
   font-size:2rem;
   /*box-sizing:content-box;*/
+}
+
+a > span {
+  color:black;
 }
 
 a{
@@ -27,7 +41,7 @@ a{
 }
 
 [id^=d_head_blog]{
-  margin:10% auto !important;
+  margin:2% auto !important;
 }
 
 [id^=bh5_span]{
@@ -136,7 +150,7 @@ ul#ul_blog li{
 }
 
 #button_post,#clone_button{
-  margin:100px auto;
+  margin:33px auto;
 }
 
 [id^="divuserblog_"]{
@@ -173,7 +187,7 @@ ul#ul_blog li{
 
 @media screen and (max-width: 1024px) {
   .fa-comments,#s_blog{
-    font-size:1.5rem;
+    font-size:1.5rem;mybut
   }
 
   #s_blog_icon + #span_blog_entra,#span_entra,#span_reg,#span_esci{
@@ -231,7 +245,7 @@ ul#ul_blog li{
 .mybut{
   display: block;
   width: 100%;
-  padding: .5rem 1rem;
+  padding: .2rem 1rem;
   font-size: 1.25rem;
   line-height: 1.5;
   border-radius: .3rem;

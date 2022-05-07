@@ -273,7 +273,7 @@ class postArea {
       var tagUserImg=document.createElement("IMG")
       divContainerHead.setAttribute("id","d_head_blog_"+id)
       divContainerHead.setAttribute("style","width:100%")
-      divContainerHead.setAttribute("style","height:auto")
+      //divContainerHead.setAttribute("style","height:auto")
       tagUserImg.setAttribute("style","border-radius:50%")
       tagUserImg.setAttribute("src",mess.photo)
       divUserBlog.appendChild(divContainerHead)
@@ -500,12 +500,15 @@ function initBlogSGang(login,parTagTitle,id){
 
 /* Primo funzione eseguita nel flusso di codice , ...... l' entrypoint.... */
 $(bbutton).click(function() {
+if(userLogged[0].fields.user!="anonimo"){
   if(isOpen==false) {
     buttonCommentClick()
   }
   else {
     msgIsTexareaOpen()
   }
+}
+else{alert("devi fare il login")}
 })
 function buttonCommentClick(){
   let modal
@@ -712,7 +715,7 @@ $(document).ready(function(){
   //cln.getElementsByClassName('mybut')[0].setAttribute("id","clone_button")
   //bdiv.appendChild(cln)[2];
   butcloned = document.getElementById('button_post')
-  $(butcloned).click(function(){
+  /*$(butcloned).click(function(){
     if(userLogged[0].fields.user!="anonimo"){
     if(isOpen==false) {
       buttonCommentClick()
@@ -722,8 +725,8 @@ $(document).ready(function(){
 
     }
   }
-  else { alert("Per aprire un post ti devi fare il login") }
-  })
+  }
+  )*/
   $('.mybut').hover(function(e){
     $('.mybut').css("box-shadow","0 0 0 white")
   },

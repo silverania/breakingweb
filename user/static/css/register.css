@@ -108,3 +108,15 @@ margin-left: 4px;
 #b_registrami:hover{
     border:3px solid white!important;
 }
+
+@media (max-width: 990px) {
+.kpx_spanOr{
+    font-size:1rem!important;
+}
+.kpx_login .kpx_authTitle {
+  font-size:0.8rem;
+}
+.facebook , .twitter , .google{
+font-size: 0.5rem;
+}
+}

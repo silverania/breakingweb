@@ -246,7 +246,7 @@ class postArea {
 
   appendPostArea(mess,divuserblog){
     if(mess.type=="newpost"){
-      var elToAppend=document.getElementById('clone_button')
+      var elToAppend=document.getElementById('button_post')
       $ ( divuserblog ).insertAfter(elToAppend)
     }
     else if (mess.type=="newresp") {
@@ -273,7 +273,7 @@ class postArea {
       var tagUserImg=document.createElement("IMG")
       divContainerHead.setAttribute("id","d_head_blog_"+id)
       divContainerHead.setAttribute("style","width:100%")
-      divContainerHead.setAttribute("style","height:auto")
+      //divContainerHead.setAttribute("style","height:auto")
       tagUserImg.setAttribute("style","border-radius:50%")
       tagUserImg.setAttribute("src",mess.photo)
       divUserBlog.appendChild(divContainerHead)
@@ -300,7 +300,7 @@ class postArea {
         divUserBlog.setAttribute("id","divuserblog_"+id)
         divUserBlog.setAttribute("class","new_post_"+id)
         $(document).on('click', function(e){
-          if ($(e.target).closest("#divuserblog_"+id).length === 0 && $(e.target).closest("#clone_button").length === 0 && $(e.target).closest("#clone_button").length === 0 && $(e.target).closest("#button_post").length === 0) {
+          if ($(e.target).closest("#divuserblog_"+id).length === 0 && $(e.target).closest("#button_post").length === 0 && $(e.target).closest(".form_comment").length === 0 ) {
             if (isChanged==false) {
               $("#divuserblog_"+id).remove()
               isOpen=false
@@ -500,12 +500,15 @@ function initBlogSGang(login,parTagTitle,id){
 
 /* Primo funzione eseguita nel flusso di codice , ...... l' entrypoint.... */
 $(bbutton).click(function() {
+if(userLogged[0].fields.user!="anonimo"){
   if(isOpen==false) {
     buttonCommentClick()
   }
   else {
     msgIsTexareaOpen()
   }
+}
+else{alert("devi fare il login")}
 })
 function buttonCommentClick(){
   let modal
@@ -689,9 +692,9 @@ function cleanJson(json){
 }
 
 $(document).on("load" ,function(){
-  var itm = document.getElementsByClassName("form_comment")[0];
-  var cln = itm.cloneNode(true);
-  bdiv.appendChild(cln)[2];
+  //var itm = document.getElementsByClassName("form_comment")[0];
+  //var cln = itm.cloneNode(true);
+  //bdiv.appendChild(cln)[2];
 })
 
 
@@ -708,12 +711,11 @@ $(document).ready(function(){
   var q=0
   let comments_json;
   var itm = document.getElementsByClassName("form_comment")[0];
-  var cln = itm.cloneNode(true);
-  cln.setAttribute("id","clone_form")
-  cln.getElementsByClassName('mybut')[0].setAttribute("id","clone_button")
-  bdiv.appendChild(cln)[2];
-  butcloned = document.getElementById('clone_button')
-  $(butcloned).click(function(){
+  //var cln = itm.cloneNode(true);
+  //cln.getElementsByClassName('mybut')[0].setAttribute("id","clone_button")
+  //bdiv.appendChild(cln)[2];
+  butcloned = document.getElementById('button_post')
+  /*$(butcloned).click(function(){
     if(userLogged[0].fields.user!="anonimo"){
     if(isOpen==false) {
       buttonCommentClick()
@@ -723,8 +725,8 @@ $(document).ready(function(){
 
     }
   }
-  else { alert("Per aprire un post ti devi fare il login") }
-  })
+  }
+  )*/
   $('.mybut').hover(function(e){
     $('.mybut').css("box-shadow","0 0 0 white")
   },
