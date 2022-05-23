@@ -40,6 +40,11 @@ font-size:20px;
 /*box-sizing:content-box;*/
 }
 
+/* privacy window */
+#bs-gdpr-cookies-modal{
+z-index:9999;
+}
+
 .badge.badge-info.badge-outlined-info{
   background-color:transparent!important;
   color:DodgerBlue;;
@@ -111,6 +116,11 @@ margin-right:5px;
 #c_aside{
   margin-top:3%;
 }
+
+.zindex{
+z-index:-999!important;
+}
+
 #d_title{
   font-family: "ShareTechMono-Regular.ttf"
   margin-bottom:3%;

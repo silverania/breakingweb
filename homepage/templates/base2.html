@@ -1,7 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="it" id="page" >
-{% block head %} {% if request.user.is_authenticated %} <script> alert("login effettuato !")</script>{% endif %}
+{% if request.user.is_authenticated %} <script> alert("login effettuato !")</script>{% endif %}
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta charset="UTF-8">
@@ -17,20 +17,16 @@
   <link rel="stylesheet" href="{% static "css/homepage.css" %}">
   <link rel="stylesheet" href="{% static "css/footer.css" %}">
   <script src="{% static 'js/all.min.js' %}"></script>
-  <link rel="stylesheet" href="/static/css/blog.css">
+  
 
-  <!--script  src="{% static 'js/jquery.min.js' %}"></script-->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script  src="{% static 'js/jquery.min.js' %}"></script>
   <script  src="{% static 'node_modules/popper.js/dist/umd/popper.min.js' %}"></script>
+<script  src="{% static 'js/bootstrap.min.js' %}"></script>
+{% block otherscripts %} {% endblock %}
 
- <script  src="{% static 'js/aside.js' %}"></script>
-  <script  src="{% static 'js/progressbar.js' %}"></script>
-    <!--script  src="{% static 'js/navcenter.js' %}"></script-->
-  <script  src="{% static 'js/style.js' %}"></script>
-  <script  src="/static/js/blog.js"></script>
-  <script  src="{% static 'js/bootstrap.min.js' %}"></script>
 </head>
-{% endblock head %}
+
 
 <body id="body"  onscroll="var h=document.body.scrollHeight;getPosition();">
 
@@ -180,7 +176,7 @@ function getIndex(e) {
 </div>
 </article>
 </div>
-
+{% block blog %}{% endblock %}
 
 <div id="d_amazon_1" class="mt-5 col-md-3 col-lg-3 col-xl-3" >
   <section id="section_right_aside">
@@ -198,68 +194,12 @@ function getIndex(e) {
     </div>
 
 </div>
-<div class="container-fluid">
-<div class="row justify-content-center">
-  <div id="col_blog" class="col-12 col-md-12 col-lg-12">
-
-
-
-
-<script>
-var x = document.title;
-tagToInsertDown="footer"
-initBlogSGang("{{request.user}}" , x , tagToInsertDown);
-</script>
-</div>
-
-  <!--textarea onclick="writeMsg(this.id,'{{login}}');" id="t_textarea" class="form-control" rows="4" placeholder="Cosa Ti Affligge ?" maxlength="140"></textarea-->
-
-</div>
-<div class="col-md-2 col-lg-3 text-center">
-
-</div>
-<div class="col-md-2 col-lg-3 text-center">
 
 </div>
 
-</div>
-</div>
 
 
-
-{% block footer %}
-<footer class="footer">
-<div class="row" style="margin:0!important;padding:0!important;">
-  <div class="col-12 col-sm-8 col-md-4 col-lg-3" style="padding:2%;">
-  <div>
-    <img  class=" iconDetails" src='{% block photo_footer %}{%static "/images/mestesso.jpg"%}{% endblock photo_footer%}'
-    alt="non posso caricare immaggini">
-  </div>
-  <div class="d_breakingweb_fonts">
-
-    <dl>
-        <dt class="badge badge-info">BreakingWeb.it</dt>
-        <dd><address><a href="mailto:spaceissimo@gmail.com">Mario Spanò</a></address></dd>
-      </dl>
-
-
-
-
-
-  </div>
-</div>
-  <div class="col-sm-4 col-md-8 col-lg-9"style="margin:0!important;padding:0!important;">
-
-  </div>
-</div>
-<div class="row" style="margin:0!important;padding:0!important;">
-  <div class="col-12 col-md-12 col-lg-12 text-center" >
-     <small id="small_text_license">Tutti i contenuti sono prottetti dalla licenza creative commons</small>
-  </div>
-</div>
-</footer>
-
-{% endblock footer %}
+{% block footer %}{% endblock %}
 
 </body>
 </html>

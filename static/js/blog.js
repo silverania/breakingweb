@@ -38,8 +38,6 @@ var spanBlogEntra=document.createElement("SPAN");
 var liBlogEsci=document.createElement("LI");
 var aBlogEsci=document.createElement("A");
 var spanBlogEsci=document.createElement("SPAN");
-//var bH5=document.createElement("span")
-//var spanUserName=document.createElement("SPAN");
 var post,post2=new Object()
 var isOpen=false
 var bSection=document.createElement("SECTION")
@@ -58,7 +56,7 @@ var exist=new Boolean(false)
 var newPostId=0
 var elementToAppendPostArea
 var json_resps
-
+var re
 
 function createSectionDivSpan(){
   bForm.setAttribute("action","post/getpost");
@@ -74,7 +72,7 @@ function createSectionDivSpan(){
   divFormChild.setAttribute("id","multiarea");
   //divFormChild.setAttribute("class","form-group");
   divExitLogin.setAttribute("id","d_blog_reg")
-  divExitLogin.setAttribute("style","width:45%;display:inline-block")
+  divExitLogin.setAttribute("style","width:45%;display:inline-block;")
   bdiv.setAttribute("id","bdiv")
   //bIcon.setAttribute('src',"../../../static/images/blog_comment.gif")
   //bIcon.setAttribute("WIDTH","50px")
@@ -84,11 +82,14 @@ function createSectionDivSpan(){
   bSection.setAttribute("style","width:100%");
   //bSpan.setAttribute("id","s_blog_icon")
   aBlogEntra.setAttribute("style","display:block;width:auto;text-align:right;")
-  aBlogReg.setAttribute("style","display:block;width:auto;text-align:right;")
-  aBlogReg.setAttribute("href","user/register")
-  aBlogEntra.setAttribute("href","user/login")
-  aBlogEsci.setAttribute("href","user/logout")
+  aBlogReg.setAttribute("style","display:block;width:auto;text-align:right;z-index:200")
+  aBlogReg.setAttribute("href","/user/register")
+    aBlogReg.setAttribute("href","/user/register")
+  aBlogEntra.setAttribute("href","/user/login")
+aBlogEntra.setAttribute("class","nav-link")
+  aBlogEsci.setAttribute("href","/user/logout")
   liBlogEntra.setAttribute("style","display:inline;width:auto;margin-right:0px;")
+liBlogEntra.setAttribute("class" , "nav-item")
   //bSpanChild.setAttribute("id","s_blog_text")
   bbutton.setAttribute("id","button_post")
   //bH5.setAttribute("id","span_blog_entra")
@@ -508,7 +509,7 @@ if(userLogged[0].fields.user!="anonimo"){
     msgIsTexareaOpen()
   }
 }
-else{alert("devi fare il login")}
+window.open("user/login")
 })
 function buttonCommentClick(){
   let modal

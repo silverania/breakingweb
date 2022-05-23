@@ -16,6 +16,7 @@ font-family:'Alpha Slab One'
 
 div.modal-content {
   width:100%;
+min-width:100%;
   height:auto;
   font-family:'WorkSans','Assistant-regular','WorkSans';
   background-color:#e6ffff;

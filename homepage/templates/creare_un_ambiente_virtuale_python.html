@@ -1,7 +1,7 @@
 {% extends 'base2.html' %}
 {% load static %}
 
-
+<head>
 {% block title %}Creare Un Ambiente Virtuale Python{% endblock title %}
   {% block keywords %}python,linux,venv,module,creare,inizializzare,ambiente,virtuale,pip{% endblock keywords %}
   {% block description %}Creare Un Ambiente Virtuale Python su Linux con il modulo venv{% endblock description%}
@@ -21,8 +21,8 @@
      <span id="s_title_2" style="display:inline-block;color:black;font-weight:bold;">Creare Un Ambinete Virtuale Python <br>
       Con Il Modulo venv</span></span>
        {% endblock tut_title %}
-
-
+      {% block otherscripts %}{% include 'custom_tag.html'%} {% endblock %}
+<head>
             {% block content %}
              <p style="text-align:center;" id="p_content">
         L' utilità principale di un ambiente virtuale Python , è quella di preservare l' ambiente Python che usa il sistema operativo .
@@ -39,26 +39,31 @@
           Su versioni inferiori non è consigliato usare venv e probabilmente neanche possibile.<br>per versioni inferiori a 3.5 di python va usato <mark>pyvenv</mark><br></br>
             <img class="img img-thumbnail"id="img_8" width="100%" height="500px"src='{% static 'images/python_version.png' %}'>
 
-        </p>
+        </p><br><br><br>
+    <h2 style="text-align:center"><mark>Creiamo l' ambiente virtuale Python :</mark></h2><br>
         <p style="text-align:center;" id="p_content">
-          Creiamo l' ambiente virtuale Python :<br><br>
+
           <img alt="non visualizzabile"  class="img img-thumbnail"id="img_8" width="100%" height="1000px"src='{% static 'images/Kazam_screenshot_00003.png' %}'>
         </p>
 
         <p style="text-align:center;" id="p_content">
           Abbiamo creato l' ambiente virtuale Python , tuttavia da terminale se eseguo il comando <mark>python</mark> ,
-          va in esecuzione ancora la versione python usata dal sistema operativo , quella installata nel percorso <mark>/usr/bin/python*</mark>
+          va in esecuzione ancora la versione python usata dal sistema operativo , quella installata nel percorso <mark>/usr/bin/python*
+          </mark>
           . Per raggiungere il nostro scopo , che è quello di non usare la versione python in /usr/bin , per non rischiare di corrompere il sistema , come detto
           : dobbiamo attivare nel terminale l' ambiente virtuale , in modo che quando lanceremo python dalla riga di comando , verrà eseguita la versione Python virtuale dal percorso :
           <mark>$ /home/username/cartellaDellAmbienteVirtualePython </mark>:
-          per fare ciò dobbiamo eseguire il comando : <mark>$ /home/username/cartellaDellAmbienteVirtualePython/bin/activate </mark> che attiverà appunto l' ambiente Virtuale. Attenzione perchè l' ambiente
-          virtuale che attiveremo con il comando <mark>activate</mark> , sarà valido solo nel terminale dov'è stato appunto attivato . Se apro un'altra istanza del terminale o avvio python da un posto diverso dal terminale in cui
+          per fare ciò dobbiamo eseguire il comando : <mark>$ /home/username/cartellaDellAmbienteVirtualePython/bin/activate </mark>
+che attiverà appunto l' ambiente Virtuale. Attenzione perchè l' ambiente
+          virtuale che attiveremo con il comando <mark>activate</mark> , sarà valido solo nel terminale dov'è stato appunto attivato .
+ Se apro un'altra istanza del terminale o avvio python da un posto diverso dal terminale in cui
           è stato attivato : verrà avviato l' eseguile che usa il sistema operativo in : <code>/usr/{bin,lib}/python*</code>.
           Il comando activate modificherà la variabile $PATH contenuta in <code>$USER/.bashrc</code> , istruendolo ad eseguire la versione python dell'
           ambiente virtuale , al posto di quella che usa il sistema operativo in <mark>/usr/bin/python*</mark> <br><br>
+          </p>
           <h2 style="text-align:center"><mark>Attiviamo L' Ambiente Virutale</mark></h2><br>
           <img class="img img-thumbnail"id="img_8" width="100%" height="1000px"src='{% static 'images/Kazam_screenshot_00004.png' %}'>
-        </p>
+
         <p style="text-align:center;" id="p_content">
           Guardate nell' immagine sotto , come il comando <mark>activate</mark> ha modificato due variabili di sistema molto importanti : PATH , PS1 . Giù Nello screenshot
            , il terminale è diviso in due sezioni : sopra e sotto. Nella sezione di sopra è stato attivato l' ambiente virtuale Python,
@@ -66,3 +71,8 @@
           <img class="img img-thumbnail"id="img_8" width="100%" height="1000px"src='{% static 'images/Kazam_screenshot_00005.png' %}'>
         </p>
 {% endblock content %}
+
+{% block blog %}{% include '_blog.html' %}{% endblock %}
+{% block footer %}
+{% include '_footer.html' %}
+{% endblock footer %}
