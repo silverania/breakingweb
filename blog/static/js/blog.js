@@ -509,8 +509,13 @@ if(userLogged[0].fields.user!="anonimo"){
     msgIsTexareaOpen()
   }
 }
-window.open("user/login")
-})
+else{
+  window.open("/user/login")
+  }
+}
+)
+
+
 function buttonCommentClick(){
   let modal
   let textAreaInDivInMain

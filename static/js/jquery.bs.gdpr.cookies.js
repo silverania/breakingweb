@@ -90,7 +90,7 @@
 
 
             if(settings.allowAdvancedOptions === true) {
-                modalButtons = '<button id="' + settings.id + '-advanced-btn" type="button" class="btn btn-secondary">' + settings.advancedButtonLabel + '</button><button id="' + settings.id + '-accept-btn" type="button" class="btn btn-primary" data-dismiss="modal">' + settings.acceptButtonLabel + '</button>';
+                modalButtons = '<button id="' + settings.id + '-advanced-btn" type="button" class="btn btn-secondary">' + settings.advancedButtonLabel + '</button><button id="' + settings.id + '-accept-btn" type="button" class="btn btn-primary" data-dismiss="modal">' + settings.acceptButtonLabel + '</button><button id="' + settings.id + '-continue-btn" type="button" class="btn btn-secondary" data-dismiss="modal">' + settings.continueButtonLabel + '</button>';
 
                 // Generate list of available advanced settings
                 var advancedCookiesToSelectList = '';
@@ -118,9 +118,9 @@
                 modalBody = '<div id="' + settings.id + '-message">' + settings.message + moreLink + '</div>' + '<div id="' + settings.id + '-advanced-types" style="display:none; margin-top: 10px;"><h5 id="' + settings.id + '-advanced-title">' + settings.advancedTitle + '</h5>' + advancedCookiesToSelectList + '</div>';
             }
             else {
-                modalButtons2 = '<button id="' + settings.id + '-accept-btn" type="button" enabled class="btn btn-primary" data-dismiss="modal">' + settings.continueButtonLabel + '</button>';
+                //modalButtons2 = '<button id="' + settings.id + '-continue-btn" type="button" enabled class="btn btn-info" data-dismiss="modal">' + settings.continueButtonLabel + '</button>';
 
-              //  modalButtons = '<button id="' + settings.id + '-accept-btn" type="button" enabled class="btn btn-primary" data-dismiss="modal">' + settings.acceptButtonLabel + '</button>';
+              modalButtons = '<button id="' + settings.id + '-accept-btn" type="button" enabled class="btn btn-primary" data-dismiss="modal">' + settings.acceptButtonLabel + '</button> ';
                 modalBody ='<div id="' + settings.id + '-message">' + settings.message + moreLink + '</div>';
             }
 
@@ -128,7 +128,7 @@
                 modalBodyStyle = 'style="overflow-y: scroll; max-height: ' + settings.messageMaxHeightPercent + '%"';
             }
 
-            var modal = '<div class="modal fade ' + settings.class + '" id="' + settings.id + '" tabindex="-1" role="dialog" aria-labelledby="' + settings.id + '-title" aria-hidden="true"><div class="modal-dialog modal-dialog-centered" role="document"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="' + settings.id + '-title">' + settings.title + '</h5></div><div id="' + settings.id + '-body" class="modal-body" ' + modalBodyStyle + '>' + modalBody + '</div><div class="modal-footer">' + modalButtons2 + '</div></div></div></div>';
+            var modal = '<div class="modal fade ' + settings.class + '" id="' + settings.id + '" tabindex="-1" role="dialog" aria-labelledby="' + settings.id + '-title" aria-hidden="true"><div class="modal-dialog modal-dialog-centered" role="document"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="' + settings.id + '-title">' + settings.title + '</h5></div><div id="' + settings.id + '-body" class="modal-body" ' + modalBodyStyle + '>' + modalBody + '</div><div class="modal-footer">' + modalButtons + '</div></div></div></div>';
 
             // Show Modal
             setTimeout(function() {

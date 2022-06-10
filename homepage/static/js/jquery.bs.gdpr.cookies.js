@@ -90,7 +90,7 @@
 
 
             if(settings.allowAdvancedOptions === true) {
-                modalButtons = '<button id="' + settings.id + '-advanced-btn" type="button" class="btn btn-secondary">' + settings.advancedButtonLabel + '</button><button id="' + settings.id + '-accept-btn" type="button" class="btn btn-primary" data-dismiss="modal">' + settings.acceptButtonLabel + '</button>';
+                modalButtons = '<button id="' + settings.id + '-advanced-btn" type="button" class="btn btn-secondary">' + settings.advancedButtonLabel + '</button><button id="' + settings.id + '-accept-btn" type="button" class="btn btn-primary" data-dismiss="modal">' + settings.acceptButtonLabel + '</button><button id="' + settings.id + '-continue-btn" type="button" class="btn btn-secondary" data-dismiss="modal">' + settings.continueButtonLabel + '</button>';
 
                 // Generate list of available advanced settings
                 var advancedCookiesToSelectList = '';
@@ -120,7 +120,7 @@
             else {
                 //modalButtons2 = '<button id="' + settings.id + '-continue-btn" type="button" enabled class="btn btn-info" data-dismiss="modal">' + settings.continueButtonLabel + '</button>';
 
-              modalButtons = '<button id="' + settings.id + '-accept-btn" type="button" enabled class="btn btn-primary" data-dismiss="modal">' + settings.acceptButtonLabel + '</button>';
+              modalButtons = '<button id="' + settings.id + '-accept-btn" type="button" enabled class="btn btn-primary" data-dismiss="modal">' + settings.acceptButtonLabel + '</button> ';
                 modalBody ='<div id="' + settings.id + '-message">' + settings.message + moreLink + '</div>';
             }
 
