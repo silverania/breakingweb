@@ -91,7 +91,7 @@ def user_register(request):
         new_user.set_password(str(data['password']))
         new_user.save()
         profile = Profile.objects.get(user=new_user)
-        if "/user/register" in reaquest.path:
+        if "/user/register" in request.path:
             profile.profile_reg_to_application = "blog"
         print("PROFILE USERNAME "+profile.first_name)
         profile.first_name = new_user.username

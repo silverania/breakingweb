@@ -92,7 +92,10 @@ def tutorial_detail(request, slug=""):
         tutorial = Tutorial.objects.latest('publish')
     else:
         print("request PATH PIENA"+mypath)
-        tutorial = Tutorial.objects.get(slug=slug)
+        try:
+            tutorial = Tutorial.objects.get(slug=slug)
+        except :
+            print("WARNING ! non ci sono tutorial nel database ! ")
         print("request PAth piena e Tutorial"+str(tutorial.slug))
     template = tutorial.slug+".html"
     user = tutorial.author
