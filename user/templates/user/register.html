@@ -45,43 +45,26 @@
 
 		<div class="row kpx_row-sm-offset-3">
 			<div class="col-xs-12 col-sm-6">
-			    <form class="kpx_loginForm"  autocomplete="off" method="POST">
-              {% csrf_token %}
-                {{ form.non_field_errors }}
-					<div class="input-group">
-						<span class="input-group-addon"><span class="fas fa-user"></span></span>
-            <label for="{{ form.username.id_for_label }}"></label>
-            <input type="input" class="form-control" name="Nome" id="inputUsername" placeholder="User" required >
-            {{ form.username.errors }}
-					</div>
-                    <hr />
 
-                    <div class="input-group">
-                      <span class="input-group-addon"><span class="fas fa-user"></span></span>
-                      <label for="{{ form.email.id_for_label }}"></label>
-                      <input type="input" class="form-control" name="Email" id="inputMail" placeholder="Email" required >
-                      {{ form.username.errors }}
-                    </div>
+        <form method="post">
+            {% csrf_token %}
+            {% for field in form %}
+              <p>
+                {{ field.label_tag }}
+                {% if 'username' in field.label_tag %}
+                {{ field }}
+                {% if field.help_text %}
 
-                  <hr />
+                  <small style="color: grey">accetta massimo 150 caratteri. Lettere, numeri e @/./+/-/_ solamente.</small>
+                {% endif %}{% endif %}
+                {% for error in field.errors %}
+                  <p style="color: red">{{ error }}</p>
+                {% endfor %}
 
-					   <div class="input-group">
-						  <span class="input-group-addon"><span class="fa fa-key"></span></span>
-              <input type="password" class="form-control" name="password" id="inputPassword" placeholder="Password" required >
-            {{ form.password.errors }}
-					</div>
+            {% endfor %}
+            <button type="submit">Registrami</button>
+          </form>
 
-<hr />
-
-          <div class="input-group">
-            <span class="input-group-addon"><span class="fa fa-key"></span></span>
-            <input type="password" class="form-control" name="password" id="inputPassword" placeholder="Password" required >
-            {{ form.password.errors }}
-          </div>
-                    <hr />
-					<button id="id_login" class="btn btn-lg btn-outline-primary btn-block" type="submit"><i class="fad fas-sign-in">
-          </i>Register</button>
-				</form>
 			</div>
     	</div>
 		<div class="row kpx_row-sm-offset-3">
