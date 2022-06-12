@@ -44,7 +44,7 @@ var bSection=document.createElement("SECTION")
 //var bSpan=document.createElement("SPAN");
 //var bSpanChild=document.createElement("SPAN");
 var bIcon = document.createElement("H1")
-    var t = document.createTextNode("InterBlog")
+    var t = document.createTextNode("Messages")
     bIcon.appendChild(t)
 var bForm=document.createElement("FORM");
 var title=document.getElementsByTagName('title')[0].innerText
