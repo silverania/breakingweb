@@ -12,7 +12,8 @@ class LoginForm(forms.Form):
 
 
 class SignUpForm(UserCreationForm):
-    photo = forms.CharField()
+    photo = forms.CharField(
+        max_length=300, required=False, help_text='Optional.')
 
     class Meta:
         model = User

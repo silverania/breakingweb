@@ -51,7 +51,9 @@
             {% csrf_token %}
             {% for field in form %}
               <p>
-
+                {% if 'Photo' in field.label_tag %}
+                <small style="color: grey">Opzionale</small>
+                  {% endif %}
                 {{ field.label_tag }}
                 {% if 'username' in field.label_tag %}
                   <small style="color: grey"></small>
@@ -61,18 +63,14 @@
                       <p style="color:red;">Username Errato o Esistente ! Cambialo !</p>
                         <script>setTimeout(() => { window.location.href = "/user/register"},5000);</script>
                 {% endif %}
-              {% if 'id_Photo' in field.name_tag %}
-                {{field}}
-              {% endif %}
 {% endif %}
                 {% else %} {{field}}
                 {% endif %}
                 {% for error in field.errors %}
                   {% if 'Password' in field.label_tag %}
                   <p style="color: red">Errore Nel Campo <mark>Password !</mark></p>
-                    <script>setTimeout(() => { window.location.href = "/user/register"},55000);</script>
+                    <script>setTimeout(() => { window.location.href = "/user/register"},5000);</script>
                   {% endif %}
-
                 {% endfor %}
             {% endfor %}
               <div >
