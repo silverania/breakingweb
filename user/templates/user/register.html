@@ -47,6 +47,7 @@
 			<div class="col-xs-12 col-sm-6">
 
         <form method="post">
+          <div class="form-group">
             {% csrf_token %}
             {% for field in form %}
               <p>
@@ -56,13 +57,17 @@
                 {% if field.help_text %}
 
                   <small style="color: grey">accetta massimo 150 caratteri. Lettere, numeri e @/./+/-/_ solamente.</small>
-                {% endif %}{% endif %}
+                {% endif %}
+                {% else %} {{field}}
+                {% endif %}
                 {% for error in field.errors %}
                   <p style="color: red">{{ error }}</p>
                 {% endfor %}
 
             {% endfor %}
-            <button type="submit">Registrami</button>
+              <div >
+            <button style="display:block;margin:0 auto!important;" class="btn btn-primary "  type="submit">Registrami</button>
+          </div></div>
           </form>
 
 			</div>
