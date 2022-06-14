@@ -39,6 +39,7 @@ def user_register(request):
             # photo = form.cleaned_data.get('photo')
             myphoto = request.POST.get('photo', False)
             user.profile.photo = myphoto
+            user.profile.first_name = form.cleaned_data.get('username')
             user.save()
             print("USERPROFILEPHOTO"+str(myphoto))
             username = form.cleaned_data.get('username')

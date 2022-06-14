@@ -139,7 +139,7 @@ def getPost(request):
 
 def newPost(request):
     postType = ""
-    print("entrypoint to newPost")
+    print("entrypoint to newPost ....request="+str(request))
     # thistutorial=Tutorial()
     if "type" in request.GET and request.GET["type"]:
         postType = request.GET.get("type")
