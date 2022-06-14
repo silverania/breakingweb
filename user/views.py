@@ -36,8 +36,11 @@ def user_register(request):
         if form.is_valid():
             user = form.save()
             user.refresh_from_db()
-            user.profile.photo = form.cleaned_data.get('photo')
+            # photo = form.cleaned_data.get('photo')
+            myphoto = request.POST.get('photo', False)
+            user.profile.photo = myphoto
             user.save()
+            print("USERPROFILEPHOTO"+str(myphoto))
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)

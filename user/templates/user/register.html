@@ -38,8 +38,8 @@
 
 		<div class="row kpx_row-sm-offset-3 kpx_loginOr">
 			<div class="col-xs-12 col-sm-6">
-				<hr class="kpx_hrOr">
-				<span class="kpx_spanOr">or</span>
+				<hr class="kpx_hrOr"><br>
+				<h3 class="kpx_authTitle">Oppure</h3>
 			</div>
 		</div>
 
@@ -51,11 +51,18 @@
             {% csrf_token %}
             {% for field in form %}
               <p>
-                {% if 'Photo' in field.label_tag %}
+                {% if 'Password confirmation' in field.label_tag %}
+                  <label>Conferma Password :</label>
+                {{ field }}
+                {% elif 'Password:' in field.label_tag %}
+                  <label>Password :</label>
+                {{ field }}
+                {% elif 'Photo' in field.label_tag %}
                 <small style="color: grey">Opzionale</small>
-                  {% endif %}
-                {{ field.label_tag }}
-                {% if 'username' in field.label_tag %}
+                  <label>{{field.label_tag}}</label>
+                    {{ field }}
+                {% elif 'Username' in field.label_tag %}
+                    <label>Username :</label>
                   <small style="color: grey"></small>
                 {{ field }}</p>
                 {% if field.help_text %}
@@ -64,13 +71,14 @@
                         <script>setTimeout(() => { window.location.href = "/user/register"},5000);</script>
                 {% endif %}
 {% endif %}
-                {% else %} {{field}}
+                {% else %}
                 {% endif %}
                 {% for error in field.errors %}
                   {% if 'Password' in field.label_tag %}
                   <p style="color: red">Errore Nel Campo <mark>Password !</mark></p>
                     <script>setTimeout(() => { window.location.href = "/user/register"},5000);</script>
                   {% endif %}
+
                 {% endfor %}
             {% endfor %}
               <div >

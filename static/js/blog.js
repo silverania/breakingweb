@@ -1,7 +1,7 @@
 BASE_URL="http://127.0.0.1:8000"
 URL_NEW_POST="/post/sendpost"
 const MAX_TEXTAREA_NUMBER=21
-const BASE_PHOTO_DIR="media/"
+const BASE_PHOTO_DIR="static/images/"
 var borderPost="none";
 var borderResponse="1px solid grey";
 var paPostOrResp;
@@ -44,7 +44,7 @@ var bSection=document.createElement("SECTION")
 //var bSpan=document.createElement("SPAN");
 //var bSpanChild=document.createElement("SPAN");
 var bIcon = document.createElement("H1")
-    var t = document.createTextNode("InterBlog")
+    var t = document.createTextNode("Messages")
     bIcon.appendChild(t)
 var bForm=document.createElement("FORM");
 var title=document.getElementsByTagName('title')[0].innerText
@@ -509,8 +509,13 @@ if(userLogged[0].fields.user!="anonimo"){
     msgIsTexareaOpen()
   }
 }
-window.open("user/login")
-})
+else{
+  window.open("/user/login")
+  }
+}
+)
+
+
 function buttonCommentClick(){
   let modal
   let textAreaInDivInMain
