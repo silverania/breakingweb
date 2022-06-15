@@ -120,7 +120,7 @@ button:disabled {
 }
 
 [id^="divuserblog_"]{
-margin-top:20px;
+margin-top:5%!important;
 }
 
 #d_blog_reg {
@@ -157,7 +157,7 @@ ul#ul_blog li{
 }
 
 [id^="divuserblog_"]{
-  margin-top:10%!important;
+  margin-top:5%!important;
 }
 
 #divuserblog_1{

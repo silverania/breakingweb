@@ -1,7 +1,7 @@
 BASE_URL="http://127.0.0.1:8000"
 URL_NEW_POST="/post/sendpost"
 const MAX_TEXTAREA_NUMBER=21
-const BASE_PHOTO_DIR="static/images/"
+const BASE_PHOTO_DIR=""
 var borderPost="none";
 var borderResponse="1px solid grey";
 var paPostOrResp;
@@ -274,6 +274,7 @@ class postArea {
       var tagUserImg=document.createElement("IMG")
       divContainerHead.setAttribute("id","d_head_blog_"+id)
       divContainerHead.setAttribute("style","width:100%")
+      divContainerHead.setAttribute("style","height:50%")
       //divContainerHead.setAttribute("style","height:auto")
       tagUserImg.setAttribute("style","border-radius:50%")
       tagUserImg.setAttribute("src",mess.photo)
