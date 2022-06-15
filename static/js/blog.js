@@ -1,7 +1,6 @@
 BASE_URL="http://127.0.0.1:8000"
 URL_NEW_POST="/post/sendpost"
 const MAX_TEXTAREA_NUMBER=21
-const BASE_PHOTO_DIR=""
 var borderPost="none";
 var borderResponse="1px solid grey";
 var paPostOrResp;
@@ -274,7 +273,6 @@ class postArea {
       var tagUserImg=document.createElement("IMG")
       divContainerHead.setAttribute("id","d_head_blog_"+id)
       divContainerHead.setAttribute("style","width:100%")
-      divContainerHead.setAttribute("style","height:50%")
       //divContainerHead.setAttribute("style","height:auto")
       tagUserImg.setAttribute("style","border-radius:50%")
       tagUserImg.setAttribute("src",mess.photo)
@@ -394,7 +392,7 @@ class postArea {
           var ids = (resps.length)
           ids = ids + 1
           createPostArea
-          ( r=new Resp(loginis,"", new Date().toLocaleString(),post,BASE_PHOTO_DIR+userLogged[0].fields.photo," risponde a "+mess.author,ids,"newresp"),elementToAppendPostArea)
+          ( r=new Resp(loginis,"", new Date().toLocaleString(),post,userLogged[0].fields.photo," risponde a "+mess.author,ids,"newresp"),elementToAppendPostArea)
           resps.push(r)
         }
         else if ( button_risposta_post.textContent=="Rispondi" && isOpen==true ){
@@ -583,7 +581,7 @@ function createNewComment(mess){
         mess.type="newpost"
         mess.publish=getDateFromDjangoDate()
         mess.author=loginis
-        userLogged[0].fields.photo == "undefined" ? alert  ("non ho la photo dell user !") :  mess.photo=BASE_PHOTO_DIR+userLogged[0].fields.photo
+        userLogged[0].fields.photo == "undefined" ? alert  ("non ho la photo dell user !") :  mess.photo=userLogged[0].fields.photo
         mess.pk=newPostId
       //  if(mess.titled){
         //  $('#myModal').remove()
@@ -774,7 +772,7 @@ $(document).ready(function(){
           // if(obj5_photo[z].fields.user==obj2[i].fields.author){
           if(profiles_json[z].pk==comments_json[i].fields.author){
             profiles.push(new Profile(profiles_json[z].fields.first_name,profiles_json[z].fields.photo))
-            mess.push(new Post("post",profiles_json[z].fields.first_name,comments_json[i].fields.title,comments_json[i].fields.body,getDateFromDjangoDate(comments_json[i].fields.publish),BASE_PHOTO_DIR+profiles_json[z].fields.photo,comments_json[i].pk))
+            mess.push(new Post("post",profiles_json[z].fields.first_name,comments_json[i].fields.title,comments_json[i].fields.body,getDateFromDjangoDate(comments_json[i].fields.publish),profiles_json[z].fields.photo,comments_json[i].pk))
             createPostArea(mess[indexX])
             break;
           }
@@ -790,7 +788,7 @@ $(document).ready(function(){
                   photoResp=obj5_photo
                 }
                 else{
-                  photoResp=BASE_PHOTO_DIR+profiles_json[z2].fields.photo
+                  photoResp=profiles_json[z2].fields.photo
                 }
                 resps.push(new Resp(profiles_json[z2].fields.first_name,resps_json[y].fields.body,getDateFromDjangoDate(resps_json[y].fields.publish),mess[indexX],photoResp," risponde a "+mess[indexX].author,resps_json[y].pk,"resp"))
                 mess[indexX].risposte.push(resps[q])

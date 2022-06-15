@@ -1,7 +1,7 @@
 BASE_URL="http://127.0.0.1:8000"
 URL_NEW_POST="/post/sendpost"
 const MAX_TEXTAREA_NUMBER=21
-const BASE_PHOTO_DIR=""
+const BASE_PHOTO_DIR="media/"
 var borderPost="none";
 var borderResponse="1px solid grey";
 var paPostOrResp;
@@ -582,7 +582,7 @@ function createNewComment(mess){
         mess.type="newpost"
         mess.publish=getDateFromDjangoDate()
         mess.author=loginis
-        userLogged[0].fields.photo == "undefined" ? alert  ("non ho la photo dell user !") :  mess.photo=BASE_PHOTO_DIR+userLogged[0].fields.photo
+        userLogged[0].fields.photo == "undefined" ? alert  ("non ho la photo dell user !") :  mess.photo=userLogged[0].fields.photo
         mess.pk=newPostId
       //  if(mess.titled){
         //  $('#myModal').remove()
