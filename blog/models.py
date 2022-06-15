@@ -6,6 +6,7 @@ from datetime import date
 from django.urls import reverse
 from user.models import Profile
 from django.utils.timezone import now
+from django.utils.text import slugify
 
 # Create your models here.
 
@@ -38,9 +39,10 @@ class Comment(models.Model):
         null=True,
         blank=True,
     )
-    title = models.CharField(max_length=100)
+    title = models.CharField(
+        max_length=100, default="...", null=True, blank=True)
     slug = models.SlugField(
-        max_length=250, unique_for_date="publish", blank=True, null=True
+        max_length=250, blank=True, null=True
     )
     author = models.ForeignKey(
         Profile,
@@ -57,21 +59,25 @@ class Comment(models.Model):
     status = models.CharField(
         max_length=10, choices=STATUS_CHOICES, default="bozza")
     tagTitleInPage = models.CharField(max_length=100, default="tag_value")
-
+    """
     def get_absolute_url(self):
         return reverse(
             "blog:newPost",
             args=[self.publish.year, self.publish.month,
                   self.publish.day, self.slug],
         )
-
+    """
     objects = PersonManager()
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(str(self.site)+str(self.publish))
+        super(Comment, self).save(*args, **kwargs)
 
     class Meta:
         unique_together = [["author", "created"]]
 
     def __str__(self):
-        return self.title
+        return str(self.title)
 
 
 class Resp(models.Model):

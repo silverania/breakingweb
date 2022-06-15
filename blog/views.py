@@ -149,13 +149,13 @@ def newPost(request):
         post = Resp()
     myuser = Profile()
     myuser.firstname = getLoginName(request)
-    post.site = tu
-    #breakpoint()
+    # post.site = tu
     if "newpost" in postType:
         post.site = tu
         if "title" in request.GET and request.GET["title"]:
             title = request.GET.get("title")
-            post.title = title
+            # post.title = title
+            post.site.title = title
             post.slug = post.title.replace(" ", "_")
     post.publish = datetime.now()
     post.created = post.publish

@@ -1,16 +1,21 @@
 {% extends 'base2.html' %}
 {% load static %}
+<head>
+{% block otherscripts %}{% include 'custom_tag.html'%} {% endblock %}
 {% block title %}Compilare Il Kernel Su Linux - The standard Way{% endblock title %}
 {% block keywords %}compilare kernel linux,linux compilazione standard,modalità standard,procedura,dipendenze per compilare il kernel,scompattare il kernel,tar,xz,.config,make config,nconfig,xconfig,gconfig,download kernel,
                 creare initramfs,initrd,ramdisk,make install,make,make modules_install,concurrency_level
 {% endblock keywords %}
-{% block description %}Linux - La Compilazione Del Kernel: The Standard Way{% endblock description%}
+{% block description %}Compilare Il Kernel Su Tutti i Sistemi Linux   {% endblock description%}
 {% block photo %}{%static "/images/mestesso.jpg"%}{% endblock photo %}
+{% block anteprima %}<meta property="og:image"   content='{% static 'images/Kazam_screenshot_00003.png' %}'/>{%endblock%}
 {% block tut_title %}
   <span class="badge badge-pill badge-light" style="width:100%;display:inline-block!important;margin:0 auto!important;">
     <span id="s_title">Linux - </span>
-  <span id="s_title_2" style="display:inline-block;color:black;font-weight:bold;"> Compilare Il Kernel</span></span>{% endblock tut_title %}
+  <span id="s_title_2" style="display:inline-block;color:black;font-weight:bold;"> Compilare Il Kernel</span></span>
 
+{% endblock tut_title %}
+</head>
 
 {% block content %}
 
@@ -416,13 +421,7 @@
       <code>grub-mkconfig -o /boot/grub/grub.cfg</code><br><br> Riavviate il pc per provare il kernel .
 </p>
 {% endblock content %}
-{% block amazon_right %}
-
-  <iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//rcm-eu.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=marios01-21&language=it_IT&o=29&p=8&l=as4&m=amazon&f=ifr&ref=as_ss_li_til&asins=1597494860&linkId=9762d964c5d52f9b08ddf653a35dccab"></iframe>
-<iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//rcm-eu.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=marios01-21&language=it_IT&o=29&p=8&l=as4&m=amazon&f=ifr&ref=as_ss_li_til&asins=1593279124&linkId=f5cb7b44c84a8f8e715550c7ff585e50"></iframe>
-<iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//rcm-eu.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=marios01-21&language=it_IT&o=29&p=8&l=as4&m=amazon&f=ifr&ref=as_ss_li_til&asins=1118787315&linkId=0f2214a03e99911ef6424535e3ad71b0"></iframe>
-<iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//rcm-eu.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=marios01-21&language=it_IT&o=29&p=8&l=as4&m=amazon&f=ifr&ref=as_ss_li_til&asins=1593272901&linkId=bad9b00c63850de0fae7bbdaa4fda379"></iframe>
-<iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//rcm-eu.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=marios01-21&language=it_IT&o=29&p=8&l=as4&m=amazon&f=ifr&ref=as_ss_li_til&asins=1119367689&linkId=ae2303ed5317c382513dfb075afbaa86"></iframe>
-<iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//rcm-eu.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=marios01-21&language=it_IT&o=29&p=8&l=as4&m=amazon&f=ifr&ref=as_ss_li_til&asins=8830454397&linkId=55705ae45836e453d9fc4a7b9734e69e"></iframe>
-
-  {% endblock %}
+{% block blog %}{% include '_blog.html' %}{% endblock %}
+{% block footer %}
+{% include '_footer.html' %}
+{% endblock footer %}

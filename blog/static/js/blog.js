@@ -1,7 +1,7 @@
 BASE_URL="http://127.0.0.1:8000"
 URL_NEW_POST="/post/sendpost"
 const MAX_TEXTAREA_NUMBER=21
-const BASE_PHOTO_DIR="static/images/"
+const BASE_PHOTO_DIR=""
 var borderPost="none";
 var borderResponse="1px solid grey";
 var paPostOrResp;
