@@ -11,7 +11,20 @@ font-family:'Alpha Slab One'
 #blog{
   width:43%!important;
   max-width:43%!important;
-  margin:0 auto!important;
+  margin:0 auto! important;
+}
+
+#bdiv{
+width:90%;
+margin:0 auto !important;
+}
+
+#button_post{
+  width:90%!important;
+}
+
+[id^=divuserblog]{
+  margin:0 auto;
 }
 
 div.modal-content {
@@ -41,8 +54,10 @@ a{
   float:right;
 }
 
+
 [id^=d_head_blog]{
-  margin:2% auto !important;
+display: inline-block;
+  margin-bottom: 10px!important;
 }
 
 [id^=bh5_span]{
@@ -119,7 +134,7 @@ button:disabled {
   width:0px!important;
 }
 
-[id^="divuserblog_"]{
+[id^=divuserblog_]{
 margin-top:5%!important;
 }
 
@@ -177,20 +192,22 @@ ul#ul_blog li{
     text-overflow: ellipsis;
 }
 
-}
+
 
 
 @media screen and (max-width: 780px) {
-  .fa-comments,#s_blog
-  {
+  .fa-comments,#s_blog {
     font-size:2rem!important;
   }
-}
 
+textarea {
+    font-size:0.7rem!important;
+}
+}
 
 @media screen and (max-width: 1024px) {
   .fa-comments,#s_blog{
-    font-size:1.5rem;mybut
+    font-size:0.7rem;
   }
 
   #s_blog_icon + #span_blog_entra,#span_entra,#span_reg,#span_esci{
@@ -198,7 +215,7 @@ ul#ul_blog li{
   }
   [id^="divuserblog"]{
     width:auto;
-    font-size:1rem;
+    font-size:0.7rem!important;
   }
 
   [id^="bh5_span"]{

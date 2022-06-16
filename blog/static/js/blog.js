@@ -479,7 +479,7 @@ create(){
   this.postarea.setAttribute("rows","2");
   this.postarea.setAttribute("name","messaggio")
   $(this.postarea).css("border", borderPost)
-  this.postarea.setAttribute("title","Autenticarsi NON è Obbligatorio !")
+  //this.postarea.setAttribute("title","Autenticarsi NON è Obbligatorio !")
   return this.postarea;
 }
 
@@ -583,6 +583,7 @@ function createNewComment(mess){
         mess.publish=getDateFromDjangoDate()
         mess.author=loginis
         userLogged[0].fields.photo == "undefined" ? alert  ("non ho la photo dell user !") :  mess.photo=userLogged[0].fields.photo
+        mess.photo="media/"+userLogged[0].fields.photo
         mess.pk=newPostId
       //  if(mess.titled){
         //  $('#myModal').remove()

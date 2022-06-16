@@ -15,6 +15,7 @@ photo = ""
 message = ""
 tu = Site()
 site = ""
+data = {}
 formatted_datetime = formats.date_format(
     datetime.now(), "SHORT_DATETIME_FORMAT")
 
@@ -55,7 +56,7 @@ def serializer(data):
 def getPost(request):
 
     print("entry in view getpost")
-    global tu, formatted_datetime, tagTitle, site
+    global tu, formatted_datetime, tagTitle, site, data
     profile_list = []
     datac = []
     comments = []
@@ -135,6 +136,7 @@ def getPost(request):
         return JsonResponse(data, safe=False)
     except UnboundLocalError:
         print("cahe sfcaccim")
+    return render(request, {'data': data})
 
 
 def newPost(request):

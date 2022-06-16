@@ -50,21 +50,27 @@ Un sistema informatico , più è snello , meno servizi attivi ha in esecuzione :
 inoltre avviare un comando all'avvio di sistema piazzoandolo in <code> $ ~/.config/autostart/ </code>
 aggiornerà i browser qualunque sia il Desktop Manager usato : ( Gnome , Xfce , Kde ecc..)
 per raggiungere il nostro scopo porteremo a termine tre semplici step :
-
+</p>
 <br><ul style="background-color: white;padding:2%;">
   <span class="badge badge-info" style="display:block;margin:3% auto;"></span>
   <li><b>1) Useremo la possibilità di eseguire comandi all' avvio del sistema offerta da tutti i DM (Desktop Manager)
- : "Gnome , Xfce , Kdm ecc.." per effettuare l' aggiornamento , senza lasciare servizi attivi e porte di comunicazione aperte </b> </li>
-  <br><li><b>2) <b>Il comando eseguito lancerà uno script Bash che piazzeremo in <code>/usr/bin/</code> in cui eseguiremo l' Aggiornamento dei/del Browser</b></li>
+ : "Gnome , Xfce , Kdm ecc.." per effettuare l' aggiornamento , senza lasciare servizi attivi
+e porte di comunicazione aperte </b> </li>
+  <br><li><b>2) Il comando eseguito lancerà uno script Bash che piazzeremo in <code>/usr/bin/</code>
+ in cui eseguiremo l' Aggiornamento dei/del Browser</b></li>
   <li><b><br>3) Modificheremo il file /etc/sudoers in modo che lo script possa eseguire l' aggiornamento
   senza inserire la password quando il comando sudo la chiederà , se la chiedesse all' interno dello
   script , ciò ne provocherebbe il blocco </b> </li>
 </ul>
 <hr>
-<br><br><h2 align="center"><mark>Cominciamo ! : Passo 1</mark></h2>
-<b>1)</b>&nbspLa procedura che illustrerò può essere effettuata anche in modalità grafica , il problema è che è diversa su ogni Desktop Manager .
-Eseguendola da terminale è sempre uguale invece . Aprite un Terminale ed eseguite :<code> <br>nano ~/.config/autostart/BrowserUp.desktop </code>
-<br><br>all' interno del file che si aprirà inserite il seguente contenuto <br><br><code style="display:block;background-color: black;margin:0 auto;"> <br><br>
+
+<h2 align="center"><mark>Cominciamo ! : Passo  1</mark></h2>
+<p><br><br> modalità grafica ,
+il problema è che è diversa su ogni Desktop Manager .
+Eseguendola da terminale è sempre uguale invece . Aprite un Terminale ed eseguite :
+<code> <br>nano ~/.config/autostart/BrowserUp.desktop </code>
+<br><br>all' interno del file che si aprirà inserite il seguente contenuto <br><br>
+<code style="display:block;background-color: black;margin:0 auto;"> <br><br>
 [Desktop Entry]<br>
 Encoding=UTF-8<br>
 Version=0.9.4<br>
@@ -105,7 +111,7 @@ danneggiare il file </mark> <br><br> <code># visudo </code>&nbsp&nbspvisudo apre
 modificarlo senza rischi .<br><br>
 guarda l' immagine , è importante che la riga da inserire venga messa prima di <code>@includedir</code>
 ovviamente cambia l'user mario con il tuo username !<br><br>
-  <img class="img img-thumbnail"id="img_8" width="100%" src='{% static 'images/Kazam_screenshot_00009.png' %}'>
+  <img class="img img-thumbnail"id="img_8" width="100%" src='{% static 'images/Kazam_screenshot_00009.png' %}'></p>
 
 
         {% endblock content %}
