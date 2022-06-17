@@ -33,10 +33,9 @@ def getLoginName(request):
             print("id" + str(request.user.id))
             myuser = Profile.objects.filter(user_id=request.user.id)
         else:
-            #user = request.GET.get("loginis")
             myuser = Profile.objects.filter(first_name="anonimo")
-            myuser.photo = settings.MEDIA_URL+"images/user-secret-solid.gif"
-            print("SER NON AUTENT " + str(myuser.photo))
+            #    myuser.photo = settings.MEDIA_URL+"images/user-secret-solid.gif"
+            print("USER NON AUTENT ")
     except UnboundLocalError:
         print("error in get users info ! contact the admin . myuser = " + str(myuser))
     return myuser
@@ -54,57 +53,55 @@ def serializer(data):
 
 
 def getPost(request):
-
     print("entry in view getpost")
     global tu, formatted_datetime, tagTitle, site, data
     profile_list = []
     datac = []
     comments = []
-    # resps = Resp.objects.all()
-    # risposte = []
-    # risposte_serialized = []
-    comments_in_database = Comment.objects.all().order_by('publish')
+    comments_in_database = Comment.objects.all()
     userLogged = getLoginName(request)
     userLogged = list(userLogged)
     userLogged = serializer(userLogged)
     profiles = list(Profile.objects.all())
     profiles_list = serializer(profiles)
+    t2 = []
     # breakpoint()
     if comments_in_database.exists():
         print("COMMENTS in DATABASES"+str(comments_in_database))
         # userLogged = getLoginName(request)
         print("USERLOGGED=" + str(userLogged))
-        resps = Resp.objects.all()
-        risposte = []
+        # resps = Resp.objects.all()
+        # risposte = []
         risposte_serialized = []
         if "tagTitle" in request.GET and request.GET["tagTitle"]:
             tagTitle = str(request.GET.get("tagTitle"))
             tu.title = tagTitle
             print("tagtitle=" + str(tagTitle))
-            #tagTitleInPage = Site.objects.get(title=tagTitle)
-            aggiornato = formatted_datetime
+            # tagTitleInPage = Site.objects.get(title=tagTitle)
+            # aggiornato = formatted_datetime
             all_comments_for_page = Comment.objects.filter(
                 site__title=tagTitle).order_by('-publish')
             datac = list(all_comments_for_page)
             # userLogged = list(userLogged)
             # userLogged = serializer(userLogged)
             data_comm = serializer(datac)
-            comment_model_serialized = serializer(all_comments_for_page)
-            print("data comment Json format=" + str(datac))
-            print("comment_model_serialized="
-                  + str(comment_model_serialized)+str("userLogged"+str(userLogged)))
+            # comment_model_serialized = serializer(all_comments_for_page)
+            # print("data comment Json format=" + str(datac))
+            # print("comment_model_serialized="
+            #      + str(comment_model_serialized)+str("userLogged"+str(userLogged)))
             for comment in comments_in_database:
                 print("tagtitle="+str(tagTitle)+"___"
                       + "comment.site="+str(comment.site))
                 if tagTitle in str(comment.site):
                     comments.append(comment)
                     print("COMMENTS=" + str(comments))
-                    #t_order = comment.risposte.all().order_by('publish')
+                    # t_order = comment.risposte.all().order_by('publish')
                     t_order = comment.risposte.all().order_by('-publish')
                     t = list(t_order)
                     print("Resp=" + str(t))
                     try:
-                        t2 = t2 + t
+                        if t2 is not None:
+                            t2 = t2 + t
                     except UnboundLocalError:
                         t2 = t
                     try:

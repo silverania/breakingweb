@@ -1,5 +1,6 @@
-BASE_URL="http://127.0.0.1:8000"
+BASE_URL="https://breakingweb.site"
 URL_NEW_POST="/post/sendpost"
+URL_SHOW_POSTS="/post/showposts"
 const MAX_TEXTAREA_NUMBER=21
 const BASE_PHOTO_DIR="media/"
 var borderPost="none";
@@ -486,15 +487,8 @@ create(){
 }
 
 
-function initBlogSGang(login,parTagTitle,id){
-  if(login=="False"||login=="false"||login=="none"||login=="AnonymousUser"){
-    loginis="anonimo"
-  }
-  else{
-    loginis=login
-  }
+function initBlogSGang(parTagTitle,login="anonimo",id="footer"){
   idis=id;
-  //tutorial=tut
   tagTitle=parTagTitle
   createSectionDivSpan(idis);
 }
@@ -741,7 +735,7 @@ $(document).ready(function(){
     $('.mybut').css("box-shadow","10px 10px 10px #719ECE")
   })
   $.ajax({
-    url: '/post/showposts',
+    url: BASE_URL+URL_SHOW_POSTS,
     data: {
       'loginis': loginis,'tagTitle' : tagTitle ,
     },

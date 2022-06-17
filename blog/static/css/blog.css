@@ -54,6 +54,9 @@ a{
   float:right;
 }
 
+#id_link_comment{
+  width:100%;
+}
 
 [id^=d_head_blog]{
 display: inline-block;
