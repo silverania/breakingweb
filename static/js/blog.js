@@ -1,6 +1,5 @@
-BASE_URL="https://breakingweb.site"
+BASE_URL="http://127.0.0.1:8000"
 URL_NEW_POST="/post/sendpost"
-URL_SHOW_POSTS="/post/showposts"
 const MAX_TEXTAREA_NUMBER=21
 const BASE_PHOTO_DIR="media/"
 var borderPost="none";
@@ -17,8 +16,10 @@ var userLogged
 var butcloned
 var isChanged=false
 var bbutton=document.createElement("Button");
+var buttonLinkComment = document.createElement("BUTTON")
 var resps
 var tagTitle
+var globDivContainerHead
 //var bUserImg=document.createElement("IMG");
 var divFormChild=document.createElement("DIV");
 var bdiv=document.createElement("DIV");
@@ -69,10 +70,13 @@ function createSectionDivSpan(){
   divCommentIcon.setAttribute("id","div_comment_icon")
   divCommentIcon.setAttribute("style","margin:0 auto")
   divRespTitle.setAttribute("class","div_resp")
+  buttonLinkComment.setAttribute("id","id_link_comment")
   //divEmpty.setAttribute("style","width:20%;display:inline-block;")
   divFormChild.setAttribute("id","multiarea");
   //divFormChild.setAttribute("class","form-group");
   divExitLogin.setAttribute("id","d_blog_reg")
+  buttonLinkComment.textContent="Commenta"
+  buttonLinkComment.setAttribute("class","mybut mybut-outline-info")
   divExitLogin.setAttribute("style","width:45%;display:inline-block;")
   bdiv.setAttribute("id","bdiv")
   //bIcon.setAttribute('src',"../../../static/images/blog_comment.gif")
@@ -107,6 +111,7 @@ liBlogEntra.setAttribute("class" , "nav-item")
   ulBlogReg.setAttribute("id","ul_blog")
   ulBlogReg.setAttribute("style","list-style: none;padding: 0;margin: 0;")
   parent=document.body.insertBefore(bSection,document.getElementsByTagName("footer")[0]);
+
   if(loginis=="anonimo"){
     console.log(loginis)
     aBlogReg.appendChild(spanBlogReg)
@@ -138,7 +143,7 @@ liBlogEntra.setAttribute("class" , "nav-item")
   bForm.appendChild(divFormChild)
   $(parent).prepend(divCommentIcon)
   divFormChild.appendChild(bbutton)
-
+  $(buttonLinkComment).insertAfter($("#div_comment_icon"))
 }
 
 class Resp{
@@ -248,7 +253,7 @@ class postArea {
 
   appendPostArea(mess,divuserblog){
     if(mess.type=="newpost"){
-      var elToAppend=document.getElementById('button_post')
+      var elToAppend=document.getElementById('d_blog_reg')
       $ ( divuserblog ).insertAfter(elToAppend)
     }
     else if (mess.type=="newresp") {
@@ -271,7 +276,8 @@ class postArea {
       var spanUserName=document.createElement("SPAN")
       var spanInUserName=document.createElement("SPAN")
       var bH5=document.createElement("span")
-      var divContainerHead=document.createElement("DIV")
+      var divContainerHead = document.createElement("DIV")
+      globDivContainerHead = divContainerHead
       var tagUserImg=document.createElement("IMG")
       divContainerHead.setAttribute("id","d_head_blog_"+id)
       divContainerHead.setAttribute("style","width:100%")
@@ -296,7 +302,7 @@ class postArea {
       tagUserImg.setAttribute("id","img_user_"+id)
       spanUserName.setAttribute("id","span_user_"+id)
       spanInUserName.setAttribute("id","span_inuser_"+id)
-      postarea.postarea.setAttribute("id",mess.type+loginis+"_"+id)
+      postarea.postarea.setAttribute("id",mess.type+"_"+loginis+"_"+id)
       switch (mess.type){
         case "newpost":
         divUserBlog.setAttribute("id","divuserblog_"+id)
@@ -487,8 +493,15 @@ create(){
 }
 
 
-function initBlogSGang(parTagTitle,login="anonimo",id="footer"){
+function initBlogSGang(parTagTitle,login,id="footer"){
+  if(login=="AnonymousUser" || login=="" ){
+    loginis="anonimo"
+  }
+  else{
+    loginis=login
+  }
   idis=id;
+  //tutorial=tut
   tagTitle=parTagTitle
   createSectionDivSpan(idis);
 }
@@ -735,7 +748,7 @@ $(document).ready(function(){
     $('.mybut').css("box-shadow","10px 10px 10px #719ECE")
   })
   $.ajax({
-    url: BASE_URL+URL_SHOW_POSTS,
+    url: '/post/showposts',
     data: {
       'loginis': loginis,'tagTitle' : tagTitle ,
     },
