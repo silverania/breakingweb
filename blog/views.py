@@ -67,7 +67,7 @@ def getPost(request):
     t2 = []
     # breakpoint()
     if comments_in_database.exists():
-        print("COMMENTS in DATABASES"+str(comments_in_database))
+        #print("COMMENTS in DATABASES"+str(comments_in_database))
         # userLogged = getLoginName(request)
         print("USERLOGGED=" + str(userLogged))
         # resps = Resp.objects.all()

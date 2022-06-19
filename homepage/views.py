@@ -26,7 +26,7 @@ def getLink(title):
 
 
 def tutorial_detail(request, slug=""):
-    print("slug"+str(slug))
+    print("slug"+str(slug)+"base dir ==="+settings.BASE_DIR)
     arguments = False
     user_string = ''
     author_tutorial = ''
@@ -94,7 +94,7 @@ def tutorial_detail(request, slug=""):
         print("request PATH PIENA"+mypath)
         try:
             tutorial = Tutorial.objects.get(slug=slug)
-        except :
+        except:
             print("WARNING ! non ci sono tutorial nel database ! ")
         print("request PAth piena e Tutorial"+str(tutorial.slug))
     template = tutorial.slug+".html"
