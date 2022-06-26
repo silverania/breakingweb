@@ -55,6 +55,7 @@ a{
 }
 
 #id_link_comment{
+  margin-top:3%;
   width:100%;
 }
 
@@ -199,17 +200,11 @@ ul#ul_blog li{
 
 
 @media screen and (max-width: 780px) {
-  .fa-comments,#s_blog {
-    font-size:2rem!important;
-  }
 
-textarea {
-    font-size:0.7rem!important;
-}
 }
 
 @media screen and (max-width: 1024px) {
-  .fa-comments,#s_blog{
+  .fa-comment-dots,#s_blog{
     font-size:0.7rem;
   }
 
@@ -251,12 +246,29 @@ textarea {
   .modal-content {
     width: 55%!important; /* Could be more or less, depending on screen size */
   }
+  .fa-comment-dots,#s_blog {
+    font-size:2rem!important;
+  }
+
+textarea {
+    font-size:0.7rem!important;
+}
 }
 
 @media screen and (max-width: 414px) {
   .modal-content {
     width: 100%!important; /* Could be more or less, depending on screen size */
   }
+}
+
+@media screen and (min-width: 780px) {
+  .fa-comment-dots,#s_blog {
+    font-size:3rem!important;
+  }
+
+textarea {
+    font-size:0.7rem!important;
+}
 }
 
 .blog_title,#blog_title{

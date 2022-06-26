@@ -43,11 +43,14 @@ var spanBlogEsci=document.createElement("SPAN");
 var post,post2=new Object()
 var isOpen=false
 var bSection=document.createElement("SECTION")
-//var bSpan=document.createElement("SPAN");
-//var bSpanChild=document.createElement("SPAN");
-var bIcon = document.createElement("H1")
+
+/*var bIcon = document.createElement("H1")
     var t = document.createTextNode("Messages")
-    bIcon.appendChild(t)
+    bIcon.appendChild(t)*/
+var bIcon = document.createElement("DIV")
+  var t = document.createElement("I")
+  t.setAttribute("class","far fa-comment-dots")
+  bIcon.appendChild(t)
 var bForm=document.createElement("FORM");
 var title=document.getElementsByTagName('title')[0].innerText
 var wait=true
@@ -198,25 +201,13 @@ class postArea {
     this.isChanged=isChanged
 
     this.postarea.onkeyup = function(){
-      // textarea resize in base al testo inserito
-
-      //$("textarea").each(function () {
-        //this.setAttribute("style", "height:" + (this.scrollHeight) + "px;overflow-y:hidden;");
-      //})
-    //    this.on("input",
-      //  function () {
         this.setAttribute("style", "height:" + (this.scrollHeight) + "px;overflow-y:hidden;");
         this.style.height = "auto";
         this.style.height = (this.scrollHeight) + "px";
-    //  }
-  //  )
-    //  })
-
-      isChanged=true
-      this.isChanged=true
-      var callcount = 0;
-      var action = function(){
-
+        isChanged=true
+        this.isChanged=true
+        var callcount = 0;
+        var action = function(){
       }
       var delayAction = function(action, time){
         var expectcallcount = callcount;
@@ -232,7 +223,6 @@ class postArea {
         delayAction(action, 200);
       }
     }
-    //var mess=""
     switch (post.type){
       case "newpost":
       this.postarea.removeAttribute("disabled","")
@@ -262,16 +252,12 @@ class postArea {
     else{
       bdiv.appendChild(divuserblog)
     }
-    //postarea.postarea.setAttribute("id","postarea_"+postarea.pk)
   }
 
   makeHeadBlog(mess,postarea,elementToAppendPostArea){
     if(!(isOpen==true)) {
       var id
       mess.type == "resp" || mess.type == "newresp" ? id = mess.post.pk + "_" + mess.pk : id = mess.pk
-      //if (!(id=="undefined")) mess.pk = id
-      //var divPostTitle=document.createElement("DIV");
-      //var spanInDivPostTitle=document.createElement("SPAN")
       divUserBlog = document.createElement( "DIV" )
       var spanUserName=document.createElement("SPAN")
       var spanInUserName=document.createElement("SPAN")
@@ -281,23 +267,17 @@ class postArea {
       var tagUserImg=document.createElement("IMG")
       divContainerHead.setAttribute("id","d_head_blog_"+id)
       divContainerHead.setAttribute("style","width:100%")
-      //divContainerHead.setAttribute("style","height:auto")
       tagUserImg.setAttribute("style","border-radius:50%")
       tagUserImg.setAttribute("src",mess.photo)
       divUserBlog.appendChild(divContainerHead)
       divContainerHead.appendChild(tagUserImg)
-      //bH5.textContent="il "+mess.publish
       spanUserName.setAttribute("style","color:grey;display:inline;")
       spanInUserName.setAttribute("style","color:black;display:inline;")
-      //spanInDivPostTitle.setAttribute("id","post_title_"+id)
-      //divPostTitle.setAttribute("id","d_post_title_"+id)
-      //divPostTitle.appendChild(spanInDivPostTitle)
       bH5.setAttribute("style","margin-left:3%;color:blue;")
       bH5.setAttribute("id","bh5_span_"+id)
       bH5.appendChild(spanInUserName)
       bH5.appendChild(spanUserName)
       divContainerHead.appendChild(bH5)
-      //divUserBlog.appendChild(divPostTitle)
       this.appendPostArea(mess,divUserBlog)
       tagUserImg.setAttribute("id","img_user_"+id)
       spanUserName.setAttribute("id","span_user_"+id)
@@ -308,13 +288,15 @@ class postArea {
         divUserBlog.setAttribute("id","divuserblog_"+id)
         divUserBlog.setAttribute("class","new_post_"+id)
         $(document).on('click', function(e){
-          if ($(e.target).closest("#divuserblog_"+id).length === 0 && $(e.target).closest("#button_post").length === 0 && $(e.target).closest(".form_comment").length === 0 ) {
+          if ($(e.target).closest("#divuserblog_"+id).length === 0 && $(e.target)
+            .closest("#button_post").length === 0
+              && $(e.target).closest(".form_comment").length === 0 &&
+                $(e.target).closest("#id_link_comment").length === 0) {
             if (isChanged==false) {
               $("#divuserblog_"+id).remove()
               isOpen=false
             }
           }
-          //  $('#button_risposta_post').click()
         })
         break
         case "resp":
@@ -347,7 +329,6 @@ class postArea {
               isOpen=false
             }
           }
-          //  $('#button_risposta_post').click()
         })
         default:
         console.log("def")
@@ -489,7 +470,6 @@ create(){
   //this.postarea.setAttribute("title","Autenticarsi NON è Obbligatorio !")
   return this.postarea;
 }
-
 }
 
 
@@ -508,32 +488,33 @@ function initBlogSGang(parTagTitle,login,id="footer"){
 
 /* Primo funzione eseguita nel flusso di codice , ...... l' entrypoint.... */
 $(bbutton).click(function() {
-if(userLogged[0].fields.user!="anonimo"){
-  if(isOpen==false) {
-    buttonCommentClick()
-  }
-  else {
-    msgIsTexareaOpen()
-  }
-}
-else{
-  window.open("/user/login")
-  }
+  openNewCommentArea()
 }
 )
 
+$(buttonLinkComment).click(function() {
+  openNewCommentArea()
+}
+)
+
+function openNewCommentArea(){
+  if(userLogged[0].fields.user!="anonimo"){
+    if(isOpen==false) {
+      buttonCommentClick()
+    }
+    else {
+      msgIsTexareaOpen()
+    }
+  }
+  else{
+    window.open("/user/login")
+    }
+}
 
 function buttonCommentClick(){
-  let modal
-  let textAreaInDivInMain
-  let result
-  var divModalMain
-  var divInMain
-  var modalConfirmButton
-  // caso del primo click su comment , in cui la textarea non è visibile e quindi anche = empty
+
   function instancePost(){
     let mess=Object()
-    //var titleNewPost=makeModalWindow(this.post=instancePostarea())
     if(!(mess instanceof Post)){
       exist=false
       mess= new Post("newpost",loginis)
@@ -545,45 +526,14 @@ function buttonCommentClick(){
     exist=true
     Boolean(exist)
   }
-
   if (!(post instanceof postArea ))
   {
-    //post=instancePostarea()
     post=instancePost()
   }
 }
 
-//function makeModalWindow(mess){
-  //newPostId=newPostId+1
-  //if(exist==false){
-    //divModalMain=document.createElement("DIV");
-    //divInMain=document.createElement("DIV");
-    //textAreaInDivInMain=document.createElement("TEXTAREA");
-    //modalConfirmButton=document.createElement("Button");
-    //var checkValidity=false
-    //modalConfirmButton.setAttribute('id','but_confirm_title')
-    //modalConfirmButton.setAttribute('type','button')
-    //divModalMain.setAttribute('class','modal')
-    //divModalMain.setAttribute('id','myModal')
-    //divInMain.setAttribute('class','modal-content')
-    //textAreaInDivInMain.setAttribute("id","p_text")
-    //textAreaInDivInMain.setAttribute("rows","1")
-    //textAreaInDivInMain.value="Titolo Post ?"
-    //divInMain.appendChild(textAreaInDivInMain)
-    //divInMain.appendChild(modalConfirmButton)
-    //divModalMain.appendChild(divInMain)
-    //body.appendChild(divModalMain)
-    //modal = document.getElementById("myModal");
-    //modal.style.display = "block";
-    //exist=true
-  //}
-  //else{
-    //modal.style.display = "block";
-  //}
+
 function createNewComment(mess){
-  //  try{
-      //let txt=$("#p_text").val()
-      //if (!(txt=="Titolo Post ?")){
         mess.titled="nuovo"
         newPostId=newPostId+1
         mess.type="newpost"
@@ -592,31 +542,18 @@ function createNewComment(mess){
         userLogged[0].fields.photo == "undefined" ? alert  ("non ho la photo dell user !") :  mess.photo=userLogged[0].fields.photo
         mess.photo="media/"+userLogged[0].fields.photo
         mess.pk=newPostId
-      //  if(mess.titled){
-        //  $('#myModal').remove()
-        //  createPostArea(mess)
-        //  exist=false
-        //}
         createPostArea(mess)
         if(exist==false){
           Boolean(exist)
         return mess
       }
     }
-      //else{
-        //alert("Devi inserire un titolo Valido")
-      //}
-
-    //catch(Error){
-      //console.log("qualcosa è andato storto nel recupero del titolo")
-
 
 
 
 // se la variabile data non viene passata come parametro si presuppone che il client abbia creato un nuovo post , quindi //la data è now
 function getDateFromDjangoDate(data=""){
   var dateNow = new Date()
-  //var dataDjango=new Date(data)
   var dataDjango
   var data1
   var data2
@@ -705,42 +642,19 @@ function cleanJson(json){
   return s
 }
 
-$(document).on("load" ,function(){
-  //var itm = document.getElementsByClassName("form_comment")[0];
-  //var cln = itm.cloneNode(true);
-  //bdiv.appendChild(cln)[2];
-})
-
 
 $(document).ready(function(){
   var obj
   var indexX=0
-  var initial_y
   var y=0,s
   mess=new Array()
   resps=new Array()
-  var post = new Array()
   let profiles=new Array()
   let z=0
   var q=0
   let comments_json;
-  var itm = document.getElementsByClassName("form_comment")[0];
-  //var cln = itm.cloneNode(true);
-  //cln.getElementsByClassName('mybut')[0].setAttribute("id","clone_button")
-  //bdiv.appendChild(cln)[2];
   butcloned = document.getElementById('button_post')
-  /*$(butcloned).click(function(){
-    if(userLogged[0].fields.user!="anonimo"){
-    if(isOpen==false) {
-      buttonCommentClick()
-    }
-    else {
-      msgIsTexareaOpen()
 
-    }
-  }
-  }
-  )*/
   $('.mybut').hover(function(e){
     $('.mybut').css("box-shadow","0 0 0 white")
   },
