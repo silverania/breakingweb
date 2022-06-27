@@ -52,7 +52,8 @@
 						<span class="input-group-addon"><span class="fas fa-user"></span></span>
             <label for="{{ form.username.id_for_label }}"></label>
             <input type="input" class="form-control" name="username" id="inputUsername" placeholder="Username" required >
-            {{ form.username.errors }}
+            <input type="hidden" name="next" value="/{% if 'blog' in request.path %}#blog{% endif %}" />
+        {{ form.username.errors }}
 					</div>
                     <hr />
 

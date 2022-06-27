@@ -20,7 +20,8 @@ def user_login(request):
             if myuser is not None:
                 if myuser.is_active:
                     login(request, myuser)
-                    return HttpResponseRedirect("/")
+                    valuenext = request.POST.get('next')
+                    return redirect(valuenext)
                 else:
                     return HttpResponse('Disabled account')
             else:

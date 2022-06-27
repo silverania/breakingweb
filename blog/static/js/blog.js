@@ -43,14 +43,10 @@ var spanBlogEsci=document.createElement("SPAN");
 var post,post2=new Object()
 var isOpen=false
 var bSection=document.createElement("SECTION")
-
-/*var bIcon = document.createElement("H1")
-    var t = document.createTextNode("Messages")
-    bIcon.appendChild(t)*/
 var bIcon = document.createElement("DIV")
-  var t = document.createElement("I")
-  t.setAttribute("class","far fa-comment-dots")
-  bIcon.appendChild(t)
+var t = document.createElement("I")
+t.setAttribute("class","far fa-comment-dots")
+bIcon.appendChild(t)
 var bForm=document.createElement("FORM");
 var title=document.getElementsByTagName('title')[0].innerText
 var wait=true
@@ -63,10 +59,10 @@ var elementToAppendPostArea
 var json_resps
 var re
 
+
 function createSectionDivSpan(){
   bForm.setAttribute("action","post/getpost");
   bForm.setAttribute("class","form_comment")
-  //divUserBlog.setAttribute("style","width:45%;display:inline-block;")
   firstDivHead.setAttribute("style","width:45%;display:inline;")
   firstDivHead.setAttribute("id","firstDivHead")
   divExitLogin.setAttribute("style","width:45%;display:inline;")
@@ -74,16 +70,12 @@ function createSectionDivSpan(){
   divCommentIcon.setAttribute("style","margin:0 auto")
   divRespTitle.setAttribute("class","div_resp")
   buttonLinkComment.setAttribute("id","id_link_comment")
-  //divEmpty.setAttribute("style","width:20%;display:inline-block;")
   divFormChild.setAttribute("id","multiarea");
-  //divFormChild.setAttribute("class","form-group");
   divExitLogin.setAttribute("id","d_blog_reg")
   buttonLinkComment.textContent="Commenta"
   buttonLinkComment.setAttribute("class","mybut mybut-outline-info")
   divExitLogin.setAttribute("style","width:45%;display:inline-block;")
   bdiv.setAttribute("id","bdiv")
-  //bIcon.setAttribute('src',"../../../static/images/blog_comment.gif")
-  //bIcon.setAttribute("WIDTH","50px")
   bIcon.setAttribute("style","text-align:center;font-weight:bold;")
   bIcon.setAttribute("id","blog_icon")
   bSection.setAttribute("id","blog");
@@ -92,12 +84,12 @@ function createSectionDivSpan(){
   aBlogEntra.setAttribute("style","display:block;width:auto;text-align:right;")
   aBlogReg.setAttribute("style","display:block;width:auto;text-align:right;z-index:200")
   aBlogReg.setAttribute("href","/user/register")
-    aBlogReg.setAttribute("href","/user/register")
-  aBlogEntra.setAttribute("href","/user/login")
-aBlogEntra.setAttribute("class","nav-link")
+  aBlogReg.setAttribute("href","/user/register")
+  aBlogEntra.setAttribute("href","/user/login/blog")
+  aBlogEntra.setAttribute("class","nav-link")
   aBlogEsci.setAttribute("href","/user/logout")
   liBlogEntra.setAttribute("style","display:inline;width:auto;margin-right:0px;")
-liBlogEntra.setAttribute("class" , "nav-item")
+  liBlogEntra.setAttribute("class" , "nav-item")
   //bSpanChild.setAttribute("id","s_blog_text")
   bbutton.setAttribute("id","button_post")
   //bH5.setAttribute("id","span_blog_entra")
@@ -150,7 +142,7 @@ liBlogEntra.setAttribute("class" , "nav-item")
 }
 
 class Resp{
-  constructor(author,body="",publish,post,photo,titolo,pk,resptype){
+  constructor(author,body="",publish,post,photo,pk,resptype){
     this.sent = false
     this.author = author
     this.post = post
@@ -158,8 +150,6 @@ class Resp{
     this.type = resptype
     this.publish = publish
     this.photo = photo
-    //this.titled=titolo
-
     if (resptype=="newresp") {
       this.pk = parseInt(pk,"10")
       this.pk=pk+1
@@ -201,13 +191,13 @@ class postArea {
     this.isChanged=isChanged
 
     this.postarea.onkeyup = function(){
-        this.setAttribute("style", "height:" + (this.scrollHeight) + "px;overflow-y:hidden;");
-        this.style.height = "auto";
-        this.style.height = (this.scrollHeight) + "px";
-        isChanged=true
-        this.isChanged=true
-        var callcount = 0;
-        var action = function(){
+      this.setAttribute("style", "height:" + (this.scrollHeight) + "px;overflow-y:hidden;");
+      this.style.height = "auto";
+      this.style.height = (this.scrollHeight) + "px";
+      isChanged=true
+      this.isChanged=true
+      var callcount = 0;
+      var action = function(){
       }
       var delayAction = function(action, time){
         var expectcallcount = callcount;
@@ -289,9 +279,9 @@ class postArea {
         divUserBlog.setAttribute("class","new_post_"+id)
         $(document).on('click', function(e){
           if ($(e.target).closest("#divuserblog_"+id).length === 0 && $(e.target)
-            .closest("#button_post").length === 0
-              && $(e.target).closest(".form_comment").length === 0 &&
-                $(e.target).closest("#id_link_comment").length === 0) {
+          .closest("#button_post").length === 0
+          && $(e.target).closest(".form_comment").length === 0 &&
+          $(e.target).closest("#id_link_comment").length === 0) {
             if (isChanged==false) {
               $("#divuserblog_"+id).remove()
               isOpen=false
@@ -323,7 +313,7 @@ class postArea {
         postarea.postarea.setAttribute("id",mess.type+loginis+"_"+id_newresp)
         $(document).on('click', function(e){
           //if ($(e.target).closest("#divuserblog_"+id_newresp).length === 0) {
-        if ($(e.target).closest('*[id^="divuserblog"]').length===0){
+          if ($(e.target).closest('*[id^="divuserblog"]').length===0){
             if (isChanged==false) {
               $("#divuserblog_"+id_newresp).remove()
               isOpen=false
@@ -507,8 +497,8 @@ function openNewCommentArea(){
     }
   }
   else{
-    window.open("/user/login")
-    }
+    window.open("/user/login/blog")
+  }
 }
 
 function buttonCommentClick(){
@@ -519,9 +509,9 @@ function buttonCommentClick(){
       exist=false
       mess= new Post("newpost",loginis)
       if(exist==false){
-      createNewComment(mess)
-      location.href="#blog"
-    }
+        createNewComment(mess)
+        location.href="#blog"
+      }
     }
     exist=true
     Boolean(exist)
@@ -534,20 +524,20 @@ function buttonCommentClick(){
 
 
 function createNewComment(mess){
-        mess.titled="nuovo"
-        newPostId=newPostId+1
-        mess.type="newpost"
-        mess.publish=getDateFromDjangoDate()
-        mess.author=loginis
-        userLogged[0].fields.photo == "undefined" ? alert  ("non ho la photo dell user !") :  mess.photo=userLogged[0].fields.photo
-        mess.photo="media/"+userLogged[0].fields.photo
-        mess.pk=newPostId
-        createPostArea(mess)
-        if(exist==false){
-          Boolean(exist)
-        return mess
-      }
-    }
+  mess.titled="nuovo"
+  newPostId=newPostId+1
+  mess.type="newpost"
+  mess.publish=getDateFromDjangoDate()
+  mess.author=loginis
+  userLogged[0].fields.photo == "undefined" ? alert  ("non ho la photo dell user !") :  mess.photo=userLogged[0].fields.photo
+  mess.photo="media/"+userLogged[0].fields.photo
+  mess.pk=newPostId
+  createPostArea(mess)
+  if(exist==false){
+    Boolean(exist)
+    return mess
+  }
+}
 
 
 
@@ -577,10 +567,10 @@ function getDateFromDjangoDate(data=""){
     var dataDjango=new Date(data)
   }
   else {
-      var dataDjango=new Date(data)
+    var dataDjango=new Date(data)
     day=data.slice("8","10")
-      month=data.slice("5","7")
-      month=getMonth(month)
+    month=data.slice("5","7")
+    month=getMonth(month)
     year=data.slice("0","4")
     hour=data.slice("11","16")
     data=getMsg()
@@ -588,30 +578,30 @@ function getDateFromDjangoDate(data=""){
   function getMonth(month){
     var res
     switch (month) {
-    case "01" : res="gennaio"
-    break
-    case "02" : res="febbraio"
-    break
-    case "03" : res="marzo"
-    break
-    case "04" : res="aprile"
-    break
-    case "05" : res="maggio"
-    break
-    case "06" : res="giugno"
-    break
-    case "07" : res="luglio"
-    break
-    case "08" : res="agosto"
-    break
-    case "09" : res="settembre"
-    break
-    case "10" : res="ottobre"
-    break
-    case "11" : res="novembre"
-    break
-    case "12" : res="dicembre"
-    break
+      case "01" : res="gennaio"
+      break
+      case "02" : res="febbraio"
+      break
+      case "03" : res="marzo"
+      break
+      case "04" : res="aprile"
+      break
+      case "05" : res="maggio"
+      break
+      case "06" : res="giugno"
+      break
+      case "07" : res="luglio"
+      break
+      case "08" : res="agosto"
+      break
+      case "09" : res="settembre"
+      break
+      case "10" : res="ottobre"
+      break
+      case "11" : res="novembre"
+      break
+      case "12" : res="dicembre"
+      break
     }
     return res
   }
