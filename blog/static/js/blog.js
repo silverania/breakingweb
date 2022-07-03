@@ -1,4 +1,4 @@
-BASE_URL="http://breakingweb.site/"
+BASE_URL="https://breakingweb.site/"
 URL_NEW_POST=BASE_URL+"post/sendpost"
 const MAX_TEXTAREA_NUMBER=21
 const BASE_PHOTO_DIR=BASE_URL+"media/"
@@ -85,10 +85,10 @@ function createSectionDivSpan(){
   //bSpan.setAttribute("id","s_blog_icon")
   aBlogEntra.setAttribute("style","display:block;width:auto;text-align:right;")
   aBlogReg.setAttribute("style","display:block;width:auto;text-align:right;z-index:200")
-  aBlogReg.setAttribute("href",BASE_URL+"/user/register")
-  aBlogEntra.setAttribute("href",BASE_URL+"/user/login/blog")
+  aBlogReg.setAttribute("href",BASE_URL+"user/register")
+  aBlogEntra.setAttribute("href",BASE_URL+"user/login/blog")
   aBlogEntra.setAttribute("class","nav-link")
-  aBlogEsci.setAttribute("href",BASE_URL+"/user/logout")
+  aBlogEsci.setAttribute("href",BASE_URL+"user/logout/blog")
   liBlogEntra.setAttribute("style","display:inline;width:auto;margin-right:0px;")
   liBlogEntra.setAttribute("class" , "nav-item")
   //bSpanChild.setAttribute("id","s_blog_text")
@@ -372,7 +372,7 @@ class postArea {
           var ids = (resps.length)
           ids = ids + 1
           createPostArea
-          ( r=new Resp(loginis,"", new Date().toLocaleString(),post,BASE_PHOTO_DIR+userLogged[0].fields.photo,
+          ( r=new Resp(loginis,"", new Date().toLocaleString(),post,userLogged[0].fields.photo,
                   " risponde a "+mess.author,ids,"newresp"),elementToAppendPostArea)
           resps.push(r)
         }
@@ -411,7 +411,7 @@ switch (mess.type){
     }
     console.log("comparazione del tipo e valore = vera in:"+txts)
     //form_risposta_post.setAttribute("action",url)
-    url=BASE_URL+URL_NEW_POST
+    url=URL_NEW_POST
     mess.body=txts
     if (sendToServer(mess,url)==0){
       isOpen=false
@@ -490,7 +490,7 @@ $(buttonLinkComment).click(function() {
 )
 
 function openNewCommentArea(){
-  if(userLogged[0].fields.user!="anonimo"){
+  if(userLogged[0].fields.first_name!="anonimo"){
     if(isOpen==false) {
       buttonCommentClick()
     }
@@ -532,7 +532,7 @@ function createNewComment(mess){
   mess.publish=getDateFromDjangoDate()
   mess.author=loginis
   userLogged[0].fields.photo == "undefined" ? alert  ("non ho la photo dell user !") :  mess.photo=userLogged[0].fields.photo
-  mess.photo="media/"+userLogged[0].fields.photo
+  mess.photo=userLogged[0].fields.photo
   mess.pk=newPostId
   createPostArea(mess)
   if(exist==false){
@@ -654,7 +654,7 @@ $(document).ready(function(){
     $('.mybut').css("box-shadow","10px 10px 10px #719ECE")
   })
   $.ajax({
-    url: '/post/showposts',
+    url: BASE_URL+'post/showposts',
     data: {
       'loginis': loginis,'tagTitle' : tagTitle ,
     },
@@ -687,7 +687,7 @@ $(document).ready(function(){
           // if(obj5_photo[z].fields.user==obj2[i].fields.author){
           if(profiles_json[z].pk==comments_json[i].fields.author){
             profiles.push(new Profile(profiles_json[z].fields.first_name,profiles_json[z].fields.photo))
-            mess.push(new Post("post",profiles_json[z].fields.first_name,comments_json[i].fields.title,comments_json[i].fields.body,getDateFromDjangoDate(comments_json[i].fields.publish),BASE_PHOTO_DIR+profiles_json[z].fields.photo,comments_json[i].pk))
+            mess.push(new Post("post",profiles_json[z].fields.first_name,comments_json[i].fields.title,comments_json[i].fields.body,getDateFromDjangoDate(comments_json[i].fields.publish),profiles_json[z].fields.photo,comments_json[i].pk))
             createPostArea(mess[indexX])
             break;
           }
@@ -703,7 +703,7 @@ $(document).ready(function(){
                   photoResp=obj5_photo
                 }
                 else{
-                  photoResp=BASE_PHOTO_DIR+profiles_json[z2].fields.photo
+                  photoResp=profiles_json[z2].fields.photo
                 }
                 resps.push(new Resp(profiles_json[z2].fields.first_name,
                             resps_json[y].fields.body,getDateFromDjangoDate(
