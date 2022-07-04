@@ -69,7 +69,7 @@ function createSectionDivSpan(){
   firstDivHead.setAttribute("id","firstDivHead")
   divExitLogin.setAttribute("style","width:45%;display:inline;")
   divCommentIcon.setAttribute("id","div_comment_icon")
-  divCommentIcon.setAttribute("style","margin:0 auto")
+  divCommentIcon.setAttribute("style","margin:0 auto 10% auto")
   divRespTitle.setAttribute("class","div_resp")
   buttonLinkComment.setAttribute("id","id_link_comment")
   divFormChild.setAttribute("id","multiarea");
