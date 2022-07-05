@@ -51,6 +51,7 @@ a{
 }
 
 #d_blog_reg{
+  margin-top:50px;
   float:right;
 }
 
@@ -87,14 +88,14 @@ display: inline-block;
 
 textarea {
   font-size:1rem!important;
-  padding:22px;
+  padding:5%;
   color:black;
   width:100%!important;
   min-width:100%;
   outline: none !important;
-  border:1px solid red;
+  border:1px solid black;
   box-shadow: 10px 10px 10px #719ECE;
-  border-radius:25px;
+  border-radius:0px;
   overflow:hidden;
 }
 

@@ -1,7 +1,8 @@
-BASE_URL="https://breakingweb.site"
-URL_NEW_POST="/post/sendpost"
+//BASE_URL="https://breakingweb.site/"
+BASE_URL="127.0.0.1:8000"
+URL_NEW_POST=BASE_URL+"post/sendpost"
 const MAX_TEXTAREA_NUMBER=21
-const BASE_PHOTO_DIR="media/"
+const BASE_PHOTO_DIR=BASE_URL+"media/"
 var borderPost="none";
 var borderResponse="1px solid grey";
 var paPostOrResp;
@@ -58,16 +59,18 @@ var newPostId=0
 var elementToAppendPostArea
 var json_resps
 var re
-
+//var script = document.createElement('script');
+//script.src = 'https://code.jquery.com/jquery-3.6.0.min.js';
+//document.getElementsByTagName('head')[0].appendChild(script);
 
 function createSectionDivSpan(){
-  bForm.setAttribute("action","post/getpost");
+  bForm.setAttribute("action",BASE_URL+"post/getpost");
   bForm.setAttribute("class","form_comment")
   firstDivHead.setAttribute("style","width:45%;display:inline;")
   firstDivHead.setAttribute("id","firstDivHead")
   divExitLogin.setAttribute("style","width:45%;display:inline;")
   divCommentIcon.setAttribute("id","div_comment_icon")
-  divCommentIcon.setAttribute("style","margin:0 auto")
+  divCommentIcon.setAttribute("style","margin:0 auto 10% auto")
   divRespTitle.setAttribute("class","div_resp")
   buttonLinkComment.setAttribute("id","id_link_comment")
   divFormChild.setAttribute("id","multiarea");
@@ -83,11 +86,10 @@ function createSectionDivSpan(){
   //bSpan.setAttribute("id","s_blog_icon")
   aBlogEntra.setAttribute("style","display:block;width:auto;text-align:right;")
   aBlogReg.setAttribute("style","display:block;width:auto;text-align:right;z-index:200")
-  aBlogReg.setAttribute("href","/user/register")
-  aBlogReg.setAttribute("href","/user/register")
-  aBlogEntra.setAttribute("href","/user/login/blog")
+  aBlogReg.setAttribute("href",BASE_URL+"user/register")
+  aBlogEntra.setAttribute("href",BASE_URL+"user/login/blog")
   aBlogEntra.setAttribute("class","nav-link")
-  aBlogEsci.setAttribute("href","/user/logout")
+  aBlogEsci.setAttribute("href",BASE_URL+"user/logout/blog")
   liBlogEntra.setAttribute("style","display:inline;width:auto;margin-right:0px;")
   liBlogEntra.setAttribute("class" , "nav-item")
   //bSpanChild.setAttribute("id","s_blog_text")
@@ -371,7 +373,8 @@ class postArea {
           var ids = (resps.length)
           ids = ids + 1
           createPostArea
-          ( r=new Resp(loginis,"", new Date().toLocaleString(),post,BASE_PHOTO_DIR+userLogged[0].fields.photo," risponde a "+mess.author,ids,"newresp"),elementToAppendPostArea)
+          ( r=new Resp(loginis,"", new Date().toLocaleString(),post,userLogged[0].fields.photo,
+                  " risponde a "+mess.author,ids,"newresp"),elementToAppendPostArea)
           resps.push(r)
         }
         else if ( button_risposta_post.textContent=="Rispondi" && isOpen==true ){
@@ -409,7 +412,7 @@ switch (mess.type){
     }
     console.log("comparazione del tipo e valore = vera in:"+txts)
     //form_risposta_post.setAttribute("action",url)
-    url=BASE_URL+URL_NEW_POST
+    url=URL_NEW_POST
     mess.body=txts
     if (sendToServer(mess,url)==0){
       isOpen=false
@@ -488,7 +491,7 @@ $(buttonLinkComment).click(function() {
 )
 
 function openNewCommentArea(){
-  if(userLogged[0].fields.user!="anonimo"){
+  if(userLogged[0].fields.first_name!="anonimo"){
     if(isOpen==false) {
       buttonCommentClick()
     }
@@ -497,7 +500,7 @@ function openNewCommentArea(){
     }
   }
   else{
-    window.open("https://breakingweb.site/user/login/blog")
+    window.open(BASE_URL+"user/login/blog")
   }
 }
 
@@ -530,7 +533,7 @@ function createNewComment(mess){
   mess.publish=getDateFromDjangoDate()
   mess.author=loginis
   userLogged[0].fields.photo == "undefined" ? alert  ("non ho la photo dell user !") :  mess.photo=userLogged[0].fields.photo
-  mess.photo="media/"+userLogged[0].fields.photo
+  mess.photo=userLogged[0].fields.photo
   mess.pk=newPostId
   createPostArea(mess)
   if(exist==false){
@@ -652,7 +655,7 @@ $(document).ready(function(){
     $('.mybut').css("box-shadow","10px 10px 10px #719ECE")
   })
   $.ajax({
-    url: BASE_URL+'/post/showposts',
+    url: BASE_URL+'post/showposts',
     data: {
       'loginis': loginis,'tagTitle' : tagTitle ,
     },
@@ -685,7 +688,7 @@ $(document).ready(function(){
           // if(obj5_photo[z].fields.user==obj2[i].fields.author){
           if(profiles_json[z].pk==comments_json[i].fields.author){
             profiles.push(new Profile(profiles_json[z].fields.first_name,profiles_json[z].fields.photo))
-            mess.push(new Post("post",profiles_json[z].fields.first_name,comments_json[i].fields.title,comments_json[i].fields.body,getDateFromDjangoDate(comments_json[i].fields.publish),BASE_PHOTO_DIR+profiles_json[z].fields.photo,comments_json[i].pk))
+            mess.push(new Post("post",profiles_json[z].fields.first_name,comments_json[i].fields.title,comments_json[i].fields.body,getDateFromDjangoDate(comments_json[i].fields.publish),profiles_json[z].fields.photo,comments_json[i].pk))
             createPostArea(mess[indexX])
             break;
           }
@@ -701,10 +704,13 @@ $(document).ready(function(){
                   photoResp=obj5_photo
                 }
                 else{
-                  photoResp=BASE_PHOTO_DIR+profiles_json[z2].fields.photo
+                  photoResp=profiles_json[z2].fields.photo
                 }
-                resps.push(new Resp(profiles_json[z2].fields.first_name,resps_json[y].fields.body,getDateFromDjangoDate(resps_json[y].fields.publish),mess[indexX],photoResp," risponde a "+mess[indexX].author,resps_json[y].pk,"resp"))
-                mess[indexX].risposte.push(resps[q])
+                resps.push(new Resp(profiles_json[z2].fields.first_name,
+                            resps_json[y].fields.body,getDateFromDjangoDate(
+                            resps_json[y].fields.publish),mess[indexX],photoResp,
+                            resps_json[y].pk,"resp"))
+                            mess[indexX].risposte.push(resps[q])
                 createPostArea(resps[q])
                 q=q+1
               }

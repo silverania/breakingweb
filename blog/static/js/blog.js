@@ -263,7 +263,7 @@ class postArea {
       divUserBlog.appendChild(divContainerHead)
       divContainerHead.appendChild(tagUserImg)
       spanUserName.setAttribute("style","color:grey;display:inline;")
-      spanInUserName.setAttribute("style","color:black;display:inline;")
+      spanInUserName.setAttribute("style","color:grey;display:inline;")
       bH5.setAttribute("style","margin-left:3%;color:blue;")
       bH5.setAttribute("id","bh5_span_"+id)
       bH5.appendChild(spanInUserName)
@@ -328,7 +328,7 @@ class postArea {
       if(mess.type=="post" || mess.type=="newpost" ) {
         if(!(postarea.disabled==true)){
           spanUserName.textContent=mess.publish
-          spanInUserName.textContent=mess.author[0].toUpperCase() +mess.author.slice("1")+" , "
+          spanInUserName.textContent=mess.author[0].toUpperCase() +mess.author.slice("1")+"  |  "
           //spanInDivPostTitle.textContent=mess.titled[0].toUpperCase()+mess.titled.slice("1")
           console.log("thispost.disabled")
           $('#post_response').css("border", "1px solid grey")
@@ -373,7 +373,7 @@ class postArea {
           ids = ids + 1
           createPostArea
           ( r=new Resp(loginis,"", new Date().toLocaleString(),post,userLogged[0].fields.photo,
-                  " risponde a "+mess.author,ids,"newresp"),elementToAppendPostArea)
+                  ids,"newresp"),elementToAppendPostArea)
           resps.push(r)
         }
         else if ( button_risposta_post.textContent=="Rispondi" && isOpen==true ){
