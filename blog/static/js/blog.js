@@ -1,4 +1,4 @@
-BASE_URL="https://breakingweb.site/"
+BASE_URL="http://127.0.0.1:8000/"
 URL_NEW_POST=BASE_URL+"post/sendpost"
 const MAX_TEXTAREA_NUMBER=21
 const BASE_PHOTO_DIR=BASE_URL+"media/"

@@ -1,7 +1,7 @@
-{% extends "admin/base_site.html" %}
-{% load i18n %}
 
-{% block breadcrumbs %}<div class="breadcrumbs"><a href="{% url 'admin:index' %}">{% trans 'Home' %}</a></div>{% endblock %}
+
+{% block breadcrumbs %}<div class="breadcrumbs"><a href="{% if 'blog' in request.path %}/#blog{% else %}{% url 'homepage:tutorial_detail'%}
+{% endif %}">Home</a></div>{% endblock %}
 
 {% block content %}
 
@@ -9,6 +9,6 @@
 
 <p><a href= {% if 'user/logout' in request.get_full_path %} "{% url 'login' %}"
 {% else %} "{% url 'admin:login' %}"{% endif %}>
-{% trans 'Log in again' %}</a></p>
+Login </a></p>
 
 {% endblock %}

@@ -17,6 +17,11 @@ font-family:'Alpha Slab One'
   margin:0 auto! important;
 }
 
+div.breadcrumbs{
+ margin:0 auto!important;
+}
+
+
 #bdiv{
 width:90%;
 margin:0 auto !important;
