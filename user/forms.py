@@ -12,7 +12,7 @@ class LoginForm(forms.Form):
 
 
 class SignUpForm(UserCreationForm):
-    photo = forms.FileField(
+    photo = forms.ImageField(
             required=False, help_text='Optional.')
 
     class Meta:

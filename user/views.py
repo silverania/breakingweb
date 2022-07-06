@@ -51,16 +51,16 @@ class LogoutView():
 
 def user_register(request):
     if request.method == 'POST':
-        form = SignUpForm(request.POST)
+        form = SignUpForm(request.POST, request.FILES)
         if form.is_valid():
             user = form.save()
             user.refresh_from_db()
-            # photo = form.cleaned_data.get('photo')
-            myphoto = request.POST.get('photo', False)
-            user.profile.photo = myphoto
+            user.profile.photo = form.cleaned_data.get('photo')
+            # myphoto = request.FILES('photo')
+            # user.profile.photo = myphoto
             user.profile.first_name = form.cleaned_data.get('username')
             user.save()
-            print("USERPROFILEPHOTO"+str(myphoto))
+            print("USERPROFILEPHOTO"+str(request.FILES))
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
@@ -68,6 +68,7 @@ def user_register(request):
             return redirect('/user/login')
     else:
         form = SignUpForm()
+        #print("USERPROFILEPHOTO"+str(myphoto))
     return render(request, 'user/register.html', {'form': form})
 
 

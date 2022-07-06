@@ -214,6 +214,7 @@ class postArea {
         delayAction(action, 200);
       }
     }
+try{
     switch (post.type){
       case "newpost":
       this.postarea.removeAttribute("disabled","")
@@ -230,6 +231,10 @@ class postArea {
       this.postarea.setAttribute("disabled","")
       break
     }
+  }
+  catch(e){
+    console.log("errore oggetto post di tipo indefinito o NULL !")
+  }
   }
 
   appendPostArea(mess,divuserblog){
@@ -372,7 +377,7 @@ class postArea {
           var ids = (resps.length)
           ids = ids + 1
           createPostArea
-          ( r=new Resp(loginis,"", new Date().toLocaleString(),post,userLogged[0].fields.photo,
+          ( r=new Resp(loginis,"", new Date().toLocaleString(),post,"../media/"+userLogged[0].fields.photo,
                   ids,"newresp"),elementToAppendPostArea)
           resps.push(r)
         }
@@ -531,8 +536,8 @@ function createNewComment(mess){
   mess.type="newpost"
   mess.publish=getDateFromDjangoDate()
   mess.author=loginis
-  userLogged[0].fields.photo == "undefined" ? alert  ("non ho la photo dell user !") :  mess.photo=userLogged[0].fields.photo
-  mess.photo=userLogged[0].fields.photo
+  userLogged[0].fields.photo == "undefined" ? alert ("non ho la photo dell user !") :
+    mess.photo="../media/"+userLogged[0].fields.photo                                  //la cartella media si trova nel path del progetto :"tutorial"
   mess.pk=newPostId
   createPostArea(mess)
   if(exist==false){
@@ -686,8 +691,8 @@ $(document).ready(function(){
         for (z=0;z<=profiles_json.length-1;z=z+1){
           // if(obj5_photo[z].fields.user==obj2[i].fields.author){
           if(profiles_json[z].pk==comments_json[i].fields.author){
-            profiles.push(new Profile(profiles_json[z].fields.first_name,profiles_json[z].fields.photo))
-            mess.push(new Post("post",profiles_json[z].fields.first_name,comments_json[i].fields.title,comments_json[i].fields.body,getDateFromDjangoDate(comments_json[i].fields.publish),profiles_json[z].fields.photo,comments_json[i].pk))
+            profiles.push(new Profile(profiles_json[z].fields.first_name,"../"+profiles_json[z].fields.photo))
+            mess.push(new Post("post",profiles_json[z].fields.first_name,comments_json[i].fields.title,comments_json[i].fields.body,getDateFromDjangoDate(comments_json[i].fields.publish),"../media/"+profiles_json[z].fields.photo,comments_json[i].pk))
             createPostArea(mess[indexX])
             break;
           }
@@ -767,7 +772,6 @@ function sendToServer(post=Object(),url){
     }
   }
   if(post.type=="newpost" || post.type=="newresp"){
-    let content=tutorial;
     $.ajax({
       url: url,
       data: data,
