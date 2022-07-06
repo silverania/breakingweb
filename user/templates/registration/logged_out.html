@@ -5,7 +5,6 @@
 
 {% block content %}
 
-<p>You are now leaving Sunnydale</p>
 
 <p><a href= {% if 'user/logout' in request.get_full_path %} "{% url 'login' %}"
 {% else %} "{% url 'admin:login' %}"{% endif %}>
