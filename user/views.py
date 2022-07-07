@@ -4,9 +4,10 @@ from django.contrib.auth.forms import UserCreationForm
 from .models import Profile
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, logout, authenticate
 from .forms import SignUpForm, LoginForm
 from django.http import HttpResponse, HttpResponseRedirect
+from django.views import View
 
 
 def user_login(request):
@@ -41,12 +42,12 @@ def dashboard(request):
     return render(request, ' user/dashboard.html', {'section': 'dashboard'})
 
 
-class LogoutView():
-    def logout(request):
+class Logout(View):
+    def get(self, request):
         logout(request)
-        redirect_to = self.request.GET.get("next", "/")
-        print("redirect to"+redirect_to)
-        return redirect_to
+        #redirect_to = self.request.GET.get("next", "/")
+        template = "registration/logged_out.html"
+        return render(request, template)
 
 
 def user_register(request):

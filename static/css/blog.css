@@ -3,7 +3,10 @@
   font-family: 'Alpha Slab One';
   src: url('../Fonts/Alfa_Slab_One/AlfaSlabOne-Regular.ttf');
 }
-
+@font-face {
+  font-family: 'Montserrat';
+  src: url('../Fonts/Montserrat/static/Montserrat-semibolditalic.ttf');
+}
 h1{
 font-family:'Alpha Slab One'
 }
@@ -13,6 +16,11 @@ font-family:'Alpha Slab One'
   max-width:43%!important;
   margin:0 auto! important;
 }
+
+div.breadcrumbs{
+ margin:0 auto!important;
+}
+
 
 #bdiv{
 width:90%;
@@ -55,6 +63,7 @@ a{
   float:right;
 }
 
+
 #id_link_comment{
   margin-top:3%;
   width:100%;
@@ -65,18 +74,26 @@ display: inline-block;
   margin-bottom: 10px!important;
 }
 
+[id^=span_in]{
+font-family: "Montserrat";
+font-weight:1000;
+color:grey;
+}
+
 [id^=bh5_span]{
   width:100%!important;
   min-width:100%!important;
-  font-size:.7rem;
+  font-size:1rem;
+  color:grey;
 }
 
 [id^=but_]{
   width:100%;
   height:auto;
-  border:2px solid orange;
+  border-style: none;
   margin:15px auto;
-  padding:2%;
+  color:#ff66cc;
+  /*padding:2%;*/
   box-shadow:10px 10px 10px #719ECE
 
 }
@@ -88,20 +105,20 @@ display: inline-block;
 
 textarea {
   font-size:1rem!important;
-  padding:5%;
+  padding:3%;
   color:black;
   width:100%!important;
   min-width:100%;
   outline: none !important;
-  border:1px solid black;
+  border:1px solid white;
   box-shadow: 10px 10px 10px #719ECE;
-  border-radius:0px;
+  border-radius:25px;
   overflow:hidden;
 }
 
 img{
   outline: none !important;
-  border:2px solid orange;
+  border-style:none;
   box-shadow: 3px 3px 3px #719ECE;
 }
 

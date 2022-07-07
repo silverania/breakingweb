@@ -1,5 +1,4 @@
-//BASE_URL="https://breakingweb.site/"
-BASE_URL="127.0.0.1:8000"
+BASE_URL="http://127.0.0.1:8000/"
 URL_NEW_POST=BASE_URL+"post/sendpost"
 const MAX_TEXTAREA_NUMBER=21
 const BASE_PHOTO_DIR=BASE_URL+"media/"
@@ -86,7 +85,7 @@ function createSectionDivSpan(){
   //bSpan.setAttribute("id","s_blog_icon")
   aBlogEntra.setAttribute("style","display:block;width:auto;text-align:right;")
   aBlogReg.setAttribute("style","display:block;width:auto;text-align:right;z-index:200")
-  aBlogReg.setAttribute("href",BASE_URL+"user/register")
+  aBlogReg.setAttribute("href",BASE_URL+"user/register/blog")
   aBlogEntra.setAttribute("href",BASE_URL+"user/login/blog")
   aBlogEntra.setAttribute("class","nav-link")
   aBlogEsci.setAttribute("href",BASE_URL+"user/logout/blog")
@@ -215,6 +214,7 @@ class postArea {
         delayAction(action, 200);
       }
     }
+try{
     switch (post.type){
       case "newpost":
       this.postarea.removeAttribute("disabled","")
@@ -231,6 +231,10 @@ class postArea {
       this.postarea.setAttribute("disabled","")
       break
     }
+  }
+  catch(e){
+    console.log("errore oggetto post di tipo indefinito o NULL !")
+  }
   }
 
   appendPostArea(mess,divuserblog){
@@ -264,7 +268,7 @@ class postArea {
       divUserBlog.appendChild(divContainerHead)
       divContainerHead.appendChild(tagUserImg)
       spanUserName.setAttribute("style","color:grey;display:inline;")
-      spanInUserName.setAttribute("style","color:black;display:inline;")
+      spanInUserName.setAttribute("style","color:grey;display:inline;")
       bH5.setAttribute("style","margin-left:3%;color:blue;")
       bH5.setAttribute("id","bh5_span_"+id)
       bH5.appendChild(spanInUserName)
@@ -329,7 +333,7 @@ class postArea {
       if(mess.type=="post" || mess.type=="newpost" ) {
         if(!(postarea.disabled==true)){
           spanUserName.textContent=mess.publish
-          spanInUserName.textContent=mess.author[0].toUpperCase() +mess.author.slice("1")+" , "
+          spanInUserName.textContent=mess.author[0].toUpperCase() +mess.author.slice("1")+"  |  "
           //spanInDivPostTitle.textContent=mess.titled[0].toUpperCase()+mess.titled.slice("1")
           console.log("thispost.disabled")
           $('#post_response').css("border", "1px solid grey")
@@ -373,8 +377,8 @@ class postArea {
           var ids = (resps.length)
           ids = ids + 1
           createPostArea
-          ( r=new Resp(loginis,"", new Date().toLocaleString(),post,userLogged[0].fields.photo,
-                  " risponde a "+mess.author,ids,"newresp"),elementToAppendPostArea)
+          ( r=new Resp(loginis,"", new Date().toLocaleString(),post,"../media/"+userLogged[0].fields.photo,
+                  ids,"newresp"),elementToAppendPostArea)
           resps.push(r)
         }
         else if ( button_risposta_post.textContent=="Rispondi" && isOpen==true ){
@@ -532,8 +536,8 @@ function createNewComment(mess){
   mess.type="newpost"
   mess.publish=getDateFromDjangoDate()
   mess.author=loginis
-  userLogged[0].fields.photo == "undefined" ? alert  ("non ho la photo dell user !") :  mess.photo=userLogged[0].fields.photo
-  mess.photo=userLogged[0].fields.photo
+  userLogged[0].fields.photo == "undefined" ? alert ("non ho la photo dell user !") :
+    mess.photo="../media/"+userLogged[0].fields.photo                                  //la cartella media si trova nel path del progetto :"tutorial"
   mess.pk=newPostId
   createPostArea(mess)
   if(exist==false){
@@ -659,8 +663,6 @@ $(document).ready(function(){
     data: {
       'loginis': loginis,'tagTitle' : tagTitle ,
     },
-
-
     dataType: 'json',
     success: function (data) {
       s = cleanJson(data)
@@ -683,12 +685,13 @@ $(document).ready(function(){
 
 
       //initial_y=(parseInt(obj3.length))-1
+      if(comments_json.length > 0) {
       for (i=0;i<=comments_json.length-1;i=i+1){
         for (z=0;z<=profiles_json.length-1;z=z+1){
           // if(obj5_photo[z].fields.user==obj2[i].fields.author){
           if(profiles_json[z].pk==comments_json[i].fields.author){
-            profiles.push(new Profile(profiles_json[z].fields.first_name,profiles_json[z].fields.photo))
-            mess.push(new Post("post",profiles_json[z].fields.first_name,comments_json[i].fields.title,comments_json[i].fields.body,getDateFromDjangoDate(comments_json[i].fields.publish),profiles_json[z].fields.photo,comments_json[i].pk))
+            profiles.push(new Profile(profiles_json[z].fields.first_name,"../"+profiles_json[z].fields.photo))
+            mess.push(new Post("post",profiles_json[z].fields.first_name,comments_json[i].fields.title,comments_json[i].fields.body,getDateFromDjangoDate(comments_json[i].fields.publish),"../media/"+profiles_json[z].fields.photo,comments_json[i].pk))
             createPostArea(mess[indexX])
             break;
           }
@@ -720,6 +723,11 @@ $(document).ready(function(){
         y=0
         indexX=indexX+1
       }
+    }
+    else {
+      mess.push(new Post("post",userLogged[0].fields.first_name,"Commenta Per Primo",".....","","../media/"+userLogged[0].fields.photo,"0"))
+      createPostArea(mess[0])
+    }                                                                            // non esistono commenti ....creo label : vuoi essere il primo a commnetare ecc...
     }
   }
 );
@@ -768,7 +776,6 @@ function sendToServer(post=Object(),url){
     }
   }
   if(post.type=="newpost" || post.type=="newresp"){
-    let content=tutorial;
     $.ajax({
       url: url,
       data: data,

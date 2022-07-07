@@ -35,7 +35,7 @@ src: url('../webfonts/ShareTechMono-Regular.ttf') ;
 body {
   width:100%;
   height:auto;
- font-family:'WorkSans','Assistant-regular','WorkSans';
+ font-family:'WorkSans','Assistant-regular';
 font-size:20px;
 /*box-sizing:content-box;*/
 }
