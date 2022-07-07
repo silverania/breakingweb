@@ -8,7 +8,8 @@
 
 
     <div class="kpx_login">
-        <h3 class="kpx_authTitle">Autenticati Con Un Social<a href="/user/register"> O Registrati</a></h3>
+        <h3 class="kpx_authTitle">Autenticati Con Un Social<a href={% if 'blog' in request.path %} "/user/login/blog"
+                                                            {% else %} "/user/login"{% endif %}> O Entra</a></h3>
         <div class="row kpx_row-sm-offset-4 kpx_socialButtons">
           <div class="col-xs-2 offset-sm-4 col-sm-2 social">
 
@@ -68,7 +69,8 @@
                 {% if field.help_text %}
                     {% if field.errors %}
                       <p style="color:red;">Username Errato o Esistente ! Cambialo !</p>
-                        <script>setTimeout(() => { window.location.href = "/user/register"},5000);</script>
+                        <script>setTimeout(() => { window.location.href = "{% if 'blog' in request.path %} /user/register/blog
+                                                                            {% else %} /user/register{% endif %}"},5000);</script>
                 {% endif %}
 {% endif %}
                 {% else %}

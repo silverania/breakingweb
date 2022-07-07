@@ -85,7 +85,7 @@ function createSectionDivSpan(){
   //bSpan.setAttribute("id","s_blog_icon")
   aBlogEntra.setAttribute("style","display:block;width:auto;text-align:right;")
   aBlogReg.setAttribute("style","display:block;width:auto;text-align:right;z-index:200")
-  aBlogReg.setAttribute("href",BASE_URL+"user/register")
+  aBlogReg.setAttribute("href",BASE_URL+"user/register/blog")
   aBlogEntra.setAttribute("href",BASE_URL+"user/login/blog")
   aBlogEntra.setAttribute("class","nav-link")
   aBlogEsci.setAttribute("href",BASE_URL+"user/logout/blog")
@@ -663,8 +663,6 @@ $(document).ready(function(){
     data: {
       'loginis': loginis,'tagTitle' : tagTitle ,
     },
-
-
     dataType: 'json',
     success: function (data) {
       s = cleanJson(data)
@@ -687,6 +685,7 @@ $(document).ready(function(){
 
 
       //initial_y=(parseInt(obj3.length))-1
+      if(comments_json.length > 0) {
       for (i=0;i<=comments_json.length-1;i=i+1){
         for (z=0;z<=profiles_json.length-1;z=z+1){
           // if(obj5_photo[z].fields.user==obj2[i].fields.author){
@@ -724,6 +723,11 @@ $(document).ready(function(){
         y=0
         indexX=indexX+1
       }
+    }
+    else {
+      mess.push(new Post("post",userLogged[0].fields.first_name,"Commenta Per Primo",".....","","../media/"+userLogged[0].fields.photo,"0"))
+      createPostArea(mess[0])
+    }                                                                            // non esistono commenti ....creo label : vuoi essere il primo a commnetare ecc...
     }
   }
 );

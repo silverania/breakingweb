@@ -65,6 +65,8 @@ def user_register(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
+            if 'blog' in request.path:
+                return redirect('/user/login/blog')
             return redirect('/user/login')
     else:
         form = SignUpForm()
