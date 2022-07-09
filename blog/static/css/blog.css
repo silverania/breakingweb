@@ -4,14 +4,28 @@
   src: url('../Fonts/Alfa_Slab_One/AlfaSlabOne-Regular.ttf');
 }
 @font-face {
-  font-family: 'Montserrat';
+  font-family: 'Montserrat-Bold';
   src: url('../Fonts/Montserrat/static/Montserrat-SemiBold.ttf');
+}
+
+@font-face {
+  font-family: 'Montserrat-Regular';
+  src: url('../Fonts/Montserrat/static/Montserrat-Regular.ttf');
 }
 h1{
 font-family:'Alpha Slab One'
 }
 
 #blog{
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+      -moz-osx-font-smoothing: grayscale;
+      font-family: ars-maquette-web,sans-serif;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 16px;
+      line-height: 22px;
+      color: #333;
   width:43%!important;
   max-width:43%!important;
   margin:0 auto! important;
@@ -75,7 +89,7 @@ display: inline-block;
 }
 
 [id^=span_in]{
-font-family: "Montserrat";
+font-family: "Montserrat-Bold";
 font-weight:1000;
 color:grey;
 }
@@ -104,7 +118,8 @@ color:grey;
 }
 
 textarea {
-  font-size:1rem!important;
+  font-family:"Montserrat-Regular";
+  font-size:1.3rem!important;
   padding:3%;
   color:black;
   width:100%!important;
@@ -275,7 +290,7 @@ ul#ul_blog li{
   }
 
 textarea {
-    font-size:0.7rem!important;
+    font-size:0.8rem!important;
 }
 }
 
@@ -291,7 +306,7 @@ textarea {
   }
 
 textarea {
-    font-size:0.7rem!important;
+    font-size:1rem!important;
 }
 }
 

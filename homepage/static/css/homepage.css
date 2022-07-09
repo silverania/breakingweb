@@ -32,6 +32,17 @@ font-family: 'ShareTechMono-Regular';
 src: url('../webfonts/ShareTechMono-Regular.ttf') ;
 }
 
+html {
+  -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      font-family: ars-maquette-web,sans-serif;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 16px;
+      line-height: 22px;
+      color: #333;
+  }
+
 body {
   width:100%;
   height:auto;
@@ -54,8 +65,8 @@ z-index:9999;
   margin:0px;
   padding:0px;
 }
+
 textarea{
-    font-family: 'WorkSans';
     font-size: 1rem;
     line-height:1;
   outline:none;

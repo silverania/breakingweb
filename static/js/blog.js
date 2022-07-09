@@ -169,7 +169,7 @@ class Profile{
 }
 
 class Post{
-  constructor(type="none",author="anonimo",title1,comment,date,photo,pk){
+  constructor(type="none",author="anonimo",title1,comment,date="nowday",photo,pk){
     this.sent=false
     this.type=type
     this.author=author
@@ -363,28 +363,42 @@ try{
     button_risposta_post.setAttribute('style','display:block')
     form_risposta_post.appendChild(button_risposta_post)
     var url;
-    $(button_risposta_post).click(function(e){
-      e.stopPropagation()
-      if (mess.type=="resp" || mess.type=="post") {
-        if(isOpen==false) {
-          elementToAppendPostArea = document.getElementById("divuserblog_"+id)
-          if(mess instanceof Resp) {
-            var post=mess.post
+    $(button_risposta_post).click(function(e)
+      {
+        if(userLogged[0].fields.first_name!="anonimo")
+          {
+            e.stopPropagation()
+            if (mess.type=="resp" || mess.type=="post")
+              {
+                if(isOpen==false)
+                  {
+                    elementToAppendPostArea = document.getElementById("divuserblog_"+id)
+                      if(mess instanceof Resp)
+                        {
+                          var post=mess.post
+                        }
+          else if (mess instanceof Post)
+            {
+              var post=mess
+            }
+            var ids = (resps.length)
+            ids = ids + 1
+            createPostArea
+              (
+                r=new Resp(loginis,"", new Date().toLocaleString(),post,
+                          "../media/"+userLogged[0].fields.photo,
+                          ids,"newresp"),elementToAppendPostArea)
+            resps.push(r)
+                  }
+            else if ( button_risposta_post.textContent=="Rispondi" && isOpen==true )
+                    {
+                      msgIsTexareaOpen()
+                    }
+              }
           }
-          else if (mess instanceof Post) {
-            var post=mess
+          else {
+            window.open(BASE_URL+"user/login/blog")
           }
-          var ids = (resps.length)
-          ids = ids + 1
-          createPostArea
-          ( r=new Resp(loginis,"", new Date().toLocaleString(),post,"../media/"+userLogged[0].fields.photo,
-                  ids,"newresp"),elementToAppendPostArea)
-          resps.push(r)
-        }
-        else if ( button_risposta_post.textContent=="Rispondi" && isOpen==true ){
-          msgIsTexareaOpen()
-        }
-      }
     }
   )
   $(button_risposta_post).hover(function(){
@@ -690,8 +704,13 @@ $(document).ready(function(){
         for (z=0;z<=profiles_json.length-1;z=z+1){
           // if(obj5_photo[z].fields.user==obj2[i].fields.author){
           if(profiles_json[z].pk==comments_json[i].fields.author){
-            profiles.push(new Profile(profiles_json[z].fields.first_name,"../"+profiles_json[z].fields.photo))
-            mess.push(new Post("post",profiles_json[z].fields.first_name,comments_json[i].fields.title,comments_json[i].fields.body,getDateFromDjangoDate(comments_json[i].fields.publish),"../media/"+profiles_json[z].fields.photo,comments_json[i].pk))
+            profiles.push(new Profile(profiles_json[z].fields.first_name,"../"
+                                              +profiles_json[z].fields.photo))
+            mess.push(new Post("post",profiles_json[z].fields.first_name,
+                        comments_json[i].fields.title,comments_json[i]
+                        .fields.body,getDateFromDjangoDate(comments_json[i].
+                        fields.publish),"../media/"+profiles_json[z].fields.
+                        photo,comments_json[i].pk))
             createPostArea(mess[indexX])
             break;
           }

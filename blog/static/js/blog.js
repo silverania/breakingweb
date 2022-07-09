@@ -169,7 +169,7 @@ class Profile{
 }
 
 class Post{
-  constructor(type="none",author="anonimo",title1,comment,date,photo,pk){
+  constructor(type="none",author="anonimo",title1,comment,date="nowday",photo,pk){
     this.sent=false
     this.type=type
     this.author=author
