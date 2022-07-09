@@ -11,8 +11,9 @@ from user.models import Profile
 from django.conf import settings
 #from blog.models import Comment
 from django.views.decorators.http import condition
-
+from django.core import serializers
 #User
+from django.core.serializers.json import DjangoJSONEncoder
 from django.contrib.auth.models import User
 import datetime
 #from django.http import urllib
@@ -83,9 +84,6 @@ def tutorial_detail(request, slug=""):
     print("user= "+str(user))
     autore = str(user)
     photo = settings.MEDIA_URL+str(user.photo)
-    #photo=user.photo
-    #print("anno?="+str(tutorial.publish.year)+str(tutorial.publish.day)+"autor="+str(tutorial.author)+"photo="+str(photo))
-    #print("COMMENTI="+str(tutorial.all_comments.all()))
     mypath = str(request.path).replace("/", "")
     if not mypath:
         print("request PATH VUOTA"+mypath)

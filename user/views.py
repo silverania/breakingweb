@@ -11,6 +11,7 @@ from django.views import View
 
 
 def user_login(request):
+    global te
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
