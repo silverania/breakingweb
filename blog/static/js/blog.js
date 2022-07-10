@@ -759,9 +759,10 @@ function createPostArea(messOrResp,elementToAppendArea){
   if(!(isOpen==true)) {
     paPostOrResp=new postArea(messOrResp)
     paPostOrResp.makeHeadBlog(messOrResp,paPostOrResp,elementToAppendArea)
-    paPostOrResp.postarea.setAttribute("style", "height:" + (this.scrollHeight) + "px;overflow-y:hidden;");
-    paPostOrResp.postarea.style.height = "auto";
-    paPostOrResp.postarea.style.height = (paPostOrResp.postarea.scrollHeight) + "px";
+    $(paPostOrResp.postarea).css("height" ,  paPostOrResp.postarea.scrollHeight.toString() + "px");
+    $(paPostOrResp.postarea).css("overflow-y" , "hidden")
+    $(paPostOrResp.postarea).css("height" , "auto");
+    $(paPostOrResp.postarea).css("height" , paPostOrResp.postarea.scrollHeight.toString() + "px");
     paPostOrResp.createButtonRispostaPost(messOrResp,paPostOrResp)
   }
   else{
