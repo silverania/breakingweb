@@ -284,7 +284,7 @@ try{
         divUserBlog.setAttribute("id","divuserblog_"+id)
         divUserBlog.setAttribute("class","new_post_"+id)
         $(document).on('click', function(e){
-          if ($(e.target).closest("#divuserblog_"+id).length === 0 && $(e.target)
+          if ($(e.target).closest('*[id^="newpost"]'+"_"+userLogged[0].fields.first_name+"_"+id).length === 0 && $(e.target)
           .closest("#button_post").length === 0
           && $(e.target).closest(".form_comment").length === 0 &&
           $(e.target).closest("#id_link_comment").length === 0) {
