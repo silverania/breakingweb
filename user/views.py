@@ -6,8 +6,21 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, authenticate
 from .forms import SignUpForm, LoginForm
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.views import View
+import json
+from django.core import serializers
+from django.contrib.auth.models import User, AnonymousUser
+
+
+class checkUser(View):
+    def get(self, request):
+        current_user = {}
+        if not request.user.is_authenticated:
+            current_user['first_name'] = 'AnonymousUser'
+        else:
+            current_user['first_name'] = str(request.user)
+        return JsonResponse({'userLogged': str(current_user['first_name'])}, safe=False)
 
 
 def user_login(request):

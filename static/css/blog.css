@@ -1,11 +1,10 @@
-{% static %}
 @font-face {
   font-family: 'Alpha Slab One';
   src: url('../Fonts/Alfa_Slab_One/AlfaSlabOne-Regular.ttf');
 }
 @font-face {
   font-family: 'Montserrat-Bold';
-  src: url('../Fonts/Montserrat/static/Montserrat-SemiBold.ttf');
+  src: url('../Fonts/Montserrat/static/Montserrat-Bold.ttf');
 }
 
 @font-face {
@@ -186,8 +185,8 @@ ul#ul_blog li{
   font-size:inherit!important;
 }
 
-.fa-comments{
-  color:orange;
+fa .fa-comments-dots{
+  color:grey!important;
 }
 
 .div_resp{
@@ -236,6 +235,7 @@ ul#ul_blog li{
 @media screen and (max-width: 1024px) {
   .fa-comment-dots,#s_blog{
     font-size:0.7rem;
+    color:grey;
   }
 
   #s_blog_icon + #span_blog_entra,#span_entra,#span_reg,#span_esci{
@@ -294,6 +294,7 @@ textarea {
 @media screen and (min-width: 780px) {
   .fa-comment-dots,#s_blog {
     font-size:3rem!important;
+  color:grey;
   }
 
 textarea {

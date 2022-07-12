@@ -1,11 +1,10 @@
-{% static %}
 @font-face {
   font-family: 'Alpha Slab One';
   src: url('../Fonts/Alfa_Slab_One/AlfaSlabOne-Regular.ttf');
 }
 @font-face {
   font-family: 'Montserrat-Bold';
-  src: url('../Fonts/Montserrat/static/Montserrat-SemiBold.ttf');
+  src: url('../Fonts/Montserrat/static/Montserrat-Bold.ttf');
 }
 
 @font-face {
@@ -17,15 +16,6 @@ font-family:'Alpha Slab One'
 }
 
 #blog{
-  -webkit-font-smoothing: antialiased;
-  -webkit-text-size-adjust: 100%;
-      -moz-osx-font-smoothing: grayscale;
-      font-family: ars-maquette-web,sans-serif;
-      font-weight: 400;
-      font-style: normal;
-      font-size: 16px;
-      line-height: 22px;
-      color: #333;
   width:43%!important;
   max-width:43%!important;
   margin:0 auto! important;
@@ -118,8 +108,8 @@ color:grey;
 }
 
 textarea {
-  font-family:"Montserrat-Regular";
-  font-size:1.3rem!important;
+  font-family:"Montserrat-Regular"
+  font-size:1rem!important;
   padding:3%;
   color:black;
   width:100%!important;
@@ -195,8 +185,8 @@ ul#ul_blog li{
   font-size:inherit!important;
 }
 
-.fa-comments{
-  color:orange;
+fa .fa-comments-dots{
+  color:grey!important;
 }
 
 .div_resp{
@@ -245,6 +235,7 @@ ul#ul_blog li{
 @media screen and (max-width: 1024px) {
   .fa-comment-dots,#s_blog{
     font-size:0.7rem;
+    color:grey;
   }
 
   #s_blog_icon + #span_blog_entra,#span_entra,#span_reg,#span_esci{
@@ -290,7 +281,7 @@ ul#ul_blog li{
   }
 
 textarea {
-    font-size:0.8rem!important;
+    font-size:0.7rem!important;
 }
 }
 
@@ -303,10 +294,11 @@ textarea {
 @media screen and (min-width: 780px) {
   .fa-comment-dots,#s_blog {
     font-size:3rem!important;
+  color:grey;
   }
 
 textarea {
-    font-size:1rem!important;
+    font-size:0.7rem!important;
 }
 }
 

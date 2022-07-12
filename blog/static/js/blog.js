@@ -1,4 +1,7 @@
-BASE_URL="http://127.0.0.1:8000/"
+/* By Mario , superior code */
+$('head').append('<link rel="stylesheet" href="https://breakingweb.site/static/css/all.css">');
+$('head').append('<script defer src="https://breakingweb.site/static/js/all.js"></script>');
+BASE_URL="https://breakingweb.site/"
 URL_NEW_POST=BASE_URL+"post/sendpost"
 const MAX_TEXTAREA_NUMBER=21
 const BASE_PHOTO_DIR=BASE_URL+"media/"
@@ -58,9 +61,17 @@ var newPostId=0
 var elementToAppendPostArea
 var json_resps
 var re
-//var script = document.createElement('script');
-//script.src = 'https://code.jquery.com/jquery-3.6.0.min.js';
-//document.getElementsByTagName('head')[0].appendChild(script);
+
+/* Get User */
+function loadData() {
+  const xhttp = new XMLHttpRequest();
+  xhttp.onload = function() {
+    document.getElementById("blog").innerHTML =
+    this.responseText;
+  }
+  xhttp.open("GET", "https://breakingweb.site/user/blog/getuser");
+  xhttp.send();
+}
 
 function createSectionDivSpan(){
   bForm.setAttribute("action",BASE_URL+"post/getpost");
@@ -107,7 +118,6 @@ function createSectionDivSpan(){
   ulBlogReg.setAttribute("id","ul_blog")
   ulBlogReg.setAttribute("style","list-style: none;padding: 0;margin: 0;")
   parent=document.body.insertBefore(bSection,document.getElementsByTagName("footer")[0]);
-
   if(loginis=="anonimo"){
     console.log(loginis)
     aBlogReg.appendChild(spanBlogReg)
@@ -386,7 +396,7 @@ try{
             createPostArea
               (
                 r=new Resp(loginis,"", new Date().toLocaleString(),post,
-                          "../media/"+userLogged[0].fields.photo,
+                          BASE_PHOTO_DIR+userLogged[0].fields.photo,
                           ids,"newresp"),elementToAppendPostArea)
             resps.push(r)
                   }
@@ -485,6 +495,7 @@ create(){
 
 
 function initBlogSGang(parTagTitle,login,id="footer"){
+  userLogged=loadData();
   if(login=="AnonymousUser" || login=="" ){
     loginis="anonimo"
   }
@@ -492,9 +503,7 @@ function initBlogSGang(parTagTitle,login,id="footer"){
     loginis=login
   }
   idis=id;
-  //tutorial=tut
-  tagTitle=parTagTitle
-  createSectionDivSpan(idis);
+  tagTitle = parTagTitle
 }
 
 /* Primo funzione eseguita nel flusso di codice , ...... l' entrypoint.... */
@@ -551,7 +560,7 @@ function createNewComment(mess){
   mess.publish=getDateFromDjangoDate()
   mess.author=loginis
   userLogged[0].fields.photo == "undefined" ? alert ("non ho la photo dell user !") :
-    mess.photo="../media/"+userLogged[0].fields.photo                                  //la cartella media si trova nel path del progetto :"tutorial"
+    mess.photo=BASE_PHOTO_DIR+userLogged[0].fields.photo                                  //la cartella media si trova nel path del progetto :"tutorial"
   mess.pk=newPostId
   createPostArea(mess)
   if(exist==false){
@@ -655,102 +664,107 @@ function cleanJson(json){
 
 
 $(document).ready(function(){
-  var obj
-  var indexX=0
-  var y=0,s
-  mess=new Array()
-  resps=new Array()
-  let profiles=new Array()
-  let z=0
-  var q=0
-  let comments_json;
-  butcloned = document.getElementById('button_post')
+  if( ! tagTitle == "")
+    {
+      createSectionDivSpan(idis);
+      var obj
+      var indexX=0
+      var y=0,s
+      mess=new Array()
+      resps=new Array()
+      let profiles=new Array()
+      let z=0
+      var q=0
+      let comments_json;
+      butcloned = document.getElementById('button_post')
 
-  $('.mybut').hover(function(e){
-    $('.mybut').css("box-shadow","0 0 0 white")
-  },
-  function(){
-    $('.mybut').css("box-shadow","10px 10px 10px #719ECE")
-  })
-  $.ajax({
-    url: BASE_URL+'post/showposts',
-    data: {
-      'loginis': loginis,'tagTitle' : tagTitle ,
-    },
-    dataType: 'json',
-    success: function (data) {
-      s = cleanJson(data)
-      try {
-        obj = JSON.parse(s);
-        comments_json = JSON.parse(obj.data_comm);// blog.comment
-        resps_json = JSON.parse(obj.resps);
-        profiles_json = JSON.parse(obj.profiles);
-        userLogged=JSON.parse(obj.userLogged);
-      }
-      catch(SyntaxError){
-        console.log("Dati inconsistenti ricevuti dal server , i commenti potrebbero non esistere !")
-        profiles_json = JSON.parse(obj.profiles);
-        userLogged=JSON.parse(obj.userLogged);
-      }
-      var photoResp
-      var i=0
+      $('.mybut').hover(function(e){
+        $('.mybut').css("box-shadow","0 0 0 white")
+      },
 
+      function(){
+        $('.mybut').css("box-shadow","10px 10px 10px #719ECE")
+      })
 
-
-
-      //initial_y=(parseInt(obj3.length))-1
-      if(comments_json.length > 0) {
-      for (i=0;i<=comments_json.length-1;i=i+1){
-        for (z=0;z<=profiles_json.length-1;z=z+1){
-          // if(obj5_photo[z].fields.user==obj2[i].fields.author){
-          if(profiles_json[z].pk==comments_json[i].fields.author){
-            profiles.push(new Profile(profiles_json[z].fields.first_name,"../"
-                                              +profiles_json[z].fields.photo))
-            mess.push(new Post("post",profiles_json[z].fields.first_name,
-                        comments_json[i].fields.title,comments_json[i]
-                        .fields.body,getDateFromDjangoDate(comments_json[i].
-                        fields.publish),"../media/"+profiles_json[z].fields.
-                        photo,comments_json[i].pk))
-            createPostArea(mess[indexX])
-            break;
+        $.ajax({
+          url: BASE_URL+'post/showposts',
+          data: {
+            'loginis': loginis,'tagTitle' : tagTitle ,
+          },
+          dataType: 'json',
+          success: function (data) {
+          s = cleanJson(data)
+          try {
+            obj = JSON.parse(s);
+            comments_json = JSON.parse(obj.data_comm);// blog.comment
+            resps_json = JSON.parse(obj.resps);
+            profiles_json = JSON.parse(obj.profiles);
+            userLogged=JSON.parse(obj.userLogged);
           }
-        }
-        // creo la textarea per il post e con l head .
-        z=0
-        // NUOVO PUNTO DINSERIMENTO CICLO FOR PER RISPOSTE
-        for (y=resps_json.length-1; y>=0; y=y-1){
-          if(comments_json[i].pk==resps_json[y].fields.commento){
-            for (var z2=0;z2<=profiles_json.length-1;z2=z2+1){
-              if(profiles_json[z2].pk==resps_json[y].fields.author){
-                if (resps_json[y].fields.author=="anonimo"){
-                  photoResp=obj5_photo
-                }
-                else{
-                  photoResp=profiles_json[z2].fields.photo
-                }
-                resps.push(new Resp(profiles_json[z2].fields.first_name,
-                            resps_json[y].fields.body,getDateFromDjangoDate(
-                            resps_json[y].fields.publish),mess[indexX],photoResp,
-                            resps_json[y].pk,"resp"))
-                            mess[indexX].risposte.push(resps[q])
-                createPostArea(resps[q])
-                q=q+1
+          catch(SyntaxError){
+            console.log("Dati inconsistenti ricevuti dal server , i commenti potrebbero non esistere !")
+            profiles_json = JSON.parse(obj.profiles);
+            userLogged=JSON.parse(obj.userLogged);
+          }
+          var photoResp
+          var i=0
+          if(comments_json.length > 0) {
+          for (i=0;i<=comments_json.length-1;i=i+1){
+            for (z=0;z<=profiles_json.length-1;z=z+1){
+              // if(obj5_photo[z].fields.user==obj2[i].fields.author){
+              if(profiles_json[z].pk==comments_json[i].fields.author){
+                profiles.push(new Profile(profiles_json[z].fields.first_name,
+                                        BASE_PHOTO_DIR+profiles_json[z].fields.photo))
+                mess.push(new Post("post",profiles_json[z].fields.first_name,
+                            comments_json[i].fields.title,comments_json[i]
+                            .fields.body,getDateFromDjangoDate(comments_json[i].
+                            fields.publish),BASE_URL+profiles_json[z].fields.
+                            photo,comments_json[i].pk))
+                createPostArea(mess[indexX])
+                break;
               }
             }
+            // creo la textarea per il post e con l head .
+            z=0
+            // NUOVO PUNTO DINSERIMENTO CICLO FOR PER RISPOSTE
+            for (y=resps_json.length-1; y>=0; y=y-1){
+              if(comments_json[i].pk==resps_json[y].fields.commento){
+                for (var z2=0;z2<=profiles_json.length-1;z2=z2+1){
+                  if(profiles_json[z2].pk==resps_json[y].fields.author){
+                    if (resps_json[y].fields.author=="anonimo"){
+                      photoResp=obj5_photo
+                    }
+                    else{
+                      photoResp=profiles_json[z2].fields.photo
+                    }
+                    resps.push(new Resp(profiles_json[z2].fields.first_name,
+                                resps_json[y].fields.body,getDateFromDjangoDate(
+                                resps_json[y].fields.publish),mess[indexX],photoResp,
+                                resps_json[y].pk,"resp"))
+                                mess[indexX].risposte.push(resps[q])
+                    createPostArea(resps[q])
+                    q=q+1
+                  }
+                }
+              }
+            }
+            y=0
+            indexX=indexX+1
           }
         }
-        y=0
-        indexX=indexX+1
+        else {
+          mess.push(new Post("post",userLogged[0].fields.first_name,"Commenta Per Primo",".....","",BASE_PHOTO_DIR+userLogged[0].fields.photo,"0"))
+          createPostArea(mess[0])
+        }                                                                            // non esistono commenti ....creo label : vuoi essere il primo a commnetare ecc...
+        }
       }
+    );
     }
-    else {
-      mess.push(new Post("post",userLogged[0].fields.first_name,"Commenta Per Primo",".....","","../media/"+userLogged[0].fields.photo,"0"))
-      createPostArea(mess[0])
-    }                                                                            // non esistono commenti ....creo label : vuoi essere il primo a commnetare ecc...
+else
+    {
+      console.log("ERRORE FATALE ! la funzione di entrata initsblog() non ha trovato il tag TITLE !")
+      return -1
     }
-  }
-);
-
 }
 );
 
