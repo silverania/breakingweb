@@ -1,8 +1,11 @@
 /* By Mario , superior code */
-$('head').append('<link rel="stylesheet" href="https://breakingweb.site/static/css/all.css">');
-$('head').append('<script defer src="https://breakingweb.site/static/js/all.js"></script>');
-BASE_URL="https://breakingweb.site/"
+$('head').append('<link rel="stylesheet" href="https://breakingweb.site/static/@fortawesome/fontawesome-free/css/all.css">');
+$('head').append('<script defer src="https://breakingweb.site/static/@fortawesome/fontawesome-free/js/all.js"></script>');
+BASE_URL="http://127.0.0.1:8000/"
+HIDDENFIELD="?next="+window.location
+XMLHTTPURL_GETUSER=BASE_URL+"user/blog/getuser"
 URL_NEW_POST=BASE_URL+"post/sendpost"
+XMLHTTPURL_LOGIN=BASE_URL+"user/login/blog"+HIDDENFIELD
 const MAX_TEXTAREA_NUMBER=21
 const BASE_PHOTO_DIR=BASE_URL+"media/"
 var borderPost="none";
@@ -15,7 +18,8 @@ var padre
 var user
 var loginis
 var lastUpdate
-var userLogged
+var userLogged=Array()
+var userAuth=Array()
 var butcloned
 var isChanged=false
 var bbutton=document.createElement("Button");
@@ -61,17 +65,10 @@ var newPostId=0
 var elementToAppendPostArea
 var json_resps
 var re
+var inputHidden=document.createElement("INPUT")
 
 /* Get User */
-function loadData() {
-  const xhttp = new XMLHttpRequest();
-  xhttp.onload = function() {
-    document.getElementById("blog").innerHTML =
-    this.responseText;
-  }
-  xhttp.open("GET", "https://breakingweb.site/user/blog/getuser");
-  xhttp.send();
-}
+
 
 function createSectionDivSpan(){
   bForm.setAttribute("action",BASE_URL+"post/getpost");
@@ -97,11 +94,13 @@ function createSectionDivSpan(){
   aBlogEntra.setAttribute("style","display:block;width:auto;text-align:right;")
   aBlogReg.setAttribute("style","display:block;width:auto;text-align:right;z-index:200")
   aBlogReg.setAttribute("href",BASE_URL+"user/register/blog")
-  aBlogEntra.setAttribute("href",BASE_URL+"user/login/blog")
+  aBlogEntra.setAttribute("href",XMLHTTPURL_LOGIN)
   aBlogEntra.setAttribute("class","nav-link")
   aBlogEsci.setAttribute("href",BASE_URL+"user/logout/blog")
   liBlogEntra.setAttribute("style","display:inline;width:auto;margin-right:0px;")
   liBlogEntra.setAttribute("class" , "nav-item")
+  liBlogEntra.setAttribute("id","li_login")
+  liBlogReg.setAttribute("id","li_reg")
   //bSpanChild.setAttribute("id","s_blog_text")
   bbutton.setAttribute("id","button_post")
   //bH5.setAttribute("id","span_blog_entra")
@@ -113,13 +112,12 @@ function createSectionDivSpan(){
   bbutton.textContent="Commenta"
   spanBlogReg.textContent="Registrati"
   spanBlogEntra.textContent="Entra"
-
   spanBlogEsci.textContent="Esci"
   ulBlogReg.setAttribute("id","ul_blog")
   ulBlogReg.setAttribute("style","list-style: none;padding: 0;margin: 0;")
   parent=document.body.insertBefore(bSection,document.getElementsByTagName("footer")[0]);
-  if(loginis=="anonimo"){
-    console.log(loginis)
+  console.log("user autenticato sul server : "+userAuth.userin[0].fields.first_name)
+  if(userAuth.userin[0].fields.first_name === "anonimo"){
     aBlogReg.appendChild(spanBlogReg)
     liBlogReg.appendChild(aBlogReg)
     aBlogEntra.appendChild(spanBlogEntra)
@@ -224,27 +222,27 @@ class postArea {
         delayAction(action, 200);
       }
     }
-try{
-    switch (post.type){
-      case "newpost":
-      this.postarea.removeAttribute("disabled","")
-      break
-      case "newresp":
-      this.postarea.removeAttribute("disabled","")
-      break
-      case "post":
-      this.postarea.value=post.body
-      this.postarea.setAttribute("disabled","")
-      break
-      case "resp":
-      this.postarea.value=post.body
-      this.postarea.setAttribute("disabled","")
-      break
+    try{
+      switch (post.type){
+        case "newpost":
+        this.postarea.removeAttribute("disabled","")
+        break
+        case "newresp":
+        this.postarea.removeAttribute("disabled","")
+        break
+        case "post":
+        this.postarea.value=post.body
+        this.postarea.setAttribute("disabled","")
+        break
+        case "resp":
+        this.postarea.value=post.body
+        this.postarea.setAttribute("disabled","")
+        break
+      }
     }
-  }
-  catch(e){
-    console.log("errore oggetto post di tipo indefinito o NULL !")
-  }
+    catch(e){
+      console.log("errore oggetto post di tipo indefinito o NULL !")
+    }
   }
 
   appendPostArea(mess,divuserblog){
@@ -288,16 +286,22 @@ try{
       tagUserImg.setAttribute("id","img_user_"+id)
       spanUserName.setAttribute("id","span_user_"+id)
       spanInUserName.setAttribute("id","span_inuser_"+id)
-      postarea.postarea.setAttribute("id",mess.type+"_"+loginis+"_"+id)
+      postarea.postarea.setAttribute("id",mess.type+"_"+mess.author+"_"+id)
       switch (mess.type){
         case "newpost":
         divUserBlog.setAttribute("id","divuserblog_"+id)
         divUserBlog.setAttribute("class","new_post_"+id)
         $(document).on('click', function(e){
-          if ($(e.target).closest('*[id^="newpost"]'+"_"+userLogged[0].fields.first_name+"_"+id).length === 0 && $(e.target)
-          .closest("#button_post").length === 0
-          && $(e.target).closest(".form_comment").length === 0 &&
-          $(e.target).closest("#id_link_comment").length === 0) {
+          //if (!$(e.target).closest('*[id^="newpost"]'+"_"+mess.author+"_"+id).length === 0 )
+          //  {
+          if ($(e.target).closest('*[id^="divuserblog"]' ).length===0 &&
+          $(e.target).closest('*[id^="id_link_comment"]' ).length===0 &&
+          $(e.target).closest('*[id^="button_post"]' ).length===0)
+          {
+            //&& $(e.target)
+            //.closest("#button_post").length === 0
+            //&& $(e.target).closest(".form_comment").length === 0 &&
+            //$(e.target).closest("#id_link_comment").length === 0) {
             if (isChanged==false) {
               $("#divuserblog_"+id).remove()
               isOpen=false
@@ -374,97 +378,97 @@ try{
     form_risposta_post.appendChild(button_risposta_post)
     var url;
     $(button_risposta_post).click(function(e)
+    {
+      if(userLogged[0].fields.first_name!="anonimo")
       {
-        if(userLogged[0].fields.first_name!="anonimo")
+        e.stopPropagation()
+        if (mess.type=="resp" || mess.type=="post")
+        {
+          if(isOpen==false)
           {
-            e.stopPropagation()
-            if (mess.type=="resp" || mess.type=="post")
-              {
-                if(isOpen==false)
-                  {
-                    elementToAppendPostArea = document.getElementById("divuserblog_"+id)
-                      if(mess instanceof Resp)
-                        {
-                          var post=mess.post
-                        }
-          else if (mess instanceof Post)
+            elementToAppendPostArea = document.getElementById("divuserblog_"+id)
+            if(mess instanceof Resp)
+            {
+              var post=mess.post
+            }
+            else if (mess instanceof Post)
             {
               var post=mess
             }
             var ids = (resps.length)
             ids = ids + 1
             createPostArea
-              (
-                r=new Resp(loginis,"", new Date().toLocaleString(),post,
-                          BASE_PHOTO_DIR+userLogged[0].fields.photo,
-                          ids,"newresp"),elementToAppendPostArea)
-            resps.push(r)
-                  }
+            (
+              r=new Resp(loginis,"", new Date().toLocaleString(),post,
+              BASE_PHOTO_DIR+userLogged[0].fields.photo,
+              ids,"newresp"),elementToAppendPostArea)
+              resps.push(r)
+            }
             else if ( button_risposta_post.textContent=="Rispondi" && isOpen==true )
-                    {
-                      msgIsTexareaOpen()
-                    }
-              }
+            {
+              msgIsTexareaOpen()
+            }
           }
-          else {
-            window.open(BASE_URL+"user/login/blog")
-          }
+        }
+        else {
+          window.open(BASE_URL+"user/login/blog")
+        }
+      }
+    )
+    $(button_risposta_post).hover(function(){
+      $(button_risposta_post).animate({'width':'33%'},200);
+      $(button_risposta_post).animate({'left':'33%'},200);
+      $(button_risposta_post).css('box-shadow', '0 0 0 white' );//#719ECE"
+    },
+    function(){
+      $(button_risposta_post).animate({'width':'100%'},200);
+      $(button_risposta_post).css('box-shadow', '10px 10px 10px #719ECE' );
     }
   )
-  $(button_risposta_post).hover(function(){
-    $(button_risposta_post).animate({'width':'33%'},200);
-    $(button_risposta_post).animate({'left':'33%'},200);
-    $(button_risposta_post).css('box-shadow', '0 0 0 white' );//#719ECE"
-  },
-  function(){
-    $(button_risposta_post).animate({'width':'100%'},200);
-    $(button_risposta_post).css('box-shadow', '10px 10px 10px #719ECE' );
-  }
-)
-switch (mess.type){
-  case "newpost" : case "newresp" :
-  postarea.isActive=true
-  button_risposta_post.textContent="Invia"
-  $(button_risposta_post).click(function(){
-    //autorizzo la creazione del nuovo post solo se è valido: contiene testo ecc..
-    let ids='#'+postarea.postarea.id
-    let txts=$(ids).val()
-    try{
-      if (txts==""){
-        throw  "Post Vuoto ! ";
+  switch (mess.type){
+    case "newpost" : case "newresp" :
+    postarea.isActive=true
+    button_risposta_post.textContent="Invia"
+    $(button_risposta_post).click(function(){
+      //autorizzo la creazione del nuovo post solo se è valido: contiene testo ecc..
+      let ids='#'+postarea.postarea.id
+      let txts=$(ids).val()
+      try{
+        if (txts==""){
+          throw  "Post Vuoto ! ";
+        }
       }
-    }
-    catch (err){
-      console.log("area di testo vuota . Exit code -1 !")
-      return -1
-    }
-    console.log("comparazione del tipo e valore = vera in:"+txts)
-    //form_risposta_post.setAttribute("action",url)
-    url=URL_NEW_POST
-    mess.body=txts
-    if (sendToServer(mess,url)==0){
-      isOpen=false
-    }
-    //button_risposta_post.setAttribute('action','url')
-    $(postarea.postarea).css("box-shadow","0 0 0 0")
-    mess.type=="newpost" ? button_risposta_post.textContent="Post Inserito" : button_risposta_post.textContent="Risposta Inserita"
+      catch (err){
+        console.log("area di testo vuota . Exit code -1 !")
+        return -1
+      }
+      console.log("comparazione del tipo e valore = vera in:"+txts)
+      //form_risposta_post.setAttribute("action",url)
+      url=URL_NEW_POST
+      mess.body=txts
+      if (sendToServer(mess,url)==0){
+        isOpen=false
+      }
+      //button_risposta_post.setAttribute('action','url')
+      $(postarea.postarea).css("box-shadow","0 0 0 0")
+      mess.type=="newpost" ? button_risposta_post.textContent="Post Inserito" : button_risposta_post.textContent="Risposta Inserita"
 
-    button_risposta_post.setAttribute("disabled","")
-    postarea.postarea.setAttribute("disabled","")
-    $(postarea.postarea).css("color" ,"rgba(0, 0, 0, 0.5)");
-    $(postarea.postarea).css("border" ,"2px solid grey");
-    $(button_risposta_post).css("color" ,"black");
-  }
-);
-break
-case "post":
-var objectToAppendChild=divUserBlog.id
-button_risposta_post.textContent="Rispondi"
-break
-case "resp" :
-var objectToAppendChild="divuserblog_"+id
-button_risposta_post.textContent="Rispondi"
-break
+      button_risposta_post.setAttribute("disabled","")
+      postarea.postarea.setAttribute("disabled","")
+      $(postarea.postarea).css("color" ,"rgba(0, 0, 0, 0.5)");
+      $(postarea.postarea).css("border" ,"2px solid grey");
+      $(button_risposta_post).css("color" ,"black");
+    }
+  );
+  break
+  case "post":
+  var objectToAppendChild=divUserBlog.id
+  button_risposta_post.textContent="Rispondi"
+  break
+  case "resp" :
+  var objectToAppendChild="divuserblog_"+id
+  button_risposta_post.textContent="Rispondi"
+  break
 }
 var elementToAppendButton=document.getElementById(objectToAppendChild)
 elementToAppendButton.appendChild(form_risposta_post)
@@ -493,17 +497,51 @@ create(){
 }
 }
 
+/*function getCSRFToken() {
+var cookieValue = null;
+if (document.cookie && document.cookie != '') {
+var cookies = document.cookie.split(';');
+for (var i = 0; i < cookies.length; i++) {
+var cookie = jQuery.trim(cookies[i]);
+if (cookie.substring(0, 10) == ('csrftoken' + '=')) {
+cookieValue = decodeURIComponent(cookie.substring(10));
+break;
+}
+}
+}
+return cookieValue;
+}*/
 
-function initBlogSGang(parTagTitle,login,id="footer"){
-  userLogged=loadData();
-  if(login=="AnonymousUser" || login=="" ){
-    loginis="anonimo"
-  }
-  else{
-    loginis=login
-  }
-  idis=id;
+function initBlogSGang(parTagTitle,u,p){
+  var p=p
+  var u=u
+  document.getElementById('s_blog').remove
   tagTitle = parTagTitle
+  //$('#s_blog').remove()
+  var jsonLogged,json
+  var userfirstName=[]
+  var userprof
+  var response
+  var xhttp2 = new XMLHttpRequest();
+  var data = JSON.stringify({"user": u, "password": p});
+  xhttp2.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      response = xhttp2.responseText;
+      console.log(xhttp2.responseText);
+      if (response){
+        response=JSON.stringify(response)
+        json=JSON.parse(response)
+        jsonLogged=JSON.parse(json)
+        userprof=JSON.parse(jsonLogged)
+        userfirstName={"userin" : JSON.parse(userprof.userLogged)}
+        userAuth=userfirstName
+        createSectionDivSpan()
+      }
+    }
+  }
+  xhttp2.open('POST', XMLHTTPURL_GETUSER,true);
+  xhttp2.setRequestHeader('Content-Type', 'application/json');
+  xhttp2.send(data)
 }
 
 /* Primo funzione eseguita nel flusso di codice , ...... l' entrypoint.... */
@@ -518,7 +556,8 @@ $(buttonLinkComment).click(function() {
 )
 
 function openNewCommentArea(){
-  if(userLogged[0].fields.first_name!="anonimo"){
+  if(userAuth.userin[0].fields.first_name!=="anonimo")
+  {
     if(isOpen==false) {
       buttonCommentClick()
     }
@@ -526,8 +565,10 @@ function openNewCommentArea(){
       msgIsTexareaOpen()
     }
   }
-  else{
-    window.open(BASE_URL+"user/login/blog")
+  else
+  {
+    //window.open(BASE_URL+"user/login/blog")
+    window.location.href =XMLHTTPURL_LOGIN;
   }
 }
 
@@ -558,9 +599,9 @@ function createNewComment(mess){
   newPostId=newPostId+1
   mess.type="newpost"
   mess.publish=getDateFromDjangoDate()
-  mess.author=loginis
-  userLogged[0].fields.photo == "undefined" ? alert ("non ho la photo dell user !") :
-    mess.photo=BASE_PHOTO_DIR+userLogged[0].fields.photo                                  //la cartella media si trova nel path del progetto :"tutorial"
+  mess.author=userAuth.userin[0].fields.first_name
+  userAuth.userin[0].fields.photo == "undefined" ? alert ("non ho la photo dell user !") :
+  mess.photo=BASE_PHOTO_DIR+userAuth.userin[0].fields.photo                                  //la cartella media si trova nel path del progetto :"tutorial"
   mess.pk=newPostId
   createPostArea(mess)
   if(exist==false){
@@ -665,165 +706,164 @@ function cleanJson(json){
 
 $(document).ready(function(){
   if( ! tagTitle == "")
-    {
-      createSectionDivSpan(idis);
-      var obj
-      var indexX=0
-      var y=0,s
-      mess=new Array()
-      resps=new Array()
-      let profiles=new Array()
-      let z=0
-      var q=0
-      let comments_json;
-      butcloned = document.getElementById('button_post')
+  {
+    var obj
+    var indexX=0
+    var y=0,s
+    mess=new Array()
+    resps=new Array()
+    let profiles=new Array()
+    let z=0
+    var q=0
+    let comments_json;
+    butcloned = document.getElementById('button_post')
 
-      $('.mybut').hover(function(e){
-        $('.mybut').css("box-shadow","0 0 0 white")
+    $('.mybut').hover(function(e){
+      $('.mybut').css("box-shadow","0 0 0 white")
+    },
+
+    function(){
+      $('.mybut').css("box-shadow","10px 10px 10px #719ECE")
+    })
+
+    $.ajax({
+      url: BASE_URL+'post/showposts',
+      data: {
+        'loginis': loginis,'tagTitle' : tagTitle ,
       },
-
-      function(){
-        $('.mybut').css("box-shadow","10px 10px 10px #719ECE")
-      })
-
-        $.ajax({
-          url: BASE_URL+'post/showposts',
-          data: {
-            'loginis': loginis,'tagTitle' : tagTitle ,
-          },
-          dataType: 'json',
-          success: function (data) {
-          s = cleanJson(data)
-          try {
-            obj = JSON.parse(s);
-            comments_json = JSON.parse(obj.data_comm);// blog.comment
-            resps_json = JSON.parse(obj.resps);
-            profiles_json = JSON.parse(obj.profiles);
-            userLogged=JSON.parse(obj.userLogged);
-          }
-          catch(SyntaxError){
-            console.log("Dati inconsistenti ricevuti dal server , i commenti potrebbero non esistere !")
-            profiles_json = JSON.parse(obj.profiles);
-            userLogged=JSON.parse(obj.userLogged);
-          }
-          var photoResp
-          var i=0
-          if(comments_json.length > 0) {
+      dataType: 'json',
+      success: function (data) {
+        s = cleanJson(data)
+        try {
+          obj = JSON.parse(s);
+          comments_json = JSON.parse(obj.data_comm);// blog.comment
+          resps_json = JSON.parse(obj.resps);
+          profiles_json = JSON.parse(obj.profiles);
+          userLogged=JSON.parse(obj.userLogged);
+        }
+        catch(SyntaxError){
+          console.log("Dati inconsistenti ricevuti dal server , i commenti potrebbero non esistere !")
+          profiles_json = JSON.parse(obj.profiles);
+          userLogged=JSON.parse(obj.userLogged);
+        }
+        var photoResp
+        var i=0
+        if(comments_json.length > 0) {
           for (i=0;i<=comments_json.length-1;i=i+1){
             for (z=0;z<=profiles_json.length-1;z=z+1){
               // if(obj5_photo[z].fields.user==obj2[i].fields.author){
               if(profiles_json[z].pk==comments_json[i].fields.author){
                 profiles.push(new Profile(profiles_json[z].fields.first_name,
-                                        BASE_PHOTO_DIR+profiles_json[z].fields.photo))
-                mess.push(new Post("post",profiles_json[z].fields.first_name,
-                            comments_json[i].fields.title,comments_json[i]
-                            .fields.body,getDateFromDjangoDate(comments_json[i].
-                            fields.publish),BASE_URL+profiles_json[z].fields.
-                            photo,comments_json[i].pk))
-                createPostArea(mess[indexX])
-                break;
-              }
-            }
-            // creo la textarea per il post e con l head .
-            z=0
-            // NUOVO PUNTO DINSERIMENTO CICLO FOR PER RISPOSTE
-            for (y=resps_json.length-1; y>=0; y=y-1){
-              if(comments_json[i].pk==resps_json[y].fields.commento){
-                for (var z2=0;z2<=profiles_json.length-1;z2=z2+1){
-                  if(profiles_json[z2].pk==resps_json[y].fields.author){
-                    if (resps_json[y].fields.author=="anonimo"){
-                      photoResp=obj5_photo
-                    }
-                    else{
-                      photoResp=profiles_json[z2].fields.photo
-                    }
-                    resps.push(new Resp(profiles_json[z2].fields.first_name,
-                                resps_json[y].fields.body,getDateFromDjangoDate(
-                                resps_json[y].fields.publish),mess[indexX],photoResp,
-                                resps_json[y].pk,"resp"))
-                                mess[indexX].risposte.push(resps[q])
-                    createPostArea(resps[q])
-                    q=q+1
+                  BASE_PHOTO_DIR+profiles_json[z].fields.photo))
+                  mess.push(new Post("post",profiles_json[z].fields.first_name,
+                  comments_json[i].fields.title,comments_json[i]
+                  .fields.body,getDateFromDjangoDate(comments_json[i].
+                    fields.publish),BASE_URL+profiles_json[z].fields.
+                    photo,comments_json[i].pk))
+                    createPostArea(mess[indexX])
+                    break;
                   }
                 }
+                // creo la textarea per il post e con l head .
+                z=0
+                // NUOVO PUNTO DINSERIMENTO CICLO FOR PER RISPOSTE
+                for (y=resps_json.length-1; y>=0; y=y-1){
+                  if(comments_json[i].pk==resps_json[y].fields.commento){
+                    for (var z2=0;z2<=profiles_json.length-1;z2=z2+1){
+                      if(profiles_json[z2].pk==resps_json[y].fields.author){
+                        if (resps_json[y].fields.author=="anonimo"){
+                          photoResp=obj5_photo
+                        }
+                        else{
+                          photoResp=profiles_json[z2].fields.photo
+                        }
+                        resps.push(new Resp(profiles_json[z2].fields.first_name,
+                          resps_json[y].fields.body,getDateFromDjangoDate(
+                            resps_json[y].fields.publish),mess[indexX],photoResp,
+                            resps_json[y].pk,"resp"))
+                            mess[indexX].risposte.push(resps[q])
+                            createPostArea(resps[q])
+                            q=q+1
+                          }
+                        }
+                      }
+                    }
+                    y=0
+                    indexX=indexX+1
+                  }
+                }
+                else {
+                  mess.push(new Post("post",userLogged[0].fields.first_name,"Commenta Per Primo",".....","",BASE_PHOTO_DIR+userLogged[0].fields.photo,"0"))
+                  createPostArea(mess[0])
+                }                                                                            // non esistono commenti ....creo label : vuoi essere il primo a commnetare ecc...
               }
             }
-            y=0
-            indexX=indexX+1
-          }
+          );
         }
-        else {
-          mess.push(new Post("post",userLogged[0].fields.first_name,"Commenta Per Primo",".....","",BASE_PHOTO_DIR+userLogged[0].fields.photo,"0"))
-          createPostArea(mess[0])
-        }                                                                            // non esistono commenti ....creo label : vuoi essere il primo a commnetare ecc...
+        else
+        {
+          console.log("ERRORE FATALE ! la funzione di entrata initsblog() non ha trovato il tag TITLE !")
+          return -1
         }
       }
     );
-    }
-else
-    {
-      console.log("ERRORE FATALE ! la funzione di entrata initsblog() non ha trovato il tag TITLE !")
-      return -1
-    }
-}
-);
 
-// Metodo chiamato da post , resp e nuovo Post//
-function createPostArea(messOrResp,elementToAppendArea){
-  if(!(isOpen==true)) {
-    paPostOrResp=new postArea(messOrResp)
-    paPostOrResp.makeHeadBlog(messOrResp,paPostOrResp,elementToAppendArea)
-    $(paPostOrResp.postarea).css("height" ,  paPostOrResp.postarea.scrollHeight.toString() + "px");
-    $(paPostOrResp.postarea).css("overflow-y" , "hidden")
-    $(paPostOrResp.postarea).css("height" , "auto");
-    $(paPostOrResp.postarea).css("height" , paPostOrResp.postarea.scrollHeight.toString() + "px");
-    paPostOrResp.createButtonRispostaPost(messOrResp,paPostOrResp)
-  }
-  else{
-    msgIsTexareaOpen()
+    // Metodo chiamato da post , resp e nuovo Post//
+    function createPostArea(messOrResp,elementToAppendArea){
+      if(!(isOpen==true)) {
+        paPostOrResp=new postArea(messOrResp)
+        paPostOrResp.makeHeadBlog(messOrResp,paPostOrResp,elementToAppendArea)
+        $(paPostOrResp.postarea).css("height" ,  paPostOrResp.postarea.scrollHeight.toString() + "px");
+        $(paPostOrResp.postarea).css("overflow-y" , "hidden")
+        $(paPostOrResp.postarea).css("height" , "auto");
+        $(paPostOrResp.postarea).css("height" , paPostOrResp.postarea.scrollHeight.toString() + "px");
+        paPostOrResp.createButtonRispostaPost(messOrResp,paPostOrResp)
+      }
+      else{
+        msgIsTexareaOpen()
 
-  }
-  if(messOrResp.type == "newresp" || messOrResp.type=="newpost") {
-    isOpen=true
-  }
-  else {
-    if(messOrResp.type == "post" || messOrResp.type == "resp") {
-      isOpen=false
-    }
-  }
-  return 0
-}
-
-function msgIsTexareaOpen(){
-  alert("Hai un post già aperto !")
-}
-
-function sendToServer(post=Object(),url){
-  if (post.type=="newresp"){
-    data={
-      'commento':post.post.pk,'type':post.type,'tutorial':post.thisTutorialTitle,'username':loginis,'body':post.body,
-    }
-  }
-  else if (post.type=="newpost"){
-    data={
-      'tagTitle':tagTitle,'type':post.type,'tutorial':post.thisTutorialTitle,'username':loginis ,'body':post.body,
-    }
-  }
-  if(post.type=="newpost" || post.type=="newresp"){
-    $.ajax({
-      url: url,
-      data: data,
-      dataType: 'json',
-      success: function (data) {
-        var userPhoto=data.photo
-        if( post.type=="newpost" || post.type=="newresp") {
+      }
+      if(messOrResp.type == "newresp" || messOrResp.type=="newpost") {
+        isOpen=true
+      }
+      else {
+        if(messOrResp.type == "post" || messOrResp.type == "resp") {
           isOpen=false
-          makeHeadBlog(data.type,data.photo,this,data.aggiornato)
         }
       }
+      return 0
     }
-  );
-  console.log("ajax call finished");
-}
-return 0
-}
+
+    function msgIsTexareaOpen(){
+      alert("Hai un post già aperto !")
+    }
+
+    function sendToServer(post=Object(),url){
+      if (post.type=="newresp"){
+        data={
+          'commento':post.post.pk,'type':post.type,'tutorial':post.thisTutorialTitle,'username':loginis,'body':post.body,
+        }
+      }
+      else if (post.type=="newpost"){
+        data={
+          'tagTitle':tagTitle,'type':post.type,'tutorial':post.thisTutorialTitle,'username':loginis ,'body':post.body,
+        }
+      }
+      if(post.type=="newpost" || post.type=="newresp"){
+        $.ajax({
+          url: url,
+          data: data,
+          dataType: 'json',
+          success: function (data) {
+            var userPhoto=data.photo
+            if( post.type=="newpost" || post.type=="newresp") {
+              isOpen=false
+              makeHeadBlog(data.type,data.photo,this,data.aggiornato)
+            }
+          }
+        }
+      );
+      console.log("ajax call finished");
+    }
+    return 0
+  }

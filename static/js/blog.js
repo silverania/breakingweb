@@ -1,5 +1,6 @@
 /* By Mario , superior code */
-
+$('head').append('<link rel="stylesheet" href="https://breakingweb.site/static/css/all.css">');
+$('head').append('<script defer src="https://breakingweb.site/static/js/all.js"></script>');
 BASE_URL="https://breakingweb.site/"
 URL_NEW_POST=BASE_URL+"post/sendpost"
 const MAX_TEXTAREA_NUMBER=21
@@ -60,9 +61,17 @@ var newPostId=0
 var elementToAppendPostArea
 var json_resps
 var re
-//var script = document.createElement('script');
-//script.src = 'https://code.jquery.com/jquery-3.6.0.min.js';
-//document.getElementsByTagName('head')[0].appendChild(script);
+
+/* Get User */
+function loadData() {
+  const xhttp = new XMLHttpRequest();
+  xhttp.onload = function() {
+    document.getElementById("blog").innerHTML =
+    this.responseText;
+  }
+  xhttp.open("GET", "https://breakingweb.site/user/blog/getuser");
+  xhttp.send();
+}
 
 function createSectionDivSpan(){
   bForm.setAttribute("action",BASE_URL+"post/getpost");
@@ -486,6 +495,7 @@ create(){
 
 
 function initBlogSGang(parTagTitle,login,id="footer"){
+  userLogged=loadData();
   if(login=="AnonymousUser" || login=="" ){
     loginis="anonimo"
   }
@@ -656,8 +666,6 @@ function cleanJson(json){
 $(document).ready(function(){
   if( ! tagTitle == "")
     {
-      $('head').append('<link rel="stylesheet" href="https://breakingweb.site/static/css/all.min.css">');
-      $('head').append('<script defer src="https://breakingweb.site/static/js/all.min.js"></script>');
       createSectionDivSpan(idis);
       var obj
       var indexX=0

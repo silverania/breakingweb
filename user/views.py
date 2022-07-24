@@ -11,20 +11,85 @@ from django.views import View
 import json
 from django.core import serializers
 from django.contrib.auth.models import User, AnonymousUser
+from django.middleware.csrf import get_token
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.csrf import csrf_exempt
+import json
+valuenext = ""
 
 
+@method_decorator(csrf_exempt, name='dispatch')
 class checkUser(View):
-    def get(self, request):
-        current_user = {}
-        if not request.user.is_authenticated:
-            current_user['first_name'] = 'AnonymousUser'
+
+    def post(self, request):
+        global valuenext
+        list_json_user_data = json.loads(request.body)
+        print("json : "+str(list_json_user_data))
+        for key, value in list_json_user_data.items():
+            if 'user' in key:
+                user = value
+            if 'password' in key:
+                password = value
+        user = authenticate(username=user, password=password)
+        #userRequestFor = list_json_user_data['user']
+        user_authenticated = user
+        print("lmmmmmmm"+str(user.username))
+        if not isinstance(user_authenticated, AnonymousUser):
+            firstName = user_authenticated.username
+            print("lmmmmmmm"+str(firstName))
+            current_user = Profile.objects.filter(first_name=firstName)
+            list_current_user = list(current_user)
+            list_current_user = serializers.serialize(
+                "json", list_current_user)
         else:
-            current_user['first_name'] = str(request.user)
-        return JsonResponse({'userLogged': str(current_user['first_name'])}, safe=False)
+            #breakpoint()
+            current_user = Profile.objects.filter(first_name="anonimo")
+            #breakpoint()
+            list_current_user = list(current_user)
+            list_current_user = serializers.serialize(
+                "json", list_current_user)
+            #breakpoint()
+        c = get_token(request)
+        print("CCCCCCC="+str(c))
+        data = json.dumps(
+            {
+                "request": c, "userLogged": list_current_user,
+            })
+        print(str(JsonResponse(data, safe=False)))
+        response = JsonResponse(
+            data, safe=False
+        )
+        return response
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.method == 'GET':
+            return self.get(request)
+        elif request.method == 'POST':
+            cv = request.body
+            print("from dispatch method :"+str(cv))
+            return self.post(request, *args, **kwargs)
+
+
+def get_client_ip(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip
+
+
+def getUrlRequest(request):
+    urls = request.build_absolute_uri()
+    return urls
 
 
 def user_login(request):
-    global te
+    global te, valuenext
+    c = get_token(request)
+    if request.user.is_authenticated:
+        return HttpResponse("Sei già autenticat !")
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
@@ -35,15 +100,17 @@ def user_login(request):
             if myuser is not None:
                 if myuser.is_active:
                     login(request, myuser)
-                    valuenext = request.POST.get('next')
-                    return redirect(valuenext)
+                    return HttpResponseRedirect(valuenext)
                 else:
                     return HttpResponse('Disabled account')
             else:
                 return HttpResponse('Invalid login')
     else:
         form = LoginForm()
-    return render(request, 'registration/login.html', {'form': form})
+        if request.method == 'GET':
+            if 'next' in request.GET:
+                valuenext = request.GET.get('next')
+    return render(request, 'registration/login.html', {'form': form, 'next': valuenext})
 
 
 @login_required
