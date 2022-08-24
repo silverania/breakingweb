@@ -1,4 +1,4 @@
 *
 !.gitignore
-!/blog/
-!/blog/.py
+!/blog
+!/blog/*.py
