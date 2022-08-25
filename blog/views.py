@@ -164,8 +164,6 @@ def newPost(request):
                 getRespOrPostToAssignResp = Comment.objects.get(pk=commento)
                 post.commento = getRespOrPostToAssignResp
                 post.save()
-        else:
-            return HttpResponse("errore parametro resptype non fornito")
         breakpoint()
     else:
         post.save()
