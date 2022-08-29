@@ -114,7 +114,7 @@ def getPost(request):
             return JsonResponse(data, safe=False)
         except UnboundLocalError:
             print("cahe sfcaccim")
-    return render(request, {'data': data})
+    return render(request, {'data': data, })
 
 
 def newPost(request):
@@ -125,7 +125,7 @@ def newPost(request):
         postType = request.GET.get("type")
         if "newpost" in postType:
             post = Comment.objects.create()
-            post.postType = postType
+            post.postType = "post"
             post.site = tu
             post.slug = tu.title.replace(" ", "_")
             post.publish = datetime.now()
@@ -140,33 +140,28 @@ def newPost(request):
         author = request.GET.get("username")
         myuser = Profile.objects.get(first_name=author)
         post.author = myuser
+    if "respToUser" in request.GET and request.GET["respToUser"]:
+        respToProfile = request.GET.get("respToUser")
+        respToProfile = Profile.objects.get(first_name=respToProfile)
+        post.respToUser = respToProfile
     if "body" in request.GET and request.GET["body"]:
         body = request.GET.get("body")
         post.body = body
-
     if "commento" in request.GET and request.GET["commento"]:
         commento = request.GET.get("commento")
         comment = Comment.objects.get(pk=commento)
         post.commento = comment
-    if 'newresp' in postType:
-        if 'respToType' in request.GET:
-            respToType = request.GET.get('respToType')
-            if 'respToResp' in respToType:
-                print("entry in if resptoresp")
-                post.postType = respToType
-                getRespOrPostToAssignResp = Resp.objects.get(pk=post.idRespTo)
-                breakpoint()
-                post.save()
-                getRespOrPostToAssignResp.resps.add(post)
-            elif 'respToPost' in respToType:
-                print("entry in if resptopost")
-                post.postType = respToType
-                getRespOrPostToAssignResp = Comment.objects.get(pk=commento)
-                post.commento = getRespOrPostToAssignResp
-                post.save()
-        breakpoint()
-    else:
-        post.save()
+    if 'respToType' in request.GET and request.GET["respToType"]:
+        respToType = request.GET.get('respToType')
+        if 'respToResp' in respToType:
+            post.postType = "respToResp"
+            getRespOrPostToAssignResp = Resp.objects.get(pk=post.idRespTo)
+            post.save()
+            getRespOrPostToAssignResp.resps.add(post)
+        elif 'respToPost' in respToType:
+            getRespOrPostToAssignResp = Comment.objects.get(pk=commento)
+            post.commento = getRespOrPostToAssignResp
+    post.save()
     # post = serializers.serialize('json', [post], ensure_ascii=False)
     # json_post = json.dumps({'post': post})
     return HttpResponse("post inserito")

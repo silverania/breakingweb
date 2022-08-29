@@ -1,0 +1,202 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="it" id="page" >
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <meta name="author" content="silverania">
+  <meta name="keywords" content="{%block keywords%}{%endblock keywords%}">
+  <meta name="description" content="{%block description%}{%endblock description%}">
+  {% block anteprima %}{% endblock %}
+  <title>{{tutorial.title}}</title>
+  <link rel="icon" type="image/x-icon" href="{% static "images/favicon.ico" %}">
+  <link rel="stylesheet" href="{% static "css/reset.css"%}">
+  <link rel="stylesheet" href="{% static "css/bootstrap.min.css"%}">
+  <link rel="stylesheet" href="{% static "css/all.css" %}">
+  <link rel="stylesheet" href="{% static "css/homepage.css" %}">
+  <link rel="stylesheet" href="{% static "css/footer.css" %}">
+  <script src="{% static 'js/all.min.js' %}"></script>
+
+
+
+<script  src="{% static 'js/jquery.min.js' %}"></script>
+  <script  src="{% static 'node_modules/popper.js/dist/umd/popper.min.js' %}"></script>
+<script  src="{% static 'js/bootstrap.min.js' %}"></script>
+{% block otherscripts %} {% endblock %}
+
+</head>
+
+
+<body id="body"  onscroll="var h=document.body.scrollHeight;getPosition();">
+
+
+
+
+<div class="container-fluid " id="container_page" >
+  <div class="row ">
+  <progress  value="0" max="100" id="progressbar"></progress>
+</div>
+<div class="row">
+<div role="header" id="col_header" class="col-12" style="margin:0px;width:100%;padding:0px;z-index:3!important;">
+{% block header %}
+  {% include '_header.html'%}
+{% endblock header %}
+</div>
+</div>
+</div>
+<div id="c_aside" class="container-fluid" style="margin-bottom:5%;" >
+                       <div class="row justify-content-left">
+                         <div class="col-12  col-md-3"  id="section_left_navbar">
+        <section role="navigation">
+          <aside>
+          <nav id="nav_top">
+         <div id="asidebar">
+        <span id="asidebar"> {% if request.user.is_authenticated %}<i  class="fas fa-angle-right" aria-hidden="true" >
+        </i>{% endif %}</span>
+         </div>
+
+         <div id="d_aside_tutorial">
+
+
+         <div id="d_tutorial_section">
+    <ul  class="w-100 list-group select_tutorial" id="selecFormAutori">
+
+{% for t in users %}
+      <li  onclick="show(this.innerHTML)" id="option_autori_{{t.user.username}}" value="{{t.user.username}}" class="list-group-item option_autori " >{{t.user.username}}
+    </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <div id="d_inside_tutorial_section">
+<ul  class="list-group" id="ul_in_selecFormAutori">
+</ul>
+</div>
+
+
+
+    <!--label id="label_tutorial" for="labelFormTutorials"><span id="span_tutorial" class="badge badge-warning">Tutorial</span></label>
+    <multiple class="form-control select_tutorial" onclick="window.open(this.value);" id="selectFormTutorials">
+
+    </select-->
+
+
+</div>
+<script>
+$(document).ready(function(){
+ var a = "{{tutorial.category}}";
+ setActiveHeaderMenu(a);
+});
+</script>
+
+<script>
+var name;
+var exist=0
+function show(e){
+  getIndex(e);
+}
+function getIndex(e) {
+  name=e
+  var width=window.innerWidth;
+  var autore=e.replace(/\s/g,'');
+  var tag=document.getElementById('ul_in_selecFormAutori');
+  if (exist==0){
+    console.log("exist=0")
+
+  {% for tut in tutorial_all %}
+  toCompare="{{tut.author.user.username}}";
+  toCompare=toCompare.replace(/\s/g,'');
+  if (autore.localeCompare(toCompare)==0){
+    var optio = document.createElement('LI');
+    optio.setAttribute("id","tutorial_id_{{tut.id}}")
+    //$('#ul_in_selecFormAutori').css("display","block")
+    title="{{tut.title}}";
+    base=width/2;
+    base=base.toString()+"px";
+    var url=title
+    optio.setAttribute("class","list-group-item li_tutorials");
+    optio.setAttribute("onclick","window.open("+"\""+url+"\""+")");
+    optio.setAttribute('style','font-size:1rem');
+    optio.setAttribute('style','width:'+base.toString());
+    //optio.value=url;
+    optio.innerHTML = title;
+    tag.appendChild(optio);
+    $('#d_inside_tutorial_section').css("display","block")
+    let x=(parseInt($('#selecFormAutori').css('width')))/10;
+    $('#d_inside_tutorial_section').animate({'left': x },400)
+    exist=1
+  }
+  else{
+    exist=0
+  }
+  {% endfor %}
+  }
+}
+</script>
+          <div  id="d_divaside" class="d_divaside">
+            <div id="d_in_divaside" class="list-group"  role="tablist">
+                {% for c in categorie %}
+            <div id="d_{{c.title}}_menu" class="list-group">
+              {% for a in c.tutorials.all %}
+                <a id="a_tutorial_{{a.title}}" class="list-group-item list-group-item-action" href={{a.slug}}>
+                  <span id="s_leftmenu1" >{{a.title}}</span>
+              </a>
+              {% endfor %}
+            </div>
+            {% endfor %}
+            </div>
+         </div>
+       </nav-->
+     </aside>
+       </section>
+     </div>
+
+<div  role="main" class=" col-12 col-md-6 col-lg-6 col-xl-6 ">
+<article>
+  <header>
+      <div id="d_title" style="position:relative;width:100%;">
+           <div id="d_photo_author" style="position:absolute;top:-10%;">
+             <div style="width:60px;">
+             <img tabindex="100" class="img img-fluid rounded-circle" src='{% block photo %}{% endblock photo %}'
+             width="40px" alt="non posso caricare immaggini">
+           </div>
+           <div  style="width:60px;">
+<span class="badge badge-secondary" id="s_nome_autore">{{autore}}</span></div>
+         </div>
+             <a href="{{tutorial.slug}}">{% block tut_title %}{% endblock tut_title %} </a>
+          <span align="center" style="color:grey;opacity:0.5;" class="s_title"> , </span>
+      <span  class="s_title" align="center" style="color:blue;">{{tutorial.publish}}</span>
+       </div>
+</header>
+<div class="d_content col-sm-12 col-md-12">
+{% block content %}
+  {% endblock content %}
+
+</div>
+</article>
+</div>
+
+<div id="d_amazon_1" class="mt-5 col-md-3 col-lg-3 col-xl-3" >
+  <section id="section_right_aside">
+
+    <!--aside>
+  <div id="d-approfondimenti">
+      <span id="s_approfondimenti" class="badge badge-pill badge-warning">Approfondimenti</span>
+    </div>
+    <div style="text-align:center;">
+  {% block amazon_right %}
+      {% endblock %}
+      </div>
+    </aside-->
+      </section>
+    </div>
+
+</div>
+
+</div>
+
+
+
+{% block footer %}{% endblock %}
+
+</body>
+</html>

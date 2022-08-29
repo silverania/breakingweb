@@ -1,0 +1,83 @@
+{% extends 'base2.html' %}
+{% load static %}
+
+<head>
+{% block title %}Creare Un Ambiente Virtuale Python{% endblock title %}
+  {% block keywords %}python,linux,venv,module,creare,inizializzare,ambiente,virtuale,pip{% endblock keywords %}
+  {% block description %}Creare Un Ambiente Virtuale Python su Linux con il modulo venv{% endblock description%}
+{% block anteprima %}<meta property="og:image"   content='{% static 'images/Kazam_screenshot_00003.png' %}'/>{% endblock %}
+
+
+
+
+
+
+     {% block photo %}{%static "/images/mestesso.jpg"%}{% endblock photo %}
+     {% block tut_title %}
+
+
+
+     <span class="badge badge-pill badge-light" style="width:100%;display:inline-block!important;margin:0 auto!important;">
+     <span id="s_title_2" style="display:inline-block;color:black;font-weight:bold;">Creare Un Ambinete Virtuale Python <br>
+      Con Il Modulo venv</span></span>
+       {% endblock tut_title %}
+      {% block otherscripts %}{% include 'custom_tag.html'%} {% endblock %}
+<head>
+            {% block content %}
+             <p style="text-align:center;" id="p_content">
+        L' utilità principale di un ambiente virtuale Python , è quella di preservare l' ambiente Python che usa il sistema operativo .
+        Usando l' ambiente python di sistema , invece che uno virtuale , per le proprie applicazioni ed esperimenti vari , ci si espone al rischio
+        di corrompere il sistema operativo ! pensiamo a distribuzioni linux come Gentoo , in cui il gestore di pacchetti : <mark>il Portage</mark> , appunto , scritto interamente in Python , a quali rischi sarebbe esposto ,
+         in caso di corruzione dell' ambiente Python di sistema ! soluzione a ciò e non solo : <mark> Creare un ambiente Python virtuale ridondante</mark> con un proprio eseguibile Python ,
+           su cui possiamo fare tutti gli esperimenti che vogliamo.
+         A partire dalla versione 3.5 di python l' uso del modulo <mark>venv</mark> nella creazione di ambienti virtuali python è raccomandata .<br> Assicuriamoci di aver installato Python sul sistema : da un terminale eseguite il comando python<br><br>
+        <code style="color:yellow;background-color:black;">mario@androgenic:~/$<span style="color:white"> python</code>
+        </p>
+
+        <p style="text-align:center;" id="p_content">
+          L' output nel terminale dovrà mostrare una versione python adatta all' uso del modulo venv che dovrà essere maggiore o uguale a 3.5 .
+          Su versioni inferiori non è consigliato usare venv e probabilmente neanche possibile.<br>per versioni inferiori a 3.5 di python va usato <mark>pyvenv</mark><br></br>
+            <img class="img img-thumbnail"id="img_8" width="100%" height="500px"src='{% static 'images/python_version.png' %}'>
+
+        </p><br><br><br>
+    <h2 style="text-align:center"><mark>Creiamo l' ambiente virtuale Python :</mark></h2><br>
+        <p style="text-align:center;" id="p_content">
+
+          <img alt="non visualizzabile"  class="img img-thumbnail"id="img_8" width="100%" height="1000px"src='{% static 'images/Kazam_screenshot_00003.png' %}'>
+        </p>
+
+        <p style="text-align:left;" id="p_content">
+          Abbiamo creato l' ambiente virtuale Python , tuttavia da terminale se eseguo il comando <mark>python</mark> ,
+          va in esecuzione ancora la versione python usata dal sistema operativo , quella installata nel percorso <mark>/usr/bin/python*
+          </mark>
+          . Per raggiungere il nostro scopo , che è quello di non usare la versione python in /usr/bin , per non rischiare di corrompere il sistema , come detto
+          : dobbiamo attivare nel terminale l' ambiente virtuale , in modo che quando lanceremo python dalla riga di comando , verrà eseguita la versione Python virtuale dal percorso :
+          <mark>$ /home/username/ambienteVirtualePython </mark>:
+          per fare ciò dobbiamo eseguire il comando :<br> <b>$ ~/AmbienteVirtualePython/bin/activate</b>
+che attiverà appunto l' ambiente Virtuale. Attenzione perchè l' ambiente
+          virtuale che attiveremo con il comando <mark>activate</mark> , sarà valido solo nel terminale dov'è stato appunto attivato .
+ Se apro un'altra istanza del terminale o avvio python da un posto diverso dal terminale in cui
+          è stato attivato : verrà avviato l' eseguile che usa il sistema operativo in : <code>/usr/{bin,lib}/python*</code>.
+          Il comando activate modificherà la variabile $PATH contenuta in <code>$USER/.bashrc</code> , istruendolo ad eseguire la versione python dell'
+          ambiente virtuale , al posto di quella che usa il sistema operativo in <mark>/usr/bin/python*</mark> <br><br>
+          </p>
+          <h2 style="text-align:center"><mark>Attiviamo L' Ambiente Virutale</mark></h2><br>
+          <img class="img img-thumbnail"id="img_8" width="100%" height="1000px"src='{% static 'images/Kazam_screenshot_00004.png' %}'>
+
+        <p style="text-align:center;" id="p_content">
+          Guardate nell' immagine sotto , come il comando <mark>activate</mark> ha modificato due variabili di sistema molto importanti : PATH , PS1 . Giù Nello screenshot
+           , il terminale è diviso in due sezioni : sopra e sotto. Nella sezione di sopra è stato attivato l' ambiente virtuale Python,
+          sotto invece no . Guardate come sono diversi i valori delle variabili , PATH e PS1  nelle rispettive sezioni .   <br><br>
+          <img class="img img-thumbnail"id="img_8" width="100%" height="1000px"src='{% static 'images/Kazam_screenshot_00005.png' %}'>
+        </p>
+        <script id="s_blog">
+            $(document).ready(function(){
+              initBlogSGang(document.title,"mario","sol-7373");
+            })
+          </script>
+{% endblock content %}
+
+
+{% block footer %}
+{% include '_footer.html' %}
+{% endblock footer %}

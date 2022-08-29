@@ -1,0 +1,426 @@
+@font-face {
+  font-family: 'Alpha Slab One';
+  src: url('../Fonts/Alfa_Slab_One/AlfaSlabOne-Regular.ttf');
+}
+@font-face {
+  font-family: 'Montserrat-Bold';
+  src: url('../Fonts/Montserrat/static/Montserrat-Bold.ttf');
+}
+
+@font-face {
+  font-family: 'Montserrat-Regular';
+  src: url('../Fonts/Montserrat/static/Montserrat-Regular.ttf');
+}
+h1{
+font-family:'Alpha Slab One'
+}
+@font-face {
+  font-family: 'Open-Sans-Bold';
+  src: url('../Fonts/Open-Sans-Bold.ttf');
+}
+@font-face {
+  font-family: 'WorkSans-Regular';
+  src: url('../Fonts/WorkSans-Regular');
+}
+#blog{
+  width:43%!important;
+  max-width:43%!important;
+  margin:0 auto! important;
+  font-family:'WorkSans-Regular';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+}
+
+div.breadcrumbs{
+ margin:0 auto!important;
+}
+
+
+#bdiv{
+width:90%;
+margin:0 auto !important;
+}
+
+#button_post{
+  width:90%!important;
+}
+
+[id^=divuserblog]{
+  margin:0 auto;
+}
+
+div.modal-content {
+  width:100%;
+min-width:100%;
+  height:auto;
+  font-family:'WorkSans','Assistant-regular','WorkSans';
+  background-color:#e6ffff;
+  font-size:2rem;
+  /*box-sizing:content-box;*/
+}
+
+a > span {
+  color:black;
+}
+
+a{
+  text-decoration:none!important;
+  width:auto!important;
+}
+
+[id^=span_]:hover{
+  color:green;
+}
+
+
+#id_link_comment{
+  margin:3% auto;
+  width:80%;
+}
+
+[id^=d_head_blog]{
+display: inline-block;
+  margin-bottom: 10px!important;
+}
+
+[id^=span_in]{
+font-family: "Montserrat-Bold";
+font-weight:1000;
+color:grey;
+}
+
+[id^=bh5_span]{
+  width:100%!important;
+  min-width:100%!important;
+  font-size:1rem;
+  color:grey;
+}
+
+[id^=but_]{
+  font-family:'Open-Sans-Bold';
+  width:100%;
+  height:auto;
+  border-style: none;
+  margin:15px auto;
+  color:#660000;
+  padding:2%;
+  box-shadow:10px 10px 10px #719ECE
+
+}
+
+[id^="img_user"]{
+  width:30px!important;
+  height:30px!important;
+}
+
+#liBlogEsci{
+
+}
+
+#H1Welcome{
+display:inline;
+width:30%;
+margin-left:3px;
+text-align:center;
+}
+
+#inputHidden,#inputSubmit{
+width:25%;
+border-style:none;
+background-color: transparent;
+}
+
+#formEsci{
+width:100%;
+display:block;
+text-align:right;
+border-style: none;
+border-color: transparent;
+background-color: transparent;
+}
+
+[id^=but_post]{
+  padding:2%;
+font-size:1rem;
+}
+
+textarea {
+background-color:grey;
+  font-family:"Montserrat-Regular";
+  font-size:1rem!important;
+  line-height: 1.6;
+  color:black;
+  width:100%!important;
+  min-width:100%;
+  outline: none !important;
+  border: none;
+     background-color: transparent;
+     resize: none;
+     outline: none;
+  box-shadow: 10px 10px 10px #719ECE;
+  border-radius:1px;
+  overflow:hidden;
+}
+
+img{
+  outline: none !important;
+  border-style:none;
+  box-shadow: 3px 3px 3px #719ECE;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  pointer-events: all !important;
+}
+
+[id^=new_divuserblog]{
+  margin:20% auto;
+}
+
+/*[id^=new_divuserblog]> [id^=d_head] + [id^=d_post] + textarea{*/
+
+
+#d_post_title , span[id^="post_title"]{
+  display:block!important;
+  width:auto;
+  text-align: center;
+  margin:20px auto!important;
+  font-size:1rem!important;
+  color:black!important;
+  line-height:1.5em!important;
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%!important; /* Could be more or less, depending on screen size */
+}
+
+#col_blog{
+  width:0px!important;
+}
+
+[id^=divuserblog_]{
+margin-top:5%!important;
+}
+
+#d_blog_reg {
+  width:100%;
+  margin-bottom:5px!important;
+  float:right;
+}
+
+ul#ul_blog li{
+  display:inline;
+}
+
+.post_response{
+  margin:50px auto auto 15% !important;
+
+  /*margin:0 auto !important;*/
+}
+
+#s_blog_text{
+  color:grey;
+  font-size:inherit!important;
+}
+
+fa .fa-comments-dots{
+  color:grey!important;
+}
+
+.div_resp{
+  width:70%!important;
+  margin:0 auto !important;
+}
+
+#button_post,#clone_button{
+  margin:33px auto;
+}
+
+[id^="divuserblog_"]{
+  margin-top:5%!important;
+}
+
+#divuserblog_1{
+  margin-top:10%!important;
+}
+
+#p_text{
+  width:100%;
+  height:auto;
+  padding:40px;
+  margin:0 auto;
+  border:3px solid orange;
+  border-radius:10px;
+  background-color:white;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+
+
+@media screen and (max-width: 780px) {
+
+}
+
+@media screen and (max-width: 480px) {
+  button{
+    max-width:80%;
+    margin:0 auto;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .fa-comment-dots,#s_blog{
+    font-size:0.7rem;
+    color:grey;
+  }
+
+  #s_blog_icon + #span_blog_entra,#span_entra,#span_reg,#span_esci{
+    font-size:0.8rem;
+  }
+  [id^="divuserblog"]{
+    width:auto;
+    font-size:0.7rem!important;
+  }
+
+  [id^="bh5_span"]{
+    width:100%;
+    height:auto;
+    font-size:0.6rem!important;
+  }
+  .modal-content {
+    width: 33%!important; /* Could be more or less, depending on screen size */
+  }
+}
+
+@media screen and (min-width: 1280px) {
+
+  #p_text{
+    width:100%!important;
+  }
+}
+
+@media screen and (min-width: 414px) {
+
+}
+
+@media screen and (max-width: 780px) {
+  #blog{
+    width:100%!important;
+    max-width:100%!important;
+    margin:0 auto!important;
+  }
+  .modal-content {
+    width: 55%!important; /* Could be more or less, depending on screen size */
+  }
+  .fa-comment-dots,#s_blog {
+    font-size:2rem!important;
+  }
+
+textarea {
+    font-size:0.7rem!important;
+    background-color: grey;
+}
+}
+
+@media screen and (max-width: 414px) {
+  .modal-content {
+    width: 100%!important; /* Could be more or less, depending on screen size */
+  }
+}
+
+@media screen and (min-width: 780px) {
+  .fa-comment-dots,#s_blog {
+    font-size:3rem!important;
+  color:grey;
+  }
+
+textarea {
+    font-size:1rem!important;
+    background-color: rgb(255,255,255);
+}
+}
+
+.blog_title,#blog_title{
+  width:auto!important;
+  margin-top:5%!important;
+  margin-bottom:3%;
+}
+
+.mybut{
+  display: block;
+  width: 100%;
+  padding: .2rem 1rem;
+  font-size: 1.25rem;
+  line-height: 1.5;
+  border-radius: .3rem;
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  background-color: transparent;
+  color:purple;
+  border-color: cyan!important;
+  box-shadow: 10px 10px 10px #719ECE;
+}
+.mybut:hover{
+  border:3px solid orange;
+}
+
+button:focus{
+  outline: none!important;
+}
+
+/* MODAL WINDOW */
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/*#p_text{
+color:orange;
+background-color: grey;
+font-size:2rem;
+}*/
+
+#but_confirm_title:after{
+  content:"Ok"
+}
+
+#but_confirm_title:hover{
+  background-color:black;
+  color:orange;
+}
+/* END */

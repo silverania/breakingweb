@@ -1,0 +1,68 @@
+.footer{
+  width:100%;
+  height:200%;
+  min-height:200%;
+  background-color: pink;
+}
+.iconDetails {
+margin-left:3%!important;
+float:left!important;
+height:47px!important;
+width:47px!important;
+border-radius: 40px;
+opacity:0.6;
+}
+
+
+.d_breakingweb_fonts{
+  margin-left:70px!important;
+color:grey;
+}
+.d_info_fonts {
+  color:grey;
+}
+
+@media screen and (max-width: 480px) {
+  .d_info_fonts{
+    font-size: .3rem;
+  }
+  .d_breakingweb_fonts{
+      font-size: .5rem;
+    margin-left:70px!important;
+  }
+#small_text_license{
+  font-size:0.5rem;
+}
+}
+
+@media screen and (min-width: 480px) {
+  .d_info_fonts {
+    font-size: .4rem;
+  }
+
+  .iconDetails {
+  margin-left:3%!important;
+  float:left!important;
+  }
+
+
+  .d_breakingweb_fonts{
+    margin-left:70px!important;
+      font-size: .4rem;
+  }
+  #small_text_license{
+    font-size:0.5rem;
+    opacity:0.7;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+
+  .d_info_fonts{
+    font-size: .4rem;
+  }
+  .d_breakingweb_fonts{
+      font-size: .8rem;
+    margin-left:70px!important;
+  }
+}

@@ -1,0 +1,87 @@
+{% extends 'base2.html' %}
+{% load static %}
+
+
+{% block title %}Installazione Di Django Su Linux{% endblock title %}
+  {% block keywords %}django installazione linux framework web html python terminale terminale pip views.py {% endblock keywords %}
+  {% block description %}Uso di urls.py in django{% endblock description%}
+
+
+
+
+
+
+
+     {% block photo %}{%static "/images/mestesso.jpg"%}{% endblock photo %}
+     {% block tut_title %}
+       <span class="badge badge-pill badge-light" style="width:100%;display:inline-block!important;margin:0 auto!important;">
+         <span id="s_title">Installazione Di Django Su Linux</span>
+      {% endblock tut_title %}
+
+
+
+{% block content %}
+  <p  id="p_content"  style="font-weight:normal;">
+<span id="s_cose_django_text_container" class="badge badge-pill badge-light" style="width:100%;display:inline-block!important;margin:0 auto!important;">
+  <span id="s_cose_django_text" class="badge badge-info s_title_paragraph">Cos'è Django ?</span></span>
+Django Web Framework è un software Open Source che "semplifica" ma non banalizza , a mio avviso , come fanno invece altri Web Framework , lo
+sviluppo di "Applicazioni/Siti Web" . Con questo fantastico framework(ancora poco usato in Italia) sono stati sviluppati WebApp del calibro di :
+ Nasa, Pinterest, Instagram, Mozilla, The Washington Times, Public Broadcasting Service , Bitbucket
+ </p>
+    <p  id="p_content"  style="font-weight:normal;"><span id="s_cose_django_text_container" class="badge badge-pill badge-light" style="width:100%;display:inline-block!important;margin:0 auto!important;">
+      <span id="s_cose_django_text" class="badge badge-info s_title_paragraph">Requisiti Per </span></span></p>
+
+    <p align="left">
+      <span style="font-weight:normal;">Esempio : <span style="color:orange;">urls.py</span></span>
+      <code>
+  <pre id="x_code">
+
+    from django.urls import path
+    from . import views
+
+      urlpatterns = [ path ( 'index.html' , views.tutorial_list) ,]
+    </pre>
+    </code>
+  </p>
+
+  <p  class="text-left " style="font-weight:normal;">la prima riga :   <code>
+  from django.urls import path </code> importa la funzione   <span style="color:grey;"> "path"</span> .<br>
+la seconda riga : <code>from . import views</code> importa il file <span style="color:grey;">views.py</span> che contiene le funzioni e/o le classi che dovranno essere eseguite in base all'
+<span data-toggle="tooltip" title="path: l' ultimo parametro del URL"><span style="color:orange;">URL</span></span> richiesto.
+la terza riga: <code>urlpatterns = [ path ( 'index.html' , views.tutorial_list),
+</code>associa o mappa la request a : <code>'index.html'</code> alla funzione python in views.py che è il secondo parametro : <code>views.tutorial_list</code> .
+la funzione <span style="color:grey;"> path ,</span>riceve quindi due parametri ,entrambi definiti nelle parentesi tonde e separati
+dalla virgola. Il primo parametro : <code>index.html</code> intercetta gli url che terminano con : <span style="color:grey">"index.html"</span> appunto , quindi
+  l' url o meglio la request viene passata come parametro alla funzione python contenuta nel file views.py il cui nome è <code>tutorial_list</code>.
+Quindi riasumendo ,  un web server, ad esempio Apache , che riceva una richiesta http all' indirizzo https://nomedominio/<span style="color:grey;">index.html</span> , elabora questa richiesta (request) nella funzione
+<span style="color:grey;"> tutorial_list ,</span>
+  contenuta nel file  <span style="color:grey;">views.py</span>
+</p>
+
+
+
+
+
+
+
+{% endblock content %}
+{% block amazon_right %}<div style="margin-left:30px;"> <iframe style="width:120px;height:240px;margin-left:10px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="https://rcm-eu.amazon-adsystem.com/e/cm?ref=tf_til&t=marios01-21&m=amazon&o=29&p=8&l=as1&IS2=1&asins=8848127924&linkId=0e42cc465c038eeab428e56c3f09b552&bc1=000000&lt1=_blank&fc1=333333&lc1=0066c0&bg1=ffffff&f=ifr"></iframe>
+<iframe style="width:120px;height:240px;margin-left:10px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//rcm-eu.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=marios01-21&language=it_IT&o=29&p=8&l=as4&m=amazon&f=ifr&ref=as_ss_li_til&asins=8850328176&linkId=6f55feb0c147a1731543ad3269b2fec1"></iframe>
+  <iframe style="width:120px;height:240px;margin-left:10px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//rcm-eu.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=marios01-21&language=it_IT&o=29&p=8&l=as4&m=amazon&f=ifr&ref=as_ss_li_til&asins=B00H9FD6QY&linkId=4516922d30b5352ad46a690a4f00117f"></iframe>
+<iframe style="width:120px;height:240px;margin-left:10px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//rcm-eu.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=marios01-21&language=it_IT&o=29&p=8&l=as4&m=amazon&f=ifr&ref=as_ss_li_til&asins=1093633948&linkId=57a70ef2cfe83b2cfc18aa7ad7cbe741"></iframe>
+<iframe style="width:120px;height:240px;margin-left:10px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//rcm-eu.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=marios01-21&language=it_IT&o=29&p=8&l=as4&m=amazon&f=ifr&ref=as_ss_li_til&asins=1789953294&linkId=763e2936fbe6549e6404e2ba89a79cf8"></iframe>
+<iframe style="width:120px;height:240px;margin-left:10px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//rcm-eu.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=marios01-21&language=it_IT&o=29&p=8&l=as4&m=amazon&f=ifr&ref=as_ss_li_til&asins=1081582162&linkId=913c618c615cd09073e3b23a837e8704"></iframe>
+<iframe style="width:120px;height:240px;margin-left:10px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//rcm-eu.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=marios01-21&language=it_IT&o=29&p=8&l=as4&m=amazon&f=ifr&ref=as_ss_li_til&asins=B0868SN6HF&linkId=37a83c22a7fde429ece5f9377c8267af"></iframe>
+<iframe style="width:120px;height:240px;margin-left:10px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//rcm-eu.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=marios01-21&language=it_IT&o=29&p=8&l=as4&m=amazon&f=ifr&ref=as_ss_li_til&asins=1983172669&linkId=e80f47fd3980c0fa7dbe848043740279"></iframe>
+<iframe style="width:120px;height:240px;margin-left:10px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//rcm-eu.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=marios01-21&language=it_IT&o=29&p=8&l=as4&m=amazon&f=ifr&ref=as_ss_li_til&asins=B084WRLDSB&linkId=05dc515a8f6d16370cb2150e0a357635"></iframe>
+<iframe style="width:120px;height:240px;margin-left:10px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//rcm-eu.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=marios01-21&language=it_IT&o=29&p=8&l=as4&m=amazon&f=ifr&ref=as_ss_li_til&asins=B07X1FPM1T&linkId=92e6bdba149c2d1eb1b65d69e1d5c79f"></iframe>
+<iframe style="width:120px;height:240px;margin-left:10px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//rcm-eu.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=marios01-21&language=it_IT&o=29&p=8&l=as4&m=amazon&f=ifr&ref=as_ss_li_til&asins=B07LDCGQN6&linkId=e4b631ec080dcf75fb5b3960a7d79a25"></iframe>
+<iframe style="width:120px;height:240px;margin-left:10px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//rcm-eu.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=marios01-21&language=it_IT&o=29&p=8&l=as4&m=amazon&f=ifr&ref=as_ss_li_til&asins=B07BDGC57S&linkId=33d34128fed8e16bf98c22917331ef54"></iframe>
+</div>
+
+
+
+
+
+
+{%endblock%}

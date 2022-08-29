@@ -1,7 +1,2 @@
-*
-!.gitignore
-!/blog
-!/blog/*.py
-!blog/static
-!blog/static/js
-!blog/static/js/*
+/tutorial/settings.py
+/blog/migrations/

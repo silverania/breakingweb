@@ -1,0 +1,373 @@
+{% extends 'base2.html' %}
+{% load static %}
+
+
+{% block title %}Costruire un menu a comparsa in HTML {% endblock title %}
+  {% block keywords %}creare,costruire,fare,menu,comparsa,bootstrap,jquery,fontawesome,fa fas-angle-right,uso,html,css,javascrit,web,framework{% endblock keywords %}
+  {% block description %}Costruire Un Menu a Comparsa in HTML{% endblock description%}
+
+
+
+
+
+
+
+     {% block photo %}{%static "/images/mestesso.jpg"%}{% endblock photo %}
+     {% block tut_title %}
+       <a class="badge badge-pill badge-light" style="width:100%;display:inline-block!important;">
+         <span id="s_title">Html - </span>
+       <span id="s_title_2" style="display:inline-block;color:black;font-weight:bold;">Menù A Comparsa Animato</span></a>{% endblock tut_title %}
+
+
+
+
+
+
+{% block content %}
+
+
+    <p id="p_content">
+    In questo tutorial andremo a creare un menù a comparsa, proprio come quello che si può vedere in alto a sinistra dopo aver cliccato sull' icona a freccia :
+    <img style="display:inline-block;width:30px;height:auto;"  class="img img-thumbnail"src='{% static 'images/angle-right2.png' %}'\>
+    (<span style="font-color:orange" title="fontawesome è una libreria di icone di cui esiste una versione opensource e una a pagamento">fontawesome angle right</span>)
+    che potete trovare nella libreria opensource : fontawesome, a <a href="https://fontawesome.com/">questo </a>link.
+    <mark>Per completare il tutorial è necessario avere <span style="color:orange"title="è una libreria javascript"> jquery </span>,<span style="color:orange"
+    title="è una libreria HTML ">   bootstrap </span>, <span  style="color:orange" title="libreria di icone e fonts vari">fontawesome</span> e
+    <span  style="color:orange" title="dipendenza per bootstrap">popper</span></mark>, quest' ultimo se pur non indispensabile è buona norma
+    averlo , in quanto è una dipendenza delle librerie bootstrap . Negli head c'è la versione 4.7 di fontawesome,se
+    volete usare l'ultima versione che ad oggi è la 5 : andate al link fontawesome di prima.
+    Create un file html e inserite il codice sottostatnte al suo interno:
+<br><br>
+
+
+
+      <span class="badge badge-info" style="color:white;">index.html
+      </span><br>
+      <code>
+      <pre id="x_code">
+        &lt!DOCTYPE html>
+        &lt;html lang="it">
+        &lt;head>
+        &lt;link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        &lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        &lt;/head>
+        &lt;body>
+        &lt;div class="container-fluid" style="">
+        &lt;div id="asidebar" style="background-color:white;">
+           &lt;span id="asidebar" style="margin-top:5%;font-size:5vw" class="fa fa-angle-right" aria-hidden="true">&lt;/span>
+            &lt;/div> &lt;span id="s_left_tutorial" class="badge badge-info">Tutorial&lt;/span>
+        &lt;/div>
+         &lt;div  class="d_divaside" style="margin:0;padding:0;position:absolute;width:20%;max-width:20%;">
+           &lt;div class="list-group" id="d_asidemenu" role="tablist">
+             &lt;a  id="a_html2" class="list-group-item list-group-item-action" data-toggle="list" href="#d_inasidemenu" role="tab">&lt;span id="s_leftmenu" style="color:orange!important;">django&lt;/span>&lt;/a>
+             &lt;a id="a_html" class="list-group-item list-group-item-action" data-toggle="list" href="#d_html_inasidemenu" role="tab">&lt;span id="s_leftmenu" style="color:orange!important;">html&lt;/span>&lt;/a>
+           &lt;!-- Tab panes -->
+           &lt;div id="d_htmlmenu" class="list-group">
+               &lt;a id="a_html" class="list-group-item list-group-item-action"   href="#">
+                 &lt;span id="s_leftmenu" style="color:orange!important;">Menu Animato&lt;/span>
+             &lt;/a>
+           &lt;/div>
+        &lt;/div>
+           &lt;/div>
+        &lt;/div>
+        &lt;script  src="{% static 'js/jquery.min.js' %}">&lt;/script>
+        &lt;script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">&lt;/script>
+        &lt;script  src="{% static 'js/aside.js' %}">&lt;/script>
+        &lt;/body>
+        &lt;/html>
+       </pre></code>
+       </p>
+
+
+  <p id="p_content">
+    <span id="title_paragrafo" class="badge badge-info"style="color:white;">Applichiamo gli stili in css3 :</span><br><br>
+    <span style="font-weight:normal;">impostiamo le proprietà nel file css. E' importante e ovvio che il menu  sia inizialmente nascosto, deve essere nascosto perchè
+      esso va visualizzato quando il client che usa la pagina clicca sulla freccia <mark>angle-right</mark>,perciò per farlo apparire inizialmente nascosto ,
+       imposteremo la proprietà <b>left</b> a : <code>left:-700px;</code>
+    in seguito il click del mouse sulla freccia eseguirà la funzione javascript che renderà l' elemento nascosto , di nuovo visibile.
+     impostando <code>left: 0px;</code><br><br>
+    <span class="badge badge-info" style="color:white;">homepage.css
+    </span>
+      <code>
+          <pre id="x_code">
+        .d_divaside{
+           position:absolute;
+           width:20%;
+           max-width:20%;
+           padding:0;
+           margin:0;
+           font-size:1vw;
+           color:white;
+           <span style="font-weight:bold;"><mark>left:-700px;</mark></span>
+           height:auto;
+           z-index:100!important;
+        }
+        #d_htmlmenu{
+          display:none;
+          background-color:whitesmoke;
+          color:orange;
+          margin-left:10%;
+          margin-top:0%;
+          padding:5%;
+          width:100%;
+        }
+        #s_left_tutorial{
+          color:white!important;
+          font-size:1vw;
+        }
+
+        </pre>
+        </code>
+
+</p>
+
+
+
+
+  <p id="p_content">
+      <b><span class="badge badge-info" id="title_paragrafo" style="color:white;">Creiamo il file javascript per gestire gli eventi:</span></b><br><br>
+    <span style="font-weight:normal"> Per mostrare il menu al click del mouse sulla freccia , bisogna intercettare a livello di codice ,
+      l' evento click appunto . Il linguaggio scelto per fare ciò è javascript . Nel codice javascript sottostante , la porzione di codice che intercetta il click del mouse
+      sulla pagina html è questa :<code> $('#asidebar').click(function(){.... ecc...</code>
+      Oltre a gestire l' evento click , gestiremo anche l' evento <mark>hover</mark>, l' evento <mark>hover</mark> si verifica Quando il mouse passa con il puntatore sull' oggetto interessato : la freccia in questo caso.
+
+     Quando accadrà l' evento <mark>hover</mark> la freccia si animerà , spostandosi da destra a sinistra e viceversa in 400 ms . Quest' animazione oltre alla bellezza dell' effetto visivo ,
+     contribuisce a far capire al client che usa la freccia appunto , che è possibile interagire con essa attraverso il click del mouse . Quindi ,
+      creiamo il file javascript :
+       <span style="color:grey">aside.js</span>  inseriamo
+   il contenuto qui sotto al suo interno.</span>
+
+    <text id="x_code" style="background-color:white;">
+      <script  src="side.js"></script>
+      </text><br><br>
+
+
+
+  <span class="badge badge-info" style="color:white;">aside.js :
+  </span>
+  <code>  <pre id="x_code">
+    $(document).ready(function(){
+      alert(window.innerWidth)
+    /* quando il mouse tocca la freccia , quest' ultima si sposterà di 14 pixel e assumera un opacità di 0.5 . Tutto cio in 400 millisecondi*/
+      $('#asidebar').hover(function(){
+        $('#asidebar').animate({ "margin-left" : '14px','opacity' : '0.5',},400);
+      },
+
+    /* quando il mouse si allontenerà dalla freccia quest' ultima tornerà nella posizione iniziale e l' opacita tornerà a 1*/
+
+      function(){
+        $('#asidebar').animate({ "margin-left" : '0px','opacity' : '1',},400);});
+
+    /* quando cliccheremo sulla freccia comparirà il menu .... a 0px torna visibile visto che la posizione iniziale era -700px: quindi era nascosta*/
+
+      $('#asidebar').click(function(){
+        $('.d_divaside').animate({ "left" : '0px',},400);});
+
+    /* quando il mouse passera(hover) su #a_html , e il cursore del mouse diventerà a forma di mano*/
+    $('#a_html').hover(function(){
+      $('#d_htmlmenu').css('cursor','pointer');},
+    function(){
+      /*$('#d_htmlmenu').css('display','none');*/
+    });
+  /* l' elemento #d_htmlmenu torna visibile quando si fa click sull elemento con id #a_html2 con "display:block" */+
+    $('#a_html2').click(function(){
+      $('#d_htmlmenu').css('display','block');
+      $('#a_html').css('display','block');
+    });
+      /*quando clicchiamo fuori dagli elementi .d_divaside e fa-angle-right tornerà tutto alla posizione iniziale */
+    $(document).click(function(event) {
+      $target = $(event.target);
+      if(!$target.closest('.d_divaside').length && !$target.closest('.fa-angle-right').length &&
+      $('.d_divaside').is(":visible")) {
+        $('.d_divaside').animate({ "left": '-700px',},300);
+        $('#d_htmlmenu').css('display','none');
+      }
+    });
+    });
+
+
+    </pre></code>
+</p>
+
+<p id="p_content" class="mt-1">
+  se usate la versione fontawesome 4.7 vi troverete con una freccia (.fa fa-angle-right) diversa da quella su questa pagina, se volte la stessa freccia del tutorial dovete usare la versione<br>
+    5 , che trovate <a href="https://fontawesome.com/">qui.</a>E ricordate che nella versione 5 "fa fa-angle-right" diventa : "fas fa-angle-right" e in una pagina html va inserita così :
+    <code>&lt;i class="fas fa-angle-right">&lt;i></code>
+
+<hr><br><br>
+<h2><span class="badge badge-warning">Alternare i Menù Visualizzati</span></h2>
+<p id="p_content" class="mt-1">
+  Un problema da superare è : che dobbiamo nascondere il sub-menù visualizzato quando si fa click su una nuova opzione del menù, per evitare che si sovrappongano due sub-menù , evento ovviamente indesiderato .
+   Se ad esempio faccio click sul menu "html" la pagina visualizza l' opzione "menu animato" , però se subito dopo decido di cliccare sul menu "Linux" mi tocca nascondere
+  l 'opzione "menu animato" affinchè non si sovrapponga con la nuova opzione visualizzata in seguito al click sul menù "Linux" .
+  Un altro problema da superare, è ,come nascondere tutti i menù, quando l' utente fa click con il mouse sulla pagina , però fuori dal menù . Questo problema è affrontato nell' ultima funzione
+   javascript , quella che gestisce <code>$(document).click(function(){ .....</code>
+  Sotto i files : <mark>html,css,javascript</mark> modificati . La prima modifica riguarda il file
+  html , in cui vanno aggiunte un paio di voci ai menu . Quindi di seguito il nuovo file html :<br><br>
+
+  <span class="badge badge-info" style="color:white;">index.html
+  </span><br>
+
+  <pre id="x_code">
+    &lt;!DOCTYPE html>
+       &lt;html lang="it">
+       &lt;head>
+       &lt;link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+       &lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+       &lt;/head>
+            &lt;body>
+
+         &lt;div class="container-fluid" style="">
+           &lt;div id="asidebar" style="background-color:white;">
+             &lt;span id="asidebar" style="margin-top:5%;font-size:5vw" class="fas fa-angle-right" aria-hidden="true">&lt;/span>
+             &lt;/div> &lt;span id="s_left_tutorial" class="badge badge-info">Tutorial&lt;/span>
+           &lt;/div>
+           &lt;div  class="d_divaside">
+             &lt;div class="list-group" id="d_asidemenu" role="tablist">
+               &lt;a  id="a_html1" class="list-group-item list-group-item-action" data-toggle="list" href="#tutorial_django" role="tab">&lt;span id="s_leftmenu_django" style="color:orange!important;">Django&lt;/span>&lt;/a>
+               &lt;a id="a_html2" class="list-group-item list-group-item-action" data-toggle="list" href="#tutorial_html" role="tab">&lt;span id="s_leftmenu_html" style="color:orange!important;">Html&lt;/span>&lt;/a>
+               &lt;a id="a_html3" class="list-group-item list-group-item-action" data-toggle="list" href="#tutorial_linux" role="tab">&lt;span id="s_leftmenu_linux" style="color:orange!important;">Linux&lt;/span>&lt;/a>
+
+               &lt;div id="d_htmlmenu" class="list-group">
+                 &lt;a id="a_tutorial_html_menu" class="list-group-item list-group-item-action"   href="#">
+                   &lt;span id="s_leftmenu1" style="color:orange!important;">Menu Animato&lt;/span>
+                 &lt;/a>
+                 &lt;a id="a_tutorial_django_urls" class="list-group-item list-group-item-action"   href="#">
+                   &lt;span id="s_leftmenu2" style="color:orange!important;">urls.py in django&lt;/span>
+                 &lt;/a>
+                 &lt;a id="a_tutorial_pdf_converter" class="list-group-item list-group-item-action"  href="#">
+                   &lt;span id="s_leftmenu3" style="color:orange!important;">Converti Testo&lt;/span>
+                 &lt;/a>
+               &lt;/div>
+             &lt;/div>
+           &lt;/div>
+         &lt;/div>
+
+         &lt;script  src="{% static 'js/jquery.min.js' %}">&lt;/script>
+         &lt;script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">&lt;/script>
+         &lt;script  src="{% static 'js/aside.js' %}">&lt;/script>
+         &lt;/body>
+         &lt;/html>
+         </pre>
+
+         <br><br>
+         <h2><span class="badge badge-warning">Qui Il file css3 modificato</span></h2>
+         <br><br>
+        <span class="badge badge-info" style="color:white;">homepage.css</span><br><br>
+
+        <code>
+         <pre id="x_code">
+         .d_divaside{
+           position:absolute;
+           width:20%;
+           max-width:20%;
+           padding:0;
+           margin:0;
+           font-size:1vw;
+           /*left:0%;*/
+           color:white;
+           left:-700px;
+           height:auto;
+           z-index:100!important;
+         }
+         .fa-angle-right{
+         font-size: 2vw;
+         }
+         #d_htmlmenu{
+           display:none;
+           background-color:whitesmoke;
+           color:orange;
+           margin-left:10%;
+           margin-top:0%;
+           padding:5%;
+           width:100%;
+         }
+         #s_left_tutorial{
+           color:white!important; font-size:1vw;
+         }
+         </code></pre>
+
+         <br><br>
+         <h2><span class="badge badge-warning">Il file javascript</span></h2><br><br>
+         <span class="badge badge-info" style="color:white;">aside.js :
+         </span><br><br>
+          <pre id="x_code">
+           $(document).ready(function(){
+           /* quando il mouse tocca la freccia , quest' ultima si sposterà di 14 pixel e assumera un opacità di 0.5 . Tutto cio in 400 millisecondi*/
+             $('#asidebar').hover(function(){
+               $('#asidebar').animate({ "margin-left" : '14px','opacity' : '0.5',},400);
+             },
+
+           /* quando il mouse si allontenerà dalla freccia quest' ultima tornerà nella posizione iniziale e l' opacita tornerà a 1*/
+
+             function(){
+               $('#asidebar').animate({ "margin-left" : '0px','opacity' : '1',},400);});
+
+           /* quando cliccheremo sulla freccia comparirà il menu .... a 0px torna visibile visto che la posizione iniziale era -700px: quindi era nascosta*/
+
+             $('#asidebar').click(function(){
+               $('.d_divaside').animate({ "left" : '0px',},400);});
+
+           /* quando il mouse passera(hover) su #a_html , l' elemento #d_htmlmenu torna visibile con "display:block" e il cursore del mouse diventerà a forma di mano*/
+           $('#a_html2').hover(function(){
+             $('#d_htmlmenu').css('cursor','pointer');},
+           function(){
+             /*$('#d_htmlmenu').css('display','none');*/
+           });
+           /*quando clicchiamo fuori dagli elementi .d_divaside e fa-angle-right tornerà tutto alla posizione iniziale */
+           $('#a_html2').click(function(){
+             $('#d_htmlmenu').css('display','block'); // mostro il menu che mi interessa
+             $('#a_tutorial_html_menu').css('display','block');
+             $('#a_tutorial_pdf_converter').css('display','none');// nascondo questo menù nel caso sia visibile
+               $('#a_tutorial_django_urls').css('display','none');// nascondo questo menù nel caso sia visibile
+           });
+           $('#a_html3').click(function(){
+             $('#d_htmlmenu').css('display','block'); // mostro il menu che mi interessa
+             $('#a_tutorial_pdf_converter').css('display','block');// mostro il menu che mi interessa
+               $('#a_tutorial_html_menu').css('display','none');// nascondo questo menù nel caso sia visibile
+                 $('#a_tutorial_django_urls').css('display','none');// nascondo questo menù nel caso sia visibile
+           });
+           $('#a_html1').click(function(){
+             $('#d_htmlmenu').css('display','block'); // mostro il menu che mi interessa
+               $('#a_tutorial_django_urls').css('display','block'); // mostro il menu che mi interessa
+             $('#a_tutorial_pdf_converter').css('display','none');// nascondo questo menù nel caso sia visibile
+               $('#a_tutorial_html_menu').css('display','none');// nascondo questo menù nel caso sia visibile
+
+           });
+
+           /*nascondo tutto se clicco al di fuori del documento*/
+           $(document).click(function(event) {
+             $target = $(event.target);
+             if(!$target.closest('.d_divaside').length && !$target.closest('.fa-angle-right').length &&
+             $('.d_divaside').is(":visible")) {
+               $('.d_divaside').animate({ "left": '-700px',},300);
+               $('#d_htmlmenu').css('display','none');
+             }
+           });
+           });
+           </pre>
+
+{% endblock content %}
+{% block amazon_right %}
+<div style="margin-right:0;">
+    <iframe  style="width:120px;height:240px;margin-left:20px;"  marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//rcm-eu.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=marios01-21&language=it_IT&o=29&p=8&l=as4&m=amazon&f=ifr&ref=as_ss_li_til&asins=B07S4K23R3&linkId=445de8252d154270d1fc7af2ca4a8e0e"></iframe>
+  <iframe  style="width:120px;height:240px;margin-left:20px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//rcm-eu.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=marios01-21&language=it_IT&o=29&p=8&l=as4&m=amazon&f=ifr&ref=as_ss_li_til&asins=8850334044&linkId=6c532a98fa050426d1216ef835080438"></iframe>
+<iframe style="width:120px;height:240px;margin-left:20px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//rcm-eu.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=marios01-21&language=it_IT&o=29&p=8&l=as4&m=amazon&f=ifr&ref=as_ss_li_til&asins=B07SCQRRT1&linkId=be470acc4cafb5842b9afbafa28cba16"></iframe>
+<iframe style="width:120px;height:240px;margin-left:20px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//rcm-eu.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=marios01-21&language=it_IT&o=29&p=8&l=as4&m=amazon&f=ifr&ref=as_ss_li_til&asins=8868952319&linkId=738f2b56885bcf53381ceb1842bfbd7d"></iframe>
+<iframe style="width:120px;height:240px;margin-left:20px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//rcm-eu.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=marios01-21&language=it_IT&o=29&p=8&l=as4&m=amazon&f=ifr&ref=as_ss_li_til&asins=B07F3X35S8&linkId=dcd77f4a756ecf82d1c6eaabaf1d1db0"></iframe>
+<iframe style="width:120px;height:240px;margin-left:20px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//rcm-eu.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=marios01-21&language=it_IT&o=29&p=8&l=as4&m=amazon&f=ifr&ref=as_ss_li_til&asins=B06X93WG44&linkId=7a4408d70e015d1706c527a39fae7c39"></iframe>
+<iframe style="width:120px;height:240px;margin-left:20px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//rcm-eu.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=marios01-21&language=it_IT&o=29&p=8&l=as4&m=amazon&f=ifr&ref=as_ss_li_til&asins=B006DXBOJ4&linkId=715d8746b9fcfdc94cfb5f516f25a99d"></iframe>
+<iframe style="width:120px;height:240px;margin-left:20px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//rcm-eu.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=marios01-21&language=it_IT&o=29&p=8&l=as4&m=amazon&f=ifr&ref=as_ss_li_til&asins=8850331312&linkId=a06d2e030e97352dd101af9d0365e2e0"></iframe>
+<iframe style="width:120px;height:240px;margin-left:20px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//rcm-eu.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=marios01-21&language=it_IT&o=29&p=8&l=as4&m=amazon&f=ifr&ref=as_ss_li_til&asins=8850331312&linkId=a06d2e030e97352dd101af9d0365e2e0"></iframe>
+
+<iframe style="width:120px;height:240px;margin-left:20px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//rcm-eu.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=marios01-21&language=it_IT&o=29&p=8&l=as4&m=amazon&f=ifr&ref=as_ss_li_til&asins=8848130364&linkId=936c9975b169a9d88c4c842f5a6504a9"></iframe>
+
+<iframe style="width:120px;height:240px;margin-left:20px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//rcm-eu.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=marios01-21&language=it_IT&o=29&p=8&l=as4&m=amazon&f=ifr&ref=as_ss_li_til&asins=8850334494&linkId=99b585a908e9777b0c35b77a8789bf3a"></iframe>
+
+<iframe style="width:120px;height:240px;margin-left:20px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//rcm-eu.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=marios01-21&language=it_IT&o=29&p=8&l=as4&m=amazon&f=ifr&ref=as_ss_li_til&asins=B07TBB7PFB&linkId=7b5450cb8ca002fa2e3126a55dec5ff8"></iframe>
+
+<iframe style="width:120px;height:240px;margin-left:20px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//rcm-eu.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=marios01-21&language=it_IT&o=29&p=8&l=as4&m=amazon&f=ifr&ref=as_ss_li_til&asins=B076HKKBMB&linkId=f824f14da4f5fb18d8b578834f77d087"></iframe>
+</div>
+
+
+  {% endblock %}

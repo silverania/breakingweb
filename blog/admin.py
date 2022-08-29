@@ -15,7 +15,8 @@ class PostAdmin(admin.ModelAdmin):
 
 class RespAdmin(admin.ModelAdmin):
     search_fields = ('commento', 'body')
-    list_display = ('commento', 'body', 'created', 'publish', 'author')
+    list_display = ('id', 'commento', 'body', 'created',
+                    'publish', 'author', 'respToUser', 'idRespTo', 'postType')
     list_filter = ('created', 'commento', 'publish', 'author')
     date_hierarchy = 'publish'
     ordering = ('commento', 'publish')

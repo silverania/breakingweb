@@ -1,0 +1,5 @@
+Blog Installazione :
+
+<script>
+initBlogSGang(loginname,"tag title content",id="footer_or other");
+</script>

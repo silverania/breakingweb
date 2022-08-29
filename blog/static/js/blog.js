@@ -70,7 +70,6 @@ var json_resps
 var re
 var inputHidden=document.createElement("INPUT")
 var inputSubmit=document.createElement("INPUT")
-/* Get User */
 
 
 function createSectionDivSpan(userAdmin,_userThatLogin){
@@ -96,8 +95,6 @@ function createSectionDivSpan(userAdmin,_userThatLogin){
     bIcon.setAttribute("id","blog_icon")
     bSection.setAttribute("id","blog");
     bSection.setAttribute("style","width:100%");
-
-    //bSpan.setAttribute("id","s_blog_icon")
     aBlogEntra.setAttribute("style","display:block;width:auto;text-align:right;")
     aBlogEntra.setAttribute("id","id_entra")
     aBlogReg.setAttribute("style","display:block;width:auto;text-align:right;z-index:200")
@@ -122,7 +119,6 @@ function createSectionDivSpan(userAdmin,_userThatLogin){
     bbutton.textContent="Commenta"
     spanBlogReg.textContent="Registrati"
     spanBlogEntra.textContent="Entra"
-
     ulBlogReg.setAttribute("id","ul_blog")
     ulBlogReg.setAttribute("style","list-style: none;padding: 0;margin: 0;")
     parent=document.body.insertBefore(bSection,document.getElementsByTagName("footer")[0]);
@@ -134,17 +130,12 @@ function createSectionDivSpan(userAdmin,_userThatLogin){
       ulBlogReg.appendChild(liBlogReg)
       ulBlogReg.appendChild(liBlogEntra)
       divExitLogin.appendChild(ulBlogReg)
-      //bSection.appendChild(divExitLogin)
     }
     else {
-      //aBlogEsci.setAttribute("style","display:block;width:auto;text-align:right")
       liBlogEsci.appendChild(aBlogEsci)
       ulBlogReg.appendChild(liBlogEsci)
       divExitLogin.appendChild(ulBlogReg)
       bSection.appendChild(divBlogReg)
-
-
-      //inputHidden.setAttribute("value",HIDDENFIELD)
       inputHidden.setAttribute("name","next")
       inputHidden.setAttribute("type","hidden")
       inputHidden.setAttribute("value",window.location)
@@ -155,11 +146,10 @@ function createSectionDivSpan(userAdmin,_userThatLogin){
       aBlogEsci.appendChild(inputHidden)
       aBlogEsci.appendChild(inputSubmit)
       liBlogEsci.setAttribute("id","liBlogEsci")
-      //$(H1Welcome).insertBefore(bSection)
       H1Welcome.setAttribute("id","H1Welcome")
       try {
         if(userThatLogin.userin[0].fields.first_name!=="None")
-          H1Welcome.innerText="Welcome "
+          H1Welcome.innerText=" "
           +(userThatLogin.userin[0].fields.first_name).charAt(0).toUpperCase()
           + userThatLogin.userin[0].fields.first_name.slice(1);+" !";
         }
@@ -190,7 +180,7 @@ return getComment()
 }
 
 class Resp{
-  constructor(author,body="",publish,post,photo,pk,resptype,respTo,respToType){
+  constructor(author,body="",publish,post,photo,pk,resptype,respTo,respToType,respToUser){
     this.sent = false
     this.author = author
     this.post = post
@@ -201,6 +191,7 @@ class Resp{
     this.respToID=respTo
     this.respToType=respToType
     this.resps=Array()
+    this.respToUser=respToUser
     if (resptype=="newresp") {
       this.pk = parseInt(pk,"10")
       this.pk=this.pk+1
@@ -309,6 +300,8 @@ class postArea {
       mess.type == "resp" || mess.type == "newresp" ? id = mess.post.pk + "_" + mess.pk : id = mess.pk
       divUserBlog = document.createElement( "DIV" )
       var spanUserName=document.createElement("SPAN")
+      var spanUserBar=document.createElement("SPAN")
+      var spanUserBar_2=document.createElement("SPAN")
       var spanInUserName=document.createElement("SPAN")
       var bH5=document.createElement("span")
       var divContainerHead = document.createElement("DIV")
@@ -320,8 +313,6 @@ class postArea {
       tagUserImg.setAttribute("src",mess.photo)
       divUserBlog.appendChild(divContainerHead)
       divContainerHead.appendChild(tagUserImg)
-      spanUserName.setAttribute("style","color:grey;display:inline;")
-      spanInUserName.setAttribute("style","color:grey;display:inline;")
       $(bH5).css("margin-left" ,"3%" )
       bH5.setAttribute("id","bh5_span_"+id)
       bH5.appendChild(spanInUserName)
@@ -329,6 +320,8 @@ class postArea {
       divContainerHead.appendChild(bH5)
       tagUserImg.setAttribute("id","img_user_"+id)
       spanUserName.setAttribute("id","span_user_"+id)
+      spanUserBar.setAttribute("id","spanBar_"+id)
+      spanUserBar_2.setAttribute("id","spanBar_2_"+id)
       spanInUserName.setAttribute("id","span_inuser_"+id)
       postarea.postarea.setAttribute("id",mess.type+"_"+mess.author+"_"+id)
       if(mess.publish==="")mess.publish="inserito adesso"
@@ -338,16 +331,10 @@ class postArea {
           divUserBlog.setAttribute("id","new_divuserblog_"+id)
           divUserBlog.setAttribute("class","new_post_"+id)
           $(document).on('click', function(e){
-            //if (!$(e.target).closest('*[id^="newpost"]'+"_"+mess.author+"_"+id).length === 0 )
-            //  {
             if ($(e.target).closest('*[id^="new_divuserblog"]' ).length===0 &&
             $(e.target).closest('*[id^="id_link_comment"]' ).length===0 &&
             $(e.target).closest('*[id^="button_post"]' ).length===0)
             {
-              //&& $(e.target)
-              //.closest("#button_post").length === 0
-              //&& $(e.target).closest(".form_comment").length === 0 &&
-              //$(e.target).closest("#id_link_comment").length === 0) {
               if (isChanged==false) {
                 $("#new_divuserblog_"+id).remove()
                 isOpen=false
@@ -358,8 +345,13 @@ class postArea {
         case "resp":
           this.appendPostArea(mess,divUserBlog,elementToAppendPostArea)
           divUserBlog.setAttribute("id","divuserblog_"+id)
+          spanUserBar.textContent=" | "
+          spanUserBar_2.textContent=" | "+mess.publish
           spanInUserName.textContent=mess.author[0].toUpperCase() +mess.author.slice("1")
-          spanUserName.textContent=" | " +mess.publish
+          spanInUserName.appendChild(spanUserBar)
+          let respTo=mess.respToUser[0].toUpperCase() +mess.respToUser.slice("1")
+          spanUserName.textContent=" in risposta a "+respTo
+          spanUserName.appendChild(spanUserBar_2)
           divUserBlog.setAttribute("style","margin-left:20%")
           console.log("is resp ")
         break
@@ -397,7 +389,6 @@ class postArea {
         if(!(postarea.disabled==true)){
           spanUserName.textContent=mess.publish
           spanInUserName.textContent=mess.author[0].toUpperCase() +mess.author.slice("1")+"  |  "
-          //spanInDivPostTitle.textContent=mess.titled[0].toUpperCase()+mess.titled.slice("1")
           console.log("thispost.disabled")
           $('#post_response').css("border", "1px solid grey")
           bbutton.textContent="Commenta"
@@ -435,6 +426,17 @@ class postArea {
         {
           if(isOpen==false)
           {
+            var className="";
+            mess.type=mess.type[0].toUpperCase()
+            +mess.type.slice(1);+" !";
+            var respToPk=mess.pk
+            var respToType="resp"+"To"+mess.type
+            for (var z2=0;z2<=profiles_json.length-1;z2=z2+1){
+              if(profiles_json[z2].pk==resps_json[y].fields.author){
+                  var respToUser=profiles_json[z2].fields.first_name
+                }
+              }
+            mess instanceof Resp ? className="resp" :  className="post"
             elementToAppendPostArea = document.getElementById("divuserblog_"+id)
             if(mess instanceof Resp)
             {
@@ -450,7 +452,7 @@ class postArea {
             (
               r=new Resp(userThatLogin.userin[0].fields.first_name,"", new Date().toLocaleString(),post,
               BASE_PHOTO_DIR+userThatLogin.userin[0].fields.photo,
-              ids,"newresp"),elementToAppendPostArea)
+              ids,"newresp",respToPk,respToType,respToUser),elementToAppendPostArea)
               resps.push(r)
             }
             else if ( button_risposta_post.textContent=="Rispondi" && isOpen==true )
@@ -460,11 +462,11 @@ class postArea {
           }
         }
         else {
-          window.open(BASE_URL+"user/login/blog")
+          window.open(BASE_URL+"user/login/blog"+HIDDENFIELD)
         }
       }
     )
-    $(button_risposta_post).hover(function(){
+  $(button_risposta_post).hover(function(){
       $(button_risposta_post).animate({'width':'33%'},200);
       $(button_risposta_post).animate({'left':'33%'},200);
       $(button_risposta_post).css('box-shadow', '0 0 0 white' );//#719ECE"
@@ -478,7 +480,7 @@ class postArea {
     case "newpost" : case "newresp" :
     postarea.isActive=true
     button_risposta_post.textContent="Invia"
-    $(button_risposta_post).click(function(){
+  $(button_risposta_post).click(function(){
       //autorizzo la creazione del nuovo post solo se è valido: contiene testo ecc..
       let ids='#'+postarea.postarea.id
       let txts=$(ids).val()
@@ -499,7 +501,6 @@ class postArea {
       if (sendToServer(mess,url)==0){
         isOpen=false
       }
-      //button_risposta_post.setAttribute('action','url')
       $(postarea.postarea).css("box-shadow","0 0 0 0")
       mess.type=="newpost" ? button_risposta_post.textContent="Post Inserito" : button_risposta_post.textContent="Risposta Inserita"
 
@@ -539,29 +540,15 @@ disableButton(button){
 }
 
 create(){
-  $(this.postarea).animate({'width':'100%'},1200);// nu second e dui 1,2sec
-  this.postarea.setAttribute("rows","5");
+  $(this.postarea).animate({'width':'100%'});// nu second e dui 1,2sec
+  //divUserBlog.animate({'width':'50%'},4000);// nu second e dui 1,2sec
+  this.postarea.setAttribute("rows","3");
   this.postarea.setAttribute("name","messaggio")
   $(this.postarea).css("border", borderPost)
   //this.postarea.setAttribute("title","Autenticarsi NON è Obbligatorio !")
   return this.postarea;
+  }
 }
-}
-
-/*function getCSRFToken() {
-var cookieValue = null;
-if (document.cookie && document.cookie != '') {
-var cookies = document.cookie.split(';');
-for (var i = 0; i < cookies.length; i++) {
-var cookie = jQuery.trim(cookies[i]);
-if (cookie.substring(0, 10) == ('csrftoken' + '=')) {
-cookieValue = decodeURIComponent(cookie.substring(10));
-break;
-}
-}
-}
-return cookieValue;
-}*/
 
 function initBlogSGang(parTagTitle,u,p){
   var p=p
@@ -623,10 +610,12 @@ function getComment(){
     console.log("recuperato titolo del sito")
     var obj
     var indexX=0
-    var y=0,s
+    y=0
+    var s,z2
     mess=new Array()
     resps=new Array()
     let profiles=new Array()
+    profiles_json=new Array()
     let z=0
     var q=0
     let comments_json;
@@ -661,10 +650,10 @@ function getComment(){
         }
         var photoResp
         var i=0
+        var respToUser
         if(comments_json.length > 0) {
           for (i=0;i<=comments_json.length-1;i=i+1){
             for (z=0;z<=profiles_json.length-1;z=z+1){
-              // if(obj5_photo[z].fields.user==obj2[i].fields.author){
               if(profiles_json[z].pk==comments_json[i].fields.author){
                 profiles.push(new Profile(profiles_json[z].fields.first_name,
                   BASE_PHOTO_DIR+profiles_json[z].fields.photo))
@@ -677,23 +666,25 @@ function getComment(){
                     break;
                   }
                 }
-                // creo la textarea per il post e con l head .
                 z=0
-                // NUOVO PUNTO DINSERIMENTO CICLO FOR PER RISPOSTE
                 for (y=resps_json.length-1; y>=0; y=y-1){
                   if(comments_json[i].pk==resps_json[y].fields.commento){
-                    for (var z2=0;z2<=profiles_json.length-1;z2=z2+1){
+                    for (z2=0;z2<=profiles_json.length-1;z2=z2+1){
                       if(profiles_json[z2].pk==resps_json[y].fields.author){
-                      //  if (resps_json[y].fields.author=="anonimo"){
-                        //  photoResp=obj5_photo
-                        //}
-                        //else{
                           photoResp=BASE_PHOTO_DIR+profiles_json[z2].fields.photo
-                        //}
+                          break;
+                          }
+                      }
+                    for (var z3=0;z3<=profiles_json.length-1;z3=z3+1){
+                        if(profiles_json[z3].pk==resps_json[y].fields.respToUser){
+                            respToUser=profiles_json[z3].fields.first_name
+                            break;
+                          }
+                      }
                         resps.push(new Resp(profiles_json[z2].fields.first_name,
                           resps_json[y].fields.body,getDateFromDjangoDate(
                             resps_json[y].fields.publish),mess[indexX],photoResp,
-                            resps_json[y].pk,"resp",resps_json[y].fields.idRespTo,resps_json[y].fields.postType))
+                            resps_json[y].pk,"resp",resps_json[y].fields.idRespTo,resps_json[y].fields.postType,respToUser))
                             mess[indexX].risposte.push(resps.at(-1))
                             var elementToAppend=resps.at(-1).respToID
                             if(resps_json[y].fields.postType==="respToPost"){
@@ -707,10 +698,7 @@ function getComment(){
                             if(!elementToAppend.length>0){break}
                             else {
                                   createPostArea(resps.at(-1),elementToAppend)
-                                  break;
                                 }
-                          }
-                        }
                       }
                     }
                     y=0
@@ -755,7 +743,6 @@ function getComment(){
     }
     else
     {
-      //window.open(BASE_URL+"user/login/blog")
       window.location.href =XMLHTTPURL_LOGIN;
     }
   }
@@ -781,7 +768,6 @@ function getComment(){
     }
   }
 
-
   function createNewComment(mess){
     mess.titled="nuovo"
     newPostId=newPostId+1
@@ -798,9 +784,6 @@ function getComment(){
     }
   }
 
-
-
-  // se la variabile data non viene passata come parametro si presuppone che il client abbia creato un nuovo post , quindi //la data è now
   function getDateFromDjangoDate(data=""){
     var dateNow = new Date()
     var dataDjango
@@ -891,9 +874,6 @@ function getComment(){
     return s
   }
 
-
-
-  // Metodo chiamato da post , resp e nuovo Post//
   function createPostArea(messOrResp,elementToAppendArea){
     if(!(isOpen==true)) {
       paPostOrResp=new postArea(messOrResp)
@@ -926,9 +906,10 @@ function getComment(){
   function sendToServer(post=Object(),url){
     if (post.type=="newresp"){
       data={
-        'divuserblogtoappend':post.respondTo,'publish':post.publish,'commento':post.post.pk,'type':post.type,'tutorial':
+        'publish':post.publish,'commento':post.post.pk,'type':post.type,'tutorial':
           tagTitle,'username':userThatLogin.userin[0].fields.first_name
-          ,'body':post.body,'respTo':post.respToID,'id':post.pk,'respToType':post.respToType,'respToType':post.respType
+          ,'body':post.body,'respTo':post.respToID,'id':post.pk,'respToType':post.respToType,
+        'respToUser':post.respToUser,
         }
     }
     else if (post.type=="newpost"){

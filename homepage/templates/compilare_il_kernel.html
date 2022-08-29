@@ -1,0 +1,432 @@
+{% extends 'base2.html' %}
+{% load static %}
+<head>
+{% block otherscripts %}{% include 'custom_tag.html'%} {% endblock %}
+{% block title %}Compilare Il Kernel Su Linux - The standard Way{% endblock title %}
+{% block keywords %}compilare kernel linux,linux compilazione standard,modalità standard,procedura,dipendenze per compilare il kernel,scompattare il kernel,tar,xz,.config,make config,nconfig,xconfig,gconfig,download kernel,
+                creare initramfs,initrd,ramdisk,make install,make,make modules_install,concurrency_level
+{% endblock keywords %}
+{% block description %}Compilare Il Kernel Su Tutti i Sistemi Linux   {% endblock description%}
+{% block photo %}{%static "/images/mestesso.jpg"%}{% endblock photo %}
+{% block anteprima %}<meta property="og:image"   content='{% static 'images/Kazam_screenshot_00003.png' %}'/>{%endblock%}
+{% block tut_title %}
+  <span class="badge badge-pill badge-light" style="width:100%;display:inline-block!important;margin:0 auto!important;">
+    <span id="s_title">Linux - </span>
+  <span id="s_title_2" style="display:inline-block;color:black;font-weight:bold;"> Compilare Il Kernel</span></span>
+
+{% endblock tut_title %}
+
+</head>
+
+{% block content %}
+
+      <p  id="p_content">
+      Nella guida verrà installato un <span title="Nell ambito dello sviluppo del kernel Linux, il kernel vanilla è il kernel ufficialmente distribuito da Linus Torvalds e dai progettisti Linux,
+       senza alcuna patch aggiuntiva."</span>
+      vanilla Kernel , quindi se configurato bene ,
+      funziona su tutte le distro GNU/Linux .
+  </p>
+  <p style="width:100%;max-width:100%;" id="p_content">
+    <span class="badge badge-info s_title_paragraph">Installiamo Le Dipendenze</span><br><br>
+      Per compilare occorrono dei pacchetti , li scarichiamo e installiamo così :
+
+   <!--mark>Per installare i Pacchetti necessari alla Compilazione </mark> :<br-->
+    <br>Su <code id="code_ubuntu_e_derivate">Debian/Ubuntu</code> e derivate :<br><br>
+
+    <code id="apt_install_build" style="color:yellow;background-color:black;">mario@androgenic:~/Scaricati/linux-5.6.10 #<span style="color:white">apt install build-essential libncurses5-dev</span></code>
+    <br><br>
+
+  <br>Su <code id="code_fedora_e_derivate"> Fedora e derivate :</code><br><br>
+    <code id="yum_group_install" style="color:yellow;background-color:black;">mario@androgenic:~/Scaricati/linux-5.6.10 #<span style="color:white">yum groupinstall ‘Development Tools’</span></code>
+
+
+</p>
+
+<!--table id="image_0a" class="table  table-dark" border="2" style="width:50%!important;height:auto;margin:0 auto!important;">
+  <thead class="thead-dark">
+    <tr>
+      <th>Programma</th>
+      <th>Versione Minima</th>
+      <th>Comando</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>GNU C</td>
+      <td>3.2</td>
+      <td>gcc –version</td>
+    </tr>
+    <tr>
+      <td>GNU make</td>
+      <td>3.80</td>
+      <td>make –version</td>
+    </tr>
+    <tr><td>binutils</td>
+      <td>2.12</td>
+      <td>ld -v</td>
+    </tr>
+    <tr><td>util-linux</td>
+      <td>2.10o</td>
+      <td>fdformat –version</td>
+    </tr>
+    <tr><td>module-init-tools</td>
+      <td>0.9.10</td>
+      <td>depmod -V</td>
+    </tr>
+    <tr>
+      <td>e2fsprogs</td>
+      <td>1.41.4</td>
+      <td>e2fsck -V</td>
+    </tr>
+    <tr>
+      <td>jfsutils</td>
+      <td>1.1.3</td>
+      <td>fsck.jfs -V</td>
+    </tr>
+    <tr>
+      <td>reiserfsprogs</td>
+      <td>3.6.3</td>
+      <td>reiserfsck -V</td>
+    </tr>
+    <tr>
+      <td>xfsprogs</td>
+      <td>2.6.0</td>
+      <td>xfs_db -V</td>
+    </tr>
+    <tr><td>squashfs-tools</td>
+      <td>4.0</td>
+      <td>mksquashfs -version</td>
+    </tr>
+    <tr><td>btrfs-progs</td>
+      <td>0.18</td>
+      <td>btrfsck</td>
+    </tr>
+    <tr ><td>pcmciautils</td>
+      <td>004</td>
+      <td>pccardctl -V</td>
+    </tr>
+    <tr><td>quota-tools</td>
+      <td>3.09</td>
+      <td>quota -V</td>
+    </tr>
+    <tr><td>PPP</td>
+      <td>2.4.0</td>
+      <td>pppd –version</td>
+    </tr>
+    <tr><td>isdn4k-utils</td>
+      <td>3.1pre1</td>
+      <td>isdnctrl 2&gt;&amp;1|grep version</td>
+    </tr>
+    <tr><td>nfs-utils</td>
+      <td>1.0.5</td>
+      <td>showmount –version</td>
+    </tr>
+    <tr><td>procps</td>
+      <td>3.2.0</td>
+      <td>ps –version</td>
+    </tr>
+    <tr><td>oprofile</td>
+      <td>0.9</td>
+      <td>oprofiled –version</td>
+    </tr>
+    <tr><td>udev</td>
+      <td>081</td>
+      <td>udevd –version</td>
+    </tr>
+    <tr><td>grub</td>
+      <td>0.93</td>
+      <td>grub –version || grub-install –version</td>
+    </tr>
+    <tr><td>mcelog</td>
+      <td>0.6</td>
+      <td>mcelog –version</td>
+    </tr>
+    <tr><td>iptables</td>
+      <td>1.4.2</td>
+      <td>iptables -V</td>
+    </tr>
+    <tr><td>openssl &amp; libcrypto</td>
+      <td>1.0.0</td>
+      <td>openssl version</td>
+    </tr>
+    <tr><td>bc</td>
+      <td>1.06.95</td>
+      <td>bc –version</td>
+    </tr>
+    <tr><td>Sphinx</td>
+      <td>1.2</td>
+      <td>sphinx-build –version</td>
+    </tr>
+  </tbody>
+</table-->
+
+
+
+
+
+<br><br>
+
+  <p id="p_content" style="margin-top:10%;font-weight:normal;" >
+    <span class="badge badge-info">Download Del Kernel</span><br><br>
+
+  Quindi dopo aver installato le dipendenze per la buona riuscita della compilazione ,<mark> scarichiamo il kernel
+    <a href="https://kernel.org" title="download del kernel Linux" target="_blank"> qui</a>.</mark>
+
+
+  Il file scaricato dovrebbe essere compresso, quindi:
+<br><br>
+</p>
+<br><span class="badge badge-info s_title_paragraph">Decomprimiamo il Kernel </span><br><br>
+
+<div id="d_head"  style="width:50%!important;max-width:50%!important;display:inline-block!important;"><h4><b><span class=".s_unzip">decomprimiamolo cosi </span></b>:</h4>
+  <code class="terminal"<> $ unxz linux-a.x.by.tar.xz</code>
+</div>
+  <div id="d_head" class="badge badge-info" style="width:50%!important;display:inline-block!important;float:right;"> <img  id="terminal" width="100%" src='{% static 'images/kernel_extract_2.jpg' %}'\></div>
+
+  <br><br>
+
+  <div  id="d_head" style="width:50%!important;display:inline-block!important;margin-bottom:1%;"><h4><b>
+    estraiamo l' archivio tar </b>:</h4>
+    <code class="terminal"> $ tar xvf linux-a.x.by.tar</code></div>
+
+<div class="badge badge-info" style="width:50%!important;display:inline-block!important;float:right;margin-bottom:3%;">
+<img id="terminal" width="100%" src='{% static 'images/linux_kernel_4.png' %}'\></div>
+
+<p id="p_content"  style="margin-top:5%;font-weight:normal;">A questo punto abbiamo la cartella : <code>linux-x.y.ab</code>
+  scompattata . Il file di configurazione del Kernel si chiama <b>.config</b> si trova nella cartella principale del kernel ed
+  è nascosto ( tutti i file preceduti da un punto sono files nascosti ) potrebbe essere configurato con qualsiasi editor di testi ,
+  ma è meglio usare le utilità offerte dal gestore pacchetti&nbsp, come quelle visulizzabili con i comandi : <mark>make xconfig , make nconfig , make gconfig ecc.. </mark>
+  la figura <a href="#img_8">8a</a> mostra l' interfaccia di configurazione di un file <mark>.config</mark> attraverso l' uso del comando <code>make nconfig</code>
+  ogni parametro del file di configurazione <b>.config </b> può ammettere l' inserimento di un valore , ad
+   esempio il parametro per lo standby di una scheda , oppure le opzioni di scelta per il driver della CPU , lo scheduling , il tipo di preemption (la modalità di assegnamento risorse),
+   che può essere per server o per desktop.
+   <mark>Oppure può ammettere al massimo tre risposte possibili : <amp> &lt;*> , &lt; >  , &lt;m></amp> </mark>come si può vedere sempre nella figura <a href="#img_7">1.a</a>.
+  <br><br>
+  <span style="color:blu"><a href="#nconfig" title="visualizza le dipendenze per la compilazione">figura 1.a</a></span>
+  <img id="nconfig" width="100%" src='{% static 'images/nconfig.jpg' %}'\><br><br>
+   <mark><amp>&lt;*></amp></mark>  questa scelta applicata ad esempio ad un driver , fa si che esso sia caricato nel kernel, ma non dal filesystem
+    , non essendo presente sul filesystem e cioè l' aria di memoria su cui un amministratore può effettuare modifiche , non è possibile interagire con esso.
+   quindi l' amministratore una volta scelto di attivare l' opzione , questa sarà per sempre attiva senza possibilità di
+    modificarla in seguito , all' avvio del sistema per esempio come avviene quando si
+   sceglie l 'opzione &lt;m> .<br><br>
+
+  <mark><amp>&lt;m></amp></mark> compila la parte del kernel a cui si riferisce come modulo (m) , appunto , e lo mette sul filesystem
+   ,il vantagggio in questo caso  (m) è che si può scegliere all' avvio del sistema se caricare il modulo oppure no .
+   I kernel precompilati delle distribuzioni , usano compilare le opzioni soprattutto come modulo , in quanto non possono sapere a priori ,
+   quale sia l 'hardware su cui verrà installato il kernel ,  così preferiscono riservarsi la scelta "carico/non carico" dopo aver letto ( con un software ) quale sia l' hardware su
+   cui sta girando il Kernel . Alcuni sistemi operativi come Debian , offrono sia la possibilità
+   di selezionare tutti i drivers presenti sul kernel , selezionandoli tutti , sia
+     la possibilità di selezionare solo quelli realmente necessari al sistema , specificando però che esiste il rischio ,
+     che alcuni moduli necessari non vengano caricati . In più , attivando un driver come modulo , si da all' utente la possibilità di abilitare
+   e disabilitare un opzione o un driver al bisogno , <br> <br> <mark> &lt; ></mark> sta per no , e semplicemente non carica l ' opzione su cui è applicata la scelta
+   <br><br>
+   Ci si potrebbe chiedere : <mark>ma non è meglio selezionare tutte le opzioni come modulo (m) , visto che si ha un livello d' interazione più elevato ?
+   </mark>La risposta è : purtroppo non è possibile ! consideriamo i driver per i canali SATA del hard disk , perchè non è possibile selezionare i driver dell' hard disk
+   come modulo (m) ? risposta : il sistema per caricare un modulo deve poter accedere al hard disk ! ma come fa ad accedere all' hard disk se ancora non ha letto i drivers(moduli)
+   per l' hard disk ??! la soluzione a questo problema esiste ed essa è rappresentata dal file <mark><code>initrd</code></mark>
+  l' immagine giù e presa da Wikipedia :<br><br>
+      <img width="100%" src='{% static 'images/kernel_1.jpg' %}'\>
+      </p>
+<p  id="p_content" style="margin-top:2%;">
+
+    - Entriamo nella cartella linux e azzeriamo
+    le dipendenze con il comando <code>mrproper</code></p>
+      <div style="width:100%;"><img width="100%" src='{% static 'images/linux_extract_5.jpg' %}'\></div>
+      <p id="p_content"  style="margin-top:5%;font-weight:normal;"> Il comando <code>mrproper</code>
+        serve a pulire la cartella in cui ci troviamo da precedenti compilazioni , è una sorta di
+        <code>make clean</code> approfondito. Più specificamente <code>mrproper</code> rimuove
+        i file generati , come detto prima , in precedenti compilazioni , i files di backup , e perfino il file .config che è
+        il file in cui è memorizzata la configurazione del kernel che verrà compilato , quindi se non volete cancellare un file .config
+        fate un backup prima di eseguire <b>mrproper</b> . basta rinominare il file <b>.config</b> in <b>config.bak</b> e <b>mrproper</b>
+         non lo cancellerà più. <br><br>
+         </p>
+         <span class="badge badge-info s_title_paragraph">Configurazione Del Kernel</span>
+
+        <br>
+         <p  id="p_content" style="margin-top:2%;font-weight:normal;">
+           l' immagine 0b sotto , è presa dal sito kernel.org e mostra le principali utilità per configurare il kernel . Personalmente preferisco usare 'nconfig' , ma
+           è questione di preferenze e librerie di sistema , chi usa gnome come dm , sarà piu propenso ad usare gconfig , chi usa kde 'xconfig' , ma certo nulla vieta
+           di fare il contrario. <br>
+            <img width="100%" src='{% static 'images/kernel_6.jpg' %}'\><br><br>
+            se scegliete di usare 'nconfig' potrebbe essere necessario installare : <b>bison , flex , libncurses5-dev . </b><br><br>
+            <br>
+
+            <b>- quindi i primi cinque comandi della finestra sopra </b> :
+             <br><br>
+<br><code>make nconfig</code><br>
+<br><code>make xconfig</code><br>
+<br><code>make gconfig</code><br>
+<br><code>make menuconfig</code><br>
+<br><code>make config</code><br>
+             <br><br>
+             <b>aprono un interfaccia testuale</b> per la configurazione del kernel. La finestra sotto mostra ad esempio la finestra che si apre sul mio PC con
+               il comando <code>make nconfig</code><br><br>
+               <b>8a</b>
+              <img id="img_8" width="100%" height="500px"src='{% static 'images/make_nconfig.jpg' %}'>
+            </p>
+            <p id="p_content" style="margin-top:2%;font-weight:normal;">
+
+              Sfortunatamente non è per nulla semplice capire quali sono veramente tutte le opzioni che servono al nostro sistema ,
+              il sistema operativo quasi sempre riesce a capire quali moduli servono, e li carica, tuttavia non di rado , occorre
+              apportare modifiche al kernel se si vuole avere un sistema performante ,
+              ad esempio le distribuzioni impostano il driver del processore , sul loro kernel precompilato sempre su <b>"Generic"</b>
+            . La CPU deve essere immediatamente operante , non è possibile selezionare il driver della CPU come modulo , la CPU non si può permettere di attendere un driver
+              funzionante dopo l' avvio del sistema , come si potrebbe permettere una scheda audio , o un driver per il sensore delle scoreggie ,
+              un sistema per avviarsi deve avere un processore ! quindi anche se possibile , per alcuni componenti hardware , non ha molto senso avere
+              moduli per drivers , devono essere subito operativi , a questi componenti non si può delegare l' immediata operatività , e
+              quando lo si può fare è perchè c'è un altro driver già funzionante che lavora a monte , come succede per una scheda video ,
+              posso attivarne i drivers come moduli solo perchè al boot il sistema ha dei drivers che se pur minimali ,
+              garantiscono il corretto funzionamento della scheda . Quindi deselezionare il driver generic della cpu e selezionare il driver giusto (amd , intel , via ecc...) poi come numero di
+              processori l' opzione giusta è <mark>(numero core) + 1 </mark> , quindi se ho un octacore seleziono : 9 .
+
+              Il modo migliore per scrivere un file <code>.config</code> funzionale , penso che sia
+              quello di usare <code>lsmod</code> con <code>make localmodconfig</code> per poi rifinere la configurazione manualmente  . lsmod serve a visualizzare i moduli del kernel caricati dal sistema operativo che sta girando.
+              Questo comando se usato con <code>make</code> ci copia la configurazione attuale del kernel in uso nel file <code>.config</code> del kernel che ci apprestiamo a compilare .
+              C' è da dire che molte distribuzioni linux applicano questo strumento automaticamente , scrivendo per noi il file&nbsp.config&nbsp,&nbspma questo avviene
+              solo se installo un kernel dal gestore dei pacchetti . Se prendo il kernel dal sito "kernel.org" ovviamente devo operare da solo.
+              Di seguito la procedura per riscrivere il file <b>.config</b> con "make lsmod":</p><br>
+
+              <p id="p_content"  style="margin-top:2%;text-align:center;">
+
+                <span  class="badge badge-info s_title_paragraph forresp">Creiamo La Lista Dei Moduli</span><br><br>
+
+
+
+                - creiamo il file mod contenente l' output del comando <code title="comando che visualizza i moduli del kernel attivi">lsmod</code>:<br>
+                <br><span id="badge_lsmod_1" class="badge badge-warning"><span style="color:yellow">$</span> sudo lsmod > mod</span><br><br>
+                il comando della riga precedente redirige , per mezzo del simbolo :<span class="badge badge-info" style="whitespace:nowrap!important;">></span> , il risultato  del comando :  <span class="badge badge-info">lsmod</span> appunto ,
+                che serve a visualizzare la lista dei moduli del kernel caricati dal sistema operativo , in un file che abbiamo chiamato <span class="badge badge-info">mod</span> , ma avremo potuto usare qualsiasi altro nome ovviamente .<br><br>
+            <br>- Controlliamo che sia stato creato il file :<code title="comando che visualizza i moduli del kernel attivi"> mod</code>:<br>
+              <br><span class="badge badge-warning"><span style="color:yellow">$</span><span style="color:blue"> cat mod</span></span><br>
+
+              <br> - Se il file  non è vuoto si può procedere a scrivere la configurazione in <code>.config</code> così:<br><br>
+                <br>
+                     <span id="badge_lsmod_2"class="badge badge-warning"><span style="color:yellow">$</span> make LSMOD=mod localmodconfig</span><br>
+                     <br><br><code>localmodoconfig</code> legge i moduli nel file <code>mod</code>
+                     che abbiamo creato precedentemente , e configura il kernel allo stesso modo , attraverso la scrittura del file <code>.config</code>al cui
+                     interno saranno attivati i stessi moduli del kernel attualmente in uso . Questa procedura riduce al minimo il rischio di ritrovarsi con una
+                     configurazione inconsistente e quindi con un sistema che non parte (cosa che al sottoscritto è capitata un migliaio di volte) .
+
+                     Se nel nuovo kernel ci sono moduli da attivare/disattivare non ancora presenti nella lista del file <code>mod</code> ,
+                     lo script <code>localmodconfig</code> ci chiederà dal terminale se attivare o meno il nuovo modulo
+                     .
+                      chi volesse cimentarsi in una configurazione
+                      manuale , puo eseguire l' utilità di configurazione <code> make nconfig </code> come fatto prima. Se volete compilare il kernel affinchè si avii senza
+                      <code>initrd</code> dovete impostare tutti i drivers che servono a far partire il sistema in modalità "built in" cioè non come moduli e quindi selezionando
+                      &lt;y> nella configurazione , se invece non vi sentite sicuri e non volete rischiare di ritrovarvi con un sistema che non parte( rischio molto elevato anche se lo si usa ) , il consiglio è quello di usarlo .
+                        vi risparmia parecchi grattacapi .  Dopo che avremo compilato il kernel , mostrerò come generare un immagine <code>initrd</code>.
+
+          </p>
+
+            <br><br><hr>
+
+            <span class="badge badge-info s_title_paragraph">Prima Di Compilare</span>
+
+
+
+
+
+
+              <p  id="p_content" style="font-weight:normal;"><br><br>
+                per compilare lanciate <code>make</code> dalla cartella linux-x.y.ab<br>
+                se avete un processore con più di due core ,e volete compilare più velocemente , usate il parametro <code>-j</code>
+                che prende come parametro il numero di processi consentito . Se non indicato , ne permette un numero infinito , tuttavia
+                nelle distro in genere al parametro <code>MAKEOPTS</code> viene assegnato un valore = -j2 , che è perfetto per un monocore ,
+                che usa un processore fisico più uno virtuale , ad esempio io che possiedo un octacore su una distro Gentoo linux nel file <code>make.conf</code> imposto
+                 la variabile <code>MAKEOPTS="-j9"</code> tuttavia make.conf , nelle altre distro non mi risulta che esista , per questi sistemi bisogna
+                 esportare la variabile d' ambiente <code>concurrency_level=-j(numeroprocessori + 1)</code> nel file <mark>.bashrc o /etc/profile ecc..</mark>
+                  . Anche in Debian/Ubuntu va impostata la variabile <code>concurrency_level=x</code> , oppure è possibile usare il parametro <code> -j </code>
+                 in make da riga di comando , soluzione che funziona ovunque . Ho sentito parecchi pareri discordanti sull' utilità di usare la flag <mark>-j</mark> , ma alla fine il dato inconfutabile è
+                 uno solo ,  è evidente che se compilo con il parametro <code>-j9</code> su una cpu octacore finisco di compilare prima di quanto riesca a fare senza <code>-j9</code>,
+                   e il motivo è evidente anche osservando i grafici del carico della cpu , che monitorano tutte e 8 cpu . Le cpu durante la compilazione sono tutte e 8 al 100% di carico , quindi è ovvio perchè il processo
+                   di compilazione duri meno . D' altronde è anche vero che se impegno tutte e 8 cpu al 100% poi non ho risorse per fare altro che compilare .<br><br>
+                 </p>
+                  <hr>
+
+                  <span class="badge badge-info s_title_paragraph">Compilazione</span><br><br>
+                   Compiliamo con :<br>
+                  <code style="color:yellow;background-color:black;">mario@androgenic:~/Scaricati/linux-5.6.10$<span style="color:white"> make</span></code>
+                  <br><br><br>
+                  Oppure per velocizzare il processo , esempio Per un Octacore :<br>
+                    <code style="color:yellow;background-color:black;">mario@androgenic:~/Scaricati/linux-5.6.10$<span style="color:white"> make -j9</span></code>
+                  </b>  <br><br><br>
+
+                    Per un QuadCore :<br>
+                      <code style="color:yellow;background-color:black;">mario@androgenic:~/Scaricati/linux-5.6.10$<span style="color:white"> make -j5</span></code>
+
+                  <br>
+                  <br>
+                    <br><br><br><hr>
+                    <span class="s_title_paragraph badge badge-info">Installiamo I Moduli</span><br><br>
+
+                  installiamo i moduli con :<br>
+
+                    <code style="color:yellow;background-color:black;">mario@androgenic:~/Scaricati/linux-5.6.10$<span style="color:white">sudo make modules_install</span></code>
+
+
+
+
+                      <br><br><hr>
+
+                      <span class="s_title_paragraph badge badge-info">Installiamo il Kernel In Boot ...</span><br><br>
+                      <mark>Assicuratevi che la partizione <code>boot</code> sia montata</mark> , perchè il comando <code>make install</code> che useremo dovrà scrivere dei files
+                      al suo interno.
+                      Se volete usare <code>initrd</code> , installate il pacchetto <b><code>initramfs-tools</code></b> necessario per la sua creazione. installiamo il kernel e copiamo alcuni file nella cartella boot con :<br><br>
+                        <code style="color:yellow;background-color:black;">mario@androgenic:~/Scaricati/linux-5.6.10$<span style="color:white">
+                        <b>  sudo make install</b></span></code>
+                          <br><br> il comando <code>make install</code> tra l' altro copia il kernel dalla cartella di compilazione nella directory <code>boot</code>
+                          e generà <mark>initramfs o initrd</mark> , come si può vedere nell' imaggine qui sotto :
+                          <br><br>
+                          <img class="img img-thumbnail"id="img_8" width="100%" height="500px"src='{% static 'images/shell1.jpg' %}'>
+
+
+          <hr style="background-color:black;border:2px solid;width:100%;">
+            <p id="p_content"  style="margin-top:2%;font-weight:normal;"><br><br>
+              Se avete compilato il kernel con il file <code>.config</code> della distribuzione linux che usate, dovrete creare il file <code>initrd</code> affinchè
+              possano essere caricati i moduli per far avviare il sistema , per il fatto che praticamente
+              tutte le distribuzioni Linux , compilano il kernel della propria distro appunto , appositamente per il suo uso con initrd. Di seguito mostrerò come crearlo
+              Nel caso non ci siate riusciti prima.
+            </p>
+            <hr style="background-color:black;border:2px solid;width:100%;">
+
+              <p id="p_content" style="margin-top:2%;font-weight:normal;">
+              <span class="s_title_paragraph badge badge-info">  Initrd o Initramfs</span><br><br>
+                <mark>Il file Initrd o il più recente initramfs contiene essenzialmente i moduli (drivers) che servono ad un pc per avviarsi</mark> . Initrd
+                emula un filesystem di root che può essere montato sulla ram , su una periferica di loopback , su un floppy .
+               il sistema dopo aver eseguito initrd , libera la memoria e monta la partizione vera di root del
+                sistema operativo.
+                </p><br><br><br>
+                  <p style="margin:2% auto;font-weight:normal;">
+              <span  class="s_title_paragraph badge badge-info">Creazione di initramfs</span>
+
+                  <br><br>
+                   Per creare initrd
+                    eseguite con sudo o come amministratore :
+
+                      <code style="background-color:black;"><br><span style="color:white"># mkinitramfs 5.6.10 -o initramfs-5.6.10.img</span>
+                      </code><br>
+                      <br>il primo parametro e cioè <code>5.6.10</code> è la versione del kernel che abbiamo compilato e su cui vogliamo creare l' initrd.
+                      la flag <code> -o </code> sta per output e definisce il nome del file creato in questo caso <code> initramfs-5.6.10.img </code> fate
+                      attenzione a non usare nomi strani nel parametro <code>-o</code> perchè c' è il rischio che gli script come : <code>grub-mkconfig </code>
+                      non trovino il file quando
+                      dovranno generare il file di configurazione/avvio per il bootloader : <code>grub.cfg</code> ecc... .
+
+                      Se volete vedere tutte le versioni di kernel disponibili , queste sono elencate in &nbsp<code>/lib/modules</code>
+                      Se volete sapere la versione del kernel in uso dal sistema eseguite :<br><br> <code>$ echo $(uname -r)</code>
+</p>
+    <p id="p_content" >  <span  class="s_title_paragraph badge badge-info">Configurare Grub Per L' Avvio</span></p>
+    <p>
+    Questo passo dovrebbe non essere necessario perchè il comando <code> make install </code> lo svolge automaticamente .
+      Sui sistemi Debian/Ubuntu eseguire :<br><br> <code>update-grub</code><br><br>
+      la procedura standard che va bene su tutti i sistemi linux è :<br>
+       <mark>come amministratore da console</mark> :<br><br>
+      <code>grub-mkconfig -o /boot/grub/grub.cfg</code><br><br> Riavviate il pc per provare il kernel .
+</p>
+<script id="s_blog">
+    $(document).ready(function(){
+      initBlogSGang(document.title,"mario","sol-7373");
+    })
+  </script>
+{% endblock content %}
+{% block footer %}
+{% include '_footer.html' %}
+{% endblock footer %}

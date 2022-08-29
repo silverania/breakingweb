@@ -1,0 +1,51 @@
+{% extends 'base2.html' %}
+{% load staticfiles %}
+{% block title %}Nascondere Le Cartelle In Apache{% endblock title %}
+  {% block keywords %}apache , linux ,cartelle , visualizzare , nascondere , apache mostra le cartelle , visualizzazione delle cartelle non voluta, Options ,Indexes , FollowSymLinks ,AllowOverride ,None,
+  ​     Require all granted , download di files da apache{% endblock keywords %}
+  {% block description %}Nascondere Le Cartelle In Apache e Download Di Files Da Apache su Linux {% endblock description%}
+     {% block photo %}{%static "/images/mestesso.jpg"%}{% endblock photo %}
+     {% block tut_title %}
+       <span class="badge badge-pill badge-light" style="width:100%;display:inline-block!important;margin:0 auto!important;">
+         <span id="s_title">Linux Apache - </span>
+       <span id="s_title_2" style="display:inline-block;color:black;font-weight:bold;">Nascondere Le Cartelle</span></span>{% endblock tut_title %}
+
+
+
+
+{% block content %}
+
+<p id="p_content" style="font-weight:normal;" >
+La visualizzazione delle cartelle contenute nelle directory di Apache non voluta , è un gravissimo problema per la sicurezza , Qualsiasi Persona ,
+sul web , che visualizza un sito presente sul nostro server , potrebbe avere accesso a informazioni sensibili di Apache , ed è superfluo dire che è una situazione che
+non si deve assolutamente verificare . Qui sotto si può vedere la sezione nel file <mark>.conf</mark> di Apache responsabile della visualizzazione , "Volontaria o non volontaria" di una Directory :
+<br><br>
+<pre style="background-color:black;color:orange;">&nbsp&ltDirectory /var/www/content>
+​     &nbspOptions Indexes FollowSymLinks
+​     &nbspAllowOverride None
+​     &nbspRequire all granted
+​&nbsp&lt/Directory>   </pre>  <br><br>
+
+la parolina magica che causa la non voluta visualiazzazione del contenuto di una directory è <mark><code>Indexes</code></mark>
+
+se presente può avvenire una cosa del genere , solo scrivendo il link del sito con la cartella di cui visualizzare il contenuto , per esempio: <mark><code>https://thetopo.it/content</code></mark><br><br>
+
+  <img class="img img-thumbnail"id="img_8" width="100%" height="500px"src='{% static 'images/apache-directory-listing.jpg' %}'><br><br>
+  Se voluta una configurazione del genere può essere utile quando si vuole permettere un <mark>download dal server di files</mark> , usando quindi   <mark>Apache</mark> come <mark>un Files Server FTP</mark> ,
+  cliccando infatti su un file nella lista da un browser remoto <mark>è possibile scaricare i files nella lista</mark>
+  <br><br>
+  Un altro modo per nascondere o mostrare i Files e le Directory è usare <mark><code>.htaccess</code></mark> esso si trova molto spesso nella root del sito che controlla. Da qui avrà influenza su tutte le sottocartelle del sito.
+Se ad esempio si vuole negare la visualizzazione delle cartelle nel browser sul percorso : <mark><code>site/includes/</code> </mark>
+è sufficiente creare il file <mark><code>.htaccess</code></mark> nella cartella <mark><code>site/includes</code></mark>
+e inserirci :
+
+<br><br><code> Deny from all </code></span>
+ <br><br>
+
+
+{% endblock %}
+{% block amazon_right %}
+<div style="margin-right:0;">
+<iframe style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//rcm-eu.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=marios01-21&language=it_IT&o=29&p=8&l=as4&m=amazon&f=ifr&ref=as_ss_li_til&asins=B07RPYFKHT&linkId=f5cc064bc654ca48745e99b9b9cefafa"></iframe>
+</div>
+{% endblock %}

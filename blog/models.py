@@ -90,25 +90,27 @@ class Resp(models.Model):
         ("respToResp", "respToResp"),
     )
     author = models.ForeignKey(
-        Profile, on_delete=models.CASCADE, related_name="resps")
+            Profile, on_delete=models.CASCADE, related_name="resps")
+    respToUser = models.ForeignKey(
+        Profile, on_delete=models.CASCADE, related_name="userResps")
     body = models.TextField()
     publish = models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)
     # post=models.CharField(max_length=250,default="post anonimo")
     commento = models.ForeignKey(
-        Comment,
-        related_name="risposte",
-        on_delete=models.CASCADE,
-        null=True,
-        blank=True,
-    )
+            Comment,
+            related_name="risposte",
+            on_delete=models.CASCADE,
+            null=True,
+            blank=True,
+            )
     resps = models.ManyToManyField("Resp", blank=True)
     idRespTo = models.CharField(max_length=50, default="0_0")
     postType = models.CharField(
-        max_length=10, default="respToPost", choices=MESS_TYPE)
+            max_length=10, default="respToPost", choices=MESS_TYPE)
 
     class Meta:
         ordering = ("publish",)
 
     def __str__(self):
-        return self.body
+        return '{} - {} ({})'.format('pk:'+str(self.pk), 'resp to:'+str(self.idRespTo), 'tipo:'+str(self.postType))

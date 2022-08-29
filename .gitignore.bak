@@ -1,0 +1,7 @@
+*
+!.gitignore
+!/blog
+!/blog/*.py
+!blog/static
+!blog/static/js
+!blog/static/js/*

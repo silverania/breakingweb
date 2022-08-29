@@ -1,0 +1,2 @@
+- inserire il percorso javascript del file eseguibile negli head
+- chiamare la funzione writeMsg() dal punto html in cui si vuole che venga inserito il blog

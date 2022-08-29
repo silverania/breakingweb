@@ -1,0 +1,125 @@
+{% extends 'base2.html' %}
+{% load static %}
+<head>
+{% block otherscripts %}{% include 'custom_tag.html'%} {% endblock %}
+{% block title %}Linux - Aggiornamento Automatico Dei Browser {% endblock title %}
+  {% block keywords %}Linux,script,aggiornamento,automatico,browsers,chrome,firefox,opera,chromium,browser,avvio,sistema,script,shell,terminale,eseguibile{% endblock keywords %}
+  {% block description %}Aggiornamento Automatico Di utti i browsers su linux , all' avvio di sistema {% endblock description%}
+{% block anteprima %}<meta property="og:image"   content='{% static 'images/Kazam_screenshot_00003.png' %}'/>{%endblock%}
+
+
+
+
+
+     {% block photo %}{%static "/images/mestesso.jpg"%}{% endblock photo %}
+     {% block tut_title %}
+
+
+     <span class="badge badge-pill badge-light" style="width:100%;display:inline-block!important;margin:0 auto!important;">
+     <span id="s_title_2" style="display:inline-block;color:black;font-weight:bold;">Linux - Aggiornare I browser
+      All' Avvio Di Sistema</span></span>
+
+
+       {% endblock tut_title %}
+
+
+
+</head>
+            {% block content %}
+
+
+  <p style="text-align:center;" id="p_content">
+  <mark>Premessa</mark>
+Le principali minacce sui Pc trovano accesso al sistema grazie ai Browsers: Chrome , firefox ecc... .
+            che sono programmi che comunicano continuamente con la rete , perchè i Browsers aprono
+            varie porte di comunicazione : 80 , 443 , 1080 , le porte ftp , le porte per il protocollo smtp
+            della posta elettronica , e si potrebbe continuare a lungo con la lista . Questo tutorial è
+    indicato a chi volesse aggiornare automaticamente il browser all'avvio di sistema , così da essere certo
+    di avere applicate le ultime patch, prima di affacciarsi alla rete ed alle sue minacce , ed a chi preferisce mantenere
+    disattivati gli aggiornamenti automatici , per non essere costretto a comunicare continuamente con i server di aggiornamento ,
+    cosa questa che costringe ad avere delle porte di comunicazione sempre aperte .
+ I browser nei repository
+Linux ricevono aggiornamenti quasi giornalieri , ma gli utenti , spesso dimenticano di aggiornarli .
+Anche perchè farlo manualmente e spesso diventa pesante . Soluzione : <mark>
+Aggiornare I Browser All' Avvio Di Sistema In Modo Che Ci Si Possa Affacciare Alla Rete In Modo Sicuro</mark>
+</p>
+<p style="text-align:center;" id="p_content">Per raggiungere il nostro scopo
+non creeremo servizi Systemd aggiuntivi , non servono ! non installeremmo Cron
+andando ad allungare ulteriormente la lista di servizi sempre attivi , noto problema per la sicurezza .
+Un sistema informatico , più è snello , meno servizi attivi ha in esecuzione : PIÙ È SICURO !
+inoltre avviare un comando all'avvio di sistema piazzoandolo in <code> $ ~/.config/autostart/ </code>
+aggiornerà i browser qualunque sia il Desktop Manager usato : ( Gnome , Xfce , Kde ecc..)
+per raggiungere il nostro scopo porteremo a termine tre semplici step :
+</p>
+<br><ul style="background-color: white;padding:2%;">
+  <span class="badge badge-info" style="display:block;margin:3% auto;"></span>
+  <li><b>1) Useremo la possibilità di eseguire comandi all' avvio del sistema offerta da tutti i DM (Desktop Manager)
+ : "Gnome , Xfce , Kdm ecc.." per effettuare l' aggiornamento , senza lasciare servizi attivi
+e porte di comunicazione aperte </b> </li>
+  <br><li><b>2) Il comando eseguito lancerà uno script Bash che piazzeremo in <code>/usr/bin/</code>
+ in cui eseguiremo l' Aggiornamento dei/del Browser</b></li>
+  <li><b><br>3) Modificheremo il file /etc/sudoers in modo che lo script possa eseguire l' aggiornamento
+  senza inserire la password quando il comando sudo la chiederà , se la chiedesse all' interno dello
+  script , ciò ne provocherebbe il blocco </b> </li>
+</ul>
+<hr>
+
+<h2 align="center"><mark>Cominciamo ! : Passo  1</mark></h2>
+<p><br><br> modalità grafica ,
+il problema è che è diversa su ogni Desktop Manager .
+Eseguendola da terminale è sempre uguale invece . Aprite un Terminale ed eseguite :
+<code> <br>nano ~/.config/autostart/BrowserUp.desktop </code>
+<br><br>all' interno del file che si aprirà inserite il seguente contenuto <br><br>
+<code style="display:block;background-color: black;margin:0 auto;"> <br><br>
+[Desktop Entry]<br>
+Encoding=UTF-8<br>
+Version=0.9.4<br>
+Type=Application<br>
+Name=BrowserUp<br>
+Comment=update<br>
+Exec=/usr/bin/updatebrowser.sh<br>
+OnlyShowIn=XFCE;GNOME;GTK;KDE;PLASMA<br>
+RunHook=0<br>
+StartupNotify=true<br>
+Terminal=true<br>
+Hidden=false<br>
+DBusActivatable=true<br>
+</code><br><br>
+Salva il file nel percorso dove l' hai aperto.
+Se vuoi vedere il terminale all' avvio del sistema , che mostra gli aggiornamenti in corso ,
+ per poi chiudersi automaticamnente : imposta <code>Terminal=true</code>,
+altrimenti a false . <br><br><b>2)</b>
+
+ &nbspApri un Terminale ed esegui come amministratore : <code> <br># nano /usr/bin/updatebrowser.sh </code>
+<br><br>all' interno del file che si aprirà inserisci il seguente contenuto <br><br>
+<code style="display:block;background-color: black;margin:0 auto;">
+#!/bin/bash<br>
+sudo  apt-get update && sudo apt-get upgrade -y {listabrowser}
+</code><br>
+nello script non usare la versione abbreviata di apt-get : <code>sudo apt update</code>
+non funzionerà ! ma usa <code> sudo apt-get update </code>
+
+Ovviamente sostituisci <mark>{listabrowser}</mark> con i browser che vuoi aggiornare . Rendi il file eseguibile :
+<code>$ sudo chmod +x /usr/bin/updatebrowser.sh</code>
+
+<br><br><b>3)</b>
+
+ Sei arrivato al punto 3 , questo passo come detto è necessario perchè
+devi evitare che nello script venga chiesta la password quando si esegue sudo. Apri il file
+<mark>/etc/sudoers con il comando visudo , non usare nano perchè potresti
+danneggiare il file </mark> <br><br> <code># visudo </code>&nbsp&nbspvisudo apre il file /etc/sudoers per
+modificarlo senza rischi .<br><br>
+guarda l' immagine , è importante che la riga da inserire venga messa prima di <code>@includedir</code>
+ovviamente cambia l'user mario con il tuo username !<br><br>
+  <img class="img img-thumbnail"id="img_8" width="100%" src='{% static 'images/Kazam_screenshot_00009.png' %}'></p>
+
+  <script id="s_blog">
+      $(document).ready(function(){
+        initBlogSGang(document.title,"mario","sol-7373Rff");
+      })
+    </script>
+        {% endblock content %}
+        {% block blog %}{% include '_blog.html' %}{% endblock %}
+        {% block footer %}
+        {% include '_footer.html' %}
+        {% endblock footer %}

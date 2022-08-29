@@ -1,0 +1,72 @@
+{% extends 'base2.html' %}
+{% load static %}
+{% block title %}Linux - Uscita Automatica{% endblock title %}
+{% block keywords %}Linux Uscita Automatica , at , logout , .bashrc , /etc/profile
+{% endblock keywords %}
+{% block description %}Linux - Uscita Automatica - Logout{% endblock description%}
+{% block photo %}{%static "/images/mestesso.jpg"%}{% endblock photo %}
+{% block tut_title %}
+  <span class="badge badge-pill badge-light" style="width:100%;display:inline-block!important;margin:0 auto!important;">
+    <span id="s_title">Linux - </span>
+  <span id="s_title_2" style="display:inline-block;color:black;font-weight:bold;">LogOut A Tempo</span></span>{% endblock tut_title %}
+
+{% block content %}
+
+ <p id="p_content" >
+
+aggiungete questo parametro all' interno del file : <code>/home/utenete/.bashrc</code> o in <code>/etc/profile</code><br><br>
+<code><mark>TMOUT=100</mark></code> <br><br>
+
+
+    modificate il valore 100 secondi , come vi serve , in modo che il sistema costringa l' uscita di un utente dopo x secondi di inattività .
+     ricordo che il puntino :<b>.</b> nel nome <b>.bashrc</b> indica che stiamo parlando di un file nascosto quindi nel terminale si può visualizzare con il comando : <code> ls -al /etc</code> .
+</p>
+
+<p id="p_content" >
+  Io uso il logout automatico perchè ho un server apache , e dato che non posso usare lo shutdown a tempo , ovviamente , perchè un pc usato come server non lo si può spegnere. Ma
+   Il logout automatico può servire ! magari hai un server condiviso a cui accedono regolarmente molti utenti , alcuni di essi
+   possono dimenticare di disconnettersi dalla sessione e lasciare aperta la sessione. Lasciare aperta una sessione utente è pericoloso e alcuni utenti potrebbero abusarne intenzionalmente.
+   Come amministratore di sistema, andresti a controllare ogni singolo sistema per verificare se gli utenti si sono disconnessi o no? Non credo .
+   </p><br><br>
+
+{% endblock content %}
+{% block amazon_right %}
+
+<div style="width:100%;">
+<iframe style="width:120px;height:240px;margin-left:20px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//rcm-eu.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=marios01-21&language=it_IT&o=29&p=8&l=as4&m=amazon&f=ifr&ref=as_ss_li_til&asins=1326160842&linkId=7801875206462716ded86930aa26cbe5"></iframe>
+<iframe style="width:120px;height:240px;margin-left:20px;"" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//rcm-eu.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=marios01-21&language=it_IT&o=29&p=8&l=as4&m=amazon&f=ifr&ref=as_ss_li_til&asins=B075NWD4J1&linkId=d04c2e3d0c0a11e33e21aa2a82d3a531"></iframe>
+
+
+
+
+
+<iframe style="width:120px;height:240px;margin-left:20px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//rcm-eu.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=marios01-21&language=it_IT&o=29&p=8&l=as4&m=amazon&f=ifr&ref=as_ss_li_til&asins=B077DFV5J3&linkId=0ecb60022e16aa044ba34071b889c42e"></iframe>
+<iframe style="width:120px;height:240px;margin-left:20px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//rcm-eu.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=marios01-21&language=it_IT&o=29&p=8&l=as4&m=amazon&f=ifr&ref=as_ss_li_til&asins=B07YDD498C&linkId=e829af07e431be4808572af2ab729915"></iframe>
+<iframe style="width:120px;height:240px;margin-left:20px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//rcm-eu.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=marios01-21&language=it_IT&o=29&p=8&l=as4&m=amazon&f=ifr&ref=as_ss_li_til&asins=1789611806&linkId=f6c0e73abb7b1f2b1f113a438d2578c1"></iframe>
+<iframe style="width:120px;height:240px;margin-left:20px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//rcm-eu.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=marios01-21&language=it_IT&o=29&p=8&l=as4&m=amazon&f=ifr&ref=as_ss_li_til&asins=B07ZP8FH9M&linkId=cd6f4f0f4b685c61a32f4a929c953a58"></iframe>
+
+<iframe style="width:120px;height:240px;margin-left:20px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//rcm-eu.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=marios01-21&language=it_IT&o=29&p=8&l=as4&m=amazon&f=ifr&ref=as_ss_li_til&asins=0244403716&linkId=3ce8e01d49e76f7bd81c68a793ab5577"></iframe>
+
+<iframe style="width:120px;height:240px;margin-left:20px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//rcm-eu.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=marios01-21&language=it_IT&o=29&p=8&l=as4&m=amazon&f=ifr&ref=as_ss_li_til&asins=0244403716&linkId=3ce8e01d49e76f7bd81c68a793ab5577"></iframe>
+<iframe style="width:120px;height:240px;margin-left:20px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//rcm-eu.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=marios01-21&language=it_IT&o=29&p=8&l=as4&m=amazon&f=ifr&ref=as_ss_li_til&asins=8871924045&linkId=ac0f92f1c13af01d9a23afa698eea2c3"></iframe>
+
+<iframe style="width:120px;height:240px;margin-left:20px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//rcm-eu.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=marios01-21&language=it_IT&o=29&p=8&l=as4&m=amazon&f=ifr&ref=as_ss_li_til&asins=1520569912&linkId=bd71f95b1d566217c4d7190b3a067ba8"></iframe>
+
+<iframe style="width:120px;height:240px;margin-left:20px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//rcm-eu.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=marios01-21&language=it_IT&o=29&p=8&l=as4&m=amazon&f=ifr&ref=as_ss_li_til&asins=0244403716&linkId=3ce8e01d49e76f7bd81c68a793ab5577"></iframe>
+<iframe style="width:120px;height:240px;margin-left:20px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//rcm-eu.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=marios01-21&language=it_IT&o=29&p=8&l=as4&m=amazon&f=ifr&ref=as_ss_li_til&asins=0244403716&linkId=3ce8e01d49e76f7bd81c68a793ab5577"></iframe>
+<iframe style="width:120px;height:240px;margin-left:20px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//rcm-eu.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=marios01-21&language=it_IT&o=29&p=8&l=as4&m=amazon&f=ifr&ref=as_ss_li_til&asins=0244403716&linkId=3ce8e01d49e76f7bd81c68a793ab5577"></iframe>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

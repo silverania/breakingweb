@@ -1,0 +1,85 @@
+
+    {%block header%}
+    <header>
+    <div  class="container-fluid" >
+      <div class="row">
+        <div id="col-header" class="col-md-12">
+    <nav  class="navbar navbar-icon-top navbar-expand-lg">
+      <div id="a_logo">
+
+        <span  id="span_title">&nbsp..</span>
+          <span  id="span_title_2">Breaking</span>
+          <span  id="span_title_w">WEB</span>
+
+
+          </div>
+
+
+      <button id="button_bars"class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"><i class="fas fa-bars" style="color:orange;"></i></span>
+      </button>
+      <div  class="collapse navbar-collapse" id="navbarSupportedContent">
+
+        <ul  class="ul_wrap_1 ul_wrap list-group list-group-horizontal" >
+          {% for c in categorie %}
+            <li  id="a-{{c.title}}"  class="list-group-item"  aria-pressed="true" >
+              <span id="s_center_menu"><b>{{c.title}} <span>In Pratica</span></b></span>
+              <span class="sr-only">(current)</span>
+            </li>
+            {% endfor %}
+
+            <!--li  id="a-django" class="i-search list-group-item" aria-pressed="true">
+              <span id="s_center_menu"><b>Django <span style="color:whitesmoke;">In Pratica</span></b></span>
+              <span class="sr-only">(current)</span>
+            </li>
+            <li  id="a-web" class="i-search list-group-item"  aria-pressed="true">
+              <span id="s_center_menu" ><b>Web <span style="color:whitesmoke;">In Pratica</span></b></span>
+              <span class="sr-only">(current)</span>
+            </li-->
+        </ul>
+
+
+        <ul  class="ul_wrap navbar-nav">
+          {% if login %}
+          <li class="nav-item" >
+            <a class="nav-link" href="/user/logout">
+              <span id="esci"><b>Crea Un Tutorial</b></span>
+            </a>
+          </li>
+          <li class="nav-item" >
+            <a id="id_esci" class="nav-link">
+              <span id="esci"><b>Esci</b></span>
+            </a>
+          </li>
+          {%else%}
+          <li class="nav-item" style="text-align:right;">
+            <a id="id_reg"  class="nav-link" >
+              <span id="registrati"><b>Registrati</b></span>
+            </a>
+          </li>
+          <li class="nav-item" style="float:right!important;">
+            <a id="id_login" class="nav-link" >
+              <span id="entra"><b>Entra</b></span>
+            </a>
+          </li>
+          {%endif%}
+        </ul>
+      </div>
+
+    </nav>
+    </div>
+    </div>
+    </div>
+    </header>
+    {%endblock header%}
+<script>$(document).ready(function(){
+$('#id_login').click(function(){
+document.getElementById('id_login').setAttribute("href","/user/login?next="+window.location)
+})
+$('#id_reg').click(function(){
+document.getElementById('id_reg').setAttribute("href","/user/register?next="+window.location)
+})
+$('#id_esci').click(function(){
+document.getElementById('id_esci').setAttribute("href","/user/logout?next="+window.location)
+})
+})</script>
