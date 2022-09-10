@@ -61,6 +61,7 @@ def getPost(request):
     print("entry in view getpost")
     global formatted_datetime
     data = ""
+    t = []
     profile_list = []
     datac = []
     comments = []
@@ -86,7 +87,6 @@ def getPost(request):
                     print(str(type(comment)))
                     try:
                         if tagTitle in str(comment.site.title):
-                            breakpoint()
                             comments.append(comment)
                             t_order = comment.risposte.all().order_by('-publish')
                             t = list(t_order)
@@ -130,57 +130,61 @@ def newPost(request):
     postType = ""
     post = []
     print("entrypoint to newPost ....request="+str(request))
+    if "body" in request.GET and request.GET["body"]:
+        body = request.GET.get("body")
+    if "username" in request.GET and request.GET["username"]:
+        author = request.GET.get("username")
+        myuser = Profile.objects.get(first_name=author)
+        myuser.firstname = getLoginName(request)
+    if "tagTitle" in request.GET:
+        tagTitle = request.GET.get('tagTitle')
+        split_url = urlsplit(tagTitle)
+        site = Site.objects.get(
+            title__contains=split_url.netloc+split_url.path)
     if "type" in request.GET and request.GET["type"]:
         postType = request.GET.get("type")
         if "newpost" in postType:
             post = Comment()
+            post.postType = "post"
         else:
             post = Resp()
+            if "respToUser" in request.GET and request.GET["respToUser"]:
+                respToProfile = request.GET.get("respToUser")
+                respToProfile = Profile.objects.get(first_name=respToProfile)
+                post.respToUser = respToProfile
+                breakpoint()
             if "respTo" in request.GET and request.GET["respTo"]:
                 post.idRespTo = request.GET.get("respTo")
-        myuser = Profile()
-        myuser.firstname = getLoginName(request)
-        if "tagTitle" in request.GET:
-            tagTitle = request.GET.get('tagTitle')
-            split_url = urlsplit(tagTitle)
-            site = Site.objects.get(title__contains=split_url.netloc)
-            post = Comment.objects.create(site=site)
-            post.site.titleTagContent = tagTitle
-            post.postType = "post"
-            post.publish = datetime.now()
-            post.created = post.publish
-            post.site.title = tagTitle
-            post.slug = site.title.replace("/", "")
-            post.slug = site.title.replace(":", "")
-        if "username" in request.GET and request.GET["username"]:
-            author = request.GET.get("username")
-            myuser = Profile.objects.get(first_name=author)
-            post.site.user = myuser
-            post.author = myuser
-        if "respToUser" in request.GET and request.GET["respToUser"]:
-            respToProfile = request.GET.get("respToUser")
-            respToProfile = Profile.objects.get(first_name=respToProfile)
-            post.respToUser = respToProfile
-        if "body" in request.GET and request.GET["body"]:
-            body = request.GET.get("body")
-            post.body = body
-        if "commento" in request.GET and request.GET["commento"]:
-            commento = request.GET.get("commento")
-            comment = Comment.objects.get(pk=commento)
-            post.commento = comment
-        if 'respToType' in request.GET and request.GET["respToType"]:
-            respToType = request.GET.get('respToType')
-            if 'respToResp' in respToType:
-                post.postType = "respToResp"
-                getRespOrPostToAssignResp = Resp.objects.get(pk=post.idRespTo)
-                post.save()
-                getRespOrPostToAssignResp.resps.add(post)
-            elif 'respToPost' in respToType:
-                getRespOrPostToAssignResp = Comment.objects.get(pk=commento)
-                post.commento = getRespOrPostToAssignResp
-        post.save()
-        # post = serializers.serialize('json', [post], ensure_ascii=False)
-        # json_post = json.dumps({'post': post})
+                if "commento" in request.GET and request.GET["commento"]:
+                    commento = request.GET.get("commento")
+                    comment = Comment.objects.get(pk=commento)
+                    post.commento = comment
+                    breakpoint()
+                if 'respToType' in request.GET and request.GET["respToType"]:
+                    respToType = request.GET.get('respToType')
+                    if 'respToResp' in respToType:
+                        post.postType = "respToResp"
+                        getRespOrPostToAssignResp = Resp.objects.get(
+                            pk=post.idRespTo)
+                        getRespOrPostToAssignResp.resps.add(post)
+                        breakpoint()
+                    elif 'respToPost' in respToType:
+                        getRespOrPostToAssignResp = Comment.objects.get(
+                            pk=commento)
+                        post.commento = getRespOrPostToAssignResp
+    post.site = site
+    post.site.title = tagTitle
+    post.slug = site.title.replace("/", "")
+    post.slug = site.title.replace(":", "")
+    post.author = myuser
+    # post.site.user = myuser
+    post.site.titleTagContent = tagTitle
+    post.publish = datetime.now()
+    post.created = post.publish
+    post.body = body
+    post.save()
+    # post = serializers.serialize('json', [post], ensure_ascii=False)
+    # json_post = json.dumps({'post': post})
     return HttpResponse("post inserito")
 
 

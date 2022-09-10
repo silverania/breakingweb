@@ -115,6 +115,7 @@ class initHome(View):
             <script  src="/static/node_modules/popper.js/dist/umd/popper.min.js"></script>
           <script  src="/static/js/bootstrap.min.js"></script>
         <script src="/static/js/all.min.js"></script>
+        <script src="/static/js/progressbar.js"></script>
         </head>
         <body id="body"  onscroll="var h=document.body.scrollHeight;getPosition();">
             <header><div class="container">

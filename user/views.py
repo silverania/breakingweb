@@ -70,7 +70,6 @@ class checkUser(View):
                 'L user è autenticato . la funzione request.user mi da : '+str(request.user))
         if isinstance(myuser, User):
             list_current_user = getUser(myuser)
-            breakpoint()
         if isinstance(request.user, User):
             userThatLoginIn = getUser(request.user)
         else:

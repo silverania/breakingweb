@@ -4,6 +4,7 @@ $('head').append('<script defer src="https://breakingweb.site/static/@fortawesom
 $('head').append('<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">')
 $('head').append('<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>')
 BASE_URL="http://127.0.0.1:8000/" // URL del server
+CLIENT_URL=window.location.href.split('#')[0].split('?')[0]
 HIDDENFIELD="?next="+window.location
 XMLHTTPURL_GETUSER=BASE_URL+"user/blog/getuser"
 URL_NEW_POST=BASE_URL+"post/sendpost"
@@ -571,7 +572,7 @@ function initBlogSGang(parTagTitle,u,p){
   sendData()
   function sendData(){
     document.getElementById('s_blog').remove
-    tagTitle = window.location.href
+    tagTitle = CLIENT_URL
     //$('#s_blog').remove()
     var jsonLogged,json
     var userfirstName=[]
@@ -713,8 +714,8 @@ function getComment(){
                   }
                 }
                 else {
-                  mess.push(new Post("post",postAuthor[0].fields.first_name,"Commenta Per Primo",".....","",BASE_PHOTO_DIR+"media/media/"+postAuthor[0].fields.photo,"0"))
-                  createPostArea(mess.at(-1))
+                  mess.push(new Post("post","tinkyblink","Commenta Per Primo",".....","",BASE_PHOTO_DIR+"media/media/"+"download_XOTfFEL.jpeg","0"))
+                  createPostArea(mess[0])
                 }                                                                            // non esistono commenti ....creo label : vuoi essere il primo a commnetare ecc...
               }
             }
