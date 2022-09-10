@@ -14,10 +14,12 @@ class LoginForm(forms.Form):
 class SignUpForm(UserCreationForm):
     photo = forms.ImageField(
             required=False, help_text='Optional.')
+    website = forms.CharField(
+        max_length=200, required=False, help_text='Opzionale')
 
     class Meta:
         model = User
-        fields = ('username', 'photo', 'password1', 'password2', )
+        fields = ('username', 'photo', 'website', 'password1', 'password2', )
 
 
 class UserRegistrationForm(forms.ModelForm):

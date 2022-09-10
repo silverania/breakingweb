@@ -1,6 +1,8 @@
 /* By Mario , superior code */
 $('head').append('<link rel="stylesheet" href="https://breakingweb.site/static/@fortawesome/fontawesome-free/css/all.css">');
 $('head').append('<script defer src="https://breakingweb.site/static/@fortawesome/fontawesome-free/js/all.js"></script>');
+$('head').append('<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">')
+$('head').append('<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>')
 BASE_URL="http://127.0.0.1:8000/" // URL del server
 HIDDENFIELD="?next="+window.location
 XMLHTTPURL_GETUSER=BASE_URL+"user/blog/getuser"
@@ -75,7 +77,6 @@ var inputSubmit=document.createElement("INPUT")
 function createSectionDivSpan(userAdmin,_userThatLogin){
   userThatLogin=_userThatLogin
   if(userAdmin!=="None"){
-    console.log("user autenticato sul server : "+userAdmin.fields.first_name)
     bForm.setAttribute("action",BASE_URL+"post/getpost");
     bForm.setAttribute("class","form_comment")
     firstDivHead.setAttribute("style","width:45%;display:inline;")
@@ -147,15 +148,10 @@ function createSectionDivSpan(userAdmin,_userThatLogin){
       aBlogEsci.appendChild(inputSubmit)
       liBlogEsci.setAttribute("id","liBlogEsci")
       H1Welcome.setAttribute("id","H1Welcome")
-      try {
         if(userThatLogin.userin[0].fields.first_name!=="None")
           H1Welcome.innerText=" "
           +(userThatLogin.userin[0].fields.first_name).charAt(0).toUpperCase()
           + userThatLogin.userin[0].fields.first_name.slice(1);+" !";
-        }
-      catch{
-        console.log("Messagio Di benvenuto non visualizzato , user non loggato ")
-        }
     }
     //bH5.appendChild(spanUserName)
     bSection.appendChild(bdiv)
@@ -172,9 +168,7 @@ function createSectionDivSpan(userAdmin,_userThatLogin){
     $(buttonLinkComment).insertAfter($("#div_comment_icon"))
   }
   else {
-    console.log("user non autenticato in sectionDivSpan")
     alert("il blog non puo essere usato !")
-    return console.log("il blog non può essere causa mancata autenticazione")
     }
 return getComment()
 }
@@ -234,6 +228,7 @@ class postArea {
 
     this.postarea.onkeyup = function(){
       this.setAttribute("style", "height:" + (this.scrollHeight) + "px;overflow-y:hidden;");
+      this.setAttribute("class","form-control");
       this.style.height = "auto";
       this.style.height = (this.scrollHeight) + "px";
       isChanged=true
@@ -255,7 +250,6 @@ class postArea {
         delayAction(action, 200);
       }
     }
-    try{
       switch (post.type){
         case "newpost":
         this.postarea.removeAttribute("disabled","")
@@ -272,10 +266,6 @@ class postArea {
         this.postarea.setAttribute("disabled","")
         break
       }
-    }
-    catch(e){
-      console.log("errore oggetto post di tipo indefinito o NULL !")
-    }
   }
 
   appendPostArea(mess,divuserblog,appendTo=bdiv){
@@ -301,6 +291,7 @@ class postArea {
       divUserBlog = document.createElement( "DIV" )
       var spanUserName=document.createElement("SPAN")
       var spanUserBar=document.createElement("SPAN")
+      var spanUserBar_2=document.createElement("SPAN")
       var spanInUserName=document.createElement("SPAN")
       var bH5=document.createElement("span")
       var divContainerHead = document.createElement("DIV")
@@ -312,9 +303,6 @@ class postArea {
       tagUserImg.setAttribute("src",mess.photo)
       divUserBlog.appendChild(divContainerHead)
       divContainerHead.appendChild(tagUserImg)
-      spanUserName.setAttribute("style","color:grey;display:inline;")
-      spanInUserName.setAttribute("style","color:grey;display:inline;")
-        spanUserBar.setAttribute("style","color:orange;display:inline;")
       $(bH5).css("margin-left" ,"3%" )
       bH5.setAttribute("id","bh5_span_"+id)
       bH5.appendChild(spanInUserName)
@@ -323,6 +311,7 @@ class postArea {
       tagUserImg.setAttribute("id","img_user_"+id)
       spanUserName.setAttribute("id","span_user_"+id)
       spanUserBar.setAttribute("id","spanBar_"+id)
+      spanUserBar_2.setAttribute("id","spanBar_2_"+id)
       spanInUserName.setAttribute("id","span_inuser_"+id)
       postarea.postarea.setAttribute("id",mess.type+"_"+mess.author+"_"+id)
       if(mess.publish==="")mess.publish="inserito adesso"
@@ -347,12 +336,13 @@ class postArea {
           this.appendPostArea(mess,divUserBlog,elementToAppendPostArea)
           divUserBlog.setAttribute("id","divuserblog_"+id)
           spanUserBar.textContent=" | "
+          spanUserBar_2.textContent=" | "+mess.publish
           spanInUserName.textContent=mess.author[0].toUpperCase() +mess.author.slice("1")
           spanInUserName.appendChild(spanUserBar)
           let respTo=mess.respToUser[0].toUpperCase() +mess.respToUser.slice("1")
-          spanUserName.textContent=" in risposta a "+respTo +" "+mess.publish
+          spanUserName.textContent=" in risposta a "+respTo
+          spanUserName.appendChild(spanUserBar_2)
           divUserBlog.setAttribute("style","margin-left:20%")
-          console.log("is resp ")
         break
         case "post":
           this.appendPostArea(mess,divUserBlog)
@@ -380,26 +370,22 @@ class postArea {
             }
           })
         break;
-        default:
-        console.log("def")
       }
       this.mess=mess
       if(mess.type=="post" || mess.type=="newpost" ) {
         if(!(postarea.disabled==true)){
           spanUserName.textContent=mess.publish
           spanInUserName.textContent=mess.author[0].toUpperCase() +mess.author.slice("1")+"  |  "
-          console.log("thispost.disabled")
           $('#post_response').css("border", "1px solid grey")
           bbutton.textContent="Commenta"
           var idWherePutElement="button_post"
-          console.log(idWherePutElement)
         }
       }
       divUserBlog.appendChild(postarea.create())
       if(mess.type=="newpost") {
         postarea.isActive=true
         if(postarea.isActive==true){
-          $("#"+postarea.postarea.id).css("border","1px solid grey")
+          $(postarea.postarea.id).css("border","1px solid grey")
         }
       }
       return $(divUserBlog)
@@ -420,18 +406,18 @@ class postArea {
     {
       if(userThatLogin!=="None")
       {
+        e.preventDefault()
         e.stopPropagation()
         if (mess.type=="resp" || mess.type=="post")
         {
           if(isOpen==false)
           {
             var className="";
-            mess.type=mess.type[0].toUpperCase()
-            +mess.type.slice(1);+" !";
             var respToPk=mess.pk
-            var respToType="resp"+"To"+mess.type
+            var respToType="resp"+"To"+mess.type[0].toUpperCase()
+            +mess.type.slice(1);
             for (var z2=0;z2<=profiles_json.length-1;z2=z2+1){
-              if(profiles_json[z2].pk==resps_json[y].fields.author){
+              if(profiles_json[z2].fields.first_name==mess.author){
                   var respToUser=profiles_json[z2].fields.first_name
                 }
               }
@@ -477,7 +463,11 @@ class postArea {
   )
   switch (mess.type){
     case "newpost" : case "newresp" :
-    postarea.isActive=true
+    $('#'+postarea.postarea.id).ready(function(){
+    $('#'+postarea.postarea.id).focus()
+    postarea.postarea.classList.add("form-control")
+      //css("border","1px solid green")
+    });
     button_risposta_post.textContent="Invia"
   $(button_risposta_post).click(function(){
       //autorizzo la creazione del nuovo post solo se è valido: contiene testo ecc..
@@ -490,10 +480,8 @@ class postArea {
       }
       catch (err){
         alert("Non posso inviare un messaggio vuoto !")
-        console.log("area di testo vuota . Exit code -1 !")
         return -1
       }
-      console.log("comparazione del tipo e valore = vera in:"+txts)
       //form_risposta_post.setAttribute("action",url)
       url=URL_NEW_POST
       mess.body=txts
@@ -506,7 +494,7 @@ class postArea {
       button_risposta_post.setAttribute("disabled","")
       postarea.postarea.setAttribute("disabled","")
       $(postarea.postarea).css("color" ,"rgba(0, 0, 0, 0.5)");
-      $(postarea.postarea).css("border" ,"2px solid grey");
+      $(postarea.postarea).css("border" ,"1px solid green");
       $(button_risposta_post).css("color" ,"black");
     }
   );
@@ -528,6 +516,7 @@ function setButtonAndFormAttribute(type){
   let buttonID="but_"+mess.type+"_"+type
   button_risposta_post.setAttribute("type","button")
   button_risposta_post.setAttribute("id",buttonID)
+  button_risposta_post.setAttribute("class","btn btn-lg btn-block")
   if(mess.body===".....") button_risposta_post.setAttribute("disabled","true")
   form_risposta_post.setAttribute("id","form_"+mess.type+"_"+id)
   form_risposta_post.setAttribute("class","form_"+mess.type+"_"+id)
@@ -539,8 +528,9 @@ disableButton(button){
 }
 
 create(){
-  $(this.postarea).animate({'width':'100%'},1200);// nu second e dui 1,2sec
-  this.postarea.setAttribute("rows","2");
+  $(this.postarea).animate({'width':'100%'});// nu second e dui 1,2sec
+  //divUserBlog.animate({'width':'50%'},4000);// nu second e dui 1,2sec
+  this.postarea.setAttribute("rows","3");
   this.postarea.setAttribute("name","messaggio")
   $(this.postarea).css("border", borderPost)
   //this.postarea.setAttribute("title","Autenticarsi NON è Obbligatorio !")
@@ -566,7 +556,6 @@ function initBlogSGang(parTagTitle,u,p){
       xhttp2.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
           response = xhttp2.responseText;
-          console.log(xhttp2.responseText);
           if (response){
             response=JSON.stringify(response)
             json=JSON.parse(response)
@@ -575,21 +564,17 @@ function initBlogSGang(parTagTitle,u,p){
             try {
               userfirstName={"userin" : JSON.parse(userprof.userLogged)}            //get admin
               userAuth=userfirstName.userin[0]
-              console.log("user admin autenticato sul server ! avvio sectionDivSpan"+
-              "e getComment.")
+              "e getComment."
             }
             catch (SyntaxError) {
-              console.log("Messaggio errore :"+SyntaxError.message)
               userfirstName=userprof.userLogged
               userAuth=userfirstName
-              console.log("esco. non si posseggono le credenziali !")
             }
             try {
               userThatLoginIn={"userin" : JSON.parse(userprof.userLoggedIN)}
             }
             catch(Error){
               userThatLoginIn=userprof.userLoggedIN
-              console.log("nessun user loggato in blog")
             }
             return createSectionDivSpan(userAuth,userThatLoginIn)
           }
@@ -605,7 +590,6 @@ function initBlogSGang(parTagTitle,u,p){
 function getComment(){
   if( ! tagTitle == "")
   {
-    console.log("recuperato titolo del sito")
     var obj
     var indexX=0
     y=0
@@ -641,10 +625,8 @@ function getComment(){
           profiles_json = JSON.parse(obj.profiles);
         }
         catch(SyntaxError){
-          console.log("Dati inconsistenti ricevuti dal server , i commenti o altri dati potrebbero non esistere !")
           mess.push(new Post("post","tinkyblink","Commenta Per Primo",".....","",BASE_PHOTO_DIR+"media/media/"+"download_XOTfFEL.jpeg","0"))
           createPostArea(mess[0])
-          return console.log("Esco dalla funzione getComent perche non esistono messaggi")
         }
         var photoResp
         var i=0
@@ -705,7 +687,7 @@ function getComment(){
                 }
                 else {
                   mess.push(new Post("post",postAuthor[0].fields.first_name,"Commenta Per Primo",".....","",BASE_PHOTO_DIR+"media/media/"+postAuthor[0].fields.photo,"0"))
-                  createPostArea(mess[0])
+                  createPostArea(mess.at(-1))
                 }                                                                            // non esistono commenti ....creo label : vuoi essere il primo a commnetare ecc...
               }
             }
@@ -876,10 +858,7 @@ function getComment(){
     if(!(isOpen==true)) {
       paPostOrResp=new postArea(messOrResp)
       paPostOrResp.makeHeadBlog(messOrResp,paPostOrResp,elementToAppendArea)
-      $(paPostOrResp.postarea).css("height" ,  paPostOrResp.postarea.scrollHeight.toString() + "px");
       $(paPostOrResp.postarea).css("overflow-y" , "hidden")
-      $(paPostOrResp.postarea).css("height" , "auto");
-      $(paPostOrResp.postarea).css("height" , paPostOrResp.postarea.scrollHeight.toString() + "px");
       paPostOrResp.createButtonRispostaPost(messOrResp,paPostOrResp)
     }
     else{
@@ -894,7 +873,7 @@ function getComment(){
         isOpen=false
       }
     }
-    return 0
+    return paPostOrResp
   }
 
   function msgIsTexareaOpen(){
@@ -929,7 +908,6 @@ function getComment(){
         }
       }
     );
-    console.log("ajax call finished");
   }
   return 0
 }

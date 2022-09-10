@@ -11,7 +11,6 @@
   <link rel="icon" type="image/x-icon" href="{% static "images/favicon.ico" %}">
   <link rel="stylesheet" href="{% static "css/reset.css"%}">
   <link rel="stylesheet" href="{% static "css/bootstrap.min.css"%}">
-  <link rel="stylesheet" href="{% static "css/all.css" %}">
   <link rel="stylesheet" href="{% static "css/homepage.css" %}">
   <link rel="stylesheet" href="{% static "css/footer.css" %}">
   <script src="{% static 'js/all.min.js' %}"></script>
@@ -23,7 +22,7 @@
 <script  src="{% static 'js/bootstrap.min.js' %}"></script>
 {% block otherscripts %} {% endblock %}
 
-</head>
+
 
 
 <body id="body"  onscroll="var h=document.body.scrollHeight;getPosition();">
@@ -109,7 +108,7 @@ function getIndex(e) {
     var optio = document.createElement('LI');
     optio.setAttribute("id","tutorial_id_{{tut.id}}")
     //$('#ul_in_selecFormAutori').css("display","block")
-    title="{{tut.title}}";
+    title="{{tut.slug}}";
     base=width/2;
     base=base.toString()+"px";
     var url=title
@@ -178,15 +177,16 @@ function getIndex(e) {
 <div id="d_amazon_1" class="mt-5 col-md-3 col-lg-3 col-xl-3" >
   <section id="section_right_aside">
 
-    <!--aside>
-  <div id="d-approfondimenti">
-      <span id="s_approfondimenti" class="badge badge-pill badge-warning">Approfondimenti</span>
+    <aside>
+  <div id="d-a">
+      <span id="s_download" class="badge badge-pill badge-warning">Download</span>
     </div>
-    <div style="text-align:center;">
-  {% block amazon_right %}
+    <div class="row">
+    <div class="col-12">
+  {% block download %}
       {% endblock %}
-      </div>
-    </aside-->
+      </div></div>
+    </aside>
       </section>
     </div>
 

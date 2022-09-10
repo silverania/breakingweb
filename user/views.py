@@ -16,6 +16,7 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 import json
 from django.contrib.auth.models import Group
+from blog.models import Site
 valuenext = ""
 userLoggedIN = None
 list_current_user = None
@@ -34,7 +35,6 @@ def getUser(user):
 @method_decorator(csrf_exempt, name='dispatch')
 class checkUser(View):
     def post(self, request):
-        global valuenext, userLoggedIN, list_current_user
         myuser = object()
         userThatLoginIn = object()
         list_json_user_data = json.loads(request.body)
@@ -50,7 +50,7 @@ class checkUser(View):
             try:
                 myuser = authenticate(username=myuser, password=password)
                 print("Verifica ... myuser non è di tipo User , ho proceduto"
-                      + "ad authenticazione !! verifico se sta nel gruppo Blog..")
+                      + "ad authenticazione !! verifico se sta nel gruppo Blog.."+str(myuser))
                 if myuser.groups.filter(name__in=['BlogAdmin']).exists():
                     print("myuser sta già nel gruppo blog_admin.....")
                 else:
@@ -70,14 +70,17 @@ class checkUser(View):
                 'L user è autenticato . la funzione request.user mi da : '+str(request.user))
         if isinstance(myuser, User):
             list_current_user = getUser(myuser)
-        if isinstance(userLoggedIN, User):
-            userThatLoginIn = getUser(userLoggedIN)
+            breakpoint()
+        if isinstance(request.user, User):
+            userThatLoginIn = getUser(request.user)
         else:
             userThatLoginIn = "None"
         data = json.dumps(
             {
                 "userLogged": list_current_user,
                 "userLoggedIN": userThatLoginIn,
+                "authenticated": request.user.is_authenticated,
+                "user": str(request.user),
             })
         print(str(JsonResponse(data, safe=False)))
         response = JsonResponse(
@@ -112,19 +115,24 @@ def getUrlRequest(request):
 
 
 def user_login(request):
-    global te, scrollTo, valuenext, userLoggedIN
+    global te, scrollTo
+    userLoggedIN = User
+    valuenext = ""
+    if 'next' in request.GET:
+        valuenext = request.GET.get('next')+scrollTo
+        print("entry in view user_login....valuenext="+valuenext)
     password = ''
-    print("entry in view user_login")
+    print("login="+str(request.user.is_authenticated))
     try:
-        if userLoggedIN.is_authenticated:
-            print("AUTHENTICATTTTTTTTTTTTT, request.user ="
-                  + str(request.user)+"userLoggedIN = "+str(userLoggedIN))
+        if request.user.is_authenticated:
             return render(request, "seigiaautenticato.html", {'valuenext':
                                                               valuenext})
     except Exception:
         print("userLoggedihn non riesco a sapere lo stato Auth/nonauth")
     if request.method == 'POST':
-        print("view: user_login , POST method")
+        if 'next' in request.POST:
+            valuenext = request.POST.get('next')+scrollTo
+            print("view: user_login , POST method......valuenext="+valuenext)
         form = LoginForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
@@ -148,8 +156,9 @@ def user_login(request):
             if 'next' in request.GET:
                 valuenext = request.GET.get('next')+scrollTo
             myuser = None
+            print("view: user_login , GET method......valuenext="+valuenext)
     return render(request, 'registration/login.html', {'form': form,
-                  'next': valuenext, 'user': myuser, 'password': password})
+                                                       'next': valuenext, 'user': myuser, 'password': password})
 
 
 @login_required
@@ -177,27 +186,29 @@ class Logout(View):
 
 
 def user_register(request):
-    global valuenext
+    valuenext = ""
     if request.method == 'POST':
         form = SignUpForm(request.POST, request.FILES)
         if form.is_valid():
             user = form.save()
             user.refresh_from_db()
-            user.profile.photo = form.cleaned_data.get('photo')
-            # myphoto = request.FILES('photo')
-            # user.profile.photo = myphoto
-            user.profile.first_name = form.cleaned_data.get('username')
-            user.save()
+            if 'blog' in request.path:
+                user.is_staff = True
+                group = Group.objects.get(name='BlogAdmin')
+                user.groups.add(group)
+                print('myuser aggiunto al gruppo blogadmin ')
             print("USERPROFILEPHOTO"+str(request.FILES))
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
-            # login(request, user)
-            #if 'blog' in request.path and 'next' in request.GET:
-            #    return redirect('/user/login/blog')
-            #elif 'blog' in request.path:
-            #    breakpoint()
-            #    return HttpResponse("<h1>Authenticated on HostMS !</h1>")
+            user.profile.photo = form.cleaned_data.get('photo')
+            user.profile.website = form.cleaned_data.get('website')
+            tu, create = Site.objects.get_or_create(
+                title=user.profile.website, user=user.profile)
+            # myphoto = request.FILES('photo')
+            # user.profile.photo = myphoto
+            user.profile.first_name = username
+            user.save()
             if 'next' in request.GET:
                 valuenext = request.GET.get('next')
                 return redirect('/user/login?next='+valuenext)
@@ -212,7 +223,6 @@ def user_register(request):
         elif 'next' in request.GET:
             valuenext = request.GET.get('next')
         form = SignUpForm()
-        #print("USERPROFILEPHOTO"+str(myphoto))
     return render(request, 'user/register.html', {'form': form})
 
 

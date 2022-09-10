@@ -9,6 +9,7 @@ class Profile(models.Model):
     #post=models.ForeignKey('blog.Comment',related_name="commenti",blank=True,null=True,on_delete=models.CASCADE)
     date_of_birth = models.DateField(blank=True, null=True)
     photo = models.ImageField(upload_to='media/media/', blank=True, null=True)
+    website = models.URLField(max_length=210, default="https://")
     first_name = models.CharField(max_length=100, default="anonimo")
     last_name = models.CharField(max_length=100, blank=True, null=True)
     #profile_reg_to_application = models.CharField(max_length=100)

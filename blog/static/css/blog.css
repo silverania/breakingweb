@@ -25,8 +25,8 @@ font-family:'Alpha Slab One'
 #blog{
   width:43%!important;
   max-width:43%!important;
-  margin:0 auto! important;
-  font-family:'WorkSans-Regular';
+  margin:50px auto! important;
+  font-family:'Montserrat-Regular';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.6;
@@ -81,7 +81,7 @@ a{
 
 [id^=d_head_blog]{
 display: inline-block;
-  margin-bottom: 10px!important;
+  margin-bottom: 5%;
 }
 
 [id^=span_in]{
@@ -151,22 +151,23 @@ font-size:1rem;
 }
 
 textarea {
-background-color:grey;
+background-color:transparent;
   font-family:"Montserrat-Regular";
   font-size:1rem!important;
   line-height: 1.6;
   color:black;
   width:100%;
 height:auto;
-  //min-width:100%;
+  /*min-width:100%;*/
   outline: none !important;
   border: none;
      background-color: transparent;
      resize: none;
      outline: none;
   box-shadow: 10px 10px 10px #719ECE;
-  border-radius:1px;
+  border-radius:4px;
   overflow:hidden;
+  padding:5px!important;
 }
 
 img{
@@ -181,7 +182,7 @@ button:disabled {
 }
 
 [id^=new_divuserblog]{
-  margin:20% auto;
+  margin:5% auto;
 }
 
 /*[id^=new_divuserblog]> [id^=d_head] + [id^=d_post] + textarea{*/
@@ -254,21 +255,6 @@ fa .fa-comments-dots{
 #divuserblog_1{
   margin-top:10%!important;
 }
-
-#p_text{
-  width:100%;
-  height:auto;
-  padding:40px;
-  margin:0 auto;
-  border:3px solid orange;
-  border-radius:10px;
-  background-color:white;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-
 
 
 @media screen and (max-width: 780px) {
@@ -347,7 +333,7 @@ textarea {
 
 textarea {
     font-size:1rem!important;
-    background-color: rgb(255,255,255);
+    background-color: transparent;
 }
 }
 

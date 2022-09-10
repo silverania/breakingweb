@@ -46,9 +46,10 @@ html {
 body {
   width:100%;
   height:auto;
- font-family:'WorkSans','Assistant-regular';
+  font-family:'WorkSans','Assistant-regular';
 font-size:20px;
-/*box-sizing:content-box;*/
+background-color:whitesmoke;
+  /*box-sizing:content-box;*/
 }
 
 /* privacy window */
@@ -103,8 +104,10 @@ header{
 }
 
 a ,a > span {
-  border:none;
-  color:black;
+  border:
+  none;
+  color:
+  black;
 }
 
 #span_title{
@@ -179,8 +182,14 @@ z-index:-999!important;
   margin-left:auto!important;
   margin-bottom:5%!important;
 }
-#s_approfondimenti{
+#a_download{
+  display:block;
+  text-align: center;
+  margin-top: 20px!important;
+}
+#s_download{
   font-family: 'Carter_One';
+  font-size: 1em;
   font-weight:normal;
   font-style:normal;
   color:white;
@@ -326,14 +335,16 @@ font-weight:bold;
   border:2px solid #007bff;
 }
 [id^="a_tutorial"]{
-  width:auto!important;
-  background-color: black;
-  color:white;
+  width:
+  auto!important;
+  background-color: black!important;
+  color:white!important;
+  black!important;
   border-color: whitesmoke;
 }
 [id^="a_tutorial"]:hover{
-  background-color:orange;
-  color:orange;
+  background-color:orange!important;
+  color:black!important;
 }
 #p_content{
   margin-top:9%;
@@ -352,22 +363,28 @@ a:hover{
 
 
 .d_divaside{
-  display:none;
-  position:absolute;
+  display:
+  none;
+  position:
+  absolute;
   width:100%;
   padding:0;
   margin:0;
   /*left:0%;*/
-  color:white;
+  /* color:
+  white; */
   left:-700px;
-  height:auto;
+  height:
+  auto;
   z-index:100!important;
 }
 #d_in_divaside{
-  width:inherit;
+  width:
+  inherit;
   /*left:0%;*/
-  color:white;
-  height:inherit;
+  /* color:white; */
+  height:
+  inherit;
 }
 
 

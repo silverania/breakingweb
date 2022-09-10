@@ -10,12 +10,11 @@ from django.core import serializers
 from django.forms.models import model_to_dict
 from django.core.serializers.json import DjangoJSONEncoder
 from django.urls import reverse
+from urllib.parse import urlsplit, urlunsplit
 
 photo = ""
 message = ""
-tu = Site()
-site = ""
-data = {}
+
 formatted_datetime = formats.date_format(
     datetime.now(), "SHORT_DATETIME_FORMAT")
 
@@ -60,7 +59,8 @@ def serializer(data):
 
 def getPost(request):
     print("entry in view getpost")
-    global tu, formatted_datetime, tagTitle, site, data
+    global formatted_datetime
+    data = ""
     profile_list = []
     datac = []
     comments = []
@@ -70,21 +70,28 @@ def getPost(request):
     t2 = []
     if "tagTitle" in request.GET and request.GET["tagTitle"]:
         tagTitle = str(request.GET.get("tagTitle"))
-        tu, create = Site.objects.get_or_create(title=tagTitle)
-        print("tagtitle=" + str(tagTitle))
-        # tagTitleInPage = Site.objects.get(title=tagTitle)
-        # aggiornato = formatted_datetime
-        if comments_in_database.exists():
-            risposte_serialized = []
-            all_comments_for_page = Comment.objects.filter(
-                site__title=tagTitle).order_by('-publish')
-            datac = list(all_comments_for_page)
-            data_comm = serializer(datac)
-            for comment in comments_in_database:
-                if tagTitle in str(comment.site):
-                    comments.append(comment)
-                    t_order = comment.risposte.all().order_by('-publish')
-                    t = list(t_order)
+        if "userAuth" in request.GET and request.GET["userAuth"]:
+            userAuth = request.GET.get('userAuth')
+            blogAdmin = Profile.objects.get(first_name=userAuth)
+            print("tagtitle=" + str(tagTitle))
+            # tagTitleInPage = Site.objects.get(title=tagTitle)
+            # aggiornato = formatted_datetime
+            if comments_in_database.exists():
+                risposte_serialized = []
+                all_comments_for_page = Comment.objects.filter(
+                    site__title=tagTitle).order_by('-publish')
+                datac = list(all_comments_for_page)
+                data_comm = serializer(datac)
+                for comment in comments_in_database:
+                    print(str(type(comment)))
+                    try:
+                        if tagTitle in str(comment.site.title):
+                            breakpoint()
+                            comments.append(comment)
+                            t_order = comment.risposte.all().order_by('-publish')
+                            t = list(t_order)
+                    except Exception:
+                        continue
                     try:
                         if t2 is not None:
                             t2 = t2 + t
@@ -94,76 +101,86 @@ def getPost(request):
                         risposte_serialized = serializer(t2)
                     except UnboundLocalError:
                         print("Nessun commento per la pagina !")
-            data = json.dumps(
-                {
-                    "data_comm": data_comm,
-                    "resps": risposte_serialized,
-                    "profiles": profiles_list,
+                data = json.dumps(
+                    {
+                        "data_comm": data_comm,
+                        "resps": risposte_serialized,
+                        "profiles": profiles_list,
+                        }
+                    )
+            else:
+                comment.site = Site.objects.get(pk=1)
+                print(str("comment="+str(comment.body)+str(comment.site)))
+                print("Errore ,Non ci sono commenti nel database !")
+                data = json.dumps(
+                    {
+                        "resps": [{"": ""}],
+                        "data_comm": [{"": ""}],
+                        "profiles": profiles_list,
                     }
                 )
-        else:
-            print("Errore ,Non ci sono commenti nel database !")
-            data = json.dumps(
-                {
-                    "resps": [{"": ""}],
-                    "data_comm": [{"": ""}],
-                    "profiles": profiles_list,
-                }
-            )
-        try:
-            return JsonResponse(data, safe=False)
-        except UnboundLocalError:
-            print("cahe sfcaccim")
+            try:
+                return JsonResponse(data, safe=False)
+            except UnboundLocalError:
+                print("cahe sfcaccim")
     return render(request, {'data': data, })
 
 
 def newPost(request):
-    global tu
     postType = ""
+    post = []
     print("entrypoint to newPost ....request="+str(request))
     if "type" in request.GET and request.GET["type"]:
         postType = request.GET.get("type")
         if "newpost" in postType:
-            post = Comment.objects.create()
-            post.postType = "post"
-            post.site = tu
-            post.slug = tu.title.replace(" ", "_")
-            post.publish = datetime.now()
-            post.created = post.publish
+            post = Comment()
         else:
             post = Resp()
             if "respTo" in request.GET and request.GET["respTo"]:
                 post.idRespTo = request.GET.get("respTo")
-    myuser = Profile()
-    myuser.firstname = getLoginName(request)
-    if "username" in request.GET and request.GET["username"]:
-        author = request.GET.get("username")
-        myuser = Profile.objects.get(first_name=author)
-        post.author = myuser
-    if "respToUser" in request.GET and request.GET["respToUser"]:
-        respToProfile = request.GET.get("respToUser")
-        respToProfile = Profile.objects.get(first_name=respToProfile)
-        post.respToUser = respToProfile
-    if "body" in request.GET and request.GET["body"]:
-        body = request.GET.get("body")
-        post.body = body
-    if "commento" in request.GET and request.GET["commento"]:
-        commento = request.GET.get("commento")
-        comment = Comment.objects.get(pk=commento)
-        post.commento = comment
-    if 'respToType' in request.GET and request.GET["respToType"]:
-        respToType = request.GET.get('respToType')
-        if 'respToResp' in respToType:
-            post.postType = "respToResp"
-            getRespOrPostToAssignResp = Resp.objects.get(pk=post.idRespTo)
-            post.save()
-            getRespOrPostToAssignResp.resps.add(post)
-        elif 'respToPost' in respToType:
-            getRespOrPostToAssignResp = Comment.objects.get(pk=commento)
-            post.commento = getRespOrPostToAssignResp
-    post.save()
-    # post = serializers.serialize('json', [post], ensure_ascii=False)
-    # json_post = json.dumps({'post': post})
+        myuser = Profile()
+        myuser.firstname = getLoginName(request)
+        if "tagTitle" in request.GET:
+            tagTitle = request.GET.get('tagTitle')
+            split_url = urlsplit(tagTitle)
+            site = Site.objects.get(title__contains=split_url.netloc)
+            post = Comment.objects.create(site=site)
+            post.site.titleTagContent = tagTitle
+            post.postType = "post"
+            post.publish = datetime.now()
+            post.created = post.publish
+            post.site.title = tagTitle
+            post.slug = site.title.replace("/", "")
+            post.slug = site.title.replace(":", "")
+        if "username" in request.GET and request.GET["username"]:
+            author = request.GET.get("username")
+            myuser = Profile.objects.get(first_name=author)
+            post.site.user = myuser
+            post.author = myuser
+        if "respToUser" in request.GET and request.GET["respToUser"]:
+            respToProfile = request.GET.get("respToUser")
+            respToProfile = Profile.objects.get(first_name=respToProfile)
+            post.respToUser = respToProfile
+        if "body" in request.GET and request.GET["body"]:
+            body = request.GET.get("body")
+            post.body = body
+        if "commento" in request.GET and request.GET["commento"]:
+            commento = request.GET.get("commento")
+            comment = Comment.objects.get(pk=commento)
+            post.commento = comment
+        if 'respToType' in request.GET and request.GET["respToType"]:
+            respToType = request.GET.get('respToType')
+            if 'respToResp' in respToType:
+                post.postType = "respToResp"
+                getRespOrPostToAssignResp = Resp.objects.get(pk=post.idRespTo)
+                post.save()
+                getRespOrPostToAssignResp.resps.add(post)
+            elif 'respToPost' in respToType:
+                getRespOrPostToAssignResp = Comment.objects.get(pk=commento)
+                post.commento = getRespOrPostToAssignResp
+        post.save()
+        # post = serializers.serialize('json', [post], ensure_ascii=False)
+        # json_post = json.dumps({'post': post})
     return HttpResponse("post inserito")
 
 

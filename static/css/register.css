@@ -108,6 +108,14 @@ margin-left: 4px;
 #b_registrami:hover{
     border:3px solid white!important;
 }
+.kpx_authTitle  {
+  margin-top:20px;
+color:black;
+}
+
+.kpx_loginOr {
+margin-top:20px;  
+}
 
 @media (max-width: 990px) {
 .kpx_spanOr{

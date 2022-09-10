@@ -1,0 +1,99 @@
+@font-face {
+  font-family: 'Roboto';
+  src: url('../webfonts/Roboto-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Orbitron';
+  src: url('../webfonts/Orbitron-VariableFont_wght.ttf') ;
+}
+
+@font-face {
+font-family: 'Dancing Script';
+src: url('../webfonts/DancingScript-Bold.ttf') ;
+}
+@font-face {
+font-family: 'WorkSans';
+src: url('../webfonts/WorkSans-Regular.ttf') ;
+}
+@font-face {
+font-family: 'Baloo_2';
+src: url('../webfonts/Baloo2-ExtraBold.ttf') ;
+}
+@font-face {
+font-family: 'Carter_One';
+src: url('../webfonts/CarterOne-Regular.ttf') ;
+}
+@font-face {
+font-family: 'Assistant-regular';
+src: url('../webfonts/Assistant-Regular.ttf') ;
+}
+@font-face {
+font-family: 'ShareTechMono-Regular';
+src: url('../webfonts/ShareTechMono-Regular.ttf') ;
+}
+@font-face {
+font-family: 'ShareTechMono-Regular';
+src: url('/static/Fonts/WorkSans-ExtraBold.ttf') ;
+}
+
+
+body{
+  background-color: whitesmoke;/*#8fced2;*/
+}
+
+h1{
+font-family:'ShareTechMono-Regular';
+font-size:3rem;
+}
+
+.class_div_title{
+  border-left:1px solid black;
+}
+.p_content{
+  text-align: justify;
+  text-justify: inter-word;
+}
+.p_info{
+  font-family:"WorkSans";
+  font-size:2em;
+  color:black;
+  text-align:left;
+}
+
+#div_col_info{
+  margin-top:5%!important;
+}
+
+#id_row_title{
+ border-bottom: 1px black solid ;
+}
+#id_video{
+  margin-top:5%;
+}
+
+@media screen and (max-width: 1200px) {
+  h1{
+  font-family:'ShareTechMono-Regular';
+  font-size:2rem;
+  }
+  .p_info{
+    font-family:"WorkSans";
+    font-size:1em;
+    color:black;
+    text-align:left;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  h1{
+  font-family:'ShareTechMono-Regular';
+  font-size:2rem;
+  }
+  .p_info{
+    font-family:"WorkSans";
+    font-size:1.4em;
+    color:black;
+    text-align:left;
+  }
+}
