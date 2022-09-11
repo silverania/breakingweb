@@ -83,7 +83,7 @@ def getPost(request):
                     site__title=tagTitle).order_by('-publish')
                 datac = list(all_comments_for_page)
                 data_comm = serializer(datac)
-                for comment in comments_in_database:
+                for comment in all_comments_for_page:
                     print(str(type(comment)))
                     try:
                         if tagTitle in str(comment.site.title):

@@ -1,3 +1,5 @@
 aggiungere tagtitle a risposta e controllare la view in blog
 
 useloggedin e useradmin sono null in blog.js
+
+nel sito del kernel la risposta viene inserita 3, 4 votlte
