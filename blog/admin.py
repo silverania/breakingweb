@@ -12,7 +12,8 @@ class PostAdmin(admin.ModelAdmin):
         site = Site.objects.filter(user=profile)
         for s in site:
             filtered_query |= query.filter(site=s)
-        return query
+            print(s.title)
+        return filtered_query
     search_fields = ('body',)
     list_filter = ('slug', 'status', 'created', 'publish', 'author',)
     #prepopulated_fields = {'slug': ('title',)}
@@ -29,9 +30,9 @@ class RespAdmin(admin.ModelAdmin):
         site = Site.objects.filter(user=profile)
         for s in site:
             filtered_query |= query.filter(site=s)
-        return query
-    search_fields = ('commento', )
-    list_display = ('commento', 'body', 'created',
+        return filtered_query
+    search_fields = ('commento', 'body')
+    list_display = ('id', 'commento', 'body', 'created',
                     'publish', 'author', 'respToUser', 'idRespTo', 'postType')
     list_filter = ('created', 'commento', 'publish', 'author')
     date_hierarchy = 'publish'
@@ -42,7 +43,6 @@ class classSite(admin.ModelAdmin):
     list_filter = ('title', 'user', 'titleTagContent')
     list_display = ('title', 'user', 'titleTagContent')
     search_fields = ('user',)
-    exclude = ('slug',)
 
 
 class classProfile(admin.ModelAdmin):

@@ -139,8 +139,10 @@ def newPost(request):
     if "tagTitle" in request.GET:
         tagTitle = request.GET.get('tagTitle')
         split_url = urlsplit(tagTitle)
+        breakpoint()
         site = Site.objects.get(
-            title__contains=split_url.netloc+split_url.path)
+            title=split_url.scheme+"://"+split_url.netloc+split_url.path)
+        breakpoint()
     if "type" in request.GET and request.GET["type"]:
         postType = request.GET.get("type")
         if "newpost" in postType:

@@ -646,16 +646,10 @@ function getComment(){
       dataType: 'json',
       success: function (data) {
         s = cleanJson(data)
-        try {
-          obj = JSON.parse(s);
-          comments_json = JSON.parse(obj.data_comm);// blog.comment
-          resps_json = JSON.parse(obj.resps);
-          profiles_json = JSON.parse(obj.profiles);
-        }
-        catch(SyntaxError){
-          mess.push(new Post("post","tinkyblink","Commenta Per Primo",".....","",BASE_PHOTO_DIR+"media/media/"+"download_XOTfFEL.jpeg","0"))
-          createPostArea(mess[0])
-        }
+        obj = JSON.parse(s);
+        comments_json = JSON.parse(obj.data_comm);// blog.comment
+        resps_json = JSON.parse(obj.resps);
+        profiles_json = JSON.parse(obj.profiles);
         var photoResp
         var i=0
         var respToUser
@@ -714,6 +708,7 @@ function getComment(){
                   }
                 }
                 else {
+                  console.log("non ho trovato commenti....inserisco il commento di default")
                   mess.push(new Post("post","tinkyblink","Commenta Per Primo",".....","",BASE_PHOTO_DIR+"media/media/"+"download_XOTfFEL.jpeg","0"))
                   createPostArea(mess[0])
                 }                                                                            // non esistono commenti ....creo label : vuoi essere il primo a commnetare ecc...
