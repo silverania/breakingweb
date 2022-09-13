@@ -120,4 +120,4 @@ class Resp(models.Model):
         ordering = ("publish",)
 
     def __str__(self):
-        return '{} - {} ({})'.format('pk:'+str(self.pk), ':'+str(self.idRespTo), 'tipo:'+str(self.postType))
+        return '{} - {} ({})'.format('id:'+str(self.pk), ':'+str(self.idRespTo), 'tipo:'+str(self.postType))

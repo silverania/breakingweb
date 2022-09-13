@@ -1,3 +1,20 @@
+Installazione Di WebTalk :
+
+Dipendenze : Jquery.
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js">
+  </script>
+
+Inserire il tag script sottostante , nel codice del sito Web su cui vuoi usare Host-WebTalk , preferibilmente
+prima del tag di chiusura </body>
+<script id="s_blog">
+    $(document).ready(function(){
+      initBlogSGang("mario","sol-7373");
+    })
+</script>
+
+
+______________________________________________________________________________
 aggiungere tagtitle a risposta e controllare la view in blog
 
 useloggedin e useradmin sono null in blog.js

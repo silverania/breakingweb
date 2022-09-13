@@ -176,7 +176,7 @@ Dopodichè nel codice html del tuo sito , copia e incolla i tag che vedi sotto
         <footer>
  <link rel=stylesheet href="/static/css/blog.css">
        <script src="/static/js/blog.js"></script>
-         <script id="s_blog">initBlogSGang(document.title,"mario45","sol-7373") </script>
+         <script id="s_blog">initBlogSGang("mario45","sol-7373") </script>
 
         </footer>
         </body>

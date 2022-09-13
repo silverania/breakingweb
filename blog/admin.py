@@ -13,7 +13,7 @@ class PostAdmin(admin.ModelAdmin):
         for s in site:
             filtered_query |= query.filter(site=s)
             print(s.title)
-        return filtered_query
+        return query
     search_fields = ('body',)
     list_filter = ('slug', 'status', 'created', 'publish', 'author',)
     #prepopulated_fields = {'slug': ('title',)}
@@ -30,7 +30,7 @@ class RespAdmin(admin.ModelAdmin):
         site = Site.objects.filter(user=profile)
         for s in site:
             filtered_query |= query.filter(site=s)
-        return filtered_query
+        return query
     search_fields = ('commento', 'body')
     list_display = ('id', 'commento', 'body', 'created',
                     'publish', 'author', 'respToUser', 'idRespTo', 'postType')

@@ -157,6 +157,7 @@ def newPost(request):
                 breakpoint()
             if "respTo" in request.GET and request.GET["respTo"]:
                 post.idRespTo = request.GET.get("respTo")
+                breakpoint()
                 if "commento" in request.GET and request.GET["commento"]:
                     commento = request.GET.get("commento")
                     comment = Comment.objects.get(pk=commento)
@@ -164,11 +165,12 @@ def newPost(request):
                     breakpoint()
                 if 'respToType' in request.GET and request.GET["respToType"]:
                     respToType = request.GET.get('respToType')
+                    breakpoint()
                     if 'respToResp' in respToType:
+                        breakpoint()
                         post.postType = "respToResp"
                         getRespOrPostToAssignResp = Resp.objects.get(
                             pk=post.idRespTo)
-                        getRespOrPostToAssignResp.resps.add(post)
                         breakpoint()
                     elif 'respToPost' in respToType:
                         getRespOrPostToAssignResp = Comment.objects.get(
@@ -185,6 +187,7 @@ def newPost(request):
     post.created = post.publish
     post.body = body
     post.save()
+    getRespOrPostToAssignResp.resps.add(post)
     # post = serializers.serialize('json', [post], ensure_ascii=False)
     # json_post = json.dumps({'post': post})
     return HttpResponse("post inserito")

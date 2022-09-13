@@ -539,7 +539,7 @@ create(){
   }
 }
 
-function initBlogSGang(parTagTitle,u,p){
+function initBlogSGang(u,p){
   var p=p
   var u=u
 
