@@ -129,6 +129,7 @@ def getPost(request):
 def newPost(request):
     postType = ""
     post = []
+    getRespOrPostToAssignResp = []
     print("entrypoint to newPost ....request="+str(request))
     if "body" in request.GET and request.GET["body"]:
         body = request.GET.get("body")
@@ -139,10 +140,8 @@ def newPost(request):
     if "tagTitle" in request.GET:
         tagTitle = request.GET.get('tagTitle')
         split_url = urlsplit(tagTitle)
-        breakpoint()
         site = Site.objects.get(
             title=split_url.scheme+"://"+split_url.netloc+split_url.path)
-        breakpoint()
     if "type" in request.GET and request.GET["type"]:
         postType = request.GET.get("type")
         if "newpost" in postType:
@@ -154,24 +153,18 @@ def newPost(request):
                 respToProfile = request.GET.get("respToUser")
                 respToProfile = Profile.objects.get(first_name=respToProfile)
                 post.respToUser = respToProfile
-                breakpoint()
             if "respTo" in request.GET and request.GET["respTo"]:
                 post.idRespTo = request.GET.get("respTo")
-                breakpoint()
                 if "commento" in request.GET and request.GET["commento"]:
                     commento = request.GET.get("commento")
                     comment = Comment.objects.get(pk=commento)
                     post.commento = comment
-                    breakpoint()
                 if 'respToType' in request.GET and request.GET["respToType"]:
                     respToType = request.GET.get('respToType')
-                    breakpoint()
                     if 'respToResp' in respToType:
-                        breakpoint()
                         post.postType = "respToResp"
                         getRespOrPostToAssignResp = Resp.objects.get(
                             pk=post.idRespTo)
-                        breakpoint()
                     elif 'respToPost' in respToType:
                         getRespOrPostToAssignResp = Comment.objects.get(
                             pk=commento)
@@ -187,7 +180,9 @@ def newPost(request):
     post.created = post.publish
     post.body = body
     post.save()
-    getRespOrPostToAssignResp.resps.add(post)
+    typeIs = str(type(getRespOrPostToAssignResp))
+    if "Resp" in typeIs:
+        getRespOrPostToAssignResp.resps.add(post)
     # post = serializers.serialize('json', [post], ensure_ascii=False)
     # json_post = json.dumps({'post': post})
     return HttpResponse("post inserito")

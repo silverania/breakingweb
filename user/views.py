@@ -17,6 +17,10 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 from django.contrib.auth.models import Group
 from blog.models import Site
+
+from django.contrib import messages
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
 valuenext = ""
 userLoggedIN = None
 list_current_user = None
@@ -223,6 +227,22 @@ def user_register(request):
             valuenext = request.GET.get('next')
         form = SignUpForm()
     return render(request, 'user/register.html', {'form': form})
+
+
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            return HttpResponse("Password Modificata ! ")
+        else:
+            return HttpResponse("errore !")
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'change_password.html', {
+        'form': form
+    })
 
 
 @ login_required

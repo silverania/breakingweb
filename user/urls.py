@@ -11,11 +11,10 @@ urlpatterns = [
     path('logout/', views.Logout.as_view(), name="logout"),
     path('logout/blog', views.Logout.as_view(), name="logout"),
     re_path('register/', views.user_register, name='register'),
-    path('dashboard/', views.dashboard, name='dashboard'),
-    # path('password_change/',auth_views.PasswordChangeView.as_view(),name='password_change'),
-    # path('password_change/done/',auth_views.PasswordChangeDoneView.as_view(),name='password_change_done'),
-    path('password_change/', auth_views.PasswordChangeView.as_view(),
-         name='password_change'),
+
+
+    path('change_password/', views.change_password,
+         name='change_password'),
     path('password_change/done/', auth_views.PasswordChangeDoneView.as_view(),
          name='password_change_done'),
 
