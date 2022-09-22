@@ -1,11 +1,6 @@
 from django.db import models
 from django.utils import timezone
-
-# from django.contrib.auth.models import User
-from datetime import date
-from django.urls import reverse
 from user.models import Profile
-from django.utils.timezone import now
 from django.utils.text import slugify
 
 # Create your models here.

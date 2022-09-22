@@ -8,11 +8,11 @@ body {
     font-family: 'Titillium Web', sans-serif;
 }
 a{
-    color:#ff5400;
+    color:blue;
 }
 a:hover {
-    opacity: 0.8;
-    color:#ff5400;
+    opacity: 0.5;
+    color:orange;
     text-decoration:none;
 }
 
@@ -32,7 +32,7 @@ a:hover {
 }
 
 .kpx_login .kpx_socialButtons a {
-    color: white; // In yourUse @body-bg
+    color: white;
 	opacity:0.9;
 }
 .kpx_login .kpx_socialButtons a:hover {

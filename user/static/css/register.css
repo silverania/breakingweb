@@ -24,11 +24,6 @@ margin-left: 10px;
 color: #FFC312;
 }
 
-#div_save_new_password{
-
-  margin-top:20px!important;
-}
-
 .social_icon span:hover{
 color: white;
 cursor: pointer;
@@ -112,14 +107,6 @@ margin-left: 4px;
 
 #b_registrami:hover{
     border:3px solid white!important;
-}
-.kpx_authTitle  {
-  margin-top:20px;
-color:black;
-}
-
-.kpx_loginOr {
-margin-top:20px;
 }
 
 @media (max-width: 990px) {

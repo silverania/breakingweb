@@ -74,14 +74,31 @@
                     <hr />
 					<button id="id_login" class="btn btn-lg btn-outline-primary btn-block" type="submit"><i class="fad fas-sign-in"></i> Login</button>
 				</form>
-        <script type="text/javascript">
 
+<script>
+            $(document).ready(function(){
               const params = new URLSearchParams(window.location.search);
-              //document.getElementById("next").value = params.get('next');
-            var r=document.getElementById("a_reg");
+              var valuenext=params.get('next');
+              var login="{{ request.user.is_authenticated }}"
+              $('[data-toggle="tooltip"]').tooltip()
+              var r=document.getElementById("a_reg");
+              var pf=document.getElementById("a_passwordforget");
+              var pc=document.getElementById("a_changepassword");
               r.href="/user/register/blog?next="+params.get('next');
+              pc.href="{% url 'change_password' %}?next="+params.get('next');
+              pf.href="{% url 'password_reset' %}?next="+params.get('next');
               var fs= document.getElementById("formlogin");
-              fs.location.reload()
+              if (valuenext){
+                localStorage.setItem("next",valuenext);
+                next=localStorage.getItem("next")
+                console.log("valuenext not empty : "+next)
+                }
+                else{
+                  next=localStorage.getItem("next")
+                  window.location.href=window.location.href+"?next="+next
+                  console.log(next)
+              }
+            });
           </script>
 			</div>
     	</div>
@@ -98,7 +115,10 @@
 			</div>
 			<div class="col-xs-12 col-sm-3">
 				<p class="kpx_forgotPwd">
-					<a href="{% url 'change_password' %}">Password Dimenticata ?</a>
+					<small><a id="a_passwordforget">Password Dimenticata ?</a></small>
+				</p>
+        <p class="kpx_forgotPwd">
+					<small><a id="a_changepassword">Vuoi Cambiare Password ?</a></small>
 				</p>
 			</div>
 		</div>
@@ -110,8 +130,7 @@
         </div>
         <script>
 $(document).ready(function(){
-  var login="{{ request.user.is_authenticated }}"
-  $('[data-toggle="tooltip"]').tooltip()
+
 })
 </script>
 {% endblock content %}

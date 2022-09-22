@@ -3,15 +3,17 @@ $('head').append('<link rel="stylesheet" href="https://breakingweb.site/static/@
 $('head').append('<script defer src="https://breakingweb.site/static/@fortawesome/fontawesome-free/js/all.js"></script>');
 $('head').append('<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">')
 $('head').append('<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>')
-BASE_URL="http://127.0.0.1:8000/" // URL del server
-HIDDENFIELD="?next="+window.location
-XMLHTTPURL_GETUSER=BASE_URL+"user/blog/getuser"
-URL_NEW_POST=BASE_URL+"post/sendpost"
-XMLHTTPURL_LOGIN=BASE_URL+"user/login/blog"+HIDDENFIELD
-XMLHTTPURL_REGISTER=BASE_URL+"user/register/blog"+HIDDENFIELD
-XMLHTTPURL_LOGOUT=BASE_URL+"user/logout/blog"+HIDDENFIELD
+const BASE_URL="http://127.0.0.1:8000/" // URL del server
+const CLIENT_URL=window.location.href.split('#')[0].split('?')[0]
+const HIDDENFIELD="?next="+window.location
+const XMLHTTPURL_GETUSER=BASE_URL+"user/blog/getuser"
+const URL_NEW_POST=BASE_URL+"post/sendpost"
+const XMLHTTPURL_LOGIN=BASE_URL+"user/login/blog"+HIDDENFIELD
+const XMLHTTPURL_REGISTER=BASE_URL+"user/register/blog"+HIDDENFIELD
+const XMLHTTPURL_LOGOUT=BASE_URL+"user/logout/blog"+HIDDENFIELD
 const MAX_TEXTAREA_NUMBER=21
 const BASE_PHOTO_DIR=BASE_URL+"media/"
+const HTTPURL_CHANGEPASSWORD=BASE_URL+"user/change_password"+HIDDENFIELD
 var borderPost="none";
 var borderResponse="1px solid grey";
 var paPostOrResp;
@@ -47,10 +49,12 @@ var liBlogReg=document.createElement("LI");
 var aBlogReg=document.createElement("A");
 var spanBlogReg=document.createElement("SPAN");
 var liBlogEntra=document.createElement("LI");
+var liBlogCambiaPassword=document.createElement("LI");
 var aBlogEntra=document.createElement("A");
+var aBlogCambiaPassword=document.createElement("A")
 var spanBlogEntra=document.createElement("SPAN");
 var liBlogEsci=document.createElement("LI");
-var aBlogEsci=document.createElement("form");
+var aBlogEsci=document.createElement("A");
 var post,post2=new Object()
 var isOpen=false
 var bSection=document.createElement("SECTION")
@@ -72,7 +76,6 @@ var json_resps
 var re
 var inputHidden=document.createElement("INPUT")
 var inputSubmit=document.createElement("INPUT")
-
 
 function createSectionDivSpan(userAdmin,_userThatLogin){
   userThatLogin=_userThatLogin
@@ -98,16 +101,25 @@ function createSectionDivSpan(userAdmin,_userThatLogin){
     bSection.setAttribute("style","width:100%");
     aBlogEntra.setAttribute("style","display:block;width:auto;text-align:right;")
     aBlogEntra.setAttribute("id","id_entra")
+    aBlogCambiaPassword.setAttribute("style","display:block;width:auto;text-align:right;")
+    aBlogCambiaPassword.setAttribute("id","id_cambia_password")
     aBlogReg.setAttribute("style","display:block;width:auto;text-align:right;z-index:200")
     aBlogReg.setAttribute("href",XMLHTTPURL_REGISTER)
+    aBlogReg.setAttribute("target","_blank")
+    aBlogCambiaPassword.setAttribute("target","_blank")
+    aBlogEsci.setAttribute("target","_blank")
     aBlogEntra.setAttribute("href",XMLHTTPURL_LOGIN)
+    aBlogCambiaPassword.setAttribute("href",HTTPURL_CHANGEPASSWORD)
+    aBlogCambiaPassword.textContent="Modifica"
+    aBlogEsci.textContent="Esci"
     aBlogEntra.setAttribute("class","nav-link")
-    aBlogEsci.setAttribute("action",BASE_URL+"user/logout/blog")
-    aBlogEsci.setAttribute("display","inline")
-    aBlogEsci.setAttribute("id","formEsci")
+    aBlogEsci.setAttribute("href",BASE_URL+"user/logout/blog"+HIDDENFIELD)
+    aBlogEsci.setAttribute("style","display:block;width:auto;text-align:right;")
+    aBlogEsci.setAttribute("id","aEsci")
     liBlogEntra.setAttribute("style","display:inline;width:auto;margin-right:0px;")
     liBlogEntra.setAttribute("class" , "nav-item")
     liBlogEntra.setAttribute("id","li_login")
+    liBlogCambiaPassword.setAttribute("id","li_cambiaPassword")
     liBlogReg.setAttribute("id","li_reg")
     //bSpanChild.setAttribute("id","s_blog_text")
     bbutton.setAttribute("id","button_post")
@@ -134,7 +146,9 @@ function createSectionDivSpan(userAdmin,_userThatLogin){
     }
     else {
       liBlogEsci.appendChild(aBlogEsci)
+      liBlogCambiaPassword.appendChild(aBlogCambiaPassword)
       ulBlogReg.appendChild(liBlogEsci)
+      ulBlogReg.appendChild(liBlogCambiaPassword)
       divExitLogin.appendChild(ulBlogReg)
       bSection.appendChild(divBlogReg)
       inputHidden.setAttribute("name","next")
@@ -144,8 +158,6 @@ function createSectionDivSpan(userAdmin,_userThatLogin){
       inputSubmit.setAttribute("id","inputSubmit")
       inputSubmit.setAttribute("type","submit")
       inputSubmit.setAttribute("value","Esci")
-      aBlogEsci.appendChild(inputHidden)
-      aBlogEsci.appendChild(inputSubmit)
       liBlogEsci.setAttribute("id","liBlogEsci")
       H1Welcome.setAttribute("id","H1Welcome")
         if(userThatLogin.userin[0].fields.first_name!=="None")
@@ -489,7 +501,7 @@ class postArea {
         isOpen=false
       }
       $(postarea.postarea).css("box-shadow","0 0 0 0")
-      mess.type=="newpost" ? button_risposta_post.textContent="Post Inserito" : button_risposta_post.textContent="Risposta Inserita"
+      mess.type=="newpost" ? button_risposta_post.textContent="Post Inserito" : button_risposta_post.textContent="inviato"
 
       button_risposta_post.setAttribute("disabled","")
       postarea.postarea.setAttribute("disabled","")
@@ -538,13 +550,40 @@ create(){
   }
 }
 
-function initBlogSGang(parTagTitle,u,p){
+function initBlogSGang(u,p){
   var p=p
   var u=u
+
+  $.ajaxSetup({
+       beforeSend: function(xhr, settings) {
+           function getCookie(name) {
+               var cookieValue = null;
+               if (document.cookie && document.cookie != '') {
+                   var cookies = document.cookie.split(';');
+                   for (var i = 0; i < cookies.length; i++) {
+                       var cookie = jQuery.trim(cookies[i]);
+                       // Does this cookie string begin with the name we want?
+                       if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                           cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                           break;
+                       }
+                   }
+               }
+               return cookieValue;
+           }
+           //if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+               // Only send the token to relative URLs i.e. locally.
+               xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+           //}
+       }
+  });
+
+
+
   sendData()
   function sendData(){
     document.getElementById('s_blog').remove
-    tagTitle = parTagTitle
+    tagTitle = CLIENT_URL
     //$('#s_blog').remove()
     var jsonLogged,json
     var userfirstName=[]
@@ -588,21 +627,20 @@ function initBlogSGang(parTagTitle,u,p){
 }
 
 function getComment(){
+  var obj
+  var indexX=0
+  y=0
+  var s,z2
+  mess=new Array()
+  resps=new Array()
+  var profiles=new Array()
+  profiles_json=new Array()
+  var z=0
+  var comments_json=new Array();
+  butcloned = document.getElementById('button_post')
   if( ! tagTitle == "")
   {
-    var obj
-    var indexX=0
-    y=0
-    var s,z2
-    mess=new Array()
-    resps=new Array()
-    let profiles=new Array()
-    profiles_json=new Array()
-    let z=0
-    var q=0
-    let comments_json;
-    butcloned = document.getElementById('button_post')
-    $('.mybut').hover(function(e){
+    $('.mybut').hover(function(){
       $('.mybut').css("box-shadow","0 0 0 white")
     },
 
@@ -613,21 +651,24 @@ function getComment(){
     $.ajax({
       url: BASE_URL+'post/showposts',
       data: {
-        'tagTitle' : tagTitle ,
+        'tagTitle' : tagTitle ,'userAuth' : userAuth.fields.first_name
       },
       dataType: 'json',
       success: function (data) {
-        s = cleanJson(data)
         try {
+          s = cleanJson(data)
           obj = JSON.parse(s);
           comments_json = JSON.parse(obj.data_comm);// blog.comment
           resps_json = JSON.parse(obj.resps);
           profiles_json = JSON.parse(obj.profiles);
         }
-        catch(SyntaxError){
-          mess.push(new Post("post","tinkyblink","Commenta Per Primo",".....","",BASE_PHOTO_DIR+"media/media/"+"download_XOTfFEL.jpeg","0"))
-          createPostArea(mess[0])
+        catch (SyntaxError){
+          obj = "";
+          comments_json = "";// blog.comment
+          resps_json = "";
+          profiles_json = "";
         }
+
         var photoResp
         var i=0
         var respToUser
@@ -686,19 +727,12 @@ function getComment(){
                   }
                 }
                 else {
-                  mess.push(new Post("post",postAuthor[0].fields.first_name,"Commenta Per Primo",".....","",BASE_PHOTO_DIR+"media/media/"+postAuthor[0].fields.photo,"0"))
-                  createPostArea(mess.at(-1))
+                  mess.push(new Post("post","tinkyblink","Commenta Per Primo",".....","",BASE_PHOTO_DIR+"media/media/"+"download_XOTfFEL.jpeg","0"))
+                  createPostArea(mess[0])
                 }                                                                            // non esistono commenti ....creo label : vuoi essere il primo a commnetare ecc...
-              }
-            }
-          );
-        }
-        else
-        {
-          console.log("ERRORE FATALE ! la funzione di entrata initsblog() non ha trovato il tag TITLE !")
-        }
+              }})
       }
-
+}
 
       /* esegui se l'uiser è loggato */
       $(bbutton).click(function() {
@@ -883,7 +917,7 @@ function getComment(){
   function sendToServer(post=Object(),url){
     if (post.type=="newresp"){
       data={
-        'publish':post.publish,'commento':post.post.pk,'type':post.type,'tutorial':
+        'publish':post.publish,'commento':post.post.pk,'type':post.type,'tagTitle':
           tagTitle,'username':userThatLogin.userin[0].fields.first_name
           ,'body':post.body,'respTo':post.respToID,'id':post.pk,'respToType':post.respToType,
         'respToUser':post.respToUser,

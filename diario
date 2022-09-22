@@ -15,8 +15,9 @@ prima del tag di chiusura </body>
 
 
 ______________________________________________________________________________
-aggiungere tagtitle a risposta e controllare la view in blog
 
-useloggedin e useradmin sono null in blog.js
+_______________________________________________________________________________
 
-nel sito del kernel la risposta viene inserita 3, 4 votlte
+eliminare variabili globali in views user , e cercare altrove se ve ne sono altre , CHE SONO PERICOLOSE PER I BUG
+
+controllare l' invio mail per reset password , e controllare il click su login button se ha bisogno di location.reload

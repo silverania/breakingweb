@@ -18,22 +18,15 @@ font-family:'Alpha Slab One'
   font-family: 'Open-Sans-Bold';
   src: url('../Fonts/Open-Sans-Bold.ttf');
 }
-
-@font-face {
-  font-family: 'Roboto-Regular';
-  src: url('../Fonts/Roboto-Regular.ttf');
-}
 @font-face {
   font-family: 'WorkSans-Regular';
-  src: url('../Fonts/WorkSans-Regular.ttf');
+  src: url('../Fonts/WorkSans-Regular');
 }
-
 #blog{
   width:43%!important;
   max-width:43%!important;
   margin:50px auto! important;
-  font-family:'Montserrat-Regular'!important;
-  font-weight:lighter;
+  font-family:'Montserrat-Regular';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.6;
@@ -50,8 +43,6 @@ margin:0 auto !important;
 }
 
 #button_post{
-  font-family:'Montserrat-Bold'!important;
-  color:#4979aa!important;
   width:90%!important;
 }
 
@@ -63,7 +54,7 @@ div.modal-content {
   width:100%;
 min-width:100%;
   height:auto;
-  font-family:'Montserrat-Regular';
+  font-family:'WorkSans','Assistant-regular','WorkSans';
   background-color:#e6ffff;
   font-size:2rem;
   /*box-sizing:content-box;*/
@@ -84,14 +75,13 @@ a{
 
 
 #id_link_comment{
-  font-family:'Montserrat-Bold'!important;
   margin:3% auto;
   width:80%;
 }
 
 [id^=d_head_blog]{
 display: inline-block;
-  margin-bottom: 10px!important;
+  margin-bottom: 5%;
 }
 
 [id^=span_in]{
@@ -101,7 +91,7 @@ color:orange;
 }
 
 [id^=spanBar]{
-font-family: "Roboto-Regular";
+font-family: "WorkSans-Regular";
 color:grey;
 }
 
@@ -113,12 +103,12 @@ color:grey;
 }
 
 [id^=but_]{
-  font-family:'Montserrat-Bold'!important;
+  font-family:'Open-Sans-Bold';
   width:100%;
   height:auto;
   border-style: none;
   margin:15px auto;
-  color:#4979aa!important;
+  color:#660000;
   padding:2%;
   box-shadow:10px 10px 10px #719ECE
 
@@ -129,9 +119,13 @@ color:grey;
   height:30px!important;
 }
 
+#liBlogEsci{
+
+}
 
 #H1Welcome{
 display:inline;
+width:30%;
 margin-left:3px;
 text-align:center;
 }
@@ -158,20 +152,20 @@ font-size:1rem;
 
 textarea {
 background-color:transparent;
-  font-family:"Montserrat-Regular"!important;
+  font-family:"Montserrat-Regular";
   font-size:1rem!important;
   line-height: 1.6;
   color:black;
   width:100%;
 height:auto;
-min-width:100%;
+  /*min-width:100%;*/
   outline: none !important;
   border: none;
      background-color: transparent;
      resize: none;
      outline: none;
   box-shadow: 10px 10px 10px #719ECE;
-  border-radius:1px;
+  border-radius:4px;
   overflow:hidden;
   padding:5px!important;
 }
@@ -188,7 +182,7 @@ button:disabled {
 }
 
 [id^=new_divuserblog]{
-  margin:20% auto;
+  margin:5% auto;
 }
 
 /*[id^=new_divuserblog]> [id^=d_head] + [id^=d_post] + textarea{*/
@@ -358,6 +352,7 @@ textarea {
   border-radius: .3rem;
   font-weight: 400;
   text-align: center;
+  vertical-align: middle;
   background-color: transparent;
   color:purple;
   border-color: cyan!important;

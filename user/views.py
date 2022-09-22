@@ -1,6 +1,5 @@
-
+from django.conf import settings
 from .forms import UserEditForm, ProfileEditForm
-from django.contrib.auth.forms import UserCreationForm
 from .models import Profile
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
@@ -11,25 +10,21 @@ from django.views import View
 import json
 from django.core import serializers
 from django.contrib.auth.models import User
-from django.middleware.csrf import get_token
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
-import json
 from django.contrib.auth.models import Group
-from blog.models import Site
-
-from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
-valuenext = ""
-userLoggedIN = None
 list_current_user = None
 scrollTo = ''
+Profile = Profile.objects.all()
+Group = Group.objects.all()
 
 
 def getUser(user):
+    global Profile
     firstName = user.username
-    current_user = Profile.objects.filter(first_name=firstName)
+    current_user = Profile.filter(first_name=firstName)
     list_current_user = list(current_user)
     list_current_user = serializers.serialize(
         "json", list_current_user)
@@ -39,6 +34,7 @@ def getUser(user):
 @method_decorator(csrf_exempt, name='dispatch')
 class checkUser(View):
     def post(self, request):
+        userLoggedIN = request.user.is_authenticated
         myuser = object()
         userThatLoginIn = object()
         list_json_user_data = json.loads(request.body)
@@ -60,7 +56,7 @@ class checkUser(View):
                 else:
                     print("user myuser NON sta nel gruppo blog_admin.....provvedo"
                           + "ad aggiungerlo ....")
-                    group = Group.objects.get(name='BlogAdmin')
+                    group = Group.get(name='BlogAdmin')
                     myuser.groups.add(group)
                     print('myuser aggiunto al gruppo blogadmin ')
             except Exception:
@@ -145,7 +141,7 @@ def user_login(request):
             if myuser is not None:
                 if myuser.is_active:
                     login(request, myuser)
-                    userLoggedIN = myuser
+                    # userLoggedIN = myuser
                     return HttpResponseRedirect(valuenext)
                 else:
                     return HttpResponse('Disabled account')
@@ -158,6 +154,11 @@ def user_login(request):
                 scrollTo = "#footer"
             if 'next' in request.GET:
                 valuenext = request.GET.get('next')+scrollTo
+                subject = 'welcome to GFG world'
+                message = 'Hi mario, thank you for registering in geeksforgeeks.'
+                email_from = settings.EMAIL_HOST_USER
+                recipient_list = ["info.strabbit@gmail.com", ]
+                # send_mail(subject, message, email_from, recipient_list)
             myuser = None
             print("view: user_login , GET method......valuenext="+valuenext)
     return render(request, 'registration/login.html', {'form': form,
@@ -197,7 +198,7 @@ def user_register(request):
             user.refresh_from_db()
             if 'blog' in request.path:
                 user.is_staff = True
-                group = Group.objects.get(name='BlogAdmin')
+                group = Group.get(name='BlogAdmin')
                 user.groups.add(group)
                 print('myuser aggiunto al gruppo blogadmin ')
             print("USERPROFILEPHOTO"+str(request.FILES))
@@ -205,11 +206,6 @@ def user_register(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             user.profile.photo = form.cleaned_data.get('photo')
-            user.profile.website = form.cleaned_data.get('website')
-            tu, create = Site.objects.get_or_create(
-                title=user.profile.website, user=user.profile)
-            # myphoto = request.FILES('photo')
-            # user.profile.photo = myphoto
             user.profile.first_name = username
             user.save()
             if 'next' in request.GET:
@@ -235,14 +231,15 @@ def change_password(request):
         if form.is_valid():
             user = form.save()
             update_session_auth_hash(request, user)  # Important!
-            return HttpResponse("Password Modificata ! ")
+            if 'next' in request.GET:
+                valuenext = request.GET.get('next')
+                breakpoint()
+                return render(request, "registration/pass_changed_done.html", {'valuenext': valuenext})
         else:
-            return HttpResponse("errore !")
+            return HttpResponse("errore nei dati inseriti !")
     else:
         form = PasswordChangeForm(request.user)
-    return render(request, 'change_password.html', {
-        'form': form
-    })
+    return render(request, 'change_password.html', {'form': form})
 
 
 @ login_required

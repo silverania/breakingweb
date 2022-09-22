@@ -1,18 +1,13 @@
 
-@media (min-width: 768px) {
-    .kpx_row-sm-offset-3 div:first-child[class*="col-"] {
-        margin-left: 25%;
-    }
-}
 body {
     font-family: 'Titillium Web', sans-serif;
 }
 a{
-    color:blue;
+    color:#ff5400;
 }
 a:hover {
-    opacity: 0.5;
-    color:orange;
+    opacity: 0.8;
+    color:#ff5400;
     text-decoration:none;
 }
 
@@ -26,7 +21,7 @@ a:hover {
 
 }
 
-.kpx_login .kpx_authTitle {
+.h3_title {
     text-align: center;
     line-height: 300%;
 }

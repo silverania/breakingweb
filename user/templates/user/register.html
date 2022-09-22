@@ -9,8 +9,8 @@
 
   <div class="kpx_login">
 
-    <div class="row kpx_row-sm-offset-3 kpx_loginOr">
-      <div class="col-xs-12 offset-sm-3 col-sm-6" style="margin-bottom:5%;">
+    <div class="row title">
+      <div class="col-xs-12 text-center offset-sm-3 col-sm-6" style="margin-bottom:5%;">
         <!--hr class="kpx_hrOr"-->
         <!--span class="kpx_spanOr">Registrati o Fai il
         <a id="a_reg" href="{% if 'blog' in request.path %} /user/login/blog
@@ -27,14 +27,14 @@
         r.href="/user/login/blog?next="+params.get('next');
       </script>
       <div class="row kpx_row-sm-offset-3 kpx_loginOr">
-        <div class="col-xs-12 col-sm-6">
+        <div class="col-xs-12 text-center col-sm-6">
           {% if not 'blog' in request.path %}<hr class="kpx_hrOr"><br>{%endif%}
-          <h2 class="kpx_authTitle">Registrazione</h2>
+          <h2 class="title">Registrazione</h2>
         </div>
       </div>
 
       <div class="row kpx_row-sm-offset-3">
-        <div class="col-xs-12 col-sm-6">
+        <div class="col-xs-12 text-center col-sm-6">
 
           <form method="post" enctype="multipart/form-data">
             <div class="form-group">
@@ -84,7 +84,7 @@
                     </div></div>
                   </div>
                 </div>
-                <div class="row kpx_row-sm-offset-3">
+                <!--div class="row kpx_row-sm-offset-3">
                   <div class="col-xs-12 col-sm-3">
                     <p></p>
                     <label class="custom-control custom-checkbox">
@@ -100,7 +100,7 @@
                       <a href="#">Password Dimenticata ?</a>
                     </p>
                   </div>
-                </div>
+                </div-->
               </div>
 
 

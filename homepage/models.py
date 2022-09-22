@@ -25,13 +25,6 @@ class BozzaManager(models.Manager):
                      self).get_queryset().filter(status='bozza')
 
 
-class Visite(models.Model):
-    visite = models.PositiveIntegerField(default=1)
-
-    def __str__(self):
-        return "%s" % (self.visite)
-
-
 class Category(models.Model):
     CATEGORY = (
         ('linux', 'Linux'),
@@ -75,6 +68,7 @@ class Tutorial(models.Model):
         Category, on_delete=models.CASCADE, related_name="tutorials")
     status = models.CharField(
         max_length=10, choices=STATUS_CHOICES, default='bozza')
+    visite = models.PositiveIntegerField(default=1)
 #post=models.ForeignKey(Comment,on_delete=models.CASCADE,related_name="comments",null=True,blank=True)
     # decommentare una delle seguenti tre righe per selezionare un custom model manager
     #objects = models.Manager() # The default manager.
@@ -85,7 +79,7 @@ class Tutorial(models.Model):
         ordering = ('-publish',)
 
     def __str__(self):
-        return "%s" % (self.title)
+        return "%s" % (self.title)+"letto "+self.visite+" volte"
 
     def get_absolute_url(self):
         return reverse('homepage:tutorial_detail',

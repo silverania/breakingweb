@@ -110,7 +110,7 @@ function createSectionDivSpan(userAdmin,_userThatLogin){
     aBlogEsci.setAttribute("target","_blank")
     aBlogEntra.setAttribute("href",XMLHTTPURL_LOGIN)
     aBlogCambiaPassword.setAttribute("href",HTTPURL_CHANGEPASSWORD)
-    aBlogCambiaPassword.textContent="account"
+    aBlogCambiaPassword.textContent="Modifica"
     aBlogEsci.textContent="Esci"
     aBlogEntra.setAttribute("class","nav-link")
     aBlogEsci.setAttribute("href",BASE_URL+"user/logout/blog"+HIDDENFIELD)
@@ -627,21 +627,20 @@ function initBlogSGang(u,p){
 }
 
 function getComment(){
+  var obj
+  var indexX=0
+  y=0
+  var s,z2
+  mess=new Array()
+  resps=new Array()
+  var profiles=new Array()
+  profiles_json=new Array()
+  var z=0
+  var comments_json=new Array();
+  butcloned = document.getElementById('button_post')
   if( ! tagTitle == "")
   {
-    var obj
-    var indexX=0
-    y=0
-    var s,z2
-    mess=new Array()
-    resps=new Array()
-    let profiles=new Array()
-    profiles_json=new Array()
-    let z=0
-    var q=0
-    let comments_json;
-    butcloned = document.getElementById('button_post')
-    $('.mybut').hover(function(e){
+    $('.mybut').hover(function(){
       $('.mybut').css("box-shadow","0 0 0 white")
     },
 
@@ -656,11 +655,20 @@ function getComment(){
       },
       dataType: 'json',
       success: function (data) {
-        s = cleanJson(data)
-        obj = JSON.parse(s);
-        comments_json = JSON.parse(obj.data_comm);// blog.comment
-        resps_json = JSON.parse(obj.resps);
-        profiles_json = JSON.parse(obj.profiles);
+        try {
+          s = cleanJson(data)
+          obj = JSON.parse(s);
+          comments_json = JSON.parse(obj.data_comm);// blog.comment
+          resps_json = JSON.parse(obj.resps);
+          profiles_json = JSON.parse(obj.profiles);
+        }
+        catch (SyntaxError){
+          obj = "";
+          comments_json = "";// blog.comment
+          resps_json = "";
+          profiles_json = "";
+        }
+
         var photoResp
         var i=0
         var respToUser
@@ -719,20 +727,12 @@ function getComment(){
                   }
                 }
                 else {
-                  console.log("non ho trovato commenti....inserisco il commento di default")
                   mess.push(new Post("post","tinkyblink","Commenta Per Primo",".....","",BASE_PHOTO_DIR+"media/media/"+"download_XOTfFEL.jpeg","0"))
                   createPostArea(mess[0])
                 }                                                                            // non esistono commenti ....creo label : vuoi essere il primo a commnetare ecc...
-              }
-            }
-          );
-        }
-        else
-        {
-          console.log("ERRORE FATALE ! la funzione di entrata initsblog() non ha trovato il tag TITLE !")
-        }
+              }})
       }
-
+}
 
       /* esegui se l'uiser è loggato */
       $(bbutton).click(function() {

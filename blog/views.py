@@ -1,48 +1,38 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from user.models import Profile
 from blog.models import Comment, Resp, Site
 from django.http import HttpResponse, JsonResponse
-from django.conf import settings
 from django.utils import formats
 from datetime import datetime
 import json
 from django.core import serializers
-from django.forms.models import model_to_dict
 from django.core.serializers.json import DjangoJSONEncoder
 from django.urls import reverse
-from urllib.parse import urlsplit, urlunsplit
-
+from urllib.parse import urlsplit
+import blog
 photo = ""
 message = ""
-
+Profile = Profile.objects.all()
+Comment = Comment.objects.all()
+Resp = Resp.objects.all()
+Site = Site.objects.all()
 formatted_datetime = formats.date_format(
     datetime.now(), "SHORT_DATETIME_FORMAT")
 
 
 class LazyEncoder(DjangoJSONEncoder):
     def default(self, obj):
-        if isinstance(obj, Resp) or isinstance(obj, Site):
+        if isinstance(obj, Resp.__class__) or isinstance(obj, Site.__class__):
             return str(obj)
         return super().default(obj)
 
 
-"""
-class authAdmin(View):
-    def post(self,request):
-    """
-
-
 def getLoginName(request):
-    try:
-        if request.user.is_authenticated:
-            print("id" + str(request.user.id))
-            myuser = Profile.objects.filter(user_id=request.user.id)
-        else:
-            myuser = Profile.objects.filter(first_name="anonimo")
-            #    myuser.photo = settings.MEDIA_URL+"images/user-secret-solid.gif"
-            print("USER NON AUTENT ")
-    except UnboundLocalError:
-        print("error in get users info ! contact the admin . myuser = " + str(myuser))
+    if request.user.is_authenticated:
+        myuser = Profile.filter(user_id=request.user.id)
+    else:
+        myuser = Profile.filter(first_name="anonimo")
+        #    myuser.photo = settings.MEDIA_URL+"images/user-secret-solid.gif"
     return myuser
 
 
@@ -58,33 +48,24 @@ def serializer(data):
 
 
 def getPost(request):
-    print("entry in view getpost")
-    global formatted_datetime
+    global formatted_datetime, Comment, Profile
     data = ""
     t = []
-    profile_list = []
     datac = []
     comments = []
-    comments_in_database = Comment.objects.all()
-    profiles = list(Profile.objects.all())
+    comments_in_database = Comment.all()
+    profiles = list(Profile.all())
     profiles_list = serializer(profiles)
     t2 = []
     if "tagTitle" in request.GET and request.GET["tagTitle"]:
         tagTitle = str(request.GET.get("tagTitle"))
-        if "userAuth" in request.GET and request.GET["userAuth"]:
-            userAuth = request.GET.get('userAuth')
-            blogAdmin = Profile.objects.get(first_name=userAuth)
-            print("tagtitle=" + str(tagTitle))
-            # tagTitleInPage = Site.objects.get(title=tagTitle)
-            # aggiornato = formatted_datetime
-            if comments_in_database.exists():
-                risposte_serialized = []
-                all_comments_for_page = Comment.objects.filter(
-                    site__title=tagTitle).order_by('-publish')
-                datac = list(all_comments_for_page)
-                data_comm = serializer(datac)
+        if comments_in_database.exists():
+            all_comments_for_page = Comment.filter(
+                site__title=tagTitle).order_by('-publish')
+            datac = list(all_comments_for_page)
+            data_comm = serializer(datac)
+            if datac:
                 for comment in all_comments_for_page:
-                    print(str(type(comment)))
                     try:
                         if tagTitle in str(comment.site.title):
                             comments.append(comment)
@@ -98,6 +79,7 @@ def getPost(request):
                     except UnboundLocalError:
                         t2 = t
                     try:
+                        t2 = list(t2)
                         risposte_serialized = serializer(t2)
                     except UnboundLocalError:
                         print("Nessun commento per la pagina !")
@@ -109,9 +91,6 @@ def getPost(request):
                         }
                     )
             else:
-                comment.site = Site.objects.get(pk=1)
-                print(str("comment="+str(comment.body)+str(comment.site)))
-                print("Errore ,Non ci sono commenti nel database !")
                 data = json.dumps(
                     {
                         "resps": [{"": ""}],
@@ -119,54 +98,51 @@ def getPost(request):
                         "profiles": profiles_list,
                     }
                 )
-            try:
-                return JsonResponse(data, safe=False)
-            except UnboundLocalError:
-                print("cahe sfcaccim")
+            return JsonResponse(data, safe=False)
     return render(request, {'data': data, })
 
 
 def newPost(request):
+    global Profile, Comment, Resp
     postType = ""
     post = []
     getRespOrPostToAssignResp = []
-    print("entrypoint to newPost ....request="+str(request))
     if "body" in request.GET and request.GET["body"]:
         body = request.GET.get("body")
     if "username" in request.GET and request.GET["username"]:
         author = request.GET.get("username")
-        myuser = Profile.objects.get(first_name=author)
+        myuser = Profile.get(first_name=author)
         myuser.firstname = getLoginName(request)
     if "tagTitle" in request.GET:
         tagTitle = request.GET.get('tagTitle')
         split_url = urlsplit(tagTitle)
-        site = Site.objects.get(
+        site = Site.get(
             title=split_url.scheme+"://"+split_url.netloc+split_url.path)
     if "type" in request.GET and request.GET["type"]:
         postType = request.GET.get("type")
         if "newpost" in postType:
-            post = Comment()
+            post = blog.models.Comment()
             post.postType = "post"
         else:
-            post = Resp()
+            post = blog.models.Resp()
             if "respToUser" in request.GET and request.GET["respToUser"]:
                 respToProfile = request.GET.get("respToUser")
-                respToProfile = Profile.objects.get(first_name=respToProfile)
+                respToProfile = Profile.get(first_name=respToProfile)
                 post.respToUser = respToProfile
             if "respTo" in request.GET and request.GET["respTo"]:
                 post.idRespTo = request.GET.get("respTo")
                 if "commento" in request.GET and request.GET["commento"]:
                     commento = request.GET.get("commento")
-                    comment = Comment.objects.get(pk=commento)
+                    comment = Comment.get(pk=commento)
                     post.commento = comment
                 if 'respToType' in request.GET and request.GET["respToType"]:
                     respToType = request.GET.get('respToType')
                     if 'respToResp' in respToType:
                         post.postType = "respToResp"
-                        getRespOrPostToAssignResp = Resp.objects.get(
+                        getRespOrPostToAssignResp = Resp.get(
                             pk=post.idRespTo)
                     elif 'respToPost' in respToType:
-                        getRespOrPostToAssignResp = Comment.objects.get(
+                        getRespOrPostToAssignResp = Comment.get(
                             pk=commento)
                         post.commento = getRespOrPostToAssignResp
     post.site = site
@@ -183,15 +159,7 @@ def newPost(request):
     typeIs = str(type(getRespOrPostToAssignResp))
     if "Resp" in typeIs:
         getRespOrPostToAssignResp.resps.add(post)
-    # post = serializers.serialize('json', [post], ensure_ascii=False)
-    # json_post = json.dumps({'post': post})
     return HttpResponse("post inserito")
-
-
-def showPost(tutorial):
-    print("entry in view showPost")
-    thistutorial = tutorial.slug
-    print("thistutorial=" + tutorial.slug)
 
 
 def retReverse(name):

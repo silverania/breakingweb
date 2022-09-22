@@ -60,7 +60,8 @@
     <ul  class="w-100 list-group select_tutorial" id="selecFormAutori">
 
 {% for t in users %}
-      <li  onclick="show(this.innerHTML)" id="option_autori_{{t.user.username}}" value="{{t.user.username}}" class="list-group-item option_autori " >{{t.user.username}}
+      <li  onclick="show(this.innerHTML)" id="option_autori_{{t.user.username}}"
+        value="{{t.user.username}}" class="list-group-item option_autori " >{{t.user.username}}
     </li>
       {% endfor %}
     </ul>
