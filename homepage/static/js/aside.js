@@ -140,9 +140,15 @@ $(document).click(function(event) {
 
   let x=$('#d_divaside').offset().left;
   $target = $(event.target);
-  if(!$target.closest('.d_divaside').length && !$target.closest('.fa-angle-right').length && !$target.closest('#header_menu').length && !$target.closest('.fa-angle-right').length && !$target.closest('#d_tutorial_section').length && ($('#d_tutorial_section').css("margin-left")=="-18px" || x>=0) && !$target.closest('#ul_in_selecFormAutori').length) {
+  if(!$target.closest('.d_divaside').length && !$target.closest('.fa-angle-right').length && !$target.closest('#header_menu').length
+   && !$target.closest('#d_tutorial_section').length
+   && ($('#d_tutorial_section').css("margin-left")=="-18px" || x>=0)
+   && !$target.closest('#ul_in_selecFormAutori').length) {
     if(x>=0) {
       $('#d_divaside').css( 'left' , '-700px');
+    }
+    if (deleteTutorial()==0)  {
+      console.log("deletetutorial=0")
     }
       hideTutorial();
   }
@@ -167,6 +173,7 @@ function hideTutorial() {
   $('#d_tutorial_section').animate({'margin-left': -off },300);
     $('#d_tutorial_section').css('display','none');
     $('#d_inside_tutorial_section').css('display','none');
+
 }
 
 function deleteTutorial() {
