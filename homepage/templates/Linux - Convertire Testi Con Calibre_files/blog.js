@@ -98,6 +98,7 @@ function createSectionDivSpan(userAdmin,_userThatLogin){
     bIcon.setAttribute("style","text-align:center;font-weight:bold;")
     bIcon.setAttribute("id","blog_icon")
     bSection.setAttribute("id","blog");
+    bSection.setAttribute("style","width:100%");
     aBlogEntra.setAttribute("style","display:block;width:auto;text-align:right;")
     aBlogEntra.setAttribute("id","id_entra")
     aBlogCambiaPassword.setAttribute("style","display:block;width:auto;text-align:right;")

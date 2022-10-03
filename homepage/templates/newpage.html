@@ -1,0 +1,533 @@
+{% load static %}
+<head>
+<title>Linux - Convertire Testi Con Calibre, letto 107 volte | Modifica tutorial | Amministrazione sito Django</title>
+<link rel="stylesheet" type="text/css" href="/static/admin/css/base.css">
+
+  <link rel="stylesheet" type="text/css" href="/static/admin/css/nav_sidebar.css">
+  <script src="/static/admin/js/nav_sidebar.js" defer=""></script>
+
+<link rel="stylesheet" type="text/css" href="{% static "css/newpage.css"%}">
+<link rel="stylesheet" type="text/css" href="{% static "css/forms.css"%}">
+
+<script src="{% static "js/getParams.js"%}"></script>
+
+<script src="/admin/jsi18n/"></script>
+<script src="/static/admin/js/vendor/jquery/jquery.js"></script>
+<script src="/static/admin/js/calendar.js"></script>
+<script src="/static/admin/js/jquery.init.js"></script>
+<script src="/static/admin/js/admin/DateTimeShortcuts.js"></script>
+<script src="/static/admin/js/core.js"></script>
+<script src="/static/admin/js/admin/RelatedObjectLookups.js"></script>
+<script src="/static/admin/js/actions.js"></script>
+<script src="/static/admin/js/urlify.js"></script>
+<script src="/static/admin/js/prepopulate.js"></script>
+<script src="/static/admin/js/vendor/xregexp/xregexp.js"></script>
+
+
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/responsive.css">
+
+
+<meta name="robots" content="NONE,NOARCHIVE">
+</head>
+<body class=" app-homepage model-tutorial change-form" data-admin-utc-offset="7200">
+
+<!-- Container -->
+<div id="container">
+
+
+    <!-- Header -->
+
+    <div id="header">
+        <div id="branding">
+
+<h1 id="site-name"><a href="/admin/">Nuovo Sito Web</a></h1>
+
+        </div>
+
+
+        <div id="user-tools">
+
+                Benvenuto,
+                <strong>mario</strong>.
+
+                    <a href="/">Visualizza il sito</a> /
+
+                <a href='javascript:getParam()'>Annulla l'accesso</a>
+
+
+        </div>
+
+
+
+    </div>
+
+    <!-- END Header -->
+
+<!--div class="breadcrumbs">
+<a href="/admin/">Pagina iniziale</a>
+› <a href="/admin/homepage/">Homepage</a>
+› <a href="/admin/homepage/tutorial/">Tutorials</a>
+› Linux - Convertire Testi Con Calibre, letto 107 volte
+</div-->
+
+
+
+    <div class="main shifted" id="main">
+
+
+
+<!--button class="sticky toggle-nav-sidebar" id="toggle-nav-sidebar" aria-label="Abilita/disabilita navigazione"></button>
+<nav class="sticky" id="nav-sidebar">
+  <input type="search" id="nav-filter" placeholder="Inizia a scrivere per filtrare..." aria-label="Filtra gli oggetti di navigazione">
+
+
+
+
+    <div class="app-auth module">
+      <table>
+        <caption>
+          <a href="/admin/auth/" class="section" title="Modelli nell'applicazione Autenticazione e Autorizzazione ">Autenticazione e Autorizzazione </a>
+        </caption>
+
+          <tbody><tr class="model-group">
+
+              <th scope="row"><a href="/admin/auth/group/">Gruppi</a></th>
+
+
+
+              <td><a href="/admin/auth/group/add/" class="addlink">Aggiungi</a></td>
+
+
+
+          </tr>
+
+          <tr class="model-user">
+
+              <th scope="row"><a href="/admin/auth/user/">Utenti</a></th>
+
+
+
+              <td><a href="/admin/auth/user/add/" class="addlink">Aggiungi</a></td>
+
+
+
+          </tr>
+
+      </tbody></table>
+    </div>
+
+    <div class="app-blog module">
+      <table>
+        <caption>
+          <a href="/admin/blog/" class="section" title="Modelli nell'applicazione Blog">Blog</a>
+        </caption>
+
+          <tbody><tr class="model-comment">
+
+              <th scope="row"><a href="/admin/blog/comment/">Comments</a></th>
+
+
+
+              <td><a href="/admin/blog/comment/add/" class="addlink">Aggiungi</a></td>
+
+
+
+          </tr>
+
+          <tr class="model-resp">
+
+              <th scope="row"><a href="/admin/blog/resp/">Resps</a></th>
+
+
+
+              <td><a href="/admin/blog/resp/add/" class="addlink">Aggiungi</a></td>
+
+
+
+          </tr>
+
+          <tr class="model-site">
+
+              <th scope="row"><a href="/admin/blog/site/">Sites</a></th>
+
+
+
+              <td><a href="/admin/blog/site/add/" class="addlink">Aggiungi</a></td>
+
+
+
+          </tr>
+
+      </tbody></table>
+    </div>
+
+    <div class="app-homepage module current-app">
+      <table>
+        <caption>
+          <a href="/admin/homepage/" class="section" title="Modelli nell'applicazione Homepage">Homepage</a>
+        </caption>
+
+          <tbody><tr class="model-category">
+
+              <th scope="row"><a href="/admin/homepage/category/">Categorys</a></th>
+
+
+
+              <td><a href="/admin/homepage/category/add/" class="addlink">Aggiungi</a></td>
+
+
+
+          </tr>
+
+          <tr class="model-tutorial current-model">
+
+              <th scope="row"><a href="/admin/homepage/tutorial/" aria-current="page">Tutorials</a></th>
+
+
+
+              <td><a href="/admin/homepage/tutorial/add/" class="addlink">Aggiungi</a></td>
+
+
+
+          </tr>
+
+      </tbody></table>
+    </div>
+
+    <div class="app-social_django module">
+      <table>
+        <caption>
+          <a href="/admin/social_django/" class="section" title="Modelli nell'applicazione Python Social Auth">Python Social Auth</a>
+        </caption>
+
+          <tbody><tr class="model-association">
+
+              <th scope="row"><a href="/admin/social_django/association/">Associations</a></th>
+
+
+
+              <td><a href="/admin/social_django/association/add/" class="addlink">Aggiungi</a></td>
+
+
+
+          </tr>
+
+          <tr class="model-nonce">
+
+              <th scope="row"><a href="/admin/social_django/nonce/">Nonces</a></th>
+
+
+
+              <td><a href="/admin/social_django/nonce/add/" class="addlink">Aggiungi</a></td>
+
+
+
+          </tr>
+
+          <tr class="model-usersocialauth">
+
+              <th scope="row"><a href="/admin/social_django/usersocialauth/">User social auths</a></th>
+
+
+
+              <td><a href="/admin/social_django/usersocialauth/add/" class="addlink">Aggiungi</a></td>
+
+
+
+          </tr>
+
+      </tbody></table>
+    </div>
+
+    <div class="app-user module">
+      <table>
+        <caption>
+          <a href="/admin/user/" class="section" title="Modelli nell'applicazione User">User</a>
+        </caption>
+
+          <tbody><tr class="model-profile">
+
+              <th scope="row"><a href="/admin/user/profile/">Profiles</a></th>
+
+
+
+              <td><a href="/admin/user/profile/add/" class="addlink">Aggiungi</a></td>
+
+
+
+          </tr>
+
+      </tbody></table>
+    </div>
+
+
+
+</nav-->
+
+
+
+      <div class="content">
+
+
+
+        <!-- Content -->
+        <div id="content" class="colM">
+
+          <h1>Crea La Tua Pagina</h1>
+          <div id="content-main">
+
+
+  <ul class="object-tools">
+
+
+
+<li>
+
+    <a href="/admin/homepage/tutorial/3/history/" class="historylink">Storia</a>
+</li>
+<li><a href="/admin/r/10/3/" class="viewsitelink">Vedi sul sito</a></li>
+
+
+
+  </ul>
+
+
+<form method="post" id="tutorial_form" novalidate=""><input type="hidden" name="csrfmiddlewaretoken" value="FeLImq564jMIldnHVWTFbZbgCgvzlhFiFdxpLBYx2PlkKilfAWdIwXXamQONNtlD">
+<div>
+
+
+
+
+
+
+
+  <fieldset class="module aligned ">
+
+
+
+        <div class="form-row field-title">
+
+
+                <div>
+
+
+                        <label title="inserisci il titolo del tutorial"class="required" for="id_title">Titolo:</label>
+
+                            <input type="text" name="title" value="" title="inserisci il titolo del tutorial "class="vTextField" maxlength="250" required="" id="id_title">
+
+
+
+                </div>
+
+        </div>
+
+        <!--div class="form-row field-overview">
+
+
+                <div>
+
+
+                        <!--label class="required" for="id_overview" title="Inserisci il testo del tutorial">Testo Pagina</label>
+
+                            <textarea name="overview" cols="40" rows="10" class="vLargeTextField" required="" id="id_overview">tutorial</textarea>
+
+
+
+                </div>
+
+        </div-->
+
+        <!--div class="form-row field-slug">
+
+
+                <div>
+
+
+                        <label for="id_slug">Slug:</label>
+
+                            <input type="text" name="slug" value="" class="vTextField" maxlength="250" id="id_slug">
+
+
+
+                </div>
+
+        </div-->
+
+        <div class="form-row field-author">
+
+
+                <div>
+
+
+
+
+                            <div class="related-widget-wrapper">
+<label><span style="weight:bold">Autore:</label>
+  <span class="badge badge-info" style="font-weight:bold;margin-left:5px;">{{request.user}}</span>
+</div>
+<!--option value="35" selected="">mario57</option-->
+
+
+
+                </div>
+
+        </div>
+
+        <div class="form-row field-body">
+
+
+                <div>
+
+
+                        <label class="required" for="id_body">Testo pagina:</label>
+
+                            <textarea name="body" cols="40" rows="10" class="vLargeTextField" required="" id="id_body"></textarea>
+
+
+
+                </div>
+
+        </div>
+
+        <!--div class="form-row field-publish">
+
+
+                <div>
+
+
+                        <label class="required" for="id_publish_0">Publish:</label>
+
+                            <p class="datetime">
+  Data: <input type="text" name="publish_0" value="13/09/2022" class="vDateField" size="10" required="" id="id_publish_0"><span class="datetimeshortcuts">&nbsp;<a href="#">Oggi</a>&nbsp;|&nbsp;<a href="#" id="calendarlink0"><span class="date-icon" title="Scegli una data"></span></a></span>
+
+<br>
+  Ora: <input type="text" name="publish_1" value="19:54:47" class="vTimeField" size="8" required="" id="id_publish_1"><span class="datetimeshortcuts">&nbsp;<a href="#">Adesso</a>&nbsp;|&nbsp;<a href="#" id="clocklink0"><span class="clock-icon" title="Scegli un orario"></span></a></span>
+
+
+</p><input type="hidden" name="initial-publish_0" value="13/09/2022" id="initial-id_publish_0"><input type="hidden" name="initial-publish_1" value="19:54:47" id="initial-id_publish_1">
+
+
+
+                </div>
+
+        </div-->
+
+        <div class="form-row field-category">
+
+
+                <div>
+
+
+                        <label class="required" for="id_category">Category:</label>
+
+                            <div class="related-widget-wrapper">
+    <select name="category" required="" id="id_category">
+  <option value="">---------</option>
+
+  <option value="1" selected="">Linux</option>
+
+</select>
+
+        <a class="related-widget-wrapper-link change-related" id="change_id_category" data-href-template="/admin/homepage/category/__fk__/change/?_to_field=id&amp;_popup=1" title="Modifica la selezione category" href="/admin/homepage/category/1/change/?_to_field=id&amp;_popup=1"><img src="/static/admin/img/icon-changelink.svg" alt="Modifica"></a><a class="related-widget-wrapper-link add-related" id="add_id_category" href="/admin/homepage/category/add/?_to_field=id&amp;_popup=1" title="Aggiungi un altro category"><img src="/static/admin/img/icon-addlink.svg" alt="Aggiungi"></a>
+
+</div>
+
+
+
+                </div>
+
+        </div>
+
+        <div class="form-row field-status">
+
+
+                <div>
+
+
+                        <label class="required" for="id_status">Status:</label>
+
+                            <select name="status" id="id_status">
+  <option value="bozza">Bozza</option>
+
+  <option value="pubblicato" selected="">Pubblicato</option>
+
+</select>
+
+
+
+                </div>
+
+        </div>
+
+        <!--div class="form-row field-visite">
+
+
+                <div>
+
+
+                        <label class="required" for="id_visite">Visite:</label>
+
+                            <input type="number" name="visite" value="107" class="vIntegerField" min="0" required="" id="id_visite">
+
+
+
+                </div>
+
+        </div-->
+
+</fieldset>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="submit-row">
+
+<input type="submit" value="Salva" class="default" name="_save">
+
+
+    <!--p class="deletelink-box"><a href="/admin/homepage/tutorial/3/delete/" class="deletelink">Cancella</a></p-->
+
+
+<!--input type="submit" value="Salva e aggiungi un altro" name="_addanother"-->
+<!--input type="submit" value="Salva e continua le modifiche" name="_continue"-->
+
+
+</div>
+
+
+
+    <script id="django-admin-form-add-constants" src="/static/admin/js/change_form.js" async="">
+    </script>
+
+
+
+
+<script id="django-admin-prepopulated-fields-constants" src="/static/admin/js/prepopulate_init.js" data-prepopulated-fields="[]">
+</script>
+
+
+</div>
+</form></div>
+
+
+          <br class="clear">
+        </div>
+        <!-- END Content -->
+        <div id="footer"></div>
+      </div>
+    </div>
+</div>
+<!-- END Container -->
+
+
+<div class="calendarbox module" id="calendarbox0" style="display: none; position: absolute;"><div><a href="#" class="calendarnav-previous">&lt;</a><a href="#" class="calendarnav-next">&gt;</a></div><div id="calendarin0" class="calendar"><table><caption>Settembre 2022</caption><tbody><tr><th>L</th><th>Ma</th><th>Me</th><th>G</th><th>V</th><th>S</th><th>D</th></tr><tr><td class="nonday"> </td><td class="nonday"> </td><td class="nonday"> </td><td class=""><a href="#">1</a></td><td class=""><a href="#">2</a></td><td class=""><a href="#">3</a></td><td class=""><a href="#">4</a></td></tr><tr><td class=""><a href="#">5</a></td><td class=""><a href="#">6</a></td><td class=""><a href="#">7</a></td><td class=""><a href="#">8</a></td><td class=""><a href="#">9</a></td><td class=""><a href="#">10</a></td><td class=""><a href="#">11</a></td></tr><tr><td class=""><a href="#">12</a></td><td class=""><a href="#">13</a></td><td class=""><a href="#">14</a></td><td class=""><a href="#">15</a></td><td class=""><a href="#">16</a></td><td class=""><a href="#">17</a></td><td class=""><a href="#">18</a></td></tr><tr><td class=""><a href="#">19</a></td><td class=""><a href="#">20</a></td><td class=""><a href="#">21</a></td><td class=""><a href="#">22</a></td><td class="today"><a href="#">23</a></td><td class=""><a href="#">24</a></td><td class=""><a href="#">25</a></td></tr><tr><td class=""><a href="#">26</a></td><td class=""><a href="#">27</a></td><td class=""><a href="#">28</a></td><td class=""><a href="#">29</a></td><td class=""><a href="#">30</a></td><td class="nonday"> </td><td class="nonday"> </td></tr></tbody></table></div><div class="calendar-shortcuts"><a href="#">Ieri</a>&nbsp;|&nbsp;<a href="#">Oggi</a>&nbsp;|&nbsp;<a href="#">Domani</a></div><p class="calendar-cancel"><a href="#">Annulla</a></p></div><div class="clockbox module" id="clockbox0" style="display: none; position: absolute;"><h2>Scegli un orario</h2><ul class="timelist"><li><a href="#">Adesso</a></li><li><a href="#">Mezzanotte</a></li><li><a href="#">6 del mattino</a></li><li><a href="#">Mezzogiorno</a></li><li><a href="#">6 del pomeriggio</a></li></ul><p class="calendar-cancel"><a href="#">Annulla</a></p></div></body>

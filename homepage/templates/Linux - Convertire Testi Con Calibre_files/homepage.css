@@ -55,7 +55,7 @@ html {
     }
 
 body {
-    /* width:100%; */
+    width:100%;
     height:auto;
     font-family:'WorkSans','Assistant-regular';
     font-size:20px;
@@ -78,6 +78,10 @@ body {
     padding:0px;
 }
 
+div>#span_title{
+
+
+}
 
 p , #p_content{
     -webkit-font-smoothing: antialiased;
@@ -116,11 +120,6 @@ header{
     max-width:100%;
     background-color:white;
 }
-
-#collapsibleNavbar{
-        /*width:100%!important;*/
-}
-
 #header_menu{
     margin-left:auto;
     width:auto;
@@ -133,17 +132,27 @@ a ,a > span {
     black;
 }
 
+#span_title{
+    font-family: 'Carter_One';  font-weight:normal;font-style:italic;
+    color:purple;
+}
 #span_title_2{/* font-family: 'Carter_One'; */  font-weight:bold;
+font-style:italic;
 color:black;}
 
 #span_title_w{
-    /* font-family: 'Roboto'; */
+    font-family: 'Roboto';
     color: #585050;
     margin-right:5px;
     font-weight: bold;
-    size:0.8rem;
 }
 
+ #a-Linux{
+border:0px solid!important ;
+background-color: transparent!important;
+color:grey;
+border-bottom-left-radius: 5px;
+ }
 
 #c_aside{
     margin-top:3%;
@@ -231,12 +240,13 @@ color:black;}
     color:orange;
 }
 [id^="a-"]{
-    width:
-    auto;
+    width:auto;
+    margin:0 auto;
+    display:inline-block!important;
    border:0px solid!important ;
-    background-color: transparent!important;
-   color:
-    blue!important;
+   background-color: transparent!important;
+   color:grey;
+   border-bottom-left-radius: 5px;
     }
 
 
@@ -269,7 +279,7 @@ code{
 
 
 li #s_center_menu{
-    font-size: 0.5em;
+    font-size: 2rem;
 }
 
 #col_aside{
@@ -447,13 +457,8 @@ a:hover{
 
 
 .ul_wrap{
-    margin-left:35%;
-    margin-top:-5%;
-}
-
-.ul_right{
-margin-right:0;
-float:right!important;
+    margin-left:auto;
+    margin:0 auto!important;
 }
 
 #d_compile > #s_compile{
@@ -465,9 +470,8 @@ float:right!important;
     #h_title2 {
         display:none;
     }
-    #span_title_W{
-        size:0.6em;
-    }
+
+
     #d_photo_author{
         margin-top:-3%;
     }
@@ -621,11 +625,17 @@ float:right!important;
         font-size:1rem;
     }
 
+    #span_title_w{
+        font-size:1rem;
+    }
     #s_title{
         font-size:1.1rem;
     }
     #s_title_2{
         font-size:1.1rem;
+    }
+    #asidebar{
+        # display:block;
     }
     #asidebar .fa-angle-right{
         font-size:1.5rem!important;
@@ -731,6 +741,10 @@ float:right!important;
         font-size:0.7rem!important;
     }
 
+    [id^="a-"]{
+        width:auto;
+        margin:0%;
+    }
 
     code{
         font-size:1.5vw;
@@ -748,8 +762,7 @@ float:right!important;
     }
 
     #span_title_w{
-            font-size:1.6rem;
-
+        font-size:1.6rem;
     }
 
 
@@ -865,17 +878,17 @@ float:right!important;
         font-size:2.2rem;
     }
     #span_title_2{
+        font-family: Roboto;font-size:2.2rem;
         font-style: normal;
         color: #4f5449;
-        font-size: 2.2rem;
     }
     #s_nome_autore{
         font-size:0.5rem!important;
         color:blue;
     }
     #span_title_w{
-        font-weight:bold;
         font-size:2.2rem;
+
     }
 
     #asidebar{

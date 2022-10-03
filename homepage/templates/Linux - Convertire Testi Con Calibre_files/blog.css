@@ -23,11 +23,13 @@ font-family:'Alpha Slab One'
   src: url('../Fonts/WorkSans-Regular');
 }
 #blog{
-    margin:50px auto! important;
-    font-family:'Montserrat-Regular';
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    line-height: 1.6;
+  width:43%!important;
+  max-width:43%!important;
+  margin:50px auto! important;
+  font-family:'Montserrat-Regular';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
 }
 
 div.breadcrumbs{
@@ -35,7 +37,10 @@ div.breadcrumbs{
 }
 
 
-#bdiv{width:90%;margin:0 auto !important;}
+#bdiv{
+width:90%;
+margin:0 auto !important;
+}
 
 #button_post{
   width:90%!important;
@@ -60,10 +65,8 @@ a > span {
 }
 
 a{
-  text-decoration:
-  none!important;
-  width:
-  auto!important;
+  text-decoration:none!important;
+  width:auto!important;
 }
 
 [id^=span_]:hover{
@@ -108,6 +111,7 @@ color:grey;
   color:#660000;
   padding:2%;
   box-shadow:10px 10px 10px #719ECE
+
 }
 
 [id^="img_user"]{
@@ -142,8 +146,8 @@ background-color: transparent;
 }
 
 [id^=but_post]{
-  /* padding:2%; */
-  /* font-size:1rem; */
+  padding:2%;
+font-size:1rem;
 }
 
 textarea {
@@ -254,26 +258,16 @@ fa .fa-comments-dots{
 
 
 @media screen and (max-width: 780px) {
-    #blog{
-      width:53%!important;
-  }
+
 }
 
 @media screen and (max-width: 480px) {
-    #blog{
-      width:100%!important;
-  }
   button{
     max-width:80%;
     margin:0 auto;
   }
 }
-@media screen and (max-width: 1280px) {
-    #blog{
-        margin:0 auto;
-        width: 45%!important;
-  }
-
+@media screen and (max-width: 1024px) {
   .fa-comment-dots,#s_blog{
     font-size:0.7rem;
     color:grey;
@@ -294,14 +288,10 @@ fa .fa-comments-dots{
   .modal-content {
     width: 33%!important; /* Could be more or less, depending on screen size */
   }
-
 }
 
 @media screen and (min-width: 1280px) {
-    #blog{
-        margin:0;
-        width: 49%!important;
-    }
+
   #p_text{
     width:100%!important;
   }
@@ -313,7 +303,7 @@ fa .fa-comments-dots{
 
 @media screen and (max-width: 780px) {
   #blog{
-    width:90%!important;
+    width:100%!important;
     max-width:100%!important;
     margin:0 auto!important;
   }
@@ -337,15 +327,10 @@ textarea {
 
 @media screen and (min-width: 780px) {
   .fa-comment-dots,#s_blog {
-    font-size:2rem!important;
+    font-size:3rem!important;
   color:grey;
   }
 
-@media screen and (min-width: 980px) {
-    #blog{
-        width:53%;
-    }
-}
 textarea {
     font-size:1rem!important;
     background-color: transparent;

@@ -17,7 +17,8 @@ page = """
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="UTF-8">
 <meta name="author" content="silverania">
-<meta name="keywords" content="software, webtalk ,hosting, messaggi,commenti,blog,gratuito,addon,sito,web,modulo,download,free,gratis,webmaster,sviluppatori">
+<meta name="keywords" content="software, webtalk ,hosting, messaggi,commenti,blog,gratuito,addon,sito,web,modulo,
+    download,free,gratis,webmaster,sviluppatori">
 <meta name="description" content="Software Gratuito Per Aggiungere Commenti Sul Tuo Sito Web.">
 <title>Host-WebTalk</title>
 <link rel="icon" type="image/x-icon" href="/static/images/favicon.ico">
@@ -87,6 +88,12 @@ gyroscope; picture-in-picture" allowfullscreen></iframe>
 </footer>
 </body>
 </html>"""
+
+
+class Newpage(View):
+    def get(self, request):
+        newpage = "newpage.html"
+        return render(request, newpage)
 
 
 def tutorial_detail(request, slug=""):

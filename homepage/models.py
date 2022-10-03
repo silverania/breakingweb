@@ -60,7 +60,7 @@ class Tutorial(models.Model):
     slug = models.SlugField(max_length=250, null=True, blank=True)
     author = models.ForeignKey(
         Profile, on_delete=models.CASCADE, blank=True, null=True)
-    body = models.TextField()
+    body = models.TextField(null=True, blank=True)
     publish = models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -79,7 +79,7 @@ class Tutorial(models.Model):
         ordering = ('-publish',)
 
     def __str__(self):
-        return "%s" % (self.title)+"letto "+self.visite+" volte"
+        return "%s" % (self.title)+", letto "+str(self.visite)+" volte"
 
     def get_absolute_url(self):
         return reverse('homepage:tutorial_detail',
