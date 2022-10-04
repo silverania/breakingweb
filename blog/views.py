@@ -90,16 +90,15 @@ def getPost(request):
                         "profiles": profiles_list,
                         }
                     )
-            else:
-                data = json.dumps(
-                    {
-                        "resps": [{"": ""}],
-                        "data_comm": [{"": ""}],
-                        "profiles": profiles_list,
+        else:
+            data = json.dumps(
+                {
+                    "resps": [{"": ""}],
+                    "data_comm": [{"": ""}],
+                    "profiles": profiles_list,
                     }
                 )
-            return JsonResponse(data, safe=False)
-    return render(request, {'data': data, })
+    return JsonResponse(data, safe=False)
 
 
 def newPost(request):

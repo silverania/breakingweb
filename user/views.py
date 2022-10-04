@@ -245,7 +245,6 @@ def change_password(request):
             update_session_auth_hash(request, user)  # Important!
             if 'next' in request.GET:
                 valuenext = request.GET.get('next')
-                breakpoint()
                 return render(request, "registration/pass_changed_done.html", {'valuenext': valuenext})
         else:
             return HttpResponse("errore nei dati inseriti !")
