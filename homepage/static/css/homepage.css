@@ -101,6 +101,12 @@ li:hover{
     margin-top:3%;
 }
 
+[id^='option_autori'],[id^='tutorial_id']{
+    width:50%;
+    max-widtH:80%;
+    font-size:10px;
+}
+
 progress#progressbar{
     position:fixed;
     width:100%;

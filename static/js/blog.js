@@ -9,7 +9,7 @@ const HIDDENFIELD="?next="+window.location
 const XMLHTTPURL_GETUSER=BASE_URL+"user/blog/getuser"
 const URL_NEW_POST=BASE_URL+"post/sendpost"
 const XMLHTTPURL_LOGIN=BASE_URL+"user/login/blog"+HIDDENFIELD
-const XMLHTTPURL_REGISTER=BASE_URL+"user/register/blog"+HIDDENFIELD
+const XMLHTTPURL_REGISTER=BASE_URL+"user/register/bloguser"+HIDDENFIELD
 const XMLHTTPURL_LOGOUT=BASE_URL+"user/logout/blog"+HIDDENFIELD
 const MAX_TEXTAREA_NUMBER=21
 const BASE_PHOTO_DIR=BASE_URL+"media/"

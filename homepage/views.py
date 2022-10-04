@@ -74,7 +74,7 @@ gyroscope; picture-in-picture" allowfullscreen></iframe>
 &lt;script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js">
 &lt;/script>
 &lt;script src="https://breakingweb.site/static/js/blog.js"> &lt;/script>
-&lt;script id="s_blog">initBlogSGang(document.title,<span style="color:blue">"user","password"</span>)>&lt;/script>
+&lt;script id="s_blog">initBlogSGang(<span style="color:blue">"user","password"</span>)>&lt;/script>
 </pre>
 </p>
 </div>
@@ -105,33 +105,33 @@ def tutorial_detail(request, slug=""):
             profile = Profile.get(first_name=author_tutorial)
             if profile not in users:
                 users.append(profile)
-    try:
-        user = tutorial.author
-    except UnboundLocalError:
-        return HttpResponse("Non ci sono Pagine ")
-    autore = str(user)
-    photo = settings.MEDIA_URL+str(user.photo)
-    mypath = str(request.path).replace("/", "")
-    if not mypath:
-        print("request PATH VUOTA"+mypath)
-        tutorial = Tutorial.latest('publish')
-    else:
-        print("request PATH PIENA"+mypath)
+            try:
+                user = tutorial.author
+            except UnboundLocalError:
+                return HttpResponse("Non ci sono Pagine ")
+        autore = str(user)
+        photo = settings.MEDIA_URL+str(user.photo)
+        mypath = str(request.path).replace("/", "")
+        if not mypath:
+            print("request PATH VUOTA"+mypath)
+            tutorial = Tutorial.latest('publish')
+        else:
+            print("request PATH PIENA"+mypath)
+            try:
+                tutorial = Tutorial.get(slug=slug)
+            except Exception:
+                print("WARNING ! non ci sono tutorial nel database ! ")
+            print("request PAth piena e Tutorial"+str(tutorial.slug))
+        template = tutorial.slug+".html"
         try:
-            tutorial = Tutorial.get(slug=slug)
-        except Exception:
-            print("WARNING ! non ci sono tutorial nel database ! ")
-        print("request PAth piena e Tutorial"+str(tutorial.slug))
-    template = tutorial.slug+".html"
-    try:
-        user = tutorial.author
-    except UnboundLocalError:
-        return HttpResponse("Non ci sono Pagine ")
-    autore = str(user)
-    photo = settings.MEDIA_URL+str(user.photo)
-    print("Requestpath & template="+str(request.path+template))
-    tutorial.visite = tutorial.visite+1
-    tutorial.save(update_fields=['visite'])
+            user = tutorial.author
+        except UnboundLocalError:
+            return HttpResponse("Non ci sono Pagine ")
+        autore = str(user)
+        photo = settings.MEDIA_URL+str(user.photo)
+        print("Requestpath & template="+str(request.path+template))
+        tutorial.visite = tutorial.visite+1
+        tutorial.save(update_fields=['visite'])
     return render(request, template, {'tutorial': tutorial, 'visitato':
                                       tutorial.visite, 'login': request.user.is_authenticated,
                                       'tutorial_all': tutorial_all, 'categorie': categorie,

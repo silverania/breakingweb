@@ -22,8 +22,9 @@ Group = Group.objects.all()
 
 
 def getUser(user):
+    list_current_user = []
     global Profile
-    firstName = user.username
+    firstName = str(user)
     current_user = Profile.filter(first_name=firstName)
     list_current_user = list(current_user)
     list_current_user = serializers.serialize(
@@ -71,7 +72,8 @@ class checkUser(View):
         if isinstance(myuser, User):
             list_current_user = getUser(myuser)
         if isinstance(request.user, User):
-            userThatLoginIn = getUser(request.user)
+            userThatLoginIn = request.user.username
+            userThatLoginIn = getUser(userThatLoginIn)
         else:
             userThatLoginIn = "None"
         data = json.dumps(
@@ -196,24 +198,33 @@ def user_register(request):
         if form.is_valid():
             user = form.save()
             user.refresh_from_db()
-            if 'blog' in request.path:
-                user.is_staff = True
-                group = Group.get(name='BlogAdmin')
-                user.groups.add(group)
-                print('myuser aggiunto al gruppo blogadmin ')
-            print("USERPROFILEPHOTO"+str(request.FILES))
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)
             user.profile.photo = form.cleaned_data.get('photo')
             user.profile.first_name = username
-            user.save()
+            if 'bloguser' in request.path:
+                valuenext = request.GET.get('next')
+                return redirect('/user/login/blog?next='+valuenext)
+            elif 'blog' in request.path:
+                group = Group.get(name='BlogAdmin')
+                user.groups.add(group)
+                print('myuser'+str(user)
+                      + "aggiunto al gruppo blogadmin ")
+                user.is_staff = True
+                user.save()
+                # mostra messaggio e esci
+                return HttpResponse("sei autorizzato ad usare hostMessage !")
+            else:
+                user = authenticate(username=username, password=raw_password)
+            print("USERPROFILEPHOTO"+str(request.FILES))
+            # vai alla pagina per utenti blog : "la home del sito su cui è installato già il blog"
             if 'next' in request.GET:
                 valuenext = request.GET.get('next')
                 return redirect('/user/login?next='+valuenext)
             else:
                 return redirect('/user/login')
     else:
+        """
         if 'blog' in request.path and 'next' in request.GET:
             scrollTo = '#footer'
             valuenext = request.GET.get('next')+scrollTo
@@ -221,6 +232,7 @@ def user_register(request):
             scrollTo = '#footer'
         elif 'next' in request.GET:
             valuenext = request.GET.get('next')
+            """
         form = SignUpForm()
     return render(request, 'user/register.html', {'form': form})
 
