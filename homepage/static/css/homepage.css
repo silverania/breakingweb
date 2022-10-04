@@ -86,7 +86,7 @@ p , #p_content{
 }
 
 textarea{
-    font-size: 1rem;
+    /* font-size: 1rem; */
     line-height:1;
     outline:none;
     padding:5%;
