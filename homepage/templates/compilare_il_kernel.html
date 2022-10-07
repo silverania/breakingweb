@@ -19,7 +19,10 @@
 </head>
 
 {% block content %}
-
+<script src="{% static 'js/jquery.bs.gdpr.cookies.js' %}"></script>
+<script>$(document).ready(function() {
+    $('body').bsgdprcookies();
+});</script>
       <p  id="p_content">
       Nella guida verrà installato un <span title="Nell ambito dello sviluppo del kernel Linux, il kernel vanilla è il kernel ufficialmente distribuito da Linus Torvalds e dai progettisti Linux,
        senza alcuna patch aggiuntiva."</span>

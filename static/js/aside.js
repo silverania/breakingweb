@@ -112,7 +112,7 @@ $("li[id^='a-']").click(function(){
     showHeader(text);
     $('.d_divaside').css('display', 'block');
     //$('.d_divaside').css('position', 'absolute');
-    $('.d_divaside').animate({ "left" : horizontalHeaderMenuPosition,"top" : "0px" },200);
+    $('.d_divaside').animate({ "left" : horizontalHeaderMenuPosition,"top" : "15%" },200);
   }
   function showHeader(text){
   switch (text){

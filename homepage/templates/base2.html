@@ -1,6 +1,8 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="it" id="page" >
+
+<head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta charset="UTF-8">
   <meta name="author" content="silverania">
@@ -10,29 +12,37 @@
   <title>{{tutorial.title}}</title>
   <link rel="icon" type="image/x-icon" href="{% static "images/favicon.ico" %}">
   <link rel="stylesheet" href="{% static "css/reset.css"%}">
-  <link rel="stylesheet" href="{% static "css/bootstrap.min.css"%}">
+  <link rel="stylesheet" href="{% static "node_modules/bootstrap/dist/css/bootstrap.css"%}">
   <link rel="stylesheet" href="{% static "css/homepage.css" %}">
   <link rel="stylesheet" href="{% static "css/footer.css" %}">
+  <link rel="stylesheet" href="{% static "css/all.min.css" %}">
+  <link rel="stylesheet" href="/static/css/blog.css">
+  <script  src="{% static 'js/jquery.min.js' %}"></script>
   <script src="{% static 'js/all.min.js' %}"></script>
 
 
+  <script  src="{% static 'node_modules/@popperjs/core/dist/umd/popper.js' %}"></script>
+<script  src="{% static 'node_modules/bootstrap/dist/js/bootstrap.js' %}"></script>
+<script  src="/static/js/blog.js"></script>
+<script  src="{% static 'js/aside.js' %}"></script>
+ <script  src="{% static 'js/progressbar.js' %}"></script>
 
-<script  src="{% static 'js/jquery.min.js' %}"></script>
-  <script  src="{% static 'node_modules/popper.js/dist/umd/popper.min.js' %}"></script>
-<script  src="{% static 'js/bootstrap.min.js' %}"></script>
+
+<script src="{% static 'js/style.js' %}"></script>
+
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1430448184465088"
      crossorigin="anonymous"></script>
 {% block otherscripts %} {% endblock %}
+</head>
 
 
 
-
-<body id="body"  onscroll="var h=document.body.scrollHeight;getPosition();">
-
+<body   onscroll="var h=document.body.scrollHeight;getPosition();">
 
 
 
 <div class="container-fluid " id="container_page" >
+
   <div class="row ">
   <progress  value="0" max="100" id="progressbar"></progress>
 </div>
@@ -44,6 +54,7 @@
 <div id="c_aside" class="container-fluid" style="margin-bottom:5%;" >
                        <div class="row justify-content-left">
                          <div class="col-12  col-md-3"  id="section_left_navbar">
+
         <section role="navigation">
           <aside>
           <nav id="nav_top">
@@ -167,6 +178,7 @@ function getIndex(e) {
        </div>
 </header>
 <div class="d_content col-sm-12 col-md-12">
+
 {% block content %}
   {% endblock content %}
 
@@ -197,6 +209,9 @@ function getIndex(e) {
 
 
 {% block footer %}{% endblock %}
-
+<script src="{% static 'js/jquery.bs.gdpr.cookies.js' %}"></script>
+<script>$(document).ready(function() {
+    $('body').bsgdprcookies();
+});</script>
 </body>
 </html>

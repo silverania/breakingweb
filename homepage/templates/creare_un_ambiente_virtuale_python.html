@@ -1,14 +1,10 @@
 {% extends 'base2.html' %}
 {% load static %}
 
-<head>
 {% block title %}Creare Un Ambiente Virtuale Python{% endblock title %}
   {% block keywords %}python,linux,venv,module,creare,inizializzare,ambiente,virtuale,pip{% endblock keywords %}
   {% block description %}Creare Un Ambiente Virtuale Python su Linux con il modulo venv{% endblock description%}
 {% block anteprima %}<meta property="og:image"   content='{% static 'images/Kazam_screenshot_00003.png' %}'/>{% endblock %}
-
-
-
 
 
 
@@ -21,9 +17,11 @@
      <span id="s_title_2" style="display:inline-block;color:black;font-weight:bold;">Creare Un Ambinete Virtuale Python <br>
       Con Il Modulo venv</span></span>
        {% endblock tut_title %}
-      {% block otherscripts %}{% include 'custom_tag.html'%} {% endblock %}
-<head>
-            {% block content %}
+
+      {% block content %}
+
+
+      
              <p style="text-align:center;" id="p_content">
         L' utilità principale di un ambiente virtuale Python , è quella di preservare l' ambiente Python che usa il sistema operativo .
         Usando l' ambiente python di sistema , invece che uno virtuale , per le proprie applicazioni ed esperimenti vari , ci si espone al rischio
@@ -74,7 +72,10 @@ che attiverà appunto l' ambiente Virtuale. Attenzione perchè l' ambiente
             $(document).ready(function(){
               initBlogSGang("mario","sol-7373");
             })
-          </script>
+            </script>
+
+
+
 {% endblock content %}
 
 

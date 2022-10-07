@@ -47,12 +47,12 @@ div.breadcrumbs{
 
 div.modal-content {
   width:100%;
-min-width:100%;
+  min-width:100%;
   height:auto;
   font-family:'WorkSans','Assistant-regular','WorkSans';
-  background-color:#e6ffff;
+  background-color: #495057;
   font-size:2rem;
-  /*box-sizing:content-box;*/
+  box-sizing:content-box;
 }
 
 a > span {
@@ -255,7 +255,7 @@ fa .fa-comments-dots{
 
 @media screen and (max-width: 780px) {
     #blog{
-      width:53%!important;
+      width:33%!important;
   }
 }
 
@@ -268,11 +268,7 @@ fa .fa-comments-dots{
     margin:0 auto;
   }
 }
-@media screen and (max-width: 1280px) {
-    #blog{
-        margin:0 auto;
-        width: 45%!important;
-  }
+
 
   .fa-comment-dots,#s_blog{
     font-size:0.7rem;
@@ -295,12 +291,12 @@ fa .fa-comments-dots{
     width: 33%!important; /* Could be more or less, depending on screen size */
   }
 
-}
+
 
 @media screen and (min-width: 1280px) {
     #blog{
         margin:0;
-        width: 49%!important;
+        width: 30%!important;
     }
   #p_text{
     width:100%!important;
@@ -312,9 +308,11 @@ fa .fa-comments-dots{
 }
 
 @media screen and (max-width: 780px) {
+    textarea{
+        font-size:0.6rem!important;
+    }
   #blog{
-    width:90%!important;
-    max-width:100%!important;
+    width:60%!important;
     margin:0 auto!important;
   }
   .modal-content {
@@ -325,7 +323,7 @@ fa .fa-comments-dots{
   }
 
 textarea {
-    font-size:0.7rem!important;
+    font-size:0.8rem!important;
 }
 }
 
@@ -336,20 +334,24 @@ textarea {
 }
 
 @media screen and (min-width: 780px) {
-  .fa-comment-dots,#s_blog {
-    font-size:2rem!important;
+    .fa-comment-dots,#s_blog {
   color:grey;
   }
+  textarea {
+      font-size:0.8rem!important;
+  }
+  #blog{
+      width:49%;
+  }
+  .fa-comment-dots{
+      font-size:2rem!important;
+  }
+}
 
 @media screen and (min-width: 980px) {
     #blog{
-        width:53%;
+        width:39%;
     }
-}
-textarea {
-    font-size:1rem!important;
-    background-color: transparent;
-}
 }
 
 .blog_title,#blog_title{
@@ -381,20 +383,19 @@ button:focus{
   outline: none!important;
 }
 
-/* MODAL WINDOW */
+ /*MODAL WINDOW */
 
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
+/*.modal {
+  /* display: none; */ /* Hidden by default */
+  /* position: fixed; */ /* Stay in place */
+  /* z-index: 1; */ /* Sit on top */
+  /* left: 0; */
+  /* top: 0; */
+  /* width: 100%; */ /* Full width */
+  /* height: 100%; */ /* Full height */
+  /* background-color: rgb(0,0,0); */ /* Fallback color */
+  /* background-color: rgba(0,0,0,0.4); */ /* Black w/ opacity */
+/*}*/
 
 /* Modal Content/Box */
 

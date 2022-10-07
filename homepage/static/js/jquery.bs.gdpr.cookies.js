@@ -23,21 +23,20 @@
             class: '',
             title: 'Cookies & Privacy Policy',
             backdrop: 'static',
-            message: 'Questo sito usa cookies',
+            message: 'Your cookie message...',
             messageScrollBar: false,
             messageMaxHeightPercent: 25,
             delay: 1500,
             expireDays: 30,
             moreLinkActive: true,
-            moreLinkLabel: "",
+            moreLinkLabel: 'More informations..',
             moreLinkNewTab: true,
             moreLink: 'privacy-policy.php',
-            acceptButtonLabel: 'Accetta',
-            continueButtonLabel: 'Continua come ospite',
-            allowAdvancedOptions: true,
-            advancedTitle: 'Seleziona Quali',
+            acceptButtonLabel: 'Accept',
+            allowAdvancedOptions: false,
+            advancedTitle: 'Select which cookies you want to accept',
             advancedAutoOpenDelay: 1000,
-            advancedButtonLabel: 'Personalizza',
+            advancedButtonLabel: 'Customize',
             advancedCookiesToSelect: [
                 {
                     name: 'necessary',
@@ -74,7 +73,6 @@
 
             var modalBody = '';
             var modalButtons = '';
-            var modalButtons2 = '';
             var modalBodyStyle = '';
             var moreLink = '';
 
@@ -90,7 +88,7 @@
 
 
             if(settings.allowAdvancedOptions === true) {
-                modalButtons = '<button id="' + settings.id + '-advanced-btn" type="button" class="btn btn-secondary">' + settings.advancedButtonLabel + '</button><button id="' + settings.id + '-accept-btn" type="button" class="btn btn-primary" data-dismiss="modal">' + settings.acceptButtonLabel + '</button><button id="' + settings.id + '-continue-btn" type="button" class="btn btn-secondary" data-dismiss="modal">' + settings.continueButtonLabel + '</button>';
+                modalButtons = '<button id="' + settings.id + '-advanced-btn" type="button" class="btn btn-secondary">' + settings.advancedButtonLabel + '</button><button id="' + settings.id + '-accept-btn" type="button" class="btn btn-primary" data-dismiss="modal">' + settings.acceptButtonLabel + '</button>';
 
                 // Generate list of available advanced settings
                 var advancedCookiesToSelectList = '';
@@ -118,9 +116,8 @@
                 modalBody = '<div id="' + settings.id + '-message">' + settings.message + moreLink + '</div>' + '<div id="' + settings.id + '-advanced-types" style="display:none; margin-top: 10px;"><h5 id="' + settings.id + '-advanced-title">' + settings.advancedTitle + '</h5>' + advancedCookiesToSelectList + '</div>';
             }
             else {
-                //modalButtons2 = '<button id="' + settings.id + '-continue-btn" type="button" enabled class="btn btn-info" data-dismiss="modal">' + settings.continueButtonLabel + '</button>';
+                modalButtons = '<button id="' + settings.id + '-accept-btn" type="button" class="btn btn-primary" data-dismiss="modal">' + settings.acceptButtonLabel + '</button>';
 
-              modalButtons = '<button id="' + settings.id + '-accept-btn" type="button" enabled class="btn btn-primary" data-dismiss="modal">' + settings.acceptButtonLabel + '</button> ';
                 modalBody ='<div id="' + settings.id + '-message">' + settings.message + moreLink + '</div>';
             }
 
@@ -133,7 +130,7 @@
             // Show Modal
             setTimeout(function() {
                 $($element).append(modal);
-
+                       $('#'+settings.id).modal('show');
                 $('#' + settings.id).modal({keyboard: false, backdrop: settings.backdrop});
 
                 if (event === 'reinit' && settings.allowAdvancedOptions === true) {

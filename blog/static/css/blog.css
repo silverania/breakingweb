@@ -47,12 +47,12 @@ div.breadcrumbs{
 
 div.modal-content {
   width:100%;
-min-width:100%;
+  min-width:100%;
   height:auto;
   font-family:'WorkSans','Assistant-regular','WorkSans';
-  background-color:#e6ffff;
+  background-color: #495057;
   font-size:2rem;
-  /*box-sizing:content-box;*/
+  box-sizing:content-box;
 }
 
 a > span {
@@ -383,20 +383,19 @@ button:focus{
   outline: none!important;
 }
 
-/* MODAL WINDOW */
+ /*MODAL WINDOW */
 
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
+/*.modal {
+  /* display: none; */ /* Hidden by default */
+  /* position: fixed; */ /* Stay in place */
+  /* z-index: 1; */ /* Sit on top */
+  /* left: 0; */
+  /* top: 0; */
+  /* width: 100%; */ /* Full width */
+  /* height: 100%; */ /* Full height */
+  /* background-color: rgb(0,0,0); */ /* Fallback color */
+  /* background-color: rgba(0,0,0,0.4); */ /* Black w/ opacity */
+/*}*/
 
 /* Modal Content/Box */
 
