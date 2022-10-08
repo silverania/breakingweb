@@ -69,6 +69,7 @@ class Tutorial(models.Model):
     status = models.CharField(
         max_length=10, choices=STATUS_CHOICES, default='bozza')
     visite = models.PositiveIntegerField(default=1)
+    photos = models.ImageField(upload_to='media/tuorial/images/', blank=True, null=True)
 #post=models.ForeignKey(Comment,on_delete=models.CASCADE,related_name="comments",null=True,blank=True)
     # decommentare una delle seguenti tre righe per selezionare un custom model manager
     #objects = models.Manager() # The default manager.

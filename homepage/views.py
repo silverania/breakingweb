@@ -5,6 +5,7 @@ from .models import Tutorial
 from .models import Category
 from user.models import Profile
 from django.conf import settings
+from user.forms import SignUpForm
 import os
 Tutorial = Tutorial.objects.all()
 Profile = Profile.objects.all()
@@ -93,7 +94,8 @@ gyroscope; picture-in-picture" allowfullscreen></iframe>
 class Newpage(View):
     def get(self, request):
         newpage = "newpage.html"
-        return render(request, newpage)
+        form = SignUpForm()
+        return render(request, newpage, {'form': form})
 
 
 def tutorial_detail(request, slug=""):
