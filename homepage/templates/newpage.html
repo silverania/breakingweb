@@ -7,13 +7,16 @@
     <script src="/static/admin/js/nav_sidebar.js" defer=""></script>
     <link rel="stylesheet" type="text/css" href="{% static "css/newpage.css"%}">
     <link rel="stylesheet" type="text/css" href="{% static "css/forms.css"%}">
+    <link rel="stylesheet" href="{% static "css/all.min.css" %}">
     <link rel="stylesheet" href="{% static "node_modules/bootstrap/dist/css/bootstrap.css"%}">
     <link rel="stylesheet" href="{% static "css/all.min.css" %}">
     <script  src="{% static 'js/jquery.min.js' %}"></script>
     <script src="{% static "js/getParams.js"%}"></script>
     <script  src="{% static 'node_modules/@popperjs/core/dist/umd/popper.js' %}"></script>
     <script  src="{% static 'node_modules/bootstrap/dist/js/bootstrap.js' %}"></script>
+    <script  src="{% static 'js/all.min.js' %}"></script>
     <script  src="{% static 'js/newpage.js' %}"></script>
+
 </head>
 <body>
 
@@ -179,13 +182,14 @@
                     <textarea name="body" cols="30" rows="10" class="vLargeTextField" required="" id="id_body"></textarea>
                     </div>
 
-                    <div class="col-6">
-                    <form method="post" enctype="multipart/form-data">
+                    <div class="col-6 mt-5">
+                    <form id="formImmagine" method="post"  enctype="multipart/form-data">
                         {% csrf_token %}
-                        <div class="input-group mb-3 mt-3">
+                        <div class="badge input-group-text" for="formImmagine"><span class="badge bg-warning">Scegli un Immagine Da Inserire nel testo
+                            </span>
+                        <div title="seleziona un immagine da inserire fra il testo" class="input-group mb-3 mt-3">
 
                             <input class="form-control" type="file" name="photo" accept="image*" id="id_photo">
-                             <label class="input-group-text" for="id_photo">Inserisci Immagine</label>
                         </div>
                     </form>
                     </div>

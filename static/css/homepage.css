@@ -54,6 +54,10 @@ html {
     color:grey!important;
 }
 
+#d_divaside.d_divaside{
+    z-index:2;
+}
+
 #span_libri{
     font-family: sans-serif;
     display: block;
@@ -69,7 +73,7 @@ body {
     background-color:white;
     box-sizing:content-box;
 }
-
+#d_linux
 /* privacy window */
 
 .badge.badge-info.badge-outlined-info{
@@ -117,7 +121,7 @@ progress#progressbar{
     top:-8px;
     height:30px;;
     margin:0 auto 0 0;
-    z-index:1000;
+    z-index:99;
 
 }
 

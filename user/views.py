@@ -213,7 +213,7 @@ def user_register(request):
                 user.is_staff = True
                 user.save()
                 # mostra messaggio e esci
-                return HttpResponse("sei autorizzato ad usare hostMessage !")
+                return HttpResponse("<h1>sei autorizzato ad usare webTalk ! </h1><h2>inserisci user e password nei tag Html</h2>")
             else:
                 user = authenticate(username=username, password=raw_password)
             print("USERPROFILEPHOTO"+str(request.FILES))

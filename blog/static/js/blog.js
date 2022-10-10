@@ -1,5 +1,5 @@
 /* By Mario , superior code */
-const BASE_URL="http://127.0.0.1:8000/" // URL del server
+const BASE_URL="https://breakingweb.site/" // URL del server
 const CLIENT_URL=window.location.href.split('#')[0].split('?')[0]
 const HIDDENFIELD="?next="+window.location
 const XMLHTTPURL_GETUSER=BASE_URL+"user/blog/getuser"

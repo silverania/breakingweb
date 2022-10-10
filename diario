@@ -1,5 +1,1 @@
-- Quando l' user fa la registrazione per usare il bloga
-non deve essere reindirizzato alla pagina di login
-
-- prendere la variabile website nel metodo post della registrazione.
-- mostrare solo i siti dell' utente loggato in admin
+cancella il toggler nalla nav

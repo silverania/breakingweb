@@ -46,9 +46,7 @@ page = """
 <div id="div_col_info" class="col-5">
 <div id="id_div_info" class="">
 <p class="p_info" id="p_info">Cos'è Host-WebTalk ?</p>
-<p id="p_content" class="p_content">Host-WebTalk è un "software libero" di commenti su siti web .   </p>
-<p class="p_info" id="p_info">A Chi Può servire ?</p>
-<p id="p_content" class="p_content">A chiunque sviluppi siti Web.</p>
+<p id="p_content" class="p_content">Host-WebTalk è un "software libero" di commenti per siti web .   </p>
 <p class="p_info" id="p_info">Installazione</p>
 <p id="p_content" class="p_content">Registrati <a href="https://breakingweb.site/user/register/blog">qui</a>
 per usare e installare il programma ed avere accesso alla pagina di gestione e moderazione dei messaggi.
@@ -116,7 +114,7 @@ def tutorial_detail(request, slug=""):
         mypath = str(request.path).replace("/", "")
         if not mypath:
             print("request PATH VUOTA"+mypath)
-            tutorial = Tutorial.latest('publish')
+            tutorial = Tutorial.get(title="compilare il kernel")
         else:
             print("request PATH PIENA"+mypath)
             try:

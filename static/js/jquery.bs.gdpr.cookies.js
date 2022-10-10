@@ -21,33 +21,33 @@
         var settings = $.extend({
             id: 'bs-gdpr-cookies-modal',
             class: '',
-            title: 'Cookies & Privacy Policy',
+            title: 'Privacy Policy',
             backdrop: 'static',
-            message: 'Your cookie message...',
+            message: 'i cookies vengono memorizzati per migliorare la navigazione ',
             messageScrollBar: false,
             messageMaxHeightPercent: 25,
             delay: 1500,
             expireDays: 30,
             moreLinkActive: true,
-            moreLinkLabel: 'More informations..',
+            moreLinkLabel: '<span style="cursor:pointer;color:orange">Più informazioni..</span>',
             moreLinkNewTab: true,
             moreLink: 'privacy-policy.php',
-            acceptButtonLabel: 'Accept',
-            allowAdvancedOptions: false,
-            advancedTitle: 'Select which cookies you want to accept',
+            acceptButtonLabel: 'Accetto',
+            allowAdvancedOptions: true,
+            advancedTitle: 'Seleziona il tipo di cookie che vuoi accettare',
             advancedAutoOpenDelay: 1000,
-            advancedButtonLabel: 'Customize',
+            advancedButtonLabel: 'Personalizza',
             advancedCookiesToSelect: [
                 {
                     name: 'necessary',
                     title: 'Necessary',
-                    description: 'Required for the site to work properly',
+                    description: 'Richiesto per il funzionamento base',
                     isFixed: true
                 },
                 {
                     name: 'preferences',
                     title: 'Site Preferences',
-                    description: 'Required for saving your site preferences, e.g. remembering your username etc.',
+                    description: 'Richiesto per salvare le preferenze, e.g. per ricordare la tua username etc.',
                     isFixed: false
                 },
                 {
@@ -59,7 +59,7 @@
                 {
                     name: 'marketing',
                     title: 'Marketing',
-                    description: 'Required to marketing, e.g. newsletters, social media, etc',
+                    description: 'Richiesto per social media, etc',
                     isFixed: false
                 }
             ],
@@ -79,7 +79,7 @@
             // Generate more link
             if(settings.moreLinkActive == true) {
                 if(settings.moreLinkNewTab == true) {
-                    moreLink = '<a href="' + settings.moreLink + '" target="_blank" rel="noopener noreferrer" id="' + settings.id + '-more-link">' + settings.moreLinkLabel + '</a>';
+                    moreLink = '<a href="' + settings.moreLink + '"  target="_blank" rel="noopener noreferrer" id="' + settings.id + '-more-link">' + settings.moreLinkLabel + '</a>';
                 }
                 else {
                     moreLink = '<a href="' + settings.moreLink + '" id="' + settings.id + '-more-link">' + settings.moreLinkLabel + '</a>';
@@ -130,7 +130,7 @@
             // Show Modal
             setTimeout(function() {
                 $($element).append(modal);
-
+                       $('#'+settings.id).modal('show');
                 $('#' + settings.id).modal({keyboard: false, backdrop: settings.backdrop});
 
                 if (event === 'reinit' && settings.allowAdvancedOptions === true) {
