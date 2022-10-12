@@ -31,11 +31,13 @@ class Category(models.Model):
         ('web', 'Web'),
         ('django', 'Django'),
         ('generica', 'Generica'),
+        ('download', 'Download')
     )
     linux = 'Linux'
     web = 'Web'
     django = 'Django'
     generica = 'Generica'
+    download = "Download"
     title = models.CharField(max_length=250)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)

@@ -1,7 +1,0 @@
-bs-gdpr-cookies-modal {
-z-index:9999;
-}
-
-div[id$="modal-message"]{
-font-size:1rem!important;
-}

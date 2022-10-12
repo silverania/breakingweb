@@ -48,6 +48,8 @@ html {
     font-size: 16px;
     line-height: 22px;
     color: #333;
+    max-width:100%;
+    min-height:100vh;
 }
 
 .fa-book{
@@ -67,7 +69,8 @@ html {
 
 body {
     width:100%;
-    height:auto;
+    min-height: 100vh;
+    /* min-height:100%; */
     /* font-family:'WorkSans','Assistant-regular'; */
     /* font-size:20px; */
     background-color:white;
@@ -161,6 +164,7 @@ color:black;}
 
 #c_aside{
     margin-top:3%;
+    height: auto;
 }
 
 .zindex{
@@ -323,12 +327,8 @@ li #s_center_menu{
     display:none;
 }
 #s_title{
-    color:orange;
-    font-family: 'montserrat-bold';
-}
-
-.s_title{
-    margin-left:10%;
+    color:grey;/*#ff66ff;*/
+    font-family: 'montserrat-regular';
 }
 
 #s_title_2{
