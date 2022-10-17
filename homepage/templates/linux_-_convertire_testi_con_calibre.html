@@ -7,7 +7,7 @@
   {% block description %}Linux - Conversione File Testuali e Installazione Di Calibre{% endblock description%}
      {% block photo %}{%static "/images/mestesso.jpg"%}{% endblock photo %}
      {% block tut_title %}
-       <span class="badge badge-pill badge-light" style="width:100%;display:inline-block!important;margin:0 auto!important;">
+       <span class="badge rounded-pill bg-light" style="width:100%;display:inline-block!important;margin:0 auto!important;">
          <span id="s_title">Linux - </span>
        <span id="s_title_2" style="display:inline-block;color:black;font-weight:bold;">Convertire Testi Con Calibre</span></span>{% endblock tut_title %}
   {% block otherscripts %}{% include 'custom_tag.html'%} {% endblock %}
@@ -19,28 +19,21 @@ Calibre gestisce la raccolta di libri elettronici dell'utente. È progettato int
 al concetto del libro logico, cioè una sola voce nel database che può
 corrispondere ai libri elettronici in molti formati. Gestisce anche la
 conversione da e verso una dozzina di differenti formati per libri elettronici.
-L' <span style="color:orange">installazione su Debian Linux</span> si fa nel modo consueto :</p>
-<p style="background-color:white;width:98%;margin:0 auto;"><code>apt update<br>apt install calibre</code></p><br><br>
+L' <span style="color:orange">installazione su Debian Linux</span> si fa nel modo consueto :
+<code>apt update<br>apt install calibre</code><br><br>
 
-  <p>
+
 <a  href="{%static "/images/calibre.jpg"%}">Schermata all' apertura :<img src='{%static "/images/calibre.jpg"%}'   width="100%" height="100%" alt="non posso visualizzare l 'interfaccia di calibre"></a>
 <br><br>
-</p>
-<p id="p_content" style="margin-top:3%;margin-bottom:3%;">
+
 Per convertire un file di testo da un formato ad un altro, è sufficiente selezionare un libro nella lista centrale e
 cliccare sull' icona converti . Si apre questa finestra :
 
-<a href='{%static "/images/calibre_converti.jpg"%}'><br><br>finestra di conversione<br><img src='{%static "/images/calibre_converti.jpg"%}'   width="100%" height="100%" alt="non posso visualizzare la schermata di conversione file di calibre"></a>
-</p>
-<p id="p_content" style="margin-top:3%;margin-bottom:3%;">
+<a href='{%static "/images/calibre_converti.jpg"%}'><br><br>finestra di conversione<br><img src='{%static "/images/calibre_converti.jpg"%}'   width="100%" height="100%" alt="non posso visualizzare la schermata di conversione file di calibre"></a><br><br>
   <b>in alto a sinistra</b> dell' immagine qui sopra si puo leggere il formato del libro selezionato , che è : "epub" , <b>in alto a destra selezionare il formato</b> in cui si desidera convertire
   l' ebook , il numero di formati fra cui scegliere è molto vasto , più di una decina ,  <b>cliccare su ok</b> per avviare la conversione .
   </p>
-  <script id="s_blog">
-      $(document).ready(function(){
-        initBlogSGang("mario","sol-7373");
-      })
-    </script>
+
   {% endblock content %}
 
 {% block footer%}

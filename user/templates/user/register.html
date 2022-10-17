@@ -51,7 +51,8 @@
                   <label>Password :</label>
                   {{ field }}
                   {% elif 'website' in field.label_tag %}
-                  <small style="color: grey">Opzionale</small>
+                  {% if next %}<small style="color: grey">Opzionale</small>
+                  {% endif %}
                   <label>{{field.label_tag}}</label>
                   {{ field }}
                   {% elif 'Photo' in field.label_tag %}

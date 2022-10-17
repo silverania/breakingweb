@@ -2,7 +2,8 @@
 {% load static %}
 
 {% block title %}Creare Un Ambiente Virtuale Python{% endblock title %}
-  {% block keywords %}python,linux,venv,module,creare,inizializzare,ambiente,virtuale,pip{% endblock keywords %}
+  {% block keywords %}python,linux,venv,module,activate,deactivate,creare,ambiente,virtuale,pip,variabili,ambiente,
+  bash,console{% endblock keywords %}
   {% block description %}Creare Un Ambiente Virtuale Python su Linux con il modulo venv{% endblock description%}
 {% block anteprima %}<meta property="og:image"   content='{% static 'images/Kazam_screenshot_00003.png' %}'/>{% endblock %}
 
@@ -13,7 +14,7 @@
 
 
 
-     <span class="badge badge-pill badge-light" style="width:100%;display:inline-block!important;margin:0 auto!important;">
+     <span class="badge rounded-pill bg-light" style="width:100%;display:inline-block!important;margin:0 auto!important;">
      <span id="s_title_2" style="display:inline-block;color:black;font-weight:bold;">Creare Un Ambinete Virtuale Python <br>
       Con Il Modulo venv</span></span>
        {% endblock tut_title %}
@@ -22,7 +23,7 @@
 
 
 
-             <p style="text-align:center;" id="p_content">
+             <p  id="p_content">
         L' utilità principale di un ambiente virtuale Python , è quella di preservare l' ambiente Python che usa il sistema operativo .
         Usando l' ambiente python di sistema , invece che uno virtuale , per le proprie applicazioni ed esperimenti vari , ci si espone al rischio
         di corrompere il sistema operativo ! pensiamo a distribuzioni linux come Gentoo , in cui il gestore di pacchetti : <mark>il Portage</mark> , appunto , scritto interamente in Python , a quali rischi sarebbe esposto ,

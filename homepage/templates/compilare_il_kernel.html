@@ -18,13 +18,12 @@
     $('body').bsgdprcookies();
 });</script>
       <p  id="p_content">
-      Nella guida verrà installato un <span title="Nell ambito dello sviluppo del kernel Linux, il kernel vanilla è il kernel ufficialmente distribuito da Linus Torvalds e dai progettisti Linux,
-       senza alcuna patch aggiuntiva."</span>
-      vanilla Kernel , quindi se configurato bene ,
-      funziona su tutte le distro GNU/Linux .
-  </p>
-  <p style="width:100%;max-width:100%;" id="p_content">
-    <span class="badge badge-info s_title_paragraph">Installiamo Le Dipendenze</span><br><br>
+      <span title="Nell ambito dello sviluppo del kernel Linux, il kernel vanilla è il kernel ufficialmente distribuito da Linus Torvalds e dai progettisti Linux,
+       senza alcuna patch aggiuntiva.">Nella guida verrà installato un
+       vanilla Kernel , quindi se configurato bene ,
+       funziona su tutte le distro GNU/Linux . </span><br><br>
+
+    <span class="badge bg-info s_title_paragraph">Installiamo Le Dipendenze</span><br><br>
       Per compilare occorrono dei pacchetti , li scarichiamo e installiamo così :
 
    <!--mark>Per installare i Pacchetti necessari alla Compilazione </mark> :<br-->
@@ -37,7 +36,7 @@
     <code id="yum_group_install" style="color:yellow;background-color:black;">mario@androgenic:~/Scaricati/linux-5.6.10 #<span style="color:white">yum groupinstall ‘Development Tools’</span></code>
 
 
-</p>
+
 
 <!--table id="image_0a" class="table  table-dark" border="2" style="width:50%!important;height:auto;margin:0 auto!important;">
   <thead class="thead-dark">
@@ -162,8 +161,8 @@
 
 <br><br>
 
-  <p id="p_content" style="margin-top:10%;font-weight:normal;" >
-    <span class="badge badge-info">Download Del Kernel</span><br><br>
+
+    <span class="badge bg-info">Download Del Kernel</span><br><br>
 
   Quindi dopo aver installato le dipendenze per la buona riuscita della compilazione ,<mark> scarichiamo il kernel
     <a href="https://kernel.org" title="download del kernel Linux" target="_blank"> qui</a>.</mark>
@@ -171,13 +170,13 @@
 
   Il file scaricato dovrebbe essere compresso, quindi:
 <br><br>
-</p>
-<br><span class="badge badge-info s_title_paragraph">Decomprimiamo il Kernel </span><br><br>
+
+<br><span class="badge bg-info s_title_paragraph">Decomprimiamo il Kernel </span><br><br>
 
 <div id="d_head"  style="width:50%!important;max-width:50%!important;display:inline-block!important;"><h4><b><span class=".s_unzip">decomprimiamolo cosi </span></b>:</h4>
   <code class="terminal"<> $ unxz linux-a.x.by.tar.xz</code>
 </div>
-  <div id="d_head" class="badge badge-info" style="width:50%!important;display:inline-block!important;float:right;"> <img  id="terminal" width="100%" src='{% static 'images/kernel_extract_2.jpg' %}'\></div>
+  <div id="d_head" class="badge bg-info" style="width:50%!important;display:inline-block!important;float:right;"> <img  id="terminal" width="100%" src='{% static 'images/kernel_extract_2.jpg' %}'\></div>
 
   <br><br>
 
@@ -185,10 +184,10 @@
     estraiamo l' archivio tar </b>:</h4>
     <code class="terminal"> $ tar xvf linux-a.x.by.tar</code></div>
 
-<div class="badge badge-info" style="width:50%!important;display:inline-block!important;float:right;margin-bottom:3%;">
+<div class="badge bg-info" style="width:50%!important;display:inline-block!important;float:right;margin-bottom:3%;">
 <img id="terminal" width="100%" src='{% static 'images/linux_kernel_4.png' %}'\></div>
 
-<p id="p_content"  style="margin-top:5%;font-weight:normal;">A questo punto abbiamo la cartella : <code>linux-x.y.ab</code>
+A questo punto abbiamo la cartella : <code>linux-x.y.ab</code>
   scompattata . Il file di configurazione del Kernel si chiama <b>.config</b> si trova nella cartella principale del kernel ed
   è nascosto ( tutti i file preceduti da un punto sono files nascosti ) potrebbe essere configurato con qualsiasi editor di testi ,
   ma è meglio usare le utilità offerte dal gestore pacchetti&nbsp, come quelle visulizzabili con i comandi : <mark>make xconfig , make nconfig , make gconfig ecc.. </mark>
@@ -221,13 +220,12 @@
    come modulo (m) ? risposta : il sistema per caricare un modulo deve poter accedere al hard disk ! ma come fa ad accedere all' hard disk se ancora non ha letto i drivers(moduli)
    per l' hard disk ??! la soluzione a questo problema esiste ed essa è rappresentata dal file <mark><code>initrd</code></mark>
   l' immagine giù e presa da Wikipedia :<br><br>
-      <img width="100%" src='{% static 'images/kernel_1.jpg' %}'\>
-      </p>
-<p  id="p_content" style="margin-top:2%;">
+      <img class="mb-5"width="100%" src='{% static 'images/kernel_1.jpg' %}'\>
+
 
     - Entriamo nella cartella linux e azzeriamo
-    le dipendenze con il comando <code>mrproper</code></p>
-      <div style="width:100%;"><img width="100%" src='{% static 'images/linux_extract_5.jpg' %}'\></div>
+    le dipendenze con il comando <code>mrproper</code>
+      <div class="mt-4" style="width:100%;"><img width="100%" src='{% static 'images/linux_extract_5.jpg' %}'\></div>
       <p id="p_content"  style="margin-top:5%;font-weight:normal;"> Il comando <code>mrproper</code>
         serve a pulire la cartella in cui ci troviamo da precedenti compilazioni , è una sorta di
         <code>make clean</code> approfondito. Più specificamente <code>mrproper</code> rimuove
@@ -236,13 +234,13 @@
         fate un backup prima di eseguire <b>mrproper</b> . basta rinominare il file <b>.config</b> in <b>config.bak</b> e <b>mrproper</b>
          non lo cancellerà più. <br><br>
          </p>
-         <span class="badge badge-info s_title_paragraph">Configurazione Del Kernel</span>
+         <span class="badge bg-info s_title_paragraph">Configurazione Del Kernel</span>
 
         <br>
-         <p  id="p_content" style="margin-top:2%;font-weight:normal;">
+        <br>
            l' immagine 0b sotto , è presa dal sito kernel.org e mostra le principali utilità per configurare il kernel . Personalmente preferisco usare 'nconfig' , ma
            è questione di preferenze e librerie di sistema , chi usa gnome come dm , sarà piu propenso ad usare gconfig , chi usa kde 'xconfig' , ma certo nulla vieta
-           di fare il contrario. <br>
+           di fare il contrario. <br><br>
             <img width="100%" src='{% static 'images/kernel_6.jpg' %}'\><br><br>
             se scegliete di usare 'nconfig' potrebbe essere necessario installare : <b>bison , flex , libncurses5-dev . </b><br><br>
             <br>
@@ -258,9 +256,8 @@
              <b>aprono un interfaccia testuale</b> per la configurazione del kernel. La finestra sotto mostra ad esempio la finestra che si apre sul mio PC con
                il comando <code>make nconfig</code><br><br>
                <b>8a</b>
-              <img id="img_8" width="100%" height="500px"src='{% static 'images/make_nconfig.jpg' %}'>
-            </p>
-            <p id="p_content" style="margin-top:2%;font-weight:normal;">
+              <img id="img_8" width="100%" height="500px"src='{% static 'images/make_nconfig.jpg' %}'><br><br>
+
 
               Sfortunatamente non è per nulla semplice capire quali sono veramente tutte le opzioni che servono al nostro sistema ,
               il sistema operativo quasi sempre riesce a capire quali moduli servono, e li carica, tuttavia non di rado , occorre
@@ -280,24 +277,23 @@
               Questo comando se usato con <code>make</code> ci copia la configurazione attuale del kernel in uso nel file <code>.config</code> del kernel che ci apprestiamo a compilare .
               C' è da dire che molte distribuzioni linux applicano questo strumento automaticamente , scrivendo per noi il file&nbsp.config&nbsp,&nbspma questo avviene
               solo se installo un kernel dal gestore dei pacchetti . Se prendo il kernel dal sito "kernel.org" ovviamente devo operare da solo.
-              Di seguito la procedura per riscrivere il file <b>.config</b> con "make lsmod":</p><br>
+              Di seguito la procedura per riscrivere il file <b>.config</b> con "make lsmod":<br><br>
 
-              <p id="p_content"  style="margin-top:2%;text-align:center;">
 
-                <span  class="badge badge-info s_title_paragraph forresp">Creiamo La Lista Dei Moduli</span><br><br>
+                <span  class="badge bg-info s_title_paragraph forresp">Creiamo La Lista Dei Moduli</span><br><br>
 
 
 
                 - creiamo il file mod contenente l' output del comando <code title="comando che visualizza i moduli del kernel attivi">lsmod</code>:<br>
-                <br><span id="badge_lsmod_1" class="badge badge-warning"><span style="color:yellow">$</span> sudo lsmod > mod</span><br><br>
-                il comando della riga precedente redirige , per mezzo del simbolo :<span class="badge badge-info" style="whitespace:nowrap!important;">></span> , il risultato  del comando :  <span class="badge badge-info">lsmod</span> appunto ,
-                che serve a visualizzare la lista dei moduli del kernel caricati dal sistema operativo , in un file che abbiamo chiamato <span class="badge badge-info">mod</span> , ma avremo potuto usare qualsiasi altro nome ovviamente .<br><br>
+                <br><span id="badge_lsmod_1" class="badge bg-warning"><span style="color:yellow">$</span> sudo lsmod > mod</span><br><br>
+                il comando della riga precedente redirige , per mezzo del simbolo :<span class="badge bg-info" style="whitespace:nowrap!important;">></span> , il risultato  del comando :  <span class="badge bg-info">lsmod</span> appunto ,
+                che serve a visualizzare la lista dei moduli del kernel caricati dal sistema operativo , in un file che abbiamo chiamato <span class="badge bg-info">mod</span> , ma avremo potuto usare qualsiasi altro nome ovviamente .<br><br>
             <br>- Controlliamo che sia stato creato il file :<code title="comando che visualizza i moduli del kernel attivi"> mod</code>:<br>
-              <br><span class="badge badge-warning"><span style="color:yellow">$</span><span style="color:blue"> cat mod</span></span><br>
+              <br><span class="badge bg-warning"><span style="color:yellow">$</span><span style="color:blue"> cat mod</span></span><br>
 
               <br> - Se il file  non è vuoto si può procedere a scrivere la configurazione in <code>.config</code> così:<br><br>
                 <br>
-                     <span id="badge_lsmod_2"class="badge badge-warning"><span style="color:yellow">$</span> make LSMOD=mod localmodconfig</span><br>
+                     <span id="badge_lsmod_2"class="badge bg-warning"><span style="color:yellow">$</span> make LSMOD=mod localmodconfig</span><br>
                      <br><br><code>localmodoconfig</code> legge i moduli nel file <code>mod</code>
                      che abbiamo creato precedentemente , e configura il kernel allo stesso modo , attraverso la scrittura del file <code>.config</code>al cui
                      interno saranno attivati i stessi moduli del kernel attualmente in uso . Questa procedura riduce al minimo il rischio di ritrovarsi con una
@@ -312,18 +308,16 @@
                       &lt;y> nella configurazione , se invece non vi sentite sicuri e non volete rischiare di ritrovarvi con un sistema che non parte( rischio molto elevato anche se lo si usa ) , il consiglio è quello di usarlo .
                         vi risparmia parecchi grattacapi .  Dopo che avremo compilato il kernel , mostrerò come generare un immagine <code>initrd</code>.
 
-          </p>
 
             <br><br><hr>
 
-            <span class="badge badge-info s_title_paragraph">Prima Di Compilare</span>
+            <span class="badge bg-info">Prima Di Compilare</span>
 
 
 
 
 
-
-              <p  id="p_content" style="font-weight:normal;"><br><br>
+<br><br>
                 per compilare lanciate <code>make</code> dalla cartella linux-x.y.ab<br>
                 se avete un processore con più di due core ,e volete compilare più velocemente , usate il parametro <code>-j</code>
                 che prende come parametro il numero di processi consentito . Se non indicato , ne permette un numero infinito , tuttavia
@@ -336,10 +330,10 @@
                  uno solo ,  è evidente che se compilo con il parametro <code>-j9</code> su una cpu octacore finisco di compilare prima di quanto riesca a fare senza <code>-j9</code>,
                    e il motivo è evidente anche osservando i grafici del carico della cpu , che monitorano tutte e 8 cpu . Le cpu durante la compilazione sono tutte e 8 al 100% di carico , quindi è ovvio perchè il processo
                    di compilazione duri meno . D' altronde è anche vero che se impegno tutte e 8 cpu al 100% poi non ho risorse per fare altro che compilare .<br><br>
-                 </p>
+
                   <hr>
 
-                  <span class="badge badge-info s_title_paragraph">Compilazione</span><br><br>
+                  <span class="badge bg-info s_title_paragraph">Compilazione</span><br><br>
                    Compiliamo con :<br>
                   <code style="color:yellow;background-color:black;">mario@androgenic:~/Scaricati/linux-5.6.10$<span style="color:white"> make</span></code>
                   <br><br><br>
@@ -353,7 +347,7 @@
                   <br>
                   <br>
                     <br><br><br><hr>
-                    <span class="s_title_paragraph badge badge-info">Installiamo I Moduli</span><br><br>
+                    <span class="s_title_paragraph badge bg-info">Installiamo I Moduli</span><br><br>
 
                   installiamo i moduli con :<br>
 
@@ -364,7 +358,7 @@
 
                       <br><br><hr>
 
-                      <span class="s_title_paragraph badge badge-info">Installiamo il Kernel In Boot ...</span><br><br>
+                      <span class="s_title_paragraph badge bg-info">Installiamo il Kernel In Boot ...</span><br><br>
                       <mark>Assicuratevi che la partizione <code>boot</code> sia montata</mark> , perchè il comando <code>make install</code> che useremo dovrà scrivere dei files
                       al suo interno.
                       Se volete usare <code>initrd</code> , installate il pacchetto <b><code>initramfs-tools</code></b> necessario per la sua creazione. installiamo il kernel e copiamo alcuni file nella cartella boot con :<br><br>
@@ -376,24 +370,21 @@
                           <img class="img img-thumbnail"id="img_8" width="100%" height="500px"src='{% static 'images/shell1.jpg' %}'>
 
 
-          <hr style="background-color:black;border:2px solid;width:100%;">
-            <p id="p_content"  style="margin-top:2%;font-weight:normal;"><br><br>
+          <hr style="background-color:black;border:2px solid;width:100%;"><br><br>
               Se avete compilato il kernel con il file <code>.config</code> della distribuzione linux che usate, dovrete creare il file <code>initrd</code> affinchè
               possano essere caricati i moduli per far avviare il sistema , per il fatto che praticamente
               tutte le distribuzioni Linux , compilano il kernel della propria distro appunto , appositamente per il suo uso con initrd. Di seguito mostrerò come crearlo
               Nel caso non ci siate riusciti prima.
-            </p>
-            <hr style="background-color:black;border:2px solid;width:100%;">
 
-              <p id="p_content" style="margin-top:2%;font-weight:normal;">
-              <span class="s_title_paragraph badge badge-info">  Initrd o Initramfs</span><br><br>
+            <hr style="background-color:black;border:2px solid;width:100%;">
+<br><br>
+              <span class="s_title_paragraph badge bg-info">  Initrd o Initramfs</span><br><br>
                 <mark>Il file Initrd o il più recente initramfs contiene essenzialmente i moduli (drivers) che servono ad un pc per avviarsi</mark> . Initrd
                 emula un filesystem di root che può essere montato sulla ram , su una periferica di loopback , su un floppy .
                il sistema dopo aver eseguito initrd , libera la memoria e monta la partizione vera di root del
                 sistema operativo.
-                </p><br><br><br>
-                  <p style="margin:2% auto;font-weight:normal;">
-              <span  class="s_title_paragraph badge badge-info">Creazione di initramfs</span>
+                <br><br><br>
+              <span  class="s_title_paragraph badge bg-info">Creazione di initramfs</span>
 
                   <br><br>
                    Per creare initrd
@@ -409,19 +400,12 @@
 
                       Se volete vedere tutte le versioni di kernel disponibili , queste sono elencate in &nbsp<code>/lib/modules</code>
                       Se volete sapere la versione del kernel in uso dal sistema eseguite :<br><br> <code>$ echo $(uname -r)</code>
-</p>
-    <p id="p_content" >  <span  class="s_title_paragraph badge badge-info">Configurare Grub Per L' Avvio</span></p>
-    <p>
+     <span  class="s_title_paragraph badge bg-info">Configurare Grub Per L' Avvio</span><br><br>
     Questo passo dovrebbe non essere necessario perchè il comando <code> make install </code> lo svolge automaticamente .
       Sui sistemi Debian/Ubuntu eseguire :<br><br> <code>update-grub</code><br><br>
       la procedura standard che va bene su tutti i sistemi linux è :<br>
        <mark>come amministratore da console</mark> :<br><br>
       <code>grub-mkconfig -o /boot/grub/grub.cfg</code><br><br> Riavviate il pc per provare il kernel .
-</p>
-<script id="s_blog">
-    $(document).ready(function(){
-      initBlogSGang("mariobros3","sol-7373");
-    })
-  </script>
+
 {% endblock content %}
 {%block download%}<a href="https://breakingweb.site/webtalk" id="a_download">Host-WebTalk</a>{%endblock%}

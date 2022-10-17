@@ -41,15 +41,23 @@ class checkUser(View):
         list_json_user_data = json.loads(request.body)
         print("json : "+str(list_json_user_data))
         for key, value in list_json_user_data.items():
+            print(key)
             if 'user' in key:
                 myuser = value
             if 'password' in key:
                 password = value
+            if 'currentUrl' in key:
+                currentUrl = value
         if not bool(userLoggedIN):
             print("if userloggedin mi da : " + str(userLoggedIN))
         if not isinstance(myuser, User):
             try:
                 myuser = authenticate(username=myuser, password=password)
+                firstName = str(myuser)
+                currentUser = Profile.get(first_name=firstName)
+                breakpoint()
+                if not str(currentUser.website) in currentUrl:
+                    return HttpResponse("nessun autorizzazione concessa !")
                 print("Verifica ... myuser non è di tipo User , ho proceduto"
                       + "ad authenticazione !! verifico se sta nel gruppo Blog.."+str(myuser))
                 if myuser.groups.filter(name__in=['BlogAdmin']).exists():
@@ -224,17 +232,13 @@ def user_register(request):
             else:
                 return redirect('/user/login')
     else:
-        """
-        if 'blog' in request.path and 'next' in request.GET:
-            scrollTo = '#footer'
-            valuenext = request.GET.get('next')+scrollTo
-        elif 'blog' in request.path:
-            scrollTo = '#footer'
-        elif 'next' in request.GET:
+        # in base alla presenza della variabile next capisco
+        # se la richiesta di registrazione è per installare il Blog
+        # oppure per usarlo
+        if 'next' in request.GET:
             valuenext = request.GET.get('next')
-            """
         form = SignUpForm()
-    return render(request, 'user/register.html', {'form': form})
+    return render(request, 'user/register.html', {'form': form, 'next': valuenext})
 
 
 def change_password(request):

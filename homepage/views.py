@@ -83,7 +83,7 @@ gyroscope; picture-in-picture" allowfullscreen></iframe>
 <footer>
 <link rel=stylesheet href="/static/css/blog.css">
 <script src="/static/js/blog.js"></script>
-<script id="s_blog">initBlogSGang("mario45","sol-7373") </script>
+<script id="s_blog">initBlogSGang("mario","sol-7373") </script>
 </footer>
 </body>
 </html>"""

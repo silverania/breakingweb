@@ -68,14 +68,25 @@ html {
     }
 
 body {
-    width:100%;
-    min-height: 100vh;
     /* min-height:100%; */
     /* font-family:'WorkSans','Assistant-regular'; */
     /* font-size:20px; */
     background-color:white;
     box-sizing:content-box;
 }
+
+#ulTopMenu{
+ width:100%;
+}
+.liTopMenu{
+    min-width:calc(100% / 6) !important;
+}
+
+article{
+    min-height:50vh;
+}
+
+
 #d_linux
 /* privacy window */
 
@@ -94,6 +105,8 @@ p , #p_content{
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     line-height: 1.6;
+    text-align: left;
+  text-justify: inter-word;
 }
 
 textarea{
@@ -171,12 +184,6 @@ color:black;}
     z-index:-999!important;
 }
 
-
-#d_title{
-    /* font-family: "ShareTechMono-Regular.ttf"; */
-    margin-bottom:3%;
-    margin-top:3%;
-}
 #span_autore{
     display:block!important;
     font-size:1rem!important;
@@ -241,18 +248,17 @@ color:black;}
 #d_content{
     width:100%;
     height:auto;
-    margin-top:2% ;
 }
 #t_header{
     background-color: white;
     color:orange;
 }
 [id^="a-"]{
-    width:
-    auto;
-   border:0px solid!important ;
+    text-align: left;
+    width:auto!important;
+    border:0px solid!important;
     background-color: transparent!important;
-   color:
+    color:
     blue!important;
     }
 
@@ -275,9 +281,7 @@ li[id^="a-"]:hover{
 #col_content{
     background-color: white;
 }
-code{
-    font-size:1vw;
-}
+
 .fa-circle{
     margin-top:0%!important;
     color:orange;
@@ -382,9 +386,6 @@ iframe:hover{
 [id^="a_tutorial"]:hover{
     background-color:orange!important;
     color:black!important;
-}
-#p_content{
-    margin-top:9%;
 }
 
 a:hover{
@@ -496,9 +497,7 @@ float:right!important;
 }
 /* FINE HEADER SECTION */
 @media screen and (max-width: 480px) {
-    body {
-        /*background: yellow;*/
-    }
+
     td{
         font-size:0.7rem;
     }
@@ -542,11 +541,7 @@ float:right!important;
     #d_user{
         display:none;
     }
-    #d_title{
-        margin-top:3%;
-        display:inline-block;
-        font-size:0.5rem;
-    }
+
     #d_photo_author{
         display:none;
     }
@@ -571,13 +566,8 @@ float:right!important;
         font-size:5pt;
     }
 
-    #p_content{
-
-    }
-
-
     .s_title_paragraph {
-        font-size:0.5rem!important;
+        font-size:0.9rem!important;
     }
     .s_unzip{
         font-size:0.2rem!important;
@@ -683,7 +673,25 @@ float:right!important;
     }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 800px) {
+    #spanEntra,#spanTutorial,#spanRegistrati,#spanEsci{
+        font-size:0.6em;
+    }
+    [id^=spanMenu]{
+        font-size:0.6em;
+    }
+    [id^=s_leftmenu]{
+        font-size:0.6rem;
+        color:white;
+    }
+    #a_download{
+        font-size:0.6em;
+        display:block;
+        text-align: center;
+    }
+    code{
+        font-size:1rem;
+    }
     /*[id$=menu]{
     width:200%!important;
     }*/
@@ -707,7 +715,7 @@ float:right!important;
         font-size:0.9rem;
     }
     code{
-        font-size:1.5vw;
+        font-size:1rem;
     }
     #x_code{
         font-size:0.5rem;
@@ -746,7 +754,7 @@ float:right!important;
 
 
     code{
-        font-size:1.5vw;
+        font-size:1rem;
     }
 
 
@@ -774,7 +782,6 @@ float:right!important;
     }
     #p_content{
         font-size:0.8rem;
-        margin-top:9%;
     }
     .s_title_paragraph{
         text-align: left;
@@ -826,7 +833,7 @@ float:right!important;
         font-size:1rem!important;
     }
     code{
-        font-size:1vw;
+        font-size:1rem;
     }
     #asidebar .fa-angle-right{
         font-size:4.4rem!important;
@@ -845,7 +852,6 @@ float:right!important;
     }
     #p_content{
         font-size:0.9rem;
-        margin-top:9%;
     }
     #d_head > h4{
         font-size:1.2rem!important;
@@ -856,7 +862,7 @@ float:right!important;
         margin-top:5%;
     }
     #x_code{
-        font-size:0.7vw;
+        font-size:1rem;
     }
 
     #s_footer{
@@ -896,7 +902,7 @@ float:right!important;
     }
 
     code{
-        font-size:0.8vw;
+        font-size:1rem;
     }
     .fa-comments,#s_blog{
         font-size:1.6rem;
@@ -932,7 +938,7 @@ float:right!important;
     }
 
     code{
-        font-size:0.8vw;
+        font-size:1rem;
     }
     #p_content{
         font-size:20px;

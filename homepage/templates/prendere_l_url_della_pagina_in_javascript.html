@@ -1,0 +1,17 @@
+{% extends 'base2.html' %}
+{% load static %}
+
+{% block title %}Prendere l' url della pagina attuale in javascript {% endblock title %}
+  {% block keywords %} trovare,prendere,leggere,url,indirizzo,attuale,pagina,web,sito,javascript,script{% endblock%}
+  {% block description %}Trovare l' url della pagina web in javascript{% endblock description%}
+{% block anteprima %}<meta property="og:image"   content='{% static 'images/Kazam_screenshot_00014.png' %}'/>{% endblock %}
+
+
+
+     {% block photo %}{{photo}}{% endblock photo %}
+
+      {% block content %}
+      <p style="text-align:center;" id="p_content">
+          <mark>const CURRENT_URL=location.href;</mark>
+         </p>
+         {%endblock%}

@@ -1,0 +1,37 @@
+{% extends 'base2.html' %}
+{% load static %}
+
+{% block title %}Centrare il testo in un tag html li{% endblock title %}
+  {% block keywords %}html,centrare,testo,tag,li,css,regola{% endblock keywords %}
+  {% block description %}Come centrare il testo in un tag HTML LI{% endblock description%}
+{% block anteprima %}<meta property="og:image"   content='{% static 'images/icone-html-bleue.jpeg' %}'/>{% endblock %}
+
+
+
+     {% block photo %}{%static "/images/mestesso.jpg"%}{% endblock photo %}
+
+      {% block content %}
+
+     <p style="text-align: center;">
+         Supponendo di avere il seguente codice <bold>Html</bold>:
+         </p>
+             <pre style="text-align: center;">
+         <span style="display:block">&lt;ul id="#ul"><br>&lt;li>
+                    &lt;span>Centrami&lt;/span>
+ &lt;/li>
+<span style="display:block;margin-left:-10%"class="ml-1">&lt;/ul></span></span>
+         </pre>
+
+         <p style="text-align: center;">
+         e di voler centrare il contenuto di un <bold>Tag Li</bold>
+         al suo interno ,<br> il codice <bold>css</bold> per risolvere
+             il problema è questo :
+            </p>
+             <pre style="text-align: center;">
+                <span style="display:block"> li { text-align: center ; }</span>
+           </pre>
+
+{% endblock content %}
+{% block footer %}
+{% include '_footer.html' %}
+{% endblock footer %}
