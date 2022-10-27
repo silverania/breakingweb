@@ -18,10 +18,10 @@ page = """
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="UTF-8">
 <meta name="author" content="silverania">
-<meta name="keywords" content="software, webtalk ,hosting, messaggi,commenti,blog,gratuito,addon,sito,web,modulo,
-    download,free,gratis,webmaster,sviluppatori">
+<meta name="keywords" content="booldog,opensource,free messages hosting ,software gratuito commenti su sito , free software ,hosting,gestione, messaggi,software,blog,blogging,comments,commenti, gratuito,addon,sito,web,modulo,
+    download,free,gratis,webmaster,sviluppatori html">
 <meta name="description" content="Software Gratuito Per Aggiungere Commenti Sul Tuo Sito Web.">
-<title>Host-WebTalk</title>
+<title>BoolDog</title>
 <link rel="icon" type="image/x-icon" href="/static/images/favicon.ico">
 <link rel="stylesheet" href="/static/css/reset.css">
 <link rel="stylesheet" href="/static/css/bootstrap.min.css">
@@ -30,34 +30,46 @@ page = """
 <script  src="/static/node_modules/popper.js/dist/umd/popper.min.js"></script>
 <script  src="/static/js/bootstrap.min.js"></script>
 <script src="/static/js/all.min.js"></script>
-<script src="/static/js/progressbar.js"></script>
 </head>
 <body id="body"  onscroll="var h=document.body.scrollHeight;getPosition();">
-<header><div class="container">
+<header>
+<div class="container">
 <div id="id_row_title" class="row justify-content-center">
 <div class="col-4">
 </div>
+
 <div class="col-6">
-<div id="id_div_title" class="class_div_title">
-<h1>Host-WebTalk</h1></div></div>
-<div class="col-2"> </div>
+<div id="id_div_title" class="ms-2 mt-2 class_div_title">
+<a  href="/booldog" target="_blank "id="a_download">
+<div class=
+    "booldog"><span class="badgebooldog"><i class=" fas fa-comment-dots"></i></span><span class="spanbooldog">BoolDog</span>
+    </div>
+  <span class="booldoginfo">Aggiungi e Gestisci Commenti sul tuo Sito Web</span></a>
 </div>
+</div>
+
+
+<div class="col-2">
+</div>
+
+</div>
+
 <div class="row justify-content-center">
 <div id="div_col_info" class="col-5">
 <div id="id_div_info" class="">
-<p class="p_info" id="p_info">Cos'è Host-WebTalk ?</p>
-<p id="p_content" class="p_content">Host-WebTalk è un "software libero" di commenti per siti web .   </p>
+<p class="p_info" id="p_info">Cos'è BoolDog ?</p>
+<p id="p_content" class="p_content">BoolDog è un "software libero" di Hosting Commenti per Siti Web. Lo stesso usato su questo sito.</p>
 <p class="p_info" id="p_info">Installazione</p>
 <p id="p_content" class="p_content">Registrati <a href="https://breakingweb.site/user/register/blog">qui</a>
 per usare e installare il programma ed avere accesso alla pagina di gestione e moderazione dei messaggi.
 Dopodichè nel codice html del tuo sito , copia e incolla i tag che vedi sotto
 , sostituendo "user" e "password"
-con l' user e password scelti per registrarti.</p>
-<p id="p_content" class="p_content"><a href="https://breakingweb.site/webtalk/admin/">Pagina Di Amministrazione</a></p>
+con l' user e password scelti per registrarti.
+</p>
 </div></div>
 <div class="col-7 text-left" id="id_video">
 <iframe width="320" height="240" src="https://www.youtube.com/embed/GN0FIFpRiWQ"
-title="Host-WebTalk" frameborder="0"
+title="BoolDog" frameborder="0"
 allow="accelerometer; autoplay; clipboard-write; encrypted-media;
 gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
@@ -65,17 +77,18 @@ gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 </header>
 <div class="container">
-<div class="row justify-content-center">
+<div class="row justify-content-left"><a href="https://breakingweb.site/booldog/admin/">Pagina Di Amministrazione</a>
 <div id="div_col_installazione" class="col-lg-12">
-<p id="p_content" class="p_content"> .
-<pre>
+
+<pre primary-lang="html">
+<code>
 &lt;link rel=stylesheet href="https://breakingweb.site/static/css/blog.css">
 &lt;script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js">
 &lt;/script>
 &lt;script src="https://breakingweb.site/static/js/blog.js"> &lt;/script>
 &lt;script id="s_blog">initBlogSGang(<span style="color:blue">"user","password"</span>)>&lt;/script>
+</code>
 </pre>
-</p>
 </div>
 </div>
 </div>

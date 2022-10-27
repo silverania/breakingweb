@@ -11,7 +11,6 @@
     {% block anteprima %}{% endblock %}
     <title>{{tutorial.title}}</title>
     <link rel="icon" type="image/x-icon" href="{% static "images/favicon.ico" %}">
-    <link rel="stylesheet" href="{% static "css/reset.css"%}">
     <link rel="stylesheet" href="{% static "node_modules/bootstrap/dist/css/bootstrap.css"%}">
     <link rel="stylesheet" href="{% static "css/homepage.css" %}">
     <link rel="stylesheet" href="{% static "css/footer.css" %}">
@@ -26,7 +25,8 @@
     <script  src="{% static 'js/aside.js' %}"></script>
     <script  src="{% static 'js/progressbar.js' %}"></script>
     <script src="{% static 'js/style.js' %}"></script>
-
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1430448184465088"
+    crossorigin="anonymous"></script>
 
     {% block otherscripts %} {% endblock %}
 </head>
@@ -43,7 +43,7 @@
     {% endblock header %}
     <div id="c_aside" class="container-fluid">
         <div style="min-height:100%vh"class="row justify-content-left">
-            <div class="col-md-3"  id="section_left_navbar">
+            <div class="col-3"  id="section_left_navbar">
 
 
                 <section role="navigation">
@@ -142,11 +142,10 @@
 
                 </aside>
             </section>
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1430448184465088"
-            crossorigin="anonymous"></script>
+
         </div>
 
-        <div role="main" class="col-md-6">
+        <div role="main" class="col-6">
             <article>
                 <header>
                     <div class="row justify-content-center mb-5">
@@ -159,10 +158,11 @@
                         </div>
 
                         <div class="col-6" style="width:auto;">
-                            <a href="{{tutorial.slug}}">{% block tut_title %}
-                                <span class="badge bg-warning" id="s_title">{{tutorial.category.category}}</span>
+                            <a id="aTitle" href="{{tutorial.slug}}">{% block tut_title %}
+                                <span class="badge bg-info" id="s_title">{% block category %}{{tutorial.category.category}}
+                                {%endblock%}</span>
                                 &nbsp-&nbsp
-                                <span id="s_title_2" >{{tutorial.title}}{% endblock tut_title %} </span></a>
+                                <span id="s_title_2" >{%block t %}{{tutorial.title}}{%endblock t %}{% endblock tut_title %} </span></a>
                                 <div class="row">
                                     <span  class="s_title" align="left" style="color:grey;">{{tutorial.publish}}</span>
                                 </div>
@@ -170,7 +170,7 @@
                         </div>
                     </header>
 
-                    <div class=" lead d_content col-sm-12 col-md-12">
+                    <div class="col-12 ">
                         {% block content %}
                         {% endblock content %}
                     </div>
@@ -187,11 +187,11 @@
             });</script>
             <div class="col-3">
                 <div class="row">
-                <div class="col-12 text-center">
-                    <span id="span_libri"><i class=" fas fa-comment-dots fa-3x"></i></span>
+                <div class="col-12">
                     {% block download %}
-                    <a class="badge bg-info text-center" href="https://breakingweb.site/webtalk" id="a_download"> Usa Webtalk
-                     sul tuo Sito Web !</a>
+                    <a  href="/booldog" target="_blank "id="a_download"><div class=
+                        "booldog"><span class="badgebooldog"><i class=" fas fa-comment-dots"></i></span><span class="spanbooldog">BoolDog</span></div>
+                      <span class="booldoginfo">Per i commenti. Usalo sul tuo Sito Web !</span></a>
                     {% endblock %}
                 </div>
                 <div class="col-12" id="divAmazonBanner">
@@ -204,10 +204,6 @@
 </div>
             {% block footer %}{% include '_footer.html' %}{% endblock %}
             <script  src="{% static 'js/blog.js'%}"></script>
-            <script id="s_blog">
-                $(document).ready(function(){
-                  initBlogSGang("mario","sol-7373");
-                })
-              </script>
+            {%block blog%}{%endblock%}
         </body>
         </html>

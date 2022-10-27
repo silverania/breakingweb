@@ -15,7 +15,6 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import Group
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
-list_current_user = None
 scrollTo = ''
 Profile = Profile.objects.all()
 Group = Group.objects.all()
@@ -39,6 +38,7 @@ class checkUser(View):
         myuser = object()
         userThatLoginIn = object()
         list_json_user_data = json.loads(request.body)
+        authorized = False
         print("json : "+str(list_json_user_data))
         for key, value in list_json_user_data.items():
             print(key)
@@ -53,18 +53,21 @@ class checkUser(View):
         if not isinstance(myuser, User):
             try:
                 myuser = authenticate(username=myuser, password=password)
+                list_current_user = getUser(myuser)
                 firstName = str(myuser)
                 currentUser = Profile.get(first_name=firstName)
-                breakpoint()
-                if not str(currentUser.website) in currentUrl:
-                    return HttpResponse("nessun autorizzazione concessa !")
+                if 'blog' in request.get_full_path():
+                    if not str(currentUser.website) in currentUrl:
+                        print("nessun autorizzazione concessa !")
+                        raise Exception(
+                            "sito Web non autoriazzato o assente in fase di registrazione")
+                        authorized = False
+                else:
+                    print("autorizzazione concessa")
+                    authorized = True
                 print("Verifica ... myuser non è di tipo User , ho proceduto"
                       + "ad authenticazione !! verifico se sta nel gruppo Blog.."+str(myuser))
-                if myuser.groups.filter(name__in=['BlogAdmin']).exists():
-                    print("myuser sta già nel gruppo blog_admin.....")
-                else:
-                    print("user myuser NON sta nel gruppo blog_admin.....provvedo"
-                          + "ad aggiungerlo ....")
+                if not myuser.groups.filter(name__in=['BlogAdmin']).exists():
                     group = Group.get(name='BlogAdmin')
                     myuser.groups.add(group)
                     print('myuser aggiunto al gruppo blogadmin ')
@@ -73,12 +76,10 @@ class checkUser(View):
                       + "al gruppo BlogAdmin")
                 myuser = "None"
                 list_current_user = myuser
+                print("77 "+str(list_current_user))
         else:
-            print(
-                "L user era autentticato non c' è stato bisogno di ripetere l autenticaxzione"
-                'L user è autenticato . la funzione request.user mi da : '+str(request.user))
-        if isinstance(myuser, User):
             list_current_user = getUser(myuser)
+            print("77 "+str(list_current_user))
         if isinstance(request.user, User):
             userThatLoginIn = request.user.username
             userThatLoginIn = getUser(userThatLoginIn)
@@ -86,6 +87,7 @@ class checkUser(View):
             userThatLoginIn = "None"
         data = json.dumps(
             {
+                "authorized": authorized,
                 "userLogged": list_current_user,
                 "userLoggedIN": userThatLoginIn,
                 "authenticated": request.user.is_authenticated,
@@ -210,8 +212,11 @@ def user_register(request):
             raw_password = form.cleaned_data.get('password1')
             user.profile.photo = form.cleaned_data.get('photo')
             user.profile.first_name = username
+            user.profile.website = form.cleaned_data.get('website')
             if 'bloguser' in request.path:
+                breakpoint()
                 valuenext = request.GET.get('next')
+                user.save()
                 return redirect('/user/login/blog?next='+valuenext)
             elif 'blog' in request.path:
                 group = Group.get(name='BlogAdmin')
@@ -220,17 +225,19 @@ def user_register(request):
                       + "aggiunto al gruppo blogadmin ")
                 user.is_staff = True
                 user.save()
+                breakpoint()
                 # mostra messaggio e esci
-                return HttpResponse("<h1>sei autorizzato ad usare webTalk ! </h1><h2>inserisci user e password nei tag Html</h2>")
+                return HttpResponse("<h1>sei autorizzato ad usare webTalk ! </h1><h2>inserisci user e password nei tag Html del tuo sito . </h2>")
             else:
-                user = authenticate(username=username, password=raw_password)
-            print("USERPROFILEPHOTO"+str(request.FILES))
-            # vai alla pagina per utenti blog : "la home del sito su cui è installato già il blog"
-            if 'next' in request.GET:
-                valuenext = request.GET.get('next')
-                return redirect('/user/login?next='+valuenext)
-            else:
-                return redirect('/user/login')
+                breakpoint()
+                if 'next' in request.GET:
+                    valuenext = request.GET.get('next')
+                    user.save()
+                    return redirect('/user/login?next='+valuenext)
+                else:
+                    user.save()
+                    return redirect('/user/login')
+
     else:
         # in base alla presenza della variabile next capisco
         # se la richiesta di registrazione è per installare il Blog

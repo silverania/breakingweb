@@ -60,7 +60,7 @@ class classProfile(admin.ModelAdmin):
         filtered_query = Profile.objects.none()
         profile = Profile.objects.get(user=request.user)
         filtered_query |= query.filter(user=profile.user)
-        return filtered_query
+        return query
     list_filter = ('user',)
 
 

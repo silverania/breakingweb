@@ -106,44 +106,41 @@ def newPost(request):
     postType = ""
     post = []
     getRespOrPostToAssignResp = []
-    if "body" in request.GET and request.GET["body"]:
-        body = request.GET.get("body")
-    if "username" in request.GET and request.GET["username"]:
-        author = request.GET.get("username")
-        myuser = Profile.get(first_name=author)
-        myuser.firstname = getLoginName(request)
-    if "tagTitle" in request.GET:
-        tagTitle = request.GET.get('tagTitle')
-        split_url = urlsplit(tagTitle)
+    body = request.GET.get("body")
+    author = request.GET.get("username")
+    myuser = Profile.get(first_name=author)
+    myuser.firstname = getLoginName(request)
+    tagTitle = request.GET.get('tagTitle')
+    split_url = urlsplit(tagTitle)
+    # check site authorization
+    try:
         site = Site.get(
             title=split_url.scheme+"://"+split_url.netloc+split_url.path)
-    if "type" in request.GET and request.GET["type"]:
-        postType = request.GET.get("type")
-        if "newpost" in postType:
-            post = blog.models.Comment()
-            post.postType = "post"
-        else:
-            post = blog.models.Resp()
-            if "respToUser" in request.GET and request.GET["respToUser"]:
-                respToProfile = request.GET.get("respToUser")
-                respToProfile = Profile.get(first_name=respToProfile)
-                post.respToUser = respToProfile
-            if "respTo" in request.GET and request.GET["respTo"]:
-                post.idRespTo = request.GET.get("respTo")
-                if "commento" in request.GET and request.GET["commento"]:
-                    commento = request.GET.get("commento")
-                    comment = Comment.get(pk=commento)
-                    post.commento = comment
-                if 'respToType' in request.GET and request.GET["respToType"]:
-                    respToType = request.GET.get('respToType')
-                    if 'respToResp' in respToType:
-                        post.postType = "respToResp"
-                        getRespOrPostToAssignResp = Resp.get(
-                            pk=post.idRespTo)
-                    elif 'respToPost' in respToType:
-                        getRespOrPostToAssignResp = Comment.get(
-                            pk=commento)
-                        post.commento = getRespOrPostToAssignResp
+    except Exception:
+        raise Exception(
+            "errore nell inserimeto del url.")
+    postType = request.GET.get("type")
+    if "newpost" in postType:
+        post = blog.models.Comment()
+        post.postType = "post"
+    else:
+        post = blog.models.Resp()
+        respToProfile = request.GET.get("respToUser")
+        respToProfile = Profile.get(first_name=respToProfile)
+        post.respToUser = respToProfile
+        post.idRespTo = request.GET.get("respTo")
+        commento = request.GET.get("commento")
+        comment = Comment.get(pk=commento)
+        post.commento = comment
+        respToType = request.GET.get('respToType')
+        if 'respToResp' in respToType:
+            post.postType = "respToResp"
+            getRespOrPostToAssignResp = Resp.get(
+                pk=post.idRespTo)
+        elif 'respToPost' in respToType:
+            getRespOrPostToAssignResp = Comment.get(
+                pk=commento)
+            post.commento = getRespOrPostToAssignResp
     post.site = site
     post.site.title = tagTitle
     post.slug = site.title.replace("/", "")

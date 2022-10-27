@@ -1,9 +1,9 @@
 @font-face {
-    font-family: 'Roboto';
+    font-family: 'roboto';
     src: url('../webfonts/Roboto-Regular.ttf');
 }
 @font-face {
-    font-family: 'Orbitron';
+    font-family: 'orbitron';
     src: url('../webfonts/Orbitron-VariableFont_wght.ttf') ;
 }
 @font-face {
@@ -35,8 +35,21 @@
     src: url('../webfonts/Montserrat-Regular.ttf') ;
 }
 @font-face {
+    font-family: 'montserrat-extra-bold';
+    src: url('../webfonts/Montserrat-ExtraBold.ttf') ;
+}
+@font-face {
     font-family: 'montserrat-bold';
     src: url('../webfonts/Montserrat-Bold.ttf') ;
+}
+@font-face {
+    font-family: 'workSans-variable-weight';
+    src: url('../webfonts/WorkSans-VariableFont_wght.ttf') ;
+}
+
+@font-face {
+    font-family: 'openSans';
+    src: url('../webfonts/OpenSans-VariableFont_wdth,wght') ;
 }
 
 html {
@@ -52,6 +65,13 @@ html {
     min-height:100vh;
 }
 
+h2{
+font-family: 'montserrat-extra-bold';
+}
+
+button{
+    font-family: 'montserrat-extra-bold'!important;
+}
 .fa-book{
     color:grey!important;
 }
@@ -60,14 +80,8 @@ html {
     z-index:2;
 }
 
-#span_libri{
-    font-family: sans-serif;
-    display: block;
-    margin:0 auto;width:20%;
-    text-align: center;
-    }
-
 body {
+    font-family: "roboto", "openSans", sans-serif;
     /* min-height:100%; */
     /* font-family:'WorkSans','Assistant-regular'; */
     /* font-size:20px; */
@@ -86,6 +100,10 @@ article{
     min-height:50vh;
 }
 
+code.baseStyle{
+        background-color: #D2FFFC
+;
+}
 
 #d_linux
 /* privacy window */
@@ -100,13 +118,48 @@ article{
     padding:0px;
 }
 
+li.liTopMenu{
+    font-family: 'montserrat-extra-bold';
+    text-align: center;
+}
+li.pageMenu{
+    font-family: 'montserrat-bold';
+    color:#1EAEDB;
+    font-size:1rem;
+    padding:1%!important;
+    padding-left:17%;
+}
 
-p , #p_content{
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    line-height: 1.6;
-    text-align: left;
-  text-justify: inter-word;
+li.pageMenu span{
+    font-size:0.9em;
+}
+
+li.pageMenu a{
+    color:#1EAEDB;
+}
+li.pageMenu:hover{
+background-color:grey;
+color:white;
+}
+
+.badgebooldog {
+    background-color: #00ff00;
+    color:#660033;;
+  padding: 4px 8px;
+  text-align: center;
+  border-radius: 5px;
+}
+
+a#a_download{
+text-decoration:none!important;
+}
+
+p {
+     font-family:"montserrat-regular";
+     -webkit-font-smoothing: antialiased;
+     -moz-osx-font-smoothing: grayscale;
+     text-align: left;
+     color:#660033;
 }
 
 textarea{
@@ -129,6 +182,12 @@ li:hover{
     width:50%;
     max-widtH:80%;
     font-size:10px;
+}
+
+#s_nome_autore{
+    display:inline-block;
+    margin:0 auto auto -6%;
+    size:1rem;
 }
 
 progress#progressbar{
@@ -159,8 +218,7 @@ header{
 a ,a > span {
     border:
     none;
-    color:
-    black;
+    color:blue;
 }
 
 #span_title_2{/* font-family: 'Carter_One'; */  font-weight:bold;
@@ -245,16 +303,15 @@ color:black;}
 #h_title2 {
     margin-top:1%;
 }
-#d_content{
-    width:100%;
-    height:auto;
-}
+
+
+
 #t_header{
     background-color: white;
     color:orange;
 }
-[id^="a-"]{
-    text-align: left;
+[id^="a-"].liTopMenu{
+    text-align: center;
     width:auto!important;
     border:0px solid!important;
     background-color: transparent!important;
@@ -331,7 +388,6 @@ li #s_center_menu{
     display:none;
 }
 #s_title{
-    color:grey;/*#ff66ff;*/
     font-family: 'montserrat-regular';
 }
 
@@ -341,7 +397,6 @@ li #s_center_menu{
 
 .s_title_paragraph{
     text-align: left;
-    font-size:1.7rem!important;
     color:white!important;
 }
 table{
@@ -388,7 +443,7 @@ iframe:hover{
     color:black!important;
 }
 
-a:hover{
+a:hover {
     cursor:pointer;
 }
 
@@ -476,6 +531,9 @@ float:right!important;
 }
 
 @media screen and (max-width: 1024px) {
+    p{
+        font-size:0.8rem;
+    }
     #h_title2 {
         display:none;
     }
@@ -489,10 +547,7 @@ float:right!important;
         position:relative!important;
         /*width:inherit;*/
         display:inline-block!important;
-        top:0%;
-        left:0%;
-        font-size:0.3rem!important;
-        color:black;
+
     }
 }
 /* FINE HEADER SECTION */
@@ -567,8 +622,13 @@ float:right!important;
     }
 
     .s_title_paragraph {
-        font-size:0.9rem!important;
+        font-size:0.7rem!important;
     }
+
+    #s_nome_autore{
+        font-size:0.6rem!important;
+    }
+
     .s_unzip{
         font-size:0.2rem!important;
     }
@@ -651,9 +711,6 @@ float:right!important;
         font-size:1.3vw;
     }
 
-    #p_content{
-        font-size: 0.5em;
-    }
 
     #d_head > h4{
         font-size:0.6rem!important;
@@ -661,9 +718,6 @@ float:right!important;
     }
     #s_footer{
         font-size:2vw;
-    }
-    .s_title_paragraph{
-        font-size:1rem!important;
     }
     .s_title{
         font-size:0.7rem!important;
@@ -692,6 +746,10 @@ float:right!important;
     code{
         font-size:1rem;
     }
+    .s_title_paragraph {
+        font-size:0.7rem!important;
+    }
+
     /*[id$=menu]{
     width:200%!important;
     }*/
@@ -711,9 +769,7 @@ float:right!important;
         font-size:3vw!important;
     }
 
-    #p_content{
-        font-size:0.9rem;
-    }
+
     code{
         font-size:1rem;
     }
@@ -780,12 +836,9 @@ float:right!important;
     #asidebar{
         display:block;
     }
-    #p_content{
-        font-size:0.8rem;
-    }
+
     .s_title_paragraph{
         text-align: left;
-        font-size:0.9rem!important;
         color:white!important;
     }
 
@@ -809,6 +862,9 @@ float:right!important;
 
 
 @media screen and (min-width: 1024px) {
+    p{
+        font-size:1.2rem;
+    }
     li #s_center_menu{
         font-size:1.3rem!important;
     }
@@ -850,9 +906,7 @@ float:right!important;
     #s_title,#s_title_2{
         font-size:1rem;
     }
-    #p_content{
-        font-size:0.9rem;
-    }
+
     #d_head > h4{
         font-size:1.2rem!important;
     }
@@ -890,8 +944,8 @@ float:right!important;
     }
     #s_nome_autore{
         font-size:0.5rem!important;
-        color:blue;
     }
+
     #span_title_w{
         font-weight:bold;
         font-size:2.2rem;
@@ -922,7 +976,6 @@ float:right!important;
         font-family:ShareTechMono-Regular;
         font-size:0.7rem!important;
         display:inline-block;
-        color:blue;
         opacity:0.5;
     }
 
@@ -940,9 +993,7 @@ float:right!important;
     code{
         font-size:1rem;
     }
-    #p_content{
-        font-size:20px;
-    }
+
     .fa-comments , #s_blog{
         font-size:1.7rem;
     }

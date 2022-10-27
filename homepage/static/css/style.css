@@ -48,7 +48,7 @@ font-size:3rem;
 }
 
 .class_div_title{
-  border-left:1px solid black;
+  border-left:3px solid #ffc107de;
 }
 .p_content{
   text-align: justify;
@@ -65,9 +65,10 @@ font-size:3rem;
   margin-top:5%!important;
 }
 
-#id_row_title{
- border-bottom: 1px black solid ;
+div.booldog,span.booldoginfo{
+    margin-left:3px;
 }
+
 #id_video{
   margin-top:5%;
 }

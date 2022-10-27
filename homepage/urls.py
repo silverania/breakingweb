@@ -3,8 +3,8 @@ from . import views
 from django.contrib import admin
 app_name = 'homepage'
 urlpatterns = [
-    path('webtalk', views.initHome.as_view(), name="initHome"),
-    path('webtalk/admin/', admin.site.urls),
+    path('booldog', views.initHome.as_view(), name="initHome"),
+    path('booldog/admin/', admin.site.urls),
     path('newpage', views.Newpage.as_view(), name="Newpage"),
     path('', views.tutorial_detail, name="tutorial_detail"),
     path('<slug:slug>', views.tutorial_detail, name="tutorial_detail"),

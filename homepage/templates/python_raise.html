@@ -1,0 +1,30 @@
+{% extends 'base2.html'%}
+{% load static%}
+{% block title %}Lanciare Un Eccezione in Python{% endblock title %}
+{% block keywords %}python,sollevare eccezione,eccezione,sollevare,throw
+    except,raise Exception{%endblock%}
+{% block description %}Python sollevare un eccezione volontariamente  {% endblock description%}
+{% block anteprima %}<meta property="og:image"   content='{% static 'images/python.png' %}'/>{% endblock %}
+
+{% block t %}Sollevare Un Eccezione Volontariamente in Python {% endblock t %}
+{% block photo %}{% get_media_prefix %}{{tutorial.author.photo}}{% endblock photo %}
+{% block content %}
+
+<div class="row">
+    <div id="content" class="col-12">
+        <div text-align="left" class="mt-2 ms-5">
+            <code class="baseStyle"  style="margin:0;padding:0;left:0;display:block;">
+                <div>if "username" in request.GET and  request.GET["username"]:</div>
+                    <div class="ms-3">pass</div>
+                    <div>else:</div>
+                    <div class="ms-3">raise Exception("Errore")</div>
+            </code>
+            </div>
+    </div>
+</div>
+{%endblock%}
+{%block blog%}<script id="s_blog">
+    $(document).ready(function(){
+      initBlogSGang("mario","sol-7373");
+    })
+  </script>{%endblock%}

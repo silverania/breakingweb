@@ -1,9 +1,9 @@
 @font-face {
-    font-family: 'Roboto';
+    font-family: 'roboto';
     src: url('../webfonts/Roboto-Regular.ttf');
 }
 @font-face {
-    font-family: 'Orbitron';
+    font-family: 'orbitron';
     src: url('../webfonts/Orbitron-VariableFont_wght.ttf') ;
 }
 @font-face {
@@ -35,8 +35,30 @@
     src: url('../webfonts/Montserrat-Regular.ttf') ;
 }
 @font-face {
+    font-family: 'montserrat-extra-bold';
+    src: url('../webfonts/Montserrat-ExtraBold.ttf') ;
+}
+@font-face {
     font-family: 'montserrat-bold';
     src: url('../webfonts/Montserrat-Bold.ttf') ;
+}
+@font-face {
+    font-family: 'workSans-variable-weight';
+    src: url('../webfonts/WorkSans-VariableFont_wght.ttf') ;
+}
+
+@font-face {
+    font-family: 'openSans';
+    src: url('../webfonts/OpenSans-VariableFont_wdth,wght') ;
+}
+
+@font-face {
+    font-family: 'ubuntu-mono';
+    src: url('../webfonts/UbuntuMono-Regular.ttf') ;
+}
+@font-face {
+    font-family: 'noto-mono';
+    src: url('../webfonts/NotoSansMono-VariableFont_wdth,wght.ttf') ;
 }
 
 html {
@@ -52,6 +74,13 @@ html {
     min-height:100vh;
 }
 
+h2{
+font-family: 'montserrat-extra-bold';
+}
+
+button{
+    font-family: 'montserrat-extra-bold'!important;
+}
 .fa-book{
     color:grey!important;
 }
@@ -60,14 +89,8 @@ html {
     z-index:2;
 }
 
-#span_libri{
-    font-family: sans-serif;
-    display: block;
-    margin:0 auto;width:20%;
-    text-align: center;
-    }
-
 body {
+    font-family: "roboto", "openSans", "sans-serif";
     /* min-height:100%; */
     /* font-family:'WorkSans','Assistant-regular'; */
     /* font-size:20px; */
@@ -86,6 +109,17 @@ article{
     min-height:50vh;
 }
 
+pre{background-color: #D2FFFC;overflow-y: hidden;overflow-x: hidden;border-radius: 2px;/* border:1px solid grey; */}
+code.baseStyle{
+    display:block;
+    /* max-width: 70%; */
+
+    text-align:left;
+    background-color: #D2FFFC;
+    border: 20px solid #D2FFFC;
+    font-family:"ubuntu-mono","noto-mono";
+    font-size: 1rem;
+}
 
 #d_linux
 /* privacy window */
@@ -100,13 +134,52 @@ article{
     padding:0px;
 }
 
+li.liTopMenu{
+    font-family: 'montserrat-extra-bold';
+    text-align: center;
+}
+li.pageMenu{
+    font-family: 'montserrat-bold';
+    color:#1EAEDB;
+    font-size:1rem;
+    padding:1%!important;
+    padding-left:17%;
+}
 
-p , #p_content{
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    line-height: 1.6;
-    text-align: left;
-  text-justify: inter-word;
+li.pageMenu span{
+    font-size:0.9em;
+}
+
+li.pageMenu a{
+    color:#1EAEDB;
+}
+li.pageMenu:hover{
+background-color:grey;
+color:white;
+}
+
+.badgebooldog {
+    background-color: #00ff00;
+    color:#660033;;
+  padding: 4px 8px;
+  text-align: center;
+  border-radius: 5px;
+}
+
+a.nav-link ,a#a_download , #aTitle{
+text-decoration:none!important;
+}
+ li{
+     list-style: none;
+ }
+p {
+     font-family: "open-sans";
+     font-weight: 400;
+     -webkit-font-smoothing: antialiased;
+     -moz-osx-font-smoothing: grayscale;
+     text-align: left;
+     color: #000000;
+     margin:10px;
 }
 
 textarea{
@@ -165,19 +238,21 @@ header{
 a ,a > span {
     border:
     none;
-    color:
-    black;
+    color:blue;
 }
 
-#span_title_2{/* font-family: 'Carter_One'; */  font-weight:bold;
-color:black;}
+#span_title_2{
+    font-family: montserrat-extra-bold;
+    font-weight:bold;
+    color:black;
+}
 
 #span_title_w{
-    /* font-family: 'Roboto'; */
+    font-family: montserrat-extra-bold;
     color: #585050;
     margin-right:5px;
-    font-weight: bold;
-    size:0.8rem;
+    font-weight: 900;
+    font-size: 2rem;
 }
 
 
@@ -251,16 +326,15 @@ color:black;}
 #h_title2 {
     margin-top:1%;
 }
-#d_content{
-    width:100%;
-    height:auto;
-}
+
+
+
 #t_header{
     background-color: white;
     color:orange;
 }
-[id^="a-"]{
-    text-align: left;
+[id^="a-"].liTopMenu{
+    text-align: center;
     width:auto!important;
     border:0px solid!important;
     background-color: transparent!important;
@@ -337,18 +411,20 @@ li #s_center_menu{
     display:none;
 }
 #s_title{
-    color:grey;/*#ff66ff;*/
     font-family: 'montserrat-regular';
 }
 
 #s_title_2{
     color:black;
 }
-
+p>span.badge.bg-light{
+    color:#061a46;
+}
 .s_title_paragraph{
-    text-align: left;
-    font-size:1.7rem!important;
     color:white!important;
+    font-size: 1.3rem;
+    margin:5px;
+    margin-left: 2px;
 }
 table{
     border:3px solid orange;
@@ -394,7 +470,7 @@ iframe:hover{
     color:black!important;
 }
 
-a:hover{
+a:hover {
     cursor:pointer;
 }
 
@@ -482,6 +558,9 @@ float:right!important;
 }
 
 @media screen and (max-width: 1024px) {
+    p{
+        font-size:0.8rem;
+    }
     #h_title2 {
         display:none;
     }
@@ -499,6 +578,35 @@ float:right!important;
     }
 }
 /* FINE HEADER SECTION */
+
+@media screen and (max-width: 800px) {
+    #spanEntra,#spanTutorial,#spanRegistrati,#spanEsci{
+        font-size:0.6em;
+    }
+    [id^=spanMenu]{
+        font-size:0.6em;
+    }
+    [id^=s_leftmenu]{
+        font-size:0.6rem;
+        color:white;
+    }
+    #a_download{
+        /* font-size: 8px; */
+        /* display:block; */
+        /* text-align: center; */
+    }
+    code{
+        font-size:1rem;
+    }
+    .s_title_paragraph {
+        font-size:1rem!important;
+    }
+
+    /*[id$=menu]{
+    width:200%!important;
+    }*/
+}
+
 @media screen and (max-width: 480px) {
 
     td{
@@ -570,7 +678,7 @@ float:right!important;
     }
 
     .s_title_paragraph {
-        font-size:0.9rem!important;
+        font-size:0.7rem!important;
     }
 
     #s_nome_autore{
@@ -629,14 +737,14 @@ float:right!important;
         font-size:1rem;
     }
     #span_title_2{
-        font-size:1rem;
+        /* font-size:1rem; */
     }
 
     #s_title{
-        font-size:1.1rem;
+        font-size:1rem;
     }
     #s_title_2{
-        font-size:1.1rem;
+        font-size:1rem;
     }
     #asidebar .fa-angle-right{
         font-size:1.5rem!important;
@@ -659,9 +767,6 @@ float:right!important;
         font-size:1.3vw;
     }
 
-    #p_content{
-        font-size: 0.5em;
-    }
 
     #d_head > h4{
         font-size:0.6rem!important;
@@ -669,9 +774,6 @@ float:right!important;
     }
     #s_footer{
         font-size:2vw;
-    }
-    .s_title_paragraph{
-        font-size:1rem!important;
     }
     .s_title{
         font-size:0.7rem!important;
@@ -681,29 +783,12 @@ float:right!important;
     }
 }
 
-@media screen and (max-width: 800px) {
-    #spanEntra,#spanTutorial,#spanRegistrati,#spanEsci{
-        font-size:0.6em;
-    }
-    [id^=spanMenu]{
-        font-size:0.6em;
-    }
-    [id^=s_leftmenu]{
-        font-size:0.6rem;
-        color:white;
-    }
-    #a_download{
-        font-size:0.6em;
-        display:block;
-        text-align: center;
-    }
-    code{
-        font-size:1rem;
-    }
-    /*[id$=menu]{
-    width:200%!important;
-    }*/
-}
+
+
+
+
+
+
 
 @media screen and (min-width: 600px) {
     li #s_center_menu{
@@ -719,9 +804,7 @@ float:right!important;
         font-size:3vw!important;
     }
 
-    #p_content{
-        font-size:0.9rem;
-    }
+
     code{
         font-size:1rem;
     }
@@ -767,7 +850,7 @@ float:right!important;
 
 
     #s_title,#s_title_2{
-        font-size:0.9rem;
+        font-size:1.2rem;
     }
     #span_title{
         font-size:1.6rem;
@@ -777,8 +860,8 @@ float:right!important;
     }
 
     #span_title_w{
-            font-size:1.6rem;
-
+            font-size: 2rem;
+            color: black;
     }
 
 
@@ -788,14 +871,14 @@ float:right!important;
     #asidebar{
         display:block;
     }
-    #p_content{
-        font-size:0.8rem;
-    }
+
     .s_title_paragraph{
-        text-align: left;
-        font-size:0.9rem!important;
-        color:white!important;
+        /* text-align: left; */
+        font-size: 1.2rem;
+        color: #061a46!important;
     }
+
+span.badge.bg-info.s_title_paragraph {}
 
     #x_code{
         font-size:0.5rem;
@@ -814,9 +897,10 @@ float:right!important;
         font-size:1.2rem;
     }
 }
-
-
 @media screen and (min-width: 1024px) {
+    p{
+        /* font-size:1.2rem; */
+    }
     li #s_center_menu{
         font-size:1.3rem!important;
     }
@@ -858,9 +942,7 @@ float:right!important;
     #s_title,#s_title_2{
         font-size:1rem;
     }
-    #p_content{
-        font-size:0.9rem;
-    }
+
     #d_head > h4{
         font-size:1.2rem!important;
     }
@@ -893,7 +975,7 @@ float:right!important;
     }
     #span_title_2{
         font-style: normal;
-        color: #4f5449;
+        color: black;
         font-size: 2.2rem;
     }
     #s_nome_autore{
@@ -921,6 +1003,8 @@ float:right!important;
     }
 }
 
+
+
 @media screen and (min-width: 1500px) {
     li #s_center_menu{
         /* font-size:1rem!important; */
@@ -930,7 +1014,6 @@ float:right!important;
         font-family:ShareTechMono-Regular;
         font-size:0.7rem!important;
         display:inline-block;
-        color:blue;
         opacity:0.5;
     }
 
@@ -948,9 +1031,7 @@ float:right!important;
     code{
         font-size:1rem;
     }
-    #p_content{
-        font-size:20px;
-    }
+
     .fa-comments , #s_blog{
         font-size:1.7rem;
     }

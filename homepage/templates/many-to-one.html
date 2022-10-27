@@ -1,0 +1,286 @@
+{% extends 'base2.html'%}
+{% load static%}
+{% block title %}Relazione Tra i Dati Tipo Many-To-One/One-To-Many {% endblock title %}
+{% block keywords %}tutorial , Django ,foreignkey , query manyToOne ,database,many-to-one,one-to-many,OneToMany,relazione,dati,avvio,creazione,progetto,applicazione,python shell,related_name, python manage.py makemigrations, python manage.py migrate,urls.py,models.py,views.py {% endblock keywords %}
+{% block description %}Tutorial - Dati Tipo Many-To-One/One-To-Many su Django Framework {% endblock description%}
+{% block anteprima %}<meta property="og:image"   content='{% static 'images/django.png' %}'/>{% endblock %}
+
+{% block t %}Relazioni Many-To-One {% endblock t %}
+{% block photo %}{% get_media_prefix %}{{tutorial.author.photo}}{% endblock photo %}
+{% block content %}
+<div class="row">
+    <div id="content" class="col-12">
+        <p>In questo tutorial ceerò un applicazione Django , la più semplice possibile , in cui implementerò una relazione <b>manyToOne</b> tra due entità in un database . L' entità <b>User</b> e l' entità <b>Site</b> . Un esempio di relazione tra dati di tipo <mark>OneToMany/manyToOne</mark> può essere ad esempio questa : Una pagina Web ha un o più <mark>commento/i</mark> , mentre un <mark>commento</mark> ha una ed una sola pagina Web , quindi tra le entità "Pagina Web" e "Commento" c' è una relazione One-To-Many : <mark>"One page Many Comment"</mark> .</p>
+    </div>
+    <div class="row justify-content-left mt-4"><span class="badge bg-info" style="font-family:montserrat-bold;font-size:1.5rem;">Contenuti</span>
+</div>
+    <div class="list-group list-group-flush col-6 mt-3">
+
+            <li class="list-group-item pageMenu"><span style="display:inline-block ;margin-right:3%" class="spanMenu "> 1 )</span><a href="#divinstall">Install di Django</a></li>
+            <li class="list-group-item pageMenu"><span style="display:inline-block ;margin-right:3%"class="spanMenu"> 2 )</span><a href="#divavvioprogetto">Avvio Progetto</a></li>
+            <li class="list-group-item pageMenu"><span class="spanMenu"style="display:inline-block ;margin-right:3%">3 )</span><a href="#divavvioapplicazione">Avvio Applicazione</a></li>
+            <li class="list-group-item pageMenu"><span class="spanMenu"style="display:inline-block ;margin-right:3%">4 )</span><a href="#divmigration">Migrazoine dei Dati</a></li>
+            <li class="list-group-item pageMenu"><span class="spanMenu"style="display:inline-block ;margin-right:3%">5 )</span><a href="#divcreazioneuser">Creazione del superuser</a></li>
+            </div>
+            <div class="list-group list-group-flush col-6 mt-3">
+
+            <li class="list-group-item pageMenu"><span class="spanMenu"style="display:inline-block ;margin-right:3%">6 )</span><a href="#divurlspy">Modifica di urls.py</a></li>
+            <li class="list-group-item pageMenu"><span class="spanMenu"style="display:inline-block ;margin-right:3%">7 )</span><a href="#divviewspy">Modifica di views.py</a></li>
+            <li class="list-group-item pageMenu"><span class="spanMenu"style="display:inline-block ;margin-right:3%">8 )</span><a href="#divmodelspy">Modifica di models.py</a></li>
+            <li class="list-group-item pageMenu"><span class="spanMenu"style="display:inline-block ;margin-right:3%">9 )</span><a href="#divdati">Recupero dei Dati</a></li>
+            <li class="list-group-item pageMenu"><span class="spanMenu"style="display:inline-block ;margin-right:3%">10 )</span><a href="#divweb">I Dati su una pagina Web</a></li>
+            </div>
+    </div>
+<div class="container mt-5">
+    <div id="divinstall" class="row">
+        <div  class="col-12">
+            <h4  class="h4 mt-3">Installazione di <kbd>Django</kbd>. <small class="text-muted">Ultima Versione</small></h4>
+            <div text-align="left" class="mt-3 ">
+                <h6 class="h6" mt-4">Da un Terminale <code>bash o sh</code></h6>
+                <code class="baseStyle mt-3"  style="margin:0;padding:0;left:0;display:block;">pip install django</code>
+            </div>
+        </div>
+    </div>
+    <div id="divavvioprogetto" class="row mt-5">
+        <div class="col-12">
+            <h4 class="h4 mt-3">Avvio Del Progetto <kbd>Site </kbd></h4>
+            <div  text-align="left" class="mt-3 ">
+                <code class="baseStyle"  style="margin:0;padding:0;left:0;display:block;">
+                    django-admin startproject Site
+                </code>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div id="divavvioapplicazione" class="col-12">
+            <h4 class="h4 mt-3">Avvio Dell' applicazione <kbd>page<kbd></h4>
+                <p>All' interno della cartella <code>Site</code> lanciamo:</p>
+                <div text-align="left" class="mt-2 ">
+                    <code class="baseStyle"  style="margin:0;padding:0;left:0;display:block;">
+                        python manage.py startapp page
+                    </code>
+                    <p class="text-muted mt-3" >Non dimentichiamo di aggiungere l' applicazione <code>
+                        page </code>in <code>settings.py</code> nella sezione <code>INSTALLED_APPS</code> </p>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div id="divmigration" class="col-12">
+                    <h4 class="h4 mt-4">Migriamo I Dati Nel Database</h4>
+                    <div text-align="left" class="mt-2 ">
+                        <code class="baseStyle"  style="margin:0;padding:0;left:0;display:block;">
+                            python manage.py migrate
+                        </code>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-5">
+                <div id="divcreazioneuser"class="col-12">
+                    <h4 class="h4 mt-4">Creiamo L' User Privilegiato</h4>
+                    <div text-align="left" class="mt-3 ">
+                        <code class="baseStyle"  style="margin:0;padding:0;left:0;display:block;">
+                            python manage.py createsuperuser
+                        </code>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-5">
+                <div id="divurlspy"class="col-12">
+                    <h4 class="h4 mt-4">Modifichiamo <kbd>urls.py</kbd></h4>
+                    <div text-align="left" class="mt-3 ">
+                        <p>Apriamo <code>urls.py</code> dalla cartella <code>Site/Site</code> e inseriamo il seguente testo :</p>
+                        <code class="baseStyle"  style="margin:0;padding:0;left:0;display:block;">
+                            <div>from django.contrib import admin</div>
+                            <div>from django.urls import path</div>
+                            <div>from page import views</div>
+                            <br>
+                            <div>urlpatterns = [</div>
+                            <div class="ms-3">path('admin/', admin.site.urls),</div>
+                                <div class="ms-3">path('home/', views.getPost),</div>
+                            <div>]</div>
+
+
+                        </code>
+                    </div>
+                </div>
+            </div>
+            <div id="divviewspy"class="row mt-5">
+                <div class="col-12">
+                    <h4 class="h4 mt-3">Modifichiamo <kbd>views.py</kbd></h4>
+                    <div text-align="left" class="mt-3 ">
+                        <code class="baseStyle"  style="margin:0;padding:0;left:0;display:block;">
+                            <div>from django.shortcuts import render</div>
+                            <div>from page.models import Page</div>
+                            <div>from django.http import HttpResponse</div>
+                            <br>
+                            <div>def getPost(request):</div>
+                            <div class="ms-3">homepage = Page.objects.get(pk=1)<br>
+                            return HttpResponse(homepage.comments.all())</div>
+
+                        </code>
+                    </div>
+                </div>
+            </div>
+
+            <div id="divmodelspy"class="row mt-5">
+                <div class="col-12">
+                    <h4 class="h4 mt-4">Modifichiamo così <kbd>models.py</kbd></h4>
+                    <div text-align="left" class="mt-3 ">
+
+                        <code class="baseStyle"  style="margin:0;padding:0;left:0;display:block;">
+                            <div>from django.db import models</div>
+                            <br>
+                            <div>class Page(models.Model):</div>
+                            <div class="ms-3">title = models.CharField(max_length=200)<br></div>
+                                <br>
+                                    <div class="ms-3">def __str__(self):</div>
+                                        <div class="">return self.title</div>
+                            <br>
+                            <!--div>class Comment(models.Model):</div>
+                            <div class="ms-3"><b>site = models.ForeignKey(Site, related_name= "all_comments",on_delete=models.PROTECT)</b></div-->
+
+                        </code>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row mt-2">
+                <div class="col-12">
+                    <div text-align="left" class=" ">
+                        <span class="badge bg-warning">importante</span>
+                        La classe Comment sarà aggiunta al file models.py dopo aver migrato
+                        Page . Questo perchè l' entità Comment contiene il dato ForeignKey che dipende dall' entità Page per esistere nel database.
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-2">
+                <div class="col-12">
+                    <div text-align="left" class=" mt-3 ">
+                        <p>Migriamo <kbd>page</kbd></p>
+                        <code class="baseStyle"  style="margin:0;padding:0;left:0;display:block;">
+                            python manage.py makemigrations && python manage.py migrate
+                        </code>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-2">
+                <div class="col-12">
+                    <div text-align="left" class="mt-3 ">
+                        <p>Aggiungiamo ora la classe <kbd>Comment</kbd> allo stesso file models.py</p>
+
+
+                        <code class="baseStyle"  style="margin:0;padding:0;left:0;display:block;">
+                            <div>from django.db import models</div>
+                            <br>
+                            <div>class Page(models.Model):</div>
+                            <div class="ms-3">title = models.CharField(max_length=200)<br></div>
+                            <br>
+                                <div class="ms-3">def __str__(self):</div>
+                                    <div class="">return self.title</div>
+                                    <br>
+                            <div>class Comment(models.Model):</div>
+                            <div class="ms-3"><b>site = models.ForeignKey(Site, related_name= "comments",on_delete=models.PROTECT)</b></div>
+                                        <div class="ms-3"> body = models.TextField()
+                                    </div>
+                                    <br>
+                                        <div class="ms-3">def __str__(self):</div>
+                                            <div class="">return self.body</div>
+                        </code>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-2">
+                <div class="col-12">
+                    <div text-align="left" class="mt-3 ">
+                        <p>Ripetiamo la migrazione per <kbd>Comment</kbd></p>
+                        <code class="baseStyle"  style="margin:0;padding:0;left:0;display:block;">
+                            python manage.py makemigrations && python manage.py migrate
+                        </code>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div id="divdati"class="row mt-5">
+                <div class="col-12">
+                    <h4 class="h4 mt-4">Creiamo due o più entità <span class="lead"><kbd>Comment</kbd></span> e un entità <span class="lead"><kbd>Page</kbd></span> in Console</h4>
+                    <div class="row mt-2">
+                        <div class="col-12">
+                            <div text-align="left" class="mt-3 ">
+                                <code class="baseStyle"  style="margin:0;padding:0;left:0;display:block;">
+                                    python manage.py shell
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="row mt-2">
+                        <div class="col-12">
+                            <div text-align="left" class="mt-3 ">
+
+                                <code class="baseStyle" style="margin:0;padding:0;left:0;display:block;">
+                                <div>>>> from page.models import Page,Comment</div>
+                                <div>>>> page = Page()</div>
+                                <div>>>> page.title ="la mia homepage !"</div>
+                                <div>>>> page.save()</div>
+                                <div>>>> comment = Comment()</div>
+                                <div>>>> comment2 = Comment()</div>
+                                <div>>>> comment.body = "Primo commento su page"</div><div>>>> comment2.body = "secondo commento su page"</div>
+
+
+                                <div>>>> comment.site=page # QUI CREO LA FOREIGNKEY TABLE che lega comment a page<br> </div>
+                                <div>>>> comment.save()</div>
+                                <div>>>> comment2.site=page</div>
+                                <div>>>> comment2.save()</div>
+                            </code>
+
+
+                            <p>Se con la prossima <kbd>query</kbd>Riusciamo a recuperare tutti i commenti dall' Entità Page significa che è andato tutto bene !</p>
+
+                            <code class="baseStyle" style="margin:0;padding:0;left:0;display:block;">
+                                <div>>>> <mark>page.comments.all()</mark></div>
+                                </code>
+
+                                <p>Notiamo che l' attributo <kbd>comments</kbd> nella query : <code>page.comments.all()</code> , è stato impostato prima in <kbd>models.py</kbd>. Rappresenta il valore dell' attributo <kbd>related_name</kbd> .
+</div>
+</div>
+</div>
+
+
+                </div>
+            </div>
+
+            <div id="divweb" class="row mt-2">
+                <div class="col-12">
+                        <h4 class="h4 mt-4">Visualizziamo tutti i commenti in una pagina <kbd>Web</kbd></h4>
+            <div text-align="left" class="mt-3">
+                <p>Visto che abbiamo qualche <kbd>Comment</kbd> nel database possiamo inviare il dato  <b>ForeignKey</b> in una risposta HTTP , per scriverla su una pagina <b>Web</b> . Per fare ciò avviamo il server dal terminale :</p>
+                    <code class="baseStyle"  style="margin:0;padding:0;left:0;display:block;">
+                        <div>python manage.py runserver</div>
+                    </code>
+                    <br>
+                    <p> Dal Browser aprite l' url <kbd>127.0.0.1:8000/home/</kbd> Se abbiamo fatto tutto bene il response dalla <kbd>view</kbd> Django dovrebbe ritornare la lista dei commenti .</p>
+                    </div>
+                    </div>
+            </div>
+
+
+        </div>
+
+        {%endblock%}
+        {%block blog%}<script id="s_blog">
+            $(document).ready(function(){
+              initBlogSGang("mario","sol-7373");
+            })
+          </script>{%endblock%}

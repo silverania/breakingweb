@@ -1,5 +1,5 @@
 /* By Mario , superior code */
-const CURRENT_URL=document.href
+var CURRENT_URL=window.location.href
 const BASE_URL="http://127.0.0.1:8000/" // URL del server
 const CLIENT_URL=window.location.href.split('#')[0].split('?')[0]
 const HIDDENFIELD="?next="+window.location
@@ -56,10 +56,6 @@ var post,post2=new Object()
 var isOpen=false
 var bSection=document.createElement("SECTION")
 var bIcon = document.createElement("DIV")
-var t = document.createElement("I")
-t.setAttribute("class","far fa-comment-dots")
-bIcon.appendChild(t)
-bIcon.appendChild(H1Welcome)
 var bForm=document.createElement("FORM");
 var title=document.getElementsByTagName('title')[0].innerText
 var wait=true
@@ -73,6 +69,9 @@ var json_resps
 var re
 var inputHidden=document.createElement("INPUT")
 var inputSubmit=document.createElement("INPUT")
+var logo='<a  href="/booldog"  target="_blank" id="a_download"><div class="booldog"><span class="badgebooldog"><i class="fas fa-comment-dots"></i></span><span class="spanbooldog">BoolDog</span></div></a>';
+$(bIcon).append(logo)
+bIcon.appendChild(H1Welcome)
 
 function createSectionDivSpan(userAdmin,_userThatLogin){
   userThatLogin=_userThatLogin
@@ -723,7 +722,7 @@ function getComment(){
                   }
                 }
                 else {
-                  mess.push(new Post("post","tinkyblink","Commenta Per Primo",".....","",BASE_PHOTO_DIR+"media/media/"+"download_XOTfFEL.jpeg","0"))
+                  mess.push(new Post("post","tinkyblink","Commenta Per Primo",".....","","static/images/user-secret-solid.gif","0"))
                   createPostArea(mess[0])
                 }                                                                            // non esistono commenti ....creo label : vuoi essere il primo a commnetare ecc...
               }})

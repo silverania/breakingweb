@@ -9,7 +9,7 @@
 
   <div class="kpx_login">
 
-    <div class="row title">
+    {% if '/register/blog' in request.full_path %}<div class="row title">
       <div class="col-xs-12 text-center offset-sm-3 col-sm-6" style="margin-bottom:5%;">
         <!--hr class="kpx_hrOr"-->
         <!--span class="kpx_spanOr">Registrati o Fai il
@@ -18,7 +18,7 @@
         <span class="kpx_spanOr">Registrati o Fai il
           <a id="a_reg"><span style="color:green;">Login</span></a></span>
         </div>
-      </div>
+      </div>{%endif%}
       <script type="text/javascript">
 
         const params = new URLSearchParams(window.location.search);
@@ -26,62 +26,81 @@
         var r=document.getElementById("a_reg");
         r.href="/user/login/blog?next="+params.get('next');
       </script>
-      <div class="row kpx_row-sm-offset-3 kpx_loginOr">
+      <div class="row justify-content-center">
         <div class="col-xs-12 text-center col-sm-6">
           {% if not 'blog' in request.path %}<hr class="kpx_hrOr"><br>{%endif%}
-          <h2 class="title">Registrazione</h2>
+          <h2 align="center"class="title">Registrazione</h2>
         </div>
       </div>
 
-      <div class="row kpx_row-sm-offset-3">
-        <div class="col-xs-12 text-center col-sm-6">
+      <div class="row justify-content-center">
+        <div class="col-xs-12 text-left col-sm-6">
 
           <form method="post" enctype="multipart/form-data">
             <div class="form-group">
               {% csrf_token %}
               {% for field in form %}
+
+              {% if 'Password:' in field.label_tag %}
               <p>
-                {% if 'Conferma' in field.label_tag %}
+                  <label>Password :</label>
+              {{ field }}
+              </p>
+               {% if field.errors %}  <p style="color:red;">Errore nell' inserimento della Password ! </p>{%endif%}
+
+
+
+
+
+                {% elif 'Conferma' in field.label_tag %}
+                <p>
                 <label>Conferma Password :</label>
                 {{ field }}
-                {% if field.errors %}  <p style="color:red;">Errore nell' inserimento delle password ! </p>
+                </p>
+                    {% if field.errors %}  <p style="color:red;">Errore nell' inserimerdto delle password ! </p>
                 <script>setTimeout(() => { window.location.href = "{% if 'blog' in request.path %} /user/register/blog
-                  {% else %} /user/register{% endif %}"},5000);</script>{%endif%}
-                  {% elif 'Password:' in field.label_tag %}
-                  <label>Password :</label>
-                  {{ field }}
+                  {% else %} /user/register{% endif %} "},5000);</script>
+                  {%endif%}
+
+
+
                   {% elif 'website' in field.label_tag %}
-                  {% if next %}<small style="color: grey">Opzionale</small>
-                  {% endif %}
-                  <label>{{field.label_tag}}</label>
-                  {{ field }}
-                  {% elif 'Photo' in field.label_tag %}
+                  <p>
+                  {% if next %}
                   <small style="color: grey">Opzionale</small>
+                   <label>{{field.label_tag}}</label>
+                  {%else%}
+                  <label>{{field.label_tag}}</label>{% endif %}
+                  {{ field }}
+                  </p>
+                   {% if field.errors %}  <p style="color:red;">Errore nell' inserimerdto del Sito Web ! </p>
+                  <script>setTimeout(() => { window.location.href = "{% if 'blog' in request.path %} /user/register/blog
+                {% else %} /user/register{% endif %} "},5000);</script>{%endif%}
+
+                  {% elif 'Photo' in field.label_tag %}
+                  <p>
+                      <small style="color: grey">Opzionale</small>
                   <label>{{field.label_tag}}</label>
                   {{ field }}
+                  </p>
+                  {% if field.errors %}  <p style="color:red;">Errore nell' inserimerdto della Photo ! </p>{%endif%}
+
+
                   {% elif 'Nome' in field.label_tag %}
-                  <label>Nome Utente :</label>
-                  <small style="color: grey"></small>
-                  {{ field }}</p>
-                  {% if field.help_text %}
-                  {% if field.errors %}
-                  <p style="color:red;">Username Errato o Esistente ! Cambialo !</p>
-                  <script>setTimeout(() => { window.location.href = "{% if 'blog' in request.path %} /user/register/blog
-                    {% else %} /user/register{% endif %}"},5000);</script>
-                    {% endif %}
-                    {% endif %}
+                   <p>
+                  User Name :
+                  {{ field }}
+                  </p>
+                   {% if field.errors %}  <p style="color:red;">Errore nell' inserimerdto del User ! </p>{%endif%}
+
                     {% else %}
                     {% endif %}
-                    {% for error in field.errors %}
-                    {% if 'Password' in field.label_tag %}
-                    <p style="color: red">Errore Nel Campo <mark>Password !</mark></p>
-                    <script>setTimeout(() => { window.location.href = "/user/register"},5000);</script>
-                    {% endif %}
+
+
 
                     {% endfor %}
-                    {% endfor %}
                     <div >
-                      <button style="display:block;margin:0 auto!important;" class="btn btn-primary "  type="submit">Registrami</button>
+                      <button style="width:60%" class="btn ms-5 btn-outline-primary "  type="submit">Registrami</button>
                     </div></div>
                   </div>
                 </div>

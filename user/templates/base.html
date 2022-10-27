@@ -2,23 +2,27 @@
 <!DOCTYPE html>
 <html lang="it" >
 
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta charset="UTF-8">
-  <meta name="author" content="silverania">
-  <meta name="keywords" content="registrazione , login">
-  <meta name="description" content="registrazione e login sul sito">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="UTF-8">
+        <meta name="author" content="silverania">
+        {% block anteprima %}{% endblock %}
+        <title>Registrazione</title>
+        <link rel="icon" type="image/x-icon" href="{% static "images/favicon.ico" %}">
+        <link rel="stylesheet" href="{% static "node_modules/bootstrap/dist/css/bootstrap.css"%}">
+        <link rel="stylesheet" href="{% static "css/all.min.css" %}">
+        <link rel="stylesheet" href="{% static "css/register.css" %}">
+        <link rel="stylesheet" href="{% static "css/login.css"%}">
 
-  <link rel="stylesheet" href="{% static "css/bootstrap.min.css"%}">
-  <link rel="stylesheet" href="{% static "css/all.min.css" %}">
-  <link rel="stylesheet" href="{% static "css/register.css" %}">
-  <link rel="stylesheet" href="{% static "css/login.css"%}">
+        <script  src="{% static 'node_modules/@popperjs/core/dist/umd/popper.js' %}"></script>
+        <script  src="{% static 'node_modules/bootstrap/dist/js/bootstrap.js' %}"></script>
+
+
+
 
   <script  src="{% static 'js/jquery.min.js' %}"></script>
 <script src="{% static "js/getParams.js"%}"></script>
 <script src="{% static "js/all.min.js"%}"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
-<script src="{% static "js/bootstrap.min.js"%}"></script>
   <script src="{% static 'js/sendAsyncAuthData.js' %}"></script>
 </head>
 
@@ -28,10 +32,9 @@
 
 <!--script  src="{% static 'js/aside.js' %}"></script-->
 <body>
-<div id="content">
+
   {% block content %}
   {% endblock %}
-  </div>
 
 
 

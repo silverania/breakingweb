@@ -1,0 +1,25 @@
+{% extends 'base2.html'%}
+{% load static%}
+{% block title %}Pip - Installazione e Uso{% endblock title %}
+  {% block keywords %}installazione,installare,pip,python,package,pacchetti,gestore,manager,ambiente,virtuale,python,pip{% endblock keywords %}
+  {% block description %}Uso e installazione di Pip Python Package Manager   {% endblock description%}
+{% block anteprima %}<meta property="og:image"   content='{% static 'images/python-pip-logo.png' %}'/>{% endblock %}
+
+
+
+     {% block photo %}{% get_media_prefix %}{{tutorial.author.photo}}{% endblock photo %}
+      {% block content %}
+ Il package manager python <b>pip</b> è normalmente presente su un sistema provvisto di un ambiente Python , tuttavia quando si usa uno o più <a style="color:blue"   href="/creare_un_ambiente_virtuale_python" target="_blank">ambienti virtuali </a>python , potrebbe essere necessario reinstallarlo o aggiornarlo . Il modo più semplice per farlo è questo :<br>
+    <ul class="list-group list-group-flush"><span class="badge bg-info" style="margin-top:5%;margin-left:0;font-size:1.2rem" >Installazione:</span>
+        <li style="margin-top:5%;"class="list-group-item"><pre><code style="font-size:1.2rem"> python -m ensurepip</code></pre></li>
+        </ul>
+        <div class="container">
+            <div class="row mt-5">
+                Sotto si possono leggere i comandi principali .
+                </div>
+            <div class="row" style="margin-bottom:10%">
+        <span class="badge bg-info"style="margin-top:5%;">Comandi :</span>
+            <img src="{% static "images/manPip.png"%}"/>
+            </div>
+            </div>
+{% endblock %}

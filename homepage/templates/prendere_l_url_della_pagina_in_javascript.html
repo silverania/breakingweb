@@ -11,7 +11,14 @@
      {% block photo %}{{photo}}{% endblock photo %}
 
       {% block content %}
-      <p style="text-align:center;" id="p_content">
-          <mark>const CURRENT_URL=location.href;</mark>
-         </p>
+      <div class="container">
+          <div class="row">
+              <div class="col-12">
+
+          <code class="baseStyle">const CURRENT_URL=location.href;
+              <div class="">alert(CURRENT_URL);</div>
+          </code>
+          </div>
+          </div>
+          </div>
          {%endblock%}

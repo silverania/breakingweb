@@ -4,6 +4,6 @@ effettivamente il padrone del sito .
 
 - centrare il banner amazon sul telefono
 - controllare il login con facebook sul server e client
-- non la variabile currenturl
 - modificare la pagina di login sulla pagina admin per visualizzare la label webtalk al posto di django.
 - controlla se il tag di google si trova su tutte le pagine .
+- visuaizzare il titolo dei tutorial nei menu volanti
