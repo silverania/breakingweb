@@ -236,9 +236,9 @@ header{
 }
 
 a ,a > span {
-    border:
-    none;
-    color:blue;
+    /* border:
+    none; */
+    /* color:blue; */
 }
 
 #span_title_2{
@@ -309,9 +309,9 @@ a ,a > span {
     margin-bottom:5%!important;
 }
 #a_download{
-    display:block;
-    text-align: center;
-    margin-top: 20px!important;
+    /* display:block; */
+    /* text-align: center; */
+    /* margin-top: 20px!important; */
 }
 #s_download{
     font-family: 'Carter_One';
