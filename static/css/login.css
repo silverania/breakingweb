@@ -7,6 +7,16 @@ a{
     /* color:blue; */
     font-size:0.6rem;
 }
+
+a{
+    color:blue;
+    font-size:0.6rem;
+}
+
+a#a_reg> span{
+    font-size:1rem;
+}
+
 a:hover {
     opacity: 0.5;
     color:orange;
@@ -15,12 +25,12 @@ a:hover {
 
 .input-group-addon{
     height:inherit;
-      margin-right:5px;
-      margin-top:1%;
+    margin-right:5px;
+    margin-top:1%;
 }
 .fa-key{
-  font-size:1.3em!important;
-  margin-left:-5px!important;
+    font-size:1.3em!important;
+    margin-left:-5px!important;
 }
 
 
@@ -29,28 +39,20 @@ a:hover {
 
 @media (max-width: 990px) {
 
-a{
-    color:blue;
-  font-size:0.3rem;
-}
-a#a_reg > span{
-font-size:2rem;
-}
-
-.facebook , .twitter , .google{
-font-size: 1.3rem;
-}
-.col-social{
-    margin:10px;
-}
-h3 {
-    margin-left:30px!important;
-}
+    .facebook , .twitter , .google{
+        font-size: 1.3rem;
+    }
+    .col-social{
+        margin:10px;
+    }
+    h3 {
+        margin-left:30px!important;
+    }
 }
 
 @media (min-width: 990px) {
-.facebook , .twitter , .google{
-font-size: 1.5rem;
-}
+    .facebook , .twitter , .google{
+        font-size: 1.5rem;
+    }
 
 }

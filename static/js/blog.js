@@ -135,7 +135,7 @@ function createSectionDivSpan(userAdmin,_userThatLogin){
       liBlogReg.appendChild(aBlogReg)
       aBlogEntra.appendChild(spanBlogEntra)
       liBlogEntra.appendChild(aBlogEntra)
-      ulBlogReg.appendChild(liBlogReg)
+      //ulBlogReg.appendChild(liBlogReg)
       ulBlogReg.appendChild(liBlogEntra)
       divExitLogin.appendChild(ulBlogReg)
     }
@@ -154,12 +154,13 @@ function createSectionDivSpan(userAdmin,_userThatLogin){
       inputSubmit.setAttribute("type","submit")
       inputSubmit.setAttribute("value","Esci")
       liBlogEsci.setAttribute("id","liBlogEsci")
-      H1Welcome.setAttribute("id","H1Welcome")
         if(userThatLogin.userin[0].fields.first_name!=="None")
-          H1Welcome.innerText=" "
+        H1Welcome.setAttribute("id","H1Welcome")
+        H1Welcome.style.display='block'
+          $(H1Welcome).append('<span class="spanuser">'
           +(userThatLogin.userin[0].fields.first_name).charAt(0).toUpperCase()
-          + userThatLogin.userin[0].fields.first_name.slice(1);+" !";
-    }
+          + userThatLogin.userin[0].fields.first_name.slice(1)+"</span>");
+        }
     //bH5.appendChild(spanUserName)
     bSection.appendChild(bdiv)
     bdiv.appendChild(firstDivHead)
@@ -306,7 +307,7 @@ class postArea {
       var tagUserImg=document.createElement("IMG")
       divContainerHead.setAttribute("id","d_head_blog_"+id)
       divContainerHead.setAttribute("style","width:100%")
-      tagUserImg.setAttribute("style","border-radius:50%")
+      tagUserImg.setAttribute("style","border-radius:5%")
       tagUserImg.setAttribute("src",mess.photo)
       divUserBlog.appendChild(divContainerHead)
       divContainerHead.appendChild(tagUserImg)

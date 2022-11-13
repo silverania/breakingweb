@@ -7,19 +7,19 @@
     src: url('../webfonts/Orbitron-VariableFont_wght.ttf') ;
 }
 @font-face {
-    font-family: 'Dancing Script';
+    font-family: 'dancingscript';
     src: url('../webfonts/DancingScript-Bold.ttf') ;
 }
 @font-face {
     font-family: 'WorkSans';
-    src: url('../webfonts/WorkSans-Regular.ttf') ;
+    src: url('../webfonts/WorkSans-VariableFont_wght.ttf') ;
 }
 @font-face {
-    font-family: 'Baloo_2';
+    font-family: 'baloo';
     src: url('../webfonts/Baloo2-ExtraBold.ttf') ;
 }
 @font-face {
-    font-family: 'Carter_One';
+    font-family: 'carterone';
     src: url('../webfonts/CarterOne-Regular.ttf') ;
 }
 @font-face {
@@ -27,12 +27,12 @@
     src: url('../webfonts/Assistant-Regular.ttf') ;
 }
 @font-face {
-    font-family: 'ShareTechMono-Regular';
+    font-family: 'sharetechmonoregular';
     src: url('../webfonts/ShareTechMono-Regular.ttf') ;
 }
 @font-face {
     font-family: 'montserrat-regular';
-    src: url('../webfonts/Montserrat-Regular.ttf') ;
+    src: url('../webfonts/Montserrat/Montserrat-VariableFont_wght.ttf') ;
 }
 @font-face {
     font-family: 'montserrat-extra-bold';
@@ -43,13 +43,16 @@
     src: url('../webfonts/Montserrat-Bold.ttf') ;
 }
 @font-face {
-    font-family: 'workSans-variable-weight';
-    src: url('../webfonts/WorkSans-VariableFont_wght.ttf') ;
+    font-family: 'comfortaa';
+    src: url('../webfonts/Comfortaa/Comfortaa-VariableFont_wght.ttf') ;
 }
-
+@font-face {
+    font-family: 'encodesans';
+    src: url('../webfonts/Encode_Sans_SC/EncodeSansSC-VariableFont_wdth,wght.ttf') ;
+}
 @font-face {
     font-family: 'openSans';
-    src: url('../webfonts/OpenSans-VariableFont_wdth,wght') ;
+    src: url('../webfonts/OpenSans-VariableFont_wdth,wght.ttf') ;
 }
 
 @font-face {
@@ -60,6 +63,18 @@
     font-family: 'noto-mono';
     src: url('../webfonts/NotoSansMono-VariableFont_wdth,wght.ttf') ;
 }
+@font-face {
+    font-family: 'raleway';
+    src: url('../webfonts/Raleway/Raleway-VariableFont_wght.ttf') ;
+}
+@font-face {
+    font-family: 'josefinsans';
+    src: url('../webfonts/Josefin_Sans/JosefinSans-VariableFont_wght.ttf') ;
+}
+@font-face {
+    font-family: 'quicksand';
+    src: url('../webfonts/Quicksand/Quicksand-VariableFont_wght.ttf') ;
+}
 
 html {
     -webkit-font-smoothing: antialiased;
@@ -69,15 +84,27 @@ html {
     font-style: normal;
     font-size: 16px;
     line-height: 22px;
-    color: #333;
     max-width:100%;
     min-height:100vh;
 }
 
-h2{
-font-family: 'montserrat-extra-bold';
+#divbooldog{
+    display:none;
 }
 
+h2,h3{font-family: '';
+      margin-bottom: 40px;}
+
+#divuserphoto,#divtitletutorial{
+    width: auto;
+    margin: 0 auto;
+    padding:0;
+}
+
+#s_title, #s_title_2 {
+    font-family:'montserrat-bold';
+    -webkit-font-smoothing: antialiased;
+}
 button{
     font-family: 'montserrat-extra-bold'!important;
 }
@@ -91,9 +118,9 @@ button{
 
 body {
     font-family: "roboto", "openSans", "sans-serif";
-    /* min-height:100%; */
-    /* font-family:'WorkSans','Assistant-regular'; */
-    /* font-size:20px; */
+    min-height:100%;
+    font-family:'WorkSans','Assistant-regular';
+    font-size:20px;
     background-color:white;
     box-sizing:content-box;
 }
@@ -109,24 +136,44 @@ article{
     min-height:50vh;
 }
 
-pre{background-color: #D2FFFC;overflow-y: hidden;overflow-x: hidden;border-radius: 2px;/* border:1px solid grey; */}
-code.baseStyle{
+.s_title {
     display:block;
-    /* max-width: 70%; */
-
-    text-align:left;
-    background-color: #D2FFFC;
-    border: 20px solid #D2FFFC;
-    font-family:"ubuntu-mono","noto-mono";
-    font-size: 1rem;
+    margin-left:20%;
+    margin-top: -9%;
 }
 
-#d_linux
-/* privacy window */
+div#divuserphoto > a#aTitle{
+    margin-left:13px;
+    max-width: 100%;
+}
 
-.badge.badge-info.badge-outlined-info{
-    background-color:transparent!important;
-    color:DodgerBlue;;
+pre{background-color: #D2FFFC;overflow-y: hidden;overflow-x: hidden;border-radius: 2px;/* border:1px solid grey; */}
+
+.divcode{
+    /* text-align: left; */
+    /* font-family: noto-mono; */
+    background: #00baff;
+    max-width: 100%;
+    padding:5px;
+}
+code.baseStyle{
+    display:block;
+    max-width: 100%;
+    text-align:left;
+    background-color: #000000;
+    color: #ffffff;
+    border: 20px solid #000000;
+    font-family: "ubuntu-mono","noto-mono";
+    font-size: 1rem;
+    /* font-weight: 800; */
+}
+
+
+span.bg-light{
+    color: #000000;
+    font-family: montserratextrabold;
+    margin-left: -2%;
+    text-align: left;
 }
 /* button commenti */
 #multiarea{
@@ -139,12 +186,15 @@ li.liTopMenu{
     text-align: center;
 }
 li.pageMenu{
-    font-family: 'montserrat-bold';
+    font-family: 'montserrat';
     color:#1EAEDB;
     font-size:1rem;
     padding:1%!important;
     padding-left:17%;
+    border:none;
 }
+
+
 
 li.pageMenu span{
     font-size:0.9em;
@@ -153,6 +203,17 @@ li.pageMenu span{
 li.pageMenu a{
     color:#1EAEDB;
 }
+
+.row_title_content{
+    display:inline;
+}
+.row_title_content>span.badge.bg-light{font-family:montserrat;font-size:1.5rem;text-align: left;color: grey;}
+
+li.pageMenu>a:hover{
+background-color:grey;
+color:white;
+}
+
 li.pageMenu:hover{
 background-color:grey;
 color:white;
@@ -166,20 +227,27 @@ color:white;
   border-radius: 5px;
 }
 
-a.nav-link ,a#a_download , #aTitle{
-text-decoration:none!important;
-}
+a.nav-link ,a#a_download , #aTitle{text-decoration:none!important;margin-left: 15px;}
  li{
      list-style: none;
  }
+
 p {
-     font-family: "open-sans";
-     font-weight: 400;
+     font-family: "quicksand";
+     font-weight: 100;
      -webkit-font-smoothing: antialiased;
      -moz-osx-font-smoothing: grayscale;
      text-align: left;
      color: #000000;
      margin:10px;
+     margin-top: 10px;
+     margin-bottom: 10px;
+}
+
+p.lead {}
+
+p.lead {
+    margin-left: 20%;
 }
 
 textarea{
@@ -206,8 +274,10 @@ li:hover{
 
 #s_nome_autore{
     display:inline-block;
-    margin:0 auto auto -6%;
-    size:1rem;
+    margin: 0 auto;
+    font-size: 1.1rem;
+    /* font-weight:bold; */
+    opacity:0.5;
 }
 
 progress#progressbar{
@@ -241,18 +311,12 @@ a ,a > span {
     /* color:blue; */
 }
 
-#span_title_2{
-    font-family: montserrat-extra-bold;
-    font-weight:bold;
-    color:black;
-}
 
-#span_title_w{
+#span_title_w,#span_title_2{
     font-family: montserrat-extra-bold;
     color: #585050;
-    margin-right:5px;
-    font-weight: 900;
-    font-size: 2rem;
+    /* margin-right:5px; */
+    /* font-weight: 900; */
 }
 
 
@@ -309,9 +373,10 @@ a ,a > span {
     margin-bottom:5%!important;
 }
 #a_download{
-    /* display:block; */
+    display:block;
     /* text-align: center; */
-    /* margin-top: 20px!important; */
+    margin-top: 20px!important;
+    width:auto;
 }
 #s_download{
     font-family: 'Carter_One';
@@ -412,16 +477,11 @@ li #s_center_menu{
 }
 #s_title{
     font-family: 'montserrat-regular';
+    /* margin: 0 auto; */
 }
 
-#s_title_2{
-    color:black;
-}
-p>span.badge.bg-light{
-    color:#061a46;
-}
 .s_title_paragraph{
-    color:white!important;
+    color:#4868af;
     font-size: 1.3rem;
     margin:5px;
     margin-left: 2px;
@@ -558,6 +618,19 @@ float:right!important;
 }
 
 @media screen and (max-width: 1024px) {
+    span.bg-light{
+        font-size: 0.8em;
+    }
+    code.baseStyle{
+        font-size:0.7em;
+    }
+    .list-group>.list-group-item>a{
+        font-size: 0.8rem;
+    }
+
+    li.pageMenu span {
+     font-size: 0.6em;
+    }
     p{
         font-size:0.8rem;
     }
@@ -574,12 +647,27 @@ float:right!important;
         position:relative!important;
         /*width:inherit;*/
         display:inline-block!important;
-
     }
 }
 /* FINE HEADER SECTION */
 
 @media screen and (max-width: 800px) {
+    #imguser{
+        margin:0 auto;
+        min-width:25px;
+        max-width:45px;
+    }
+
+    .fa-comment-dots {
+        font-size: 1.2rem;
+    }
+
+    .spanbooldog{
+        font-size: 0.8rem;
+    }
+    .s_title {
+    font-size: 0.4rem;
+    }
     #spanEntra,#spanTutorial,#spanRegistrati,#spanEsci{
         font-size:0.6em;
     }
@@ -595,9 +683,7 @@ float:right!important;
         /* display:block; */
         /* text-align: center; */
     }
-    code{
-        font-size:1rem;
-    }
+
     .s_title_paragraph {
         font-size:1rem!important;
     }
@@ -608,7 +694,13 @@ float:right!important;
 }
 
 @media screen and (max-width: 480px) {
-
+    #s_title_2{
+        max-width:60%;
+        word-wrap: break-word;
+    }
+    .list-group>.list-group-item>a {
+        font-size: 3px;
+    }
     td{
         font-size:0.7rem;
     }
@@ -635,11 +727,6 @@ float:right!important;
         display:none;
     }
 
-    #x_code{
-        padding:0px;
-        margin-left:0px!important;
-        font-size:0.2rem!important;
-    }
     #badge_lsmod_1,#badge_lsmod_2{
         text-align:center!important;
         color:blue;
@@ -656,11 +743,13 @@ float:right!important;
     #d_photo_author{
         display:none;
     }
-    #s_title{
-        font-size:1rem;
+    #s_title,#span_title_w{
+        font-size:0.8rem;
     }
     #s_title_2{
-        font-size:1rem;
+        font-size: 0.8rem;
+        width:auto;
+        max-width:60%;
     }
 
     #d_head > h4 {
@@ -682,7 +771,7 @@ float:right!important;
     }
 
     #s_nome_autore{
-        font-size:0.6rem!important;
+        font-size: 0.05rem!important;
     }
 
     .s_unzip{
@@ -728,23 +817,20 @@ float:right!important;
 
 @media screen and (min-width: 480px) {
 
-    #x_code{
-        padding:0px;
-        margin-left:0px!important;
-        font-size:0.4rem;
-    }
+
+
     #span_title{
         font-size:1rem;
     }
     #span_title_2{
-        /* font-size:1rem; */
+    font-size:1rem;
     }
 
     #s_title{
-        font-size:1rem;
+        font-size:0.6rem;
     }
-    #s_title_2{
-        font-size:1rem;
+    #s_title_2,#span_title_w{
+        font-size: 0.8rem;
     }
     #asidebar .fa-angle-right{
         font-size:1.5rem!important;
@@ -776,21 +862,15 @@ float:right!important;
         font-size:2vw;
     }
     .s_title{
-        font-size:0.7rem!important;
+        font-size:0.5rem!important;
     }
     .fa-comments,#s_blog{
         font-size:0.7rem;
     }
 }
 
-
-
-
-
-
-
-
 @media screen and (min-width: 600px) {
+
     li #s_center_menu{
         font-size:0.8rem!important;
     }
@@ -804,13 +884,6 @@ float:right!important;
         font-size:3vw!important;
     }
 
-
-    code{
-        font-size:1rem;
-    }
-    #x_code{
-        font-size:0.5rem;
-    }
     .fa-book{
         font-size:3vw;
         margin-top:5%;
@@ -835,6 +908,16 @@ float:right!important;
     }
 }
 @media screen and (min-width: 768px) {
+    #imguser{
+        margin:0 auto;
+        min-width:25px;
+        max-width:45px;
+    }
+
+    #divbooldog{
+        display: inline-block;
+    }
+
     #header_menu{
         margin:0 auto;
         width:auto;
@@ -843,25 +926,16 @@ float:right!important;
         font-size:0.7rem!important;
     }
 
-
-    code{
-        font-size:1rem;
-    }
-
-
     #s_title,#s_title_2{
-        font-size:1.2rem;
+        font-size: 0.8rem;
     }
+
     #span_title{
         font-size:1.6rem;
     }
-    #span_title_2{
-        font-size:1.6rem;
-    }
 
-    #span_title_w{
-            font-size: 2rem;
-            color: black;
+    #span_title_2,#span_title_w{
+        font-size: 1.2rem;
     }
 
 
@@ -873,16 +947,9 @@ float:right!important;
     }
 
     .s_title_paragraph{
-        /* text-align: left; */
         font-size: 1.2rem;
-        color: #061a46!important;
     }
 
-span.badge.bg-info.s_title_paragraph {}
-
-    #x_code{
-        font-size:0.5rem;
-    }
     .fa-comments{
         font-size:1.4rem;
     }
@@ -898,8 +965,15 @@ span.badge.bg-info.s_title_paragraph {}
     }
 }
 @media screen and (min-width: 1024px) {
+    code.baseStyle.html{
+        font-size:0.6em;
+    }
+    span.bg-light{
+        font-size: 1em;
+    }
     p{
-        /* font-size:1.2rem; */
+        font-size: 0.9rem;
+        width: auto;
     }
     li #s_center_menu{
         font-size:1.3rem!important;
@@ -909,7 +983,7 @@ span.badge.bg-info.s_title_paragraph {}
         font-size:1.2rem;
     }
     #span_title_2{
-        font-size:1.2rem;
+        font-size: 1.4rem;
     }
 
     #span_title_w{
@@ -951,9 +1025,7 @@ span.badge.bg-info.s_title_paragraph {}
 
         margin-top:5%;
     }
-    #x_code{
-        font-size:1rem;
-    }
+
 
     #s_footer{
         font-size:0.9vw;
@@ -961,39 +1033,45 @@ span.badge.bg-info.s_title_paragraph {}
 }
 
 @media screen and (min-width: 1200px) {
+    p{
+        font-size:1.1em;
+    }
+
+    code.baseStyle.html{
+        font-size: 0.7em;
+    }
     li #s_center_menu{
         /* font-size:1rem!important; */
     }
     #s_title,#s_title_2{
-        font-size:1.5rem;
+        font-size: 1.3rem;
     }
     .s_title{
-        margin-left: 3%;
+    margin-left: 13%;
+    margin-top: -6%;
+    display: block;
     }
     #span_title{
         font-size:2.2rem;
     }
     #span_title_2{
         font-style: normal;
-        color: black;
-        font-size: 2.2rem;
+        /* color: black; */
+        font-size: 1.7rem;
     }
     #s_nome_autore{
-        font-size:0.5rem!important;
+        font-size: 1.1rem!important;
     }
 
     #span_title_w{
         font-weight:bold;
-        font-size:2.2rem;
+        font-size: 1.6rem;
     }
 
     #asidebar{
         display:block;
     }
 
-    code{
-        font-size:1rem;
-    }
     .fa-comments,#s_blog{
         font-size:1.6rem;
     }
@@ -1006,30 +1084,39 @@ span.badge.bg-info.s_title_paragraph {}
 
 
 @media screen and (min-width: 1500px) {
+    h3, .h3 {
+    font-size: 1.5em;
+    font-family: montserratextrabold;
+    }
+    p{
+        font-size: 1em;
+    }
+
+p.lead {
+    font-size: 2rem;
+}
     li #s_center_menu{
         /* font-size:1rem!important; */
     }
 
     .s_title{
         font-family:ShareTechMono-Regular;
-        font-size:0.7rem!important;
+        font-size: 0.7rem;
         display:inline-block;
         opacity:0.5;
     }
-
+    #s_title, #s_title_2 {
+        font-size: 1.7rem;
+    }
     #h_title2{
         margin-left:10%!important;
     }
     span#s_nome_autore{
         font-size:0.5rem;
-        color:white;
+        color: #adb5bd;
     }
     #asidebar{
         display:block;
-    }
-
-    code{
-        font-size:1rem;
     }
 
     .fa-comments , #s_blog{

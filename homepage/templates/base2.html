@@ -42,10 +42,8 @@
     {% include '_header.html'%}
     {% endblock header %}
     <div id="c_aside" class="container-fluid">
-        <div style="min-height:100%vh"class="row justify-content-left">
+        <div class="row justify-content-left">
             <div class="col-3"  id="section_left_navbar">
-
-
                 <section role="navigation">
                     <aside>
                         <nav id="nav_top">
@@ -55,11 +53,8 @@
                             </div>
 
                             <div id="d_aside_tutorial">
-
-
                                 <div id="d_tutorial_section">
                                     <ul  class="w-100 list-group select_tutorial" id="selecFormAutori">
-
                                         {% for t in users %}
                                         <li  onclick="show(this.innerHTML)" id="option_autori_{{t.user.username}}"
                                         value="{{t.user.username}}" class="list-group-item option_autori " >{{t.user.username}}
@@ -130,7 +125,7 @@
                                 {% for c in categorie %}
                                 <div id="d_{{c.title}}_menu" class="list-group">
                                     {% for a in c.tutorials.all %}
-                                    <a id="a_tutorial_{{a.title}}" class="list-group-item list-group-item-action" href={{a.slug}}>
+                                    <a id="a_tutorial_{{a.title}}" class="list-group-item list-group-item-action" href="/{{a.slug}}">
                                         <span id="s_leftmenu1" >{{a.title}}</span>
                                     </a>
                                     {% endfor %}
@@ -145,66 +140,61 @@
 
         </div>
 
-        <div role="main" class="col-6">
+        <div role="main" class="col-9 col-sm-9 col-md-6">
             <article>
                 <header>
-                    <div class="row justify-content-center mb-5">
-                        <div class="col-6 text-right" style="width:auto">
-                            <img tabindex="100" class="rounded float-start img-fluid" src='{% block photo %}{% endblock photo %}'
-                            width="40px" alt="non posso caricare immaggini">
-                            <div>
-                                <span class="badge bg-info" id="s_nome_autore">{{autore}}</span>
-                            </div>
-                        </div>
-
-                        <div class="col-6" style="width:auto;">
+                    <div class="row mb-5">
+                        <div id="divuserphoto" class="col-12 col-sm-12 col-md-12">
+                            <img id="imguser" class="img-fluid rounded" src='{% block photo %}{% endblock photo %}'
+                            alt="non posso caricare immaggini">
                             <a id="aTitle" href="{{tutorial.slug}}">{% block tut_title %}
-                                <span class="badge bg-info" id="s_title">{% block category %}{{tutorial.category.category}}
-                                {%endblock%}
-                            </span>
+                                <span id="s_title">{% block category %}{{tutorial.category.category}}
+                                    {%endblock%}
+                                </span>
                                 &nbsp-&nbsp
                                 <span id="s_title_2" >{%block t %}{{tutorial.title}}{%endblock t %}{% endblock tut_title %} </span></a>
-                                <div class="row">
-                                    <span  class="s_title" align="left" style="color:grey;">{{tutorial.publish}}</span>
+                                <div>
+                                    <span  id="s_nome_autore">{{autore}}</span>
+                                    <span  class="s_title">{{tutorial.publish}}</span>
                                 </div>
                             </div>
                         </div>
-                    </header>
-
-                    <div class="col-12 ">
-                        {% block content %}
-                        {% endblock content %}
-                    </div>
-                </article>
-            </div>
-
+                        </header>
+                <div class="col-12 ">
+                    {% block content %}
+                    {% endblock content %}
+                </div>
+            </article>
+        </div>
 
 
 
 
-            <script src="{% static 'js/jquery.bs.gdpr.cookies.js' %}"></script>
-            <script>$(document).ready(function() {
-                $('body').bsgdprcookies();
-            });</script>
-            <div class="col-3">
-                <div class="row">
-                <div class="col-12">
+
+        <script src="{% static 'js/jquery.bs.gdpr.cookies.js' %}"></script>
+        <script>$(document).ready(function() {
+            $('body').bsgdprcookies();
+        });</script>
+        <div id="divbooldog" class="col-md-3">
+            <div class="row">
+                <div class="col-12 text-end">
                     {% block download %}
                     <a  href="/booldog" target="_blank "id="a_download"><div class=
                         "booldog"><span class="badgebooldog"><i class=" fas fa-comment-dots"></i></span><span class="spanbooldog">BoolDog</span></div>
-                      <span class="booldoginfo">Per i commenti. Usalo sul tuo Sito Web !</span></a>
-                    {% endblock %}
+                        <span class="booldoginfo">Per i commenti. Usalo sul tuo Sito Web !</span></a>
+                        {% endblock %}
+                    </div>
+                    <div class="col-12" id="divAmazonBanner">
+                        <iframe class="my-auto"style="position:fixed;bottom:-6%;"src="https://rcm-eu.amazon-adsystem.com/e/cm?o=29&p=13&l=ur1&category=amazongeneric&banner=0JCKN21AT6QNZ64D8E02&f=ifr&linkID=237424dafae56723beaa911da091e4ad&t=breakingweb-21&tracking_id=breakingweb-21" width="468" height="120" scrolling="no" border="0" marginwidth="0" style="border:none;" frameborder="0" align=right sandbox="allow-scripts allow-same-origin allow-popups allow-top-navigation-by-user-activation"></iframe>
+                    </div>
                 </div>
-                <div class="col-12" id="divAmazonBanner">
-                    <iframe class="my-auto"style="position:fixed;bottom:-6%;"src="https://rcm-eu.amazon-adsystem.com/e/cm?o=29&p=13&l=ur1&category=amazongeneric&banner=0JCKN21AT6QNZ64D8E02&f=ifr&linkID=237424dafae56723beaa911da091e4ad&t=breakingweb-21&tracking_id=breakingweb-21" width="468" height="120" scrolling="no" border="0" marginwidth="0" style="border:none;" frameborder="0" align=right sandbox="allow-scripts allow-same-origin allow-popups allow-top-navigation-by-user-activation"></iframe>
-                </div>
-
             </div>
         </div>
     </div>
-</div>
-            {% block footer %}{% include '_footer.html' %}{% endblock %}
-            <script  src="{% static 'js/blog.js'%}"></script>
-            {%block blog%}{%endblock%}
-        </body>
-        </html>
+
+
+        {% block footer %}{% include '_footer.html' %}{% endblock %}
+        <script  src="{% static 'js/blog.js'%}"></script>
+        {%block blog%}{%endblock%}
+    </body>
+    </html>

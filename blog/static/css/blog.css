@@ -77,7 +77,7 @@ text-decoration: none;
     }
 
 #div_comment_icon > #blog_icon > #a_download > .booldog > .badgebooldog > .fa-comment-dots  {
-    font-size: 3rem;
+    font-size: 2rem;
 }
 
 #div_comment_icon > #blog_icon > #a_download > .booldog > .badgebooldog{
@@ -87,7 +87,7 @@ text-decoration: none;
 }
 .fa-comment-dots{
     margin-top: -3%;
-    font-size: 3rem;
+    font-size: 2rem;
     color: #84cbff91;
     }
 
@@ -95,6 +95,7 @@ text-decoration: none;
     width:100%;
     height:auto;
     text-decoration:none;
+    margin-right: auto;
 }
 .badgebooldog {
     width:inherit;
@@ -113,7 +114,6 @@ text-decoration: none;
     font-family: Orbitron;
     font-weight:800!important;
     margin-left:1%;
-    font-size:2rem;
     text-decoration:none;
 }
 
@@ -127,7 +127,7 @@ a#a_download{
 text-decoration:none!important;
 }
 
-#li_reg > a , #liBlogEsci > #aEsci, #li_cambiaPassword > a#id_cambia_password {
+#li_reg > a , #liBlogEsci > #aEsci, #li_cambiaPassword > a#id_cambia_password{
   text-decoration: none;
 }
 
@@ -183,15 +183,10 @@ color:grey;
 
 
 #H1Welcome{
+display:none;
 text-align:right;
 font-size:0.1rem;
 font-family:"montserrat-extra-bold";
-}
-
-#H1Welcome:before{
-  content:"logIn as ";
-  font-family:auto;
-  font-style:italic
 }
 
 #inputHidden,#inputSubmit{
@@ -235,7 +230,7 @@ height:auto;
 }
 
 img{
-  outline: none !important;
+  /* outline: none !important; */
   border-style:none;
   box-shadow: 3px 3px 3px #719ECE;
 }
@@ -326,6 +321,10 @@ ul#ul_blog li{
   #p_text{
     width:100%!important;
   }
+  #li_cambiaPassword > a#id_cambia_password ,#liBlogEsci > a#aEsci,#li_login > #id_entra>#span_entra{
+    text-decoration: none;
+    font-size:0.5rem;
+}
 }
 
 
@@ -370,6 +369,9 @@ ul#ul_blog li{
   #p_text{
     width:100%!important;
   }
+  #li_cambiaPassword > a#id_cambia_password ,#liBlogEsci > a#aEsci,#li_login > #id_entra>#span_entra{
+    text-decoration: none;
+    font-size:1rem;
 }
 
 

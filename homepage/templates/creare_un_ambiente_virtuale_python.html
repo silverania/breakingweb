@@ -22,23 +22,23 @@
          in caso di corruzione dell' ambiente Python di sistema ! soluzione a ciò e non solo : <mark> Creare un ambiente Python virtuale ridondante</mark> con un proprio eseguibile Python ,
            su cui possiamo fare tutti gli esperimenti che vogliamo.
          A partire dalla versione 3.5 di python l' uso del modulo <mark>venv</mark> nella creazione di ambienti virtuali python è raccomandata .<br> Assicuriamoci di aver installato Python sul sistema : da un terminale eseguite il comando python<br><br>
-        <code class="baseStyle">mario@androgenic:~/$<span style="color:black"> python</code>
+        <code class="baseStyle">mario@androgenic:~/$ python</code>
         </p>
 
         <p>
           L' output nel terminale dovrà mostrare una versione python adatta all' uso del modulo venv che dovrà essere maggiore o uguale a 3.5 .
           Su versioni inferiori non è consigliato usare venv e probabilmente neanche possibile.</p><p>per versioni inferiori a 3.5 di python va usato <mark>pyvenv</mark><br></br>
-            <img class="img img-thumbnail"id="img_8" width="100%" height="500px"src='{% static 'images/python_version.png' %}'>
+            <img class="img img-fluid mb-5"id="img_8" src='{% static 'images/python_version.png' %}'>
 
         </p>
         <p>
     <span class="badge bg-light s_title_paragraph">Creiamo l' ambiente virtuale Python </span></p>
         <p style="text-align:center;" id="p_content">
 
-          <img alt="non visualizzabile"  class="img img-thumbnail"id="img_8" width="100%" height="1000px"src='{% static 'images/pythonVenv_00002.png' %}'>
+          <img alt="non visualizzabile"  class="img mb-5 img-fluid"id="img_8"  src='{% static 'images/pythonVenv_00002.png' %}'>
         </p>
 
-        <p style="text-align:left;margin-top:10%" id="p_content">
+        <p>
           Abbiamo creato l' ambiente virtuale Python , tuttavia da terminale se eseguo il comando <mark>python</mark> ,
           va in esecuzione ancora la versione python usata dal sistema operativo , quella installata nel percorso <mark>/usr/bin/python*
           </mark>
@@ -55,7 +55,7 @@ che attiverà appunto l' ambiente Virtuale. Attenzione perchè l' ambiente
           </p>
           <p>
           <span class="badge bg-light s_title_paragraph" style="font-size:2rem">Attiviamo L' Ambiente Virutale</span>
-          <img class="img img-thumbnail"id="img_8" width="100%" height="1000px"src='{% static 'images/pythonVenv_00003.png' %}'/>
+          <img class="img img-fluid"id="img_8" src='{% static 'images/pythonVenv_00003.png' %}'/>
           </p>
         <p>
           nell' immagine giù si vede come il comando <mark>activate</mark> abbia modificato una variabile di sistema molto importante <kbd>PATH</kbd> . Giù Nello screenshot
@@ -63,7 +63,7 @@ che attiverà appunto l' ambiente Virtuale. Attenzione perchè l' ambiente
           sotto invece no . Guardate come è diverso il valore della variabile  PATH nelle rispettive sezioni .
         </p>
         <br><br>
-       <img class="img img-thumbnail"id="img_8" width="100%" height="1000px" src='{% static 'images/path2.png' %}'><br>
+       <img class="img img-fluid mb-5"id="img_8" src='{% static 'images/path2.png' %}'><br>
         <script id="s_blog">
             $(document).ready(function(){
               initBlogSGang("mario","sol-7373");

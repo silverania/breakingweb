@@ -11,95 +11,6 @@ Tutorial = Tutorial.objects.all()
 Profile = Profile.objects.all()
 tutorial_all = Tutorial.all()
 categorie = Category.objects.all()
-page = """
-<!DOCTYPE html>
-<html lang="it" id="page" >
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta charset="UTF-8">
-<meta name="author" content="silverania">
-<meta name="keywords" content="booldog,opensource,free messages hosting ,software gratuito commenti su sito , free software ,hosting,gestione, messaggi,software,blog,blogging,comments,commenti, gratuito,addon,sito,web,modulo,
-    download,free,gratis,webmaster,sviluppatori html">
-<meta name="description" content="Software Gratuito Per Aggiungere Commenti Sul Tuo Sito Web.">
-<title>BoolDog</title>
-<link rel="icon" type="image/x-icon" href="/static/images/favicon.ico">
-<link rel="stylesheet" href="/static/css/reset.css">
-<link rel="stylesheet" href="/static/css/bootstrap.min.css">
-<link rel="stylesheet" href="/static/css/style.css">
-<script  src="/static/js/jquery.min.js"></script>
-<script  src="/static/node_modules/popper.js/dist/umd/popper.min.js"></script>
-<script  src="/static/js/bootstrap.min.js"></script>
-<script src="/static/js/all.min.js"></script>
-</head>
-<body id="body"  onscroll="var h=document.body.scrollHeight;getPosition();">
-<header>
-<div class="container">
-<div id="id_row_title" class="row justify-content-center">
-<div class="col-4">
-</div>
-
-<div class="col-6">
-<div id="id_div_title" class="ms-2 mt-2 class_div_title">
-<a  href="/booldog" target="_blank "id="a_download">
-<div class=
-    "booldog"><span class="badgebooldog"><i class=" fas fa-comment-dots"></i></span><span class="spanbooldog">BoolDog</span>
-    </div>
-  <span class="booldoginfo">Aggiungi e Gestisci Commenti sul tuo Sito Web</span></a>
-</div>
-</div>
-
-
-<div class="col-2">
-</div>
-
-</div>
-
-<div class="row justify-content-center">
-<div id="div_col_info" class="col-5">
-<div id="id_div_info" class="">
-<p class="p_info" id="p_info">Cos'è BoolDog ?</p>
-<p id="p_content" class="p_content">BoolDog è un "software libero" di Hosting Commenti per Siti Web. Lo stesso usato su questo sito.</p>
-<p class="p_info" id="p_info">Installazione</p>
-<p id="p_content" class="p_content">Registrati <a href="https://breakingweb.site/user/register/blog">qui</a>
-per usare e installare il programma ed avere accesso alla pagina di gestione e moderazione dei messaggi.
-Dopodichè nel codice html del tuo sito , copia e incolla i tag che vedi sotto
-, sostituendo "user" e "password"
-con l' user e password scelti per registrarti.
-</p>
-</div></div>
-<div class="col-7 text-left" id="id_video">
-<iframe width="320" height="240" src="https://www.youtube.com/embed/GN0FIFpRiWQ"
-title="BoolDog" frameborder="0"
-allow="accelerometer; autoplay; clipboard-write; encrypted-media;
-gyroscope; picture-in-picture" allowfullscreen></iframe>
-</div>
-</div>
-</div>
-</header>
-<div class="container">
-<div class="row justify-content-left"><a href="https://breakingweb.site/booldog/admin/">Pagina Di Amministrazione</a>
-<div id="div_col_installazione" class="col-lg-12">
-
-<pre primary-lang="html">
-<code>
-&lt;link rel=stylesheet href="https://breakingweb.site/static/css/blog.css">
-&lt;script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js">
-&lt;/script>
-&lt;script src="https://breakingweb.site/static/js/blog.js"> &lt;/script>
-&lt;script id="s_blog">initBlogSGang(<span style="color:blue">"user","password"</span>)>&lt;/script>
-</code>
-</pre>
-</div>
-</div>
-</div>
-</header>
-<footer>
-<link rel=stylesheet href="/static/css/blog.css">
-<script src="/static/js/blog.js"></script>
-<script id="s_blog">initBlogSGang("mario","sol-7373") </script>
-</footer>
-</body>
-</html>"""
 
 
 class Newpage(View):
@@ -159,7 +70,96 @@ def readInfoClient(request):
 
 class initHome(View):
     def get(self, request):
-        global page
+        page = """
+        <!DOCTYPE html>
+        <html lang="it" id="page" >
+        <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="UTF-8">
+        <meta name="author" content="silverania">
+        <meta name="keywords" content="booldog,opensource,free messages hosting ,software gratuito commenti su sito , free software ,hosting,gestione, messaggi,software,blog,blogging,comments,commenti, gratuito,addon,sito,web,modulo,
+            download,free,gratis,webmaster,sviluppatori html">
+        <meta name="description" content="Software Gratuito Per Aggiungere Commenti Sul Tuo Sito Web.">
+        <title>BoolDog</title>
+        <link rel="icon" type="image/x-icon" href="/static/images/favicon.ico">
+        <link rel="stylesheet" href="/static/css/booldog.css">
+        <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/static/css/style.css">
+        <script  src="/static/js/jquery.min.js"></script>
+        <script  src="/static/node_modules/popper.js/dist/umd/popper.min.js"></script>
+        <script  src="/static/js/bootstrap.min.js"></script>
+        <script src="/static/js/all.min.js"></script>
+        </head>
+        <body id="body"  onscroll="var h=document.body.scrollHeight;getPosition();">
+        <header>
+        <div class="container">
+        <div id="id_row_title" class="row justify-content-center">
+        <div class="col-4">
+        </div>
+
+        <div class="col-6">
+        <div id="id_div_title" class="ms-2 mt-2 class_div_title">
+        <a  href="/booldog" target="_blank" id="a_download" class="title">
+        <div class=
+            "booldog booldogtitle"><span class="badgebooldog title"><i class="fas fa-comment-dots title"></i></span>
+            <span class="title spanbooldog">BoolDog</span>
+            </div>
+          <span class="booldoginfo title">Aggiungi e Gestisci Commenti sul tuo Sito Web</span></a>
+        </div>
+        </div>
+
+
+        <div class="col-2">
+        </div>
+
+        </div>
+
+        <div class="row justify-content-center">
+        <div id="div_col_info" class="col-5">
+        <div id="id_div_info" class="">
+        <p class="p_info" id="p_info">Cos'è BoolDog ?</p>
+        <p id="p_content" class="p_content">BoolDog è un "software libero" di Hosting Commenti per Siti Web. Lo stesso usato su questo sito.</p>
+        <p class="p_info" id="p_info">Installazione</p>
+        <p id="p_content" class="p_content">Registrati <a href="user/register/blog">qui</a>
+        per usare e installare il programma ed avere accesso alla pagina di gestione e moderazione dei messaggi.
+        Dopodichè nel codice html del tuo sito , copia e incolla i tag che vedi sotto
+        , sostituendo "user" e "password"
+        con l' user e password scelti per registrarti.
+        </p>
+        </div></div>
+        <div class="col-7 text-left" id="id_video">
+        <iframe width="320" height="240" src="https://www.youtube.com/embed/GN0FIFpRiWQ"
+        title="BoolDog" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media;
+        gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        </div>
+        </div>
+        </header>
+        <div class="container">
+        <div class="row justify-content-left"><a href="booldog/admin/">Pagina Di Amministrazione</a>
+        <div id="div_col_installazione" class="col-lg-12">
+
+        <pre primary-lang="html">
+        <code>
+        &lt;link rel=stylesheet href="/static/css/blog.css">
+        &lt;script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js">
+        &lt;/script>
+        &lt;script src="https://breakingweb.site/static/js/blog.js"> &lt;/script>
+        &lt;script id="s_blog">initBlogSGang(<span style="color:blue">"user","password"</span>)>&lt;/script>
+        </code>
+        </pre>
+        </div>
+        </div>
+        </div>
+        </header>
+        <footer>
+        <link rel=stylesheet href="/static/css/blog.css">
+        <script src="/static/js/blog.js"></script>
+        <script id="s_blog">initBlogSGang("mario","sol-7373") </script>
+        </footer>
+        </body>
+        </html>"""
         return HttpResponse(page)
 
 

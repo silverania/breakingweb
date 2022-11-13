@@ -14,9 +14,9 @@ creare, initramfs,initrd,ramdisk,make install,make, modules_install,concurrency_
 
     <p>
         <span title="Nell ambito dello sviluppo del kernel Linux, il kernel vanilla è il kernel ufficialmente distribuito da Linus Torvalds e dai progettisti Linux,
-        senza alcuna patch aggiuntiva.">Nel Tutorial verrà installato un
+        senza alcuna patch aggiuntiva.">un kernel vanilla è un kernel non modificato . In genere i kernel delle distribuzioni sono modificati in base alle necessita del sistema operativo su cui gira : "Debian , Ubuntu , Fedora ecc.." Nel Tutorial verrà installato un
         vanilla Kernel , quindi se configurato bene ,
-        funziona su tutte le distro GNU/Linux .
+        funziona su tutte le distro GNU/Linux . Il vanilla kernel è estremamente leggero perciò accelera di parecchio il processo di avvio del sistema operativo .
     </span>
 
 </p>
@@ -27,13 +27,11 @@ creare, initramfs,initrd,ramdisk,make install,make, modules_install,concurrency_
 <p>
 <!--mark>Per installare i Pacchetti necessari alla Compilazione </mark> :<br-->
 Su <kbd>Debian/Ubuntu</kbd> e derivate :</p>
-<p>
-<code class="baseStyle">apt install build-essential libncurses5-dev</code>
-</p>
+<code class="baseStyle">apt install build-essential libncurses5-dev gnupg2</code>
 <p>
 Su <kbd>Fedora</kbd> e derivate :</p>
 <code data-language="bash" class="baseStyle">
-yum groupinstall ‘Development Tools’</code>
+yum groupinstall ‘Development Tools’ && yum install gnupg2</code>
 
 <p class="mt-5"><span class="badge bg-light s_title_paragraph">Download Del Kernel</span></p>
 <p>
@@ -41,18 +39,57 @@ Quindi dopo aver installato le dipendenze per la buona riuscita della compilazio
     <a href="https://kernel.org" title="download del kernel Linux" target="_blank"> qui</a>.</mark>
     Il file scaricato dovrebbe essere compresso, quindi:
 
-    <p class="mt-5"><span class="badge bg-light s_title_paragraph">Decomprimiamo il Kernel </span></p>
-    <div class="d_head"  style="width:50%!important;max-width:50%!important;display:inline-block!important;"><span class=".s_unzip">decomprimiamolo cosi </span>:
-        <code> $ unxz linux-a.x.by.tar.xz</code>
+    <p><span class="badge bg-light s_title_paragraph">Decomprimiamo il Kernel </span></p>
+    <div class="d_head"  style="width:35%!important;max-width:35%!important;display:inline-block!important;"><p><span class=".s_unzip">decomprimiamolo cosi </span><br>
+        <code> $ unxz linux-a.x.by.tar.xz</code></p>
     </div>
-    <div class="d_head" class="badge bg-light" style="width:50%!important;display:inline-block!important;float:right;"> <img  id="terminal" width="100%" src='{% static 'images/kernel_extract_2.jpg' %}'\></div>
+    <div  class="d_head mb-3" style="width:65%!important;max-width:65%;display:inline-block!important;float:right;"> <img  id="terminal" class="img img-fluid"  src='{% static 'images/kernel_extract_2.jpg' %}'\></div>
 
-    <div  class="mt-5" class="d_head" style="width:50%!important;display:inline-block!important;margin-bottom:1%;"><h4><b>
-        estraiamo l' archivio tar </b>:</h4>
-        <code> $ tar xvf linux-a.x.by.tar</code></div>
+    <span class="badge bg-light s_title_paragraph">Prendiamo le chiavi</span><p> Le chiavi valuteranno l' integrità del <b>kernel</b> scaricato , in modo da non usare codici manomessi .</p>
+    <div class="d_head"  style="width:100%!important;max-width:100%!important;display:inline-block!important;"><code class="baseStyle"><span class=".s_unzip"><kbd>mario@breakingweb:~/Scaricati $<span style="color:green"> gpg2 --locate-keys torvalds@kernel.org gregkh@kernel.org</span></kbd></span><br>
+    <samp>    gpg: /home/mario/.gnupg/trustdb.gpg: creato il trustdb<br>
+gpg: chiave 38DBBDC86092693E: chiave pubblica "Greg Kroah-Hartman<br> <gregkh@kernel.org>" importata<br>
+gpg: Numero totale esaminato: 1<br>
+gpg:              importate: 1<br>
+gpg: chiave 79BE3E4300411886: chiave pubblica "Linus Torvalds <torvalds@kernel.org>" importata<br>
+gpg: Numero totale esaminato: 1<br>
+gpg:              importate: 1<br>
+pub   rsa4096 2011-09-23 [SC]<br>
+      647F28654894E3BD457199BE38DBBDC86092693E<br>
+uid           [ sconosciuto] Greg Kroah-Hartman <gregkh@kernel.org><br>
+sub   rsa4096 2011-09-23 [E]<br>
 
-        <div class="badge bg-light" style="width:50%!important;display:inline-block!important;float:right;margin-bottom:3%;">
-            <img id="terminal" width="100%" src='{% static 'images/linux_kernel_4.png' %}'\></div>
+pub   rsa2048 2011-09-20 [SC]<br>
+      ABAF11C65A2970B130ABE3C479BE3E4300411886<br>
+uid           [ sconosciuto] Linus Torvalds <torvalds@kernel.org><br>
+sub   rsa2048 2011-09-20 [E]<br></samp>
+
+
+    </code>
+    <p><span class="mt-3 badge bg-light s_title_paragraph"></p>
+    <code class="baseStyle"><kbd>mario@breakingweb:~/Scaricati $<span style="color:green"> mario@breakingweb:~/Scaricati$  gpg2 --verify linux-5.3.18.tar.sign</span></kbd><br>
+<samp>gpg: presupponendo i dati firmati in 'linux-5.3.18.tar'
+gpg: Firma effettuata mer 18 dic 2019, 16:08:12 CET
+gpg:                utilizzando la chiave RSA 647F28654894E3BD457199BE38DBBDC86092693E
+<mark>gpg: Firma valida da "Greg Kroah-Hartman <gregkh@kernel.org>" </mark>[sconosciuto]
+gpg: ATTENZIONE: questa chiave non è certificata con una firma fidata!
+gpg:          Non ci sono indicazioni che la firma appartenga al proprietario.
+Impronta digitale della chiave primaria: 647F 2865 4894 E3BD 4571  99BE 38DB BDC8 6092 693E
+</samp>
+</code>
+
+    </div>
+
+
+
+
+    <div  class="mt-5" class="d_head"><p><span class="mt-3 badge bg-light s_title_paragraph"><b>Estraiamo l' archivio tar</b></p>
+
+        <p>Dopo aver decompresso la cartella  <b>linux-5.x.xx</b> ; è pronta per essere compilata . Decomprimiamola così: <code> $ tar xvf linux-a.x.by.tar</code></p></div>
+
+        <div class="mt-2">
+            <img id="terminal" class="img img-fluid" class="img img-fluid" src='{% static 'images/linux_kernel_4.png' %}'\>
+        </div>
 
             <p>A questo punto abbiamo la cartella : <code>linux-x.y.ab</code>
             scompattata . Il file di configurazione del Kernel si chiama <b>.config</b> si trova nella cartella principale del kernel ed
@@ -112,12 +149,12 @@ Quindi dopo aver installato le dipendenze per la buona riuscita della compilazio
             <br>
 
             <b>- quindi i primi cinque comandi della finestra sopra </b> :
-            <br><br>
+            <br>
             <br><code>make nconfig</code><br>
             <br><code>make xconfig</code><br>
             <br><code>make gconfig</code><br>
             <br><code>make menuconfig</code><br>
-            <br><code>make config</code><br>
+            <br><code>make config</code><br><br>
 
             <b>aprono un interfaccia testuale</b> per la configurazione del kernel. La finestra sotto mostra ad esempio la finestra che si apre sul mio PC con
             il comando <code>make nconfig</code><br><br>
@@ -151,20 +188,19 @@ Quindi dopo aver installato le dipendenze per la buona riuscita della compilazio
 
 
             - creiamo il file mod contenente l' output del comando <code title="comando che visualizza i moduli del kernel attivi">lsmod</code>:<br>
-            <br><span id="badge_lsmod_1" class="badge bg-warning"><span style="color:yellow">$</span> sudo lsmod > mod</span><br><br>
+            <br><code class="baseStyle"> sudo lsmod > mod</code><br><br>
             il comando della riga precedente redirige , per mezzo del simbolo :<span class="badge bg-light" style="whitespace:nowrap!important;">></span> , il risultato  del comando :  <span class="badge bg-light">lsmod</span> appunto ,
             che serve a visualizzare la lista dei moduli del kernel caricati dal sistema operativo , in un file che abbiamo chiamato <span class="badge bg-light">mod</span> , ma avremo potuto usare qualsiasi altro nome ovviamente .
-            <p class="mt-3">- Controlliamo che sia stato creato il file :<code title="comando che visualizza i moduli del kernel attivi"> mod</code>:
+            <p class="mt-3">- Controlliamo che sia stato creato il file :<code title="comando che visualizza i moduli del kernel attivi"> mod</code>:</p>
+            <code class="baseStyle">
+             cat mod</code>
+            <p>
+             - Se il file  non è vuoto si può procedere a scrivere la configurazione in <code>.config</code> così:</p>
+            <code class="baseStyle"> make LSMOD=mod localmodconfig</code>
 
-            <span class="badge bg-warning"><span style="color:yellow">$</span><span style="color:blue"> cat mod</span></span></p>
-            <p class="mt-3">
-             - Se il file  non è vuoto si può procedere a scrivere la configurazione in <code>.config</code> così:
-             <p class="mt-3">
-            <span id="badge_lsmod_2"class="badge bg-warning"><span style="color:yellow">$</span> make LSMOD=mod localmodconfig</span>
-                </p>
-                <p class="mt-3">
-                    <pre class="code"><code>localmodoconfig</code> legge i moduli nel file <code>mod</code>
-            che abbiamo creato precedentemente , e configura il kernel allo stesso modo , attraverso la scrittura del file <code>.config</code>al cui
+                <p>
+                    <kbd>localmodoconfig</kbd> legge i moduli nel file <kbd>mod</kbd>
+            che abbiamo creato precedentemente , e configura il kernel allo stesso modo , attraverso la scrittura del file <code>.config</code> al cui
             interno saranno attivati i stessi moduli del kernel attualmente in uso . Questa procedura riduce al minimo il rischio di ritrovarsi con una
             configurazione inconsistente e quindi con un sistema che non parte .
 
@@ -175,7 +211,7 @@ Quindi dopo aver installato le dipendenze per la buona riuscita della compilazio
             manuale , puo eseguire l' utilità di configurazione <code> make nconfig </code> come fatto prima. Se volete compilare il kernel affinchè si avii senza
             <code>initrd</code> dovete impostare tutti i drivers che servono a far partire il sistema in modalità "built in" cioè non come moduli e quindi selezionando
             &lt;y> nella configurazione , se invece non vi sentite sicuri e non volete rischiare di ritrovarvi con un sistema che non parte( rischio molto elevato anche se lo si usa ) , il consiglio è quello di usarlo .
-            vi risparmia parecchi grattacapi .  Dopo che avremo compilato il kernel , mostrerò come generare un immagine <code>initrd</code>.
+            vi risparmia parecchi grattacapi .  Dopo che avremo compilato il kernel , mostrerò come generare un immagine <kbd>initrd</kbd>.
 </p>
             <hr>
             <p class="mt-3">
@@ -194,7 +230,7 @@ Quindi dopo aver installato le dipendenze per la buona riuscita della compilazio
             di compilazione duri meno . D' altronde è anche vero che se impegno tutte e 8 cpu al 100% poi non ho risorse per fare altro che compilare .</p>
 
             <hr>
-            <p class="mt-3">
+            <p>
             <span class="badge bg-light s_title_paragraph">Compilazione</span>
 
             Compiliamo con :<br>
@@ -216,12 +252,12 @@ Quindi dopo aver installato le dipendenze per la buona riuscita della compilazio
         <span class="s_title_paragraph badge bg-light">Installiamo I Moduli</span>
         installiamo i moduli con :<br>
 
-        <code style="color:yellow;background-color:black;">mario@androgenic:~/Scaricati/linux-5.6.10$<span style="color:white">sudo make modules_install</span></code>
+        <code style="color:yellow;background-color:black;">mario@androgenic:~/Scaricati/linux-5.6.10$<span style="color:white"> sudo make modules_install</span></code>
         </p>
         <hr>
         <p class="mt-3">
         <span class="s_title_paragraph badge bg-light">Installiamo il Kernel In Boot ...</span><br><br>
-        <mark>Assicuratevi che la partizione <code>boot</code> sia montata</mark> , perchè il comando <code>make install</code> che useremo dovrà scrivere dei files
+        Assicuratevi che la partizione <code class="baseStyle">boot</code> sia montata , perchè il comando <code class="baseStyle">make install</code> che useremo dovrà scrivere dei files
         al suo interno.
         Se volete usare <code>initrd</code> , installate il pacchetto <b><code>initramfs-tools</code></b> necessario per la sua creazione. installiamo il kernel e copiamo alcuni file nella cartella boot con :
         </p>
@@ -267,21 +303,21 @@ Quindi dopo aver installato le dipendenze per la buona riuscita della compilazio
             la flag <code> -o </code> sta per output e definisce il nome del file creato in questo caso <code> initramfs-5.6.10.img </code> fate
             attenzione a non usare nomi strani nel parametro <code>-o</code> perchè c' è il rischio che gli script come : <code>grub-mkconfig </code>
             non trovino il file quando
-            dovranno generare il file di configurazione/avvio per il bootloader : <code>grub.cfg</code> ecc... .
+            dovranno generare il file di configurazione/avvio per il bootloader : <code class="baseStyle>grub.cfg</code> ecc... .
 
-            Se volete vedere tutte le versioni di kernel disponibili , queste sono elencate in &nbsp<code>/lib/modules</code>
+            Se volete vedere tutte le versioni di kernel disponibili , queste sono elencate in &nbsp<code class="baseStyle">/lib/modules</code>
             Se volete sapere la versione del kernel in uso dal sistema eseguite : <code>$ echo $(uname -r)</code>
             </p>
-            <p class="mt-5">
+            <p>
             <span  class="s_title_paragraph badge bg-light">Configurare Grub Per L' Avvio</span>
-            Questo passo dovrebbe non essere necessario perchè il comando <code> make install </code> lo svolge automaticamente .
+            Questo passo dovrebbe non essere necessario perchè il comando <code class="baseStyle"> make install </code> lo svolge automaticamente .
             </p>
             Sui sistemi Debian/Ubuntu eseguire :
             <p class="mt-3">
             <code>update-grub</code><br><br>
             la procedura standard che va bene su tutti i sistemi linux è :<br>
             <mark>come amministratore da console</mark> :<br><br>
-            <code>grub-mkconfig -o /boot/grub/grub.cfg</code><br><br> Riavviate il pc per provare il kernel .
+            <code class="baseStyle" >grub-mkconfig -o /boot/grub/grub.cfg</code><br><br> Riavviate il pc per provare il kernel .
             </p>
 
             {% endblock content %}

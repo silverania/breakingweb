@@ -1,0 +1,427 @@
+{% extends 'base2.html'%}
+{% load static%}
+{% block title %}Integrazione di un gateway di pagamenti sul proprio sito{% endblock title %}
+{% block keywords %}tutorial django braintree , tutorial braintree ,tutorial django,ottenere merchant-id, public-key , private-key  ,accettare pagamenti elettronici su sito web, braintree , pagamenti elettronici , checkout carrello ,checkout ,aggiungere key settings.py, client token , token key , javascript sdk client braintree, button acquista ,gateway ,sandbox,installare python braintree,python braintree,pip install braintree,creare account braintree,login braintree,sandbox,api,PayPal,dropin ,sicuro,transazioni con autorizzazioni rifiutate,response declined,views.py,urls.py
+Pay {% endblock keywords %}
+{% block description %}Implementare un Gateway di Pagamento braintree con Django{% endblock description%}
+{% block anteprima %}<meta property="og:image"   content='{% static 'images/braintree.png' %}'/>{% endblock %}
+
+
+{% block photo %}{% get_media_prefix %}{{tutorial.author.photo}}{% endblock photo %}
+{%block t%}Gateway di pagamento con <b>Braintree</b>{%endblock%}
+{% block content%}
+<div class="container">
+<div class="row justify-content-center mt-4 "><span class="badge  bg-light text-center" style="display:inline">Contenuti</span>
+
+
+    <div class="list-group list-group-flush list-group-numbered col-3 mt-3">
+
+        <li class="list-group-item pageMenu"><a href="#requisiti">requisiti</a></li>
+        <li class="list-group-item pageMenu"><a href="#obiettivi">obiettivi</a></li>
+        <li class="list-group-item pageMenu"><a href="#divbraintree">account <b>braintree</b></a></li>
+        <li class="list-group-item pageMenu"><a href="#divlogin">login su <b>Braintree</b></a></li>
+        <li class="list-group-item pageMenu"><a href="#divinstall">il modulo Python</a></li>
+        <li class="list-group-item pageMenu"><a href="#divkey">recupero <b>id</b> e <b>key</b></a></li>
+        <li class="list-group-item pageMenu"><a href="#divsettingspy">modifica di <b>settings.py</b></a></li>
+    </div>
+    <div class="list-group list-group-flush list-group-numbered col-3 mt-3">
+
+        <li class="list-group-item pageMenu"><a href="#dropinhtml">creazione del dropin</a></li>
+        <li class="list-group-item pageMenu"><a href="#dropincss">il file css</a></li>
+        <li class="list-group-item pageMenu"><a href="#divgetdropin">Il file getDropin.js</li>
+            <li class="list-group-item pageMenu"><a href="#divurlspy"> <b>urls.py</b></a></li>
+            <li class="list-group-item pageMenu"><a href="#divviewpy"> <b>views.py</b></a></li>
+        <li class="list-group-item pageMenu"><a href="#divcheckout">Check Out Carrello</a></li>
+
+
+    </div>
+
+
+
+
+
+    </div>
+
+
+<div id="requisiti" class="row justify-content-left">
+    <div class="col-12 mt-5">
+        <span class="badge bg-light">
+    Requisiti per portare a termine il tutorial
+</span>
+<div  text-align="left" class="mt-2 ">
+    <p>Occorre aver configurato un progetto qualsiasi su <kbd>django</kbd>
+        anche solo del tipo <span style="font-style:italic">helloworld</span> .
+        Chiedi quello che vuoi a fine pagina nella sezione commenti <b style="font-weight:800">booldog</b>.
+    </p>
+    </div>
+    </div>
+    </div>
+
+
+    <div id="obiettivi" class="row">
+        <div  class="col-12 mt-3">
+            <span class="badge bg-light">Obiettivi</span>
+            <div  text-align="left" class="mt-2 ">
+                <p>
+                     nel tutorial vedremo come accettare pagamenti elettronici sul proprio sito web , sviluppato con <kbd>django</kbd> .Useremo un gateway di pagamenti <b>braintree</b> . Braintree è l' unico payments partner che permette di accettare cards, PayPal, e PayPal Credit con una singola integrazione.
+                </p>
+            </div>
+        </div>
+    </div>
+
+        <div id="divbraintree" class="row">
+            <div  class="col-12 mt-3">
+                <span class="badge bg-light">Creazione Account Braintree</span>
+                <div  text-align="left" class="mt-2 ">
+                    <p>
+                        Useremo una sandbox gateway offerta da braintree , che ci permetterà di sperimentare in tutta sicurezza.
+                        Registriamoci per ottenere le chiavi <b>merchant-id</b>,
+                        <b>public-key</b> e <b>private-key</b>
+                        al link <a rel="nofollow" href="https://www.braintreepayments.com/sandbox" target="_blank">braintreesandbox</a> . questa è la pagina per registrarsi . Immagine 1.a</p><p class="mt-3">1.a<img class="img-fluid rounded" src='{% static 'images/braintreeSignup.png' %}'
+                            alt="non posso caricare immaggini">
+                        </p>
+                        <p class="mt-4">Dopo aver inserito i dati per la registrazione sarà inviata una mail al indirizzo inserito . Apri la mail ricevuta e segui le istruzioni per completare il setup e attivare l' account .</p>
+                    </div>
+                </div>
+            </div>
+            <div id="divlogin" class="row">
+                <div  class="col-12 mt-5">
+                    <span class="badge bg-light">Eseguiamo il Login</span>
+                    <p>Completata la registrazione , apriamo il link braintree per il <a rel="nofollow" href="https://sandbox.braintreegateway.com/login" target="_blank">login qui</a>.
+                        Vedremo un immagine simile alla 1.b</p>
+                        <p class="mt-3">1.b<img class="img-fluid rounded" src='{% static 'images/braintreeLogin.png' %}'
+                            alt="non posso caricare immaggini">
+                        </p>
+                    </div>
+                </div>
+
+
+
+
+                <div id="divkey" class="row">
+                    <div  class="col-12 mt-3 mb-3">
+                        <span class="badge bg-light">Recuperaimo <b>id</b> e <b>key</b></span>
+                        <p> Dopo avere effettuato il login sarete reindirizzati su una pagina come quella dell' immagine 1.c sottostante . Prendiamo nota delle informazioni <b>public-key</b>/<b>private-key</b> e <b>merchant-id</b> che inseriremo fra un pò  nel file <b>settings.py</b>
+                        </p>
+                        <p class="mt-3">1.c<img class="img-fluid rounded" src='{% static 'images/braintreeGateway.png' %}'
+                            alt="non posso caricare immaggini">
+                        </p>
+
+                    </div>
+                </div>
+
+
+                <div id="divinstall" class="row">
+                    <div  class="col-12 mt-3 mb-3">
+                        <span class="badge bg-light">Installiamo il modulo Python Braintree</span>
+                        <p>Nel repository Python è presente un modulo sviluppato da <b>Braintree</b> che installa le api per interagire da un server Python come <b>Django</b> , ma non solo , con il gateway di pagamento braintree. Ulteriori info sul modulo si trovano
+                            <a rel="nofollow" href="https://pypi.org/project/braintree/#description" target="_blank"><span style="color:grey"class="small">qui</a></p>
+                                <div text-align="left" class="mt-3 ">
+                                    <h5 class="h5" mt-4">Da un Terminale bash o sh</h5>
+                                    <div class="mt-3"> <div class="divcode">console</div>
+                                    <code class="baseStyle"  style="margin:0;padding:0;left:0;display:block;"><span>$</span> pip install braintree</code>
+                                    </div>
+                                    <p class="mt-3">1.c</p>
+                                    <p>
+                                        <img class="img-fluid rounded" src='{% static 'images/installBraintree.png' %}'
+                                        alt="non posso caricare immaggini">
+                                    </p>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <div id="divsettingspy" class="row mt-5 mb-5">
+                            <div  class="col-12">
+                                <span class="badge bg-light">Aggiungiamo le <b>key</b>/<b>id</b> in <b>settings.py</b></span>
+                                <div class="mt-3 ">
+                                    <p>Apriamo <b>settings.py</b> e inseriamo <b>key</b> e <b>id</b> nel modo come nell' immagine
+                                        1.d
+                                    </p>
+                                    <p class="mt-3">1.d</p>
+                                    <img class="img-fluid rounded" src='{% static 'images/braintreesetting.py.png' %}'
+                                    alt="non posso caricare immaggini"/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="dropinhtml" class="row">
+                            <div  class="col-12 mt-3 mb-3 ">
+                                <span class="badge bg-light">Creiamo il dropin</span>
+                                <p>Un <b>dropin</b> è un form per l' inserimento dei dati di una carta di credito su una pagina web. Il modo più semplice per generarlo sulla nostra pagina web è usare l' <b>SDK</b> javascript offerto da  <b>Braintree</b> attraverso la funzione dell' sdk javascript : <b>braintree.dropin.create()</b> nel file <b>getDropin.js</b> che creeremo tra poco . Creando il <b>dropin</b> lato client  , quindi , alleggeriamo il lavoro del nostro server in termini di carico di rete e cpu . Il <b> dropin</b> , infatti , potrebbe anche essere creato lato server da <b>django</b> , ma questa opzione non verrà trattata qui . Quindi Creiamo il file <b>index.html</b> , in cui , fra l' altro , inseriremo il tag script per usare l' <b>sdk javascript dropin.min.js</b> , evidenziato in grassetto , e il tag script per usare il file getDropin.js anch'esso in grassetto sotto , che ci scriveremo noi fra poco , e in cui genereremo effettivamente il dropin per l' inserimento dei dati della carta .
+                                        </p>
+                                <div  text-align="left" class="mt-5 ">
+                                    <p>
+                                    </p>
+                                    <div> <div class="divcode">index.html</div>
+                                    <code class="baseStyle html">
+                                        <span>{%load static<span>%</span>}</span>
+                                        <br>
+                                        &lt;html><br>
+                                        &lt;head><br>
+                                        &lt;meta charset="utf-8"><br>
+                                        &lt;link rel="stylesheet" href="/static/css/style.css"><br>
+                                        &lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+                                        &lt;script src=https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js>&lt;/script><br>
+                                        &lt;script  src="/static/js/jquery.min.js ">&lt;/script>
+                                        <b style="font-weight:800;"> &lt;script src="https://js.braintreegateway.com/web/dropin/1.33.4/js/dropin.min.js"><br>
+                                            &lt;/script></b><br>
+                                            &lt;script src="/static/js/<b>getDropin.js"</b>><br>&lt;/script><br>
+                                            &lt;/head><br>
+                                            <span>{% csrf_token <span>%</span>}</span>
+                                            &lt;body><br>
+                                            &lt;div id="dropin-wrapper">
+                                              &lt;div id="checkout-message">&lt;/div>
+                                              &lt;div class="form-row">
+                                                  &lt;input id="prezzo" type="text" class="form-control" placeholder="Inserisci la cifra da versare in euro ">
+                                                &lt;/div>
+                                                <br>&lt;!-- nel tag sottostante  "dropin-container" sarà inserito il dropin dalla funzione javascript : "dropin.create()" nel file getDropin.js()--><br>
+                                              <b>&lt;div id="dropin-container">&lt;/div></b>
+
+
+                                            &lt;button type="submit" id="submit-button" class="button button--small button--green">Paga&lt;/button>
+                                        &lt;/div>
+                                            &lt;/body><br>
+                                            &lt;/html>
+                                        </code>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="divgetdropin" class="row">
+                            <div  class="col-12 mt-3">
+                                <p><span class="badge bg-light"> Il file javascript <b>getDropin.js</b></span></p>
+                                <div  text-align="left" class="mt-2 ">
+                                    <p>
+                                        Per generare il dropin serve il <b>token</b> di autenticazione , che può essere di due tipi : <b>1) la tokenization key</b>  che è una chiave statica (non cambia) , riusabile in più sessioni , con privilegi più limitati , e che può essere revocata in modo da impedire pagamenti sulle applicazioni che la usano. Se ne può possedere più di una , e usarla in base agli scopi. <b>2) client token</b>  è un <span style="font-style:italic">JWT(json web token )</span> firmato , che crittografa i dati a cui è associata , include le informazioni di configurazione e autorizzazione richieste dall'SDK client Braintree .
+
+ in questo caso la  view di django attraverso le funzioni del package braintree installato in precedenza ,genera il token ,   Quando django/server  fornisce un token client al client web javascript(getDropin.js), autentica l'applicazione per comunicare direttamente con Braintree e generare il dropin.
+il client_token è valido per un massimo di 24 ore. Nella seguente tabella sono riportate le differenze :</p> <label class="mt-5" style="font-family:roboto-bold" for="tokendifference">Differenze tra client-token e token-key</label>  <img id="tokendifference" class="mt-3 mb-3 img img-fluid" src="{% static 'images/clienttoken.png' %}"/><p> In questo tutorial userò la <b>token key</b> , però mostrerò ugualmente come generare la <b>client_token</b> nel caso qualcuno voglia usarla . La <b>token-key</b> va recuperata dal pannello di controllo , quindi facciamo il login su sandbox.braintreegateway se non l' avete fatto , per avere accesso al pannello di controllo , in alto a destra c'è un icona a forma di gear(ingranaggio) cliccategli sopra e selezionate <b>api</b> , si aprirà la pagina per generare la token key.</p><p> <img class="mt-3 mb-3 img img-fluid"src="{%static 'images/pagetokenkey.png'%}"></p><p> la   <b>token key</b> quindi, fra l' altro servirà ad autorizzare la creazione del <b>dropin</b> e ad associare il client a configurazioni specifiche . <small>(il termine client non si riferisce alla persona che userà il nostro sito , ma al sito stesso che è appunto client del server)</small> . Nel file <b>getDropin.js</b> potete notare la funzione getCokie() che recupera il <b>csrftoken</b> , inviato dal server <b>django</b> per autenticare successivamente le sessioni e le <b>request &lt;POST></b> con il nostro server <b>django</b> . Questo tipo di autenticazione su django , comunque , non ha nulla ha che vedere con l' autenticazione per usare il <b>dropin</b> e per le transizioni . <mark>importante</mark> . Cambiate il link nella funzione <b>ajax</b> dove c'è il parametro url , e sostituitelo l' url che punta alla <b>view</b> django dove gestite la <b>request.POST</b> in <b>views.py</b> . Ad esempio nel tutorial l' URL che esegue la funzione <b>page</b> in <b>views.py</b> è definito in <b>urls.py</b> , come vedremo tra poco .
+                                        . </p>
+                                        <div>
+                                            <div class="divcode"><b> getDropin.js</b></div>
+                                            <code class="baseStyle">
+                                                $(document).ready(function(){<br>
+                                                var button = document.querySelector('#submit-button');<br>
+                                                <b style="color:white;">/* la seguente funzione getCookie e propria per l' uso con django framework , se non usate django potete eliminarla*/ <br></b>
+                                                function getCookie(name) {<br>
+                                                    &nbsplet cookieValue = null;<br>
+                                                    &nbspif (document.cookie && document.cookie !== '') {<br>
+                                                        &nbsp&nbspconst cookies = document.cookie.split(';');<br>
+                                                        &nbsp&nbspfor (let i = 0; i < cookies.length; i++) {<br>
+                                                            &nbsp&nbsp&nbspconst cookie = cookies[i].trim();<br>
+                                                            &nbsp&nbsp&nbspcookieValue = decodeURIComponent(cookie.substring(name.length + 1));<br>
+                                                            &nbsp&nbsp&nbspbreak;<br>
+                                                        &nbsp&nbsp&nbsp}<br>
+                                                    &nbsp}<br>
+                                                    return cookieValue;<br>
+                                                }<br>
+
+                                                const csrftoken = getCookie('csrftoken'); //solo su django <br>
+
+                                                braintree.dropin.create({ authorization: <b style="color:white;">'sandbox_g42y39zw_348pk9cgf3bgyw2b'</b>,   locale:"it_IT",
+                                                container: '#dropin-container' },
+                                                        function (createErr, instance) {
+                                                            button.addEventListener('click',<br>
+                                                            function () {<br>
+
+                                                                var textPrezzo=document.querySelector('#prezzo');<br>
+                                                                var prezzo=textPrezzo.value;<br>
+                                                                instance.requestPaymentMethod(function (requestPaymentMethodErr, payload) {<br>
+                                                       <b style="color:white;">/* il click sul button paga sul dropin  button  invia il<br>
+                                                        pagamento cryptato in una variabile chiamata : payment method nonce*/<br></b>
+                                                       $.ajax({<br>
+                                                         type: 'POST',<br>
+                                                         url: <mark>'/page'</mark>,<br><b style="color:white;">// esegue la view page in views.py<br></b>
+                                                         headers:{'X-CSRFToken':csrftoken}, <b style="color:white;"> /* riga necessaria solo su django,<br>
+                                                                                           questo token (csrftoken) non ha nulla a che vedere con il client_token per l 'autenticazione' su braintree , su framework diversi da django non serve*/</b><br>
+                                                         data: {'paymentMethodNonce': 'fake-valid-nonce','amount': prezzo}
+                                                       }).done(function(result) {<br>
+
+                                                         instance.teardown(function (teardownErr) {<br>
+                                                           if (teardownErr) {<br>
+                                                            &nbsp console.error('non posso resettare il dropin');<br>
+                                                           } else {<br>
+                                                            &nbsp console.info('dropin reset ok!');<br>
+                                                             $('#submit-button').remove();
+                                                                $('#prezzo').remove()
+                                                           }<br>
+                                                         });<br>
+
+                                                         if (result) {<br>
+                                                          &nbsp $('#checkout-message').html('&lt;h3 align="center" class="mt-5">Transazione &lt;/h3>&lt;p align="center">'+result+'&lt;a   href="https://sandbox.braintreegateway.com/login"> sandbox Control Panel&lt;/a>'); }else {$('#checkout-message').html('&lt;h1>Error&lt;/h1>&lt;p>controlla la  console.&lt;/p>');
+                                                           }<br>
+                                                       &nbsp&nbsp&nbsp&nbsp&nbsp});<br>
+                                                     &nbsp&nbsp&nbsp&nbsp});<br>
+                                                   &nbsp&nbsp&nbsp});<br>
+                                                 &nbsp&nbsp});<br>
+                                                &nbsp})<br>
+
+                                            </code>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="divurlspy" class="row">
+                                <div  class="col-12 mt-3">
+                                 <p><span class="badge bg-light">Modifica di <kbd>urls.py</kbd></span></p>
+                                 <div  text-align="left" class="mt-2 ">
+                                     <p><b>urls.py</b>  esegue la stessa funzione : <b>def page(request)</b> in views.py , sia per l' apertura del del path <b>home/</b> attraverso una <b>request.GET</b> , sia la chimata asincrona <b>ajax</b> per il path <b>/page</b> attraverso un <b>request.POST</b>.
+                                     <div class="divcode"><b>urls.py</b></div>
+                                     <code class="baseStyle"><br>
+
+                                         from django.urls import path<br>
+                                         from home import views<br><br>
+
+                                         urlpatterns = [<br>
+                                            &nbsp&nbsp&nbsp path('home/', views.page,<br> name="page"),<br>
+                                            path('/page', views.page),
+                                         ]<br>
+                                     </code>
+                                 </div>
+                             </div>
+                            </div>
+
+
+                            <div id="divviewpy" class="row">
+                                <div  class="col-12 mt-3">
+                                 <p><span class="badge bg-light">Modifica di <kbd>views.py</kbd></span></p>
+                                 <div  text-align="left" class="mt-2 ">
+                                     <p>
+                                    la view si basa sul tipo di request (POST O GET) per capire quali dati ritornare ( return). Quando riceve una <b>GET</b> fa un return del template e del client_token(non indispensabile in questo caso come spiegato sopra, perchè usiamo la token_key ) . Quando riceve una <b>POST</b> la view suppone che gli siano stati mandati i dati del pagamento .
+                                    </p>
+                                 <div>
+                                    <div class="divcode">views.py</div>
+                                         <code class="baseStyle">
+                                             from django.shortcuts import render<br>
+                                             from django.views import View<br>
+                                             from django.http import HttpResponse<br>
+                                             <b>import braintree<br></b>
+                                             from django.conf import settings<br>
+                                             <br><br>
+                                             def page(request):
+                                             <br>
+                                            &nbsp&nbsp&nbsp&nbsppaymethod = ""<br>
+                                              &nbsp&nbsp&nbsp&nbspamount = ""<br>
+                                                 &nbsp&nbsp&nbsp&nbspgateway = braintree.BraintreeGateway(settings.BRAINTREE_CONF)<br>
+                                                &nbsp&nbsp&nbsp&nbspif request.method == 'GET':
+                                                <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspreturn render(request,  "base_ecomm.html")
+                                                    <br><span style="color:grey"> # per il client_token invece che la token_key :<br>
+                                                     # client_token = gateway.client_token.generate()<br>
+                                                    # return render(request,  "base_ecomm.html"   , {'client_token' : client_token})</span>
+                                                    <br>&nbsp&nbsp&nbsp&nbspelse:<br>
+                                                        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsprequest.method == 'POST'
+                                                        <br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspif 'amount' in request.POST:<br>
+                                                            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspamount = request.POST['amount']<br>
+                                                        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspif 'paymentMethodNonce' in request.POST:<br>
+                                                            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsppaymethod = request.POST['paymentMethodNonce']
+                                                        <br>&nbsp&nbsp&nbsp&nbspresult = gateway.transaction.sale({'amount': amount, 'payment_method_nonce': paymethod, 'options':
+                            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{'submit_for_settlement': True, }})<br>
+            &nbsp&nbsp&nbsp&nbsptransaction = str(result.transaction.processor_response_text)
+            <br>
+            &nbsp&nbsp&nbsp&nbspprint(str(transaction))<br>
+            &nbsp&nbsp&nbsp&nbspprint(str(result))<br>
+            &nbsp&nbsp&nbsp&nbspreturn HttpResponse(transaction)<br>
+                                            </code>
+                                            <p> . Quando cliccheremo sul pulsante del dropin : <kbd>Paga</kbd> l' <b>event listener</b> sull 'evento <b>click</b>' nel file javascript eseguirà la funzione ajax che effettua una <b>request.POST</b></p>
+
+                                    </div>
+                                </div>
+                             </div>
+                         </div>
+
+                         <div id="dropincss" class="row">
+                             <div  class="col-12 mt-3">
+                                 <p><span class="badge bg-light">Creiamo gli stili per il dropin</span></p>
+                                 <p> Rendiamo il dropin più carino.</p>
+                                 <div  text-align="left" class="mt-2 ">
+                                     <div > <div class="divcode"> style.css</div>
+                                     <code class="baseStyle">
+                                         #dropin-container{<br>
+                                             width:20%;<br>
+                                             max-width:20%;<br>
+                                             margin:0 auto;<br>
+                                         }<br>
+                                         <div>.button {</div>
+                                           <div>cursor: pointer;</div>
+                                           <div>font-weight: 500;</div>
+                                          <div> left: 45%;</div>
+                                           <div>line-height: inherit;</div>
+                                           <div>position: relative;</div>
+                                           <div>text-decoration: none;</div>
+                                           <div>text-align: center;</div>
+                                           <div>border-style: solid;</div>
+                                           <div>border-width: 1px;</div>
+                                           <div>border-radius: 3px;</div>
+                                           <div>-webkit-appearance: none;</div>
+                                           <div>-moz-appearance: none;</div>
+                                           <div>display: inline-block;</div>
+                                     <div>    }</div>
+
+                                         .button--small {<br>
+                                           padding: 10px 20px;<br>
+                                           font-size: 0.875rem;<br>
+                                         }<br>
+
+                                         .button--green {<br>
+                                           outline: none;<br>
+                                           background-color: #64d18a;<br>
+                                           border-color: #64d18a;<br>
+                                           color: white;<br>
+                                           transition: all 200ms ease;<br>
+                                         }<br>
+
+                                         .button--green:hover {<br>
+                                           background-color: #8bdda8;<br>
+                                           color: white;<br>
+                                         }<br>
+                                         </code>
+
+                                     </div>
+                                     </div>
+                                     </div>
+                                     </div>
+
+
+
+
+
+                         <div id="divcheckout" class="row mt-5">
+                             <div  class="col-12">
+                                 <span class="badge bg-light">Checkout</span>
+                         <p class="mt-4">avviamo il server django</p>
+                         <div> <div class="divcode">Console</div>
+                             <code class="baseStyle">
+                                 python manage.py runserver
+                                 </code>
+                                 <div>
+                                 <p class="mt-4"> apriamo la pagina nel browser <b>http://127.0.0.1:8000/home/</b> . Dovremmo vedere questo :
+                                 <img class="img-fluid rounded mb-4 mt-4" src='{% static 'images/dropin2.png' %}'
+                                   alt="non posso caricare immaggini"></p>
+                                   <p>
+
+                                   I numeri delle carte di credito da inserire nel dropin li fornisce braintree , e sono solo per la sandbox , per fare esperimenti in sicurezza . li trovate a <a rel="nofollow" href="https://developer.paypal.com/braintree/docs/reference/general/testing" target="_blank"> questo link </a> . Se vogliamo visualizzare transazioni con autorizzazioni rifiutate nel pannello di controllo dobbiamo abilitare alcune impostazioni nella sezione <b style="font-weight: 800">processing</b> del pannello di controllo sul sito braintree , a cui si arriva cliccando sempre sull' icona gear(ingranaggio) in alto a destra , e poi selezionando la voce processing nel menu a comparsa . Arrivete così alla pagina raffigurata sotto nell' immagine 2a.1 <p>2a.1</p><p></p><p><img class="img-fluid rounded mt-3 mb-4 " src='{% static 'images/braintreeprocessing.png' %}'
+                                  alt="non posso caricare immaggini"/>
+                                 </p> . Modificate le impostazioni in base ai vostri bisogni .  Se volete generare risposte di rifiuto potete farlo inserendo nel campo amount specifici valori . Ad esempio le cifre comprese tra 2000 e 2999.9 generano Response declined. Come si può vedere nell' immagine 2a.2 sotto:<p>2a.2
+                                  </p><p><img class="img-fluid rounded mb-4 mt-3" src='{% static 'images/specificresponse2.png' %}'
+                                     alt="non posso caricare immaggini"/></p><p>la sezione nell' immagine e molto altro li trovate di nuovo a
+                                       <a rel="nofollow" href="https://developer.paypal.com/braintree/docs/reference/general/testing" target="_blank">  questo link </a> . Il sito Braintree ha una buonissima documentazione , un altra pagina consigliata è quella dei tutorial su <a rel="noffollow" href="https://developer.paypal.com/braintree/docs/reference/general/testing"> developer.paypal</a> . Per finire, tornando agli argomenti del tutorial , voglio chiarire che una transazione avvenuta con successo mostrerà una pagina con questo testo . Ovviamente si è liberi di mostrare altro testo , oppure di fare un redirect su una altra pagina . <p><img class="img-fluid rounded mt-3 mb-5" src='{% static 'images/transactionok.png' %}'
+                                         alt="non posso caricare immaggini"/></p>
+                             </div>
+                             </div>
+                             </div>
+                          </div>
+                          </div>
+
+
+
+{%endblock%}
+
+{%block blog%}<script id="s_blog">
+    $(document).ready(function(){
+      initBlogSGang("mario","sol-7373");
+    })
+  </script>{%endblock%}

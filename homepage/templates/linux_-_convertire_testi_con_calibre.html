@@ -35,7 +35,11 @@ cliccare sull' icona converti . Si apre questa finestra :
   </p>
 
   {% endblock content %}
-
+  {%block blog%}<script id="s_blog">
+      $(document).ready(function(){
+        initBlogSGang("mario","sol-7373");
+      })
+    </script>{%endblock%}
 {% block footer%}
 {% include '_footer.html'%}
 {% endblock %}

@@ -2,7 +2,8 @@
 {% load static %}
 
 {% block title %}Centrare il testo in un tag html li{% endblock title %}
-  {% block keywords %}html,centrare,testo,tag,li,css,regola{% endblock keywords %}
+  {% block keywords %}html,css,centrare il testo in un tag span dentro li,li ,centrare,testo,tag,span,css,regola,&lt;ul> &lt;li> &lt;span>,text-align, center,breakingweb.site,mario spanò
+{% endblock keywords %}
   {% block description %}Come centrare il testo in un tag HTML LI{% endblock description%}
 {% block anteprima %}<meta property="og:image"   content='{% static 'images/icone-html-bleue.jpeg' %}'/>{% endblock %}
 
@@ -12,26 +13,28 @@
 
       {% block content %}
 
-     <p style="text-align: center;">
+     <p>
          Supponendo di avere il seguente codice <kbd>Html</kbd>:
          </p>
-             <pre style="text-align: center;">
-         <span style="display:block">&lt;ul id="#ul"><br>&lt;li>
+             <code class="baseStyle">
+         &lt;ul id="#ul"><br>&lt;li>
                     &lt;span>Centrami&lt;/span>
- &lt;/li>
-<span style="display:block;margin-left:-10%"class="ml-1">&lt;/ul></span></span>
-         </pre>
+ &lt;/li><br>
+&lt;/ul>
+         </code>
 
-         <p style="text-align: center;">
+         <p>
          e di voler centrare il contenuto di un <bold>Tag Li</bold>
-         al suo interno ,<br> il codice <kbd>css</kbd> per risolvere
-             il problema è questo :
+         al suo interno ,<br><kbd>css</kbd>il problema va risolto così:
+
             </p>
-             <pre style="text-align: center;">
+             <code class="baseStyle">
                 <span style="display:block"> li { text-align: center ; }</span>
-           </pre>
+           </code>
 
 {% endblock content %}
-{% block footer %}
-{% include '_footer.html' %}
-{% endblock footer %}
+{%block blog%}<script id="s_blog">
+    $(document).ready(function(){
+      initBlogSGang("mario","sol-7373");
+    })
+  </script>{%endblock%}

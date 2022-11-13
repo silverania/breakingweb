@@ -1,16 +1,16 @@
 /* By Mario , superior code */
 var CURRENT_URL=window.location.href
-const BASE_URL="http://127.0.0.1:8000/" // URL del server
+const BASE_URL="https://breakingweb.site/" // URL del server
 const CLIENT_URL=window.location.href.split('#')[0].split('?')[0]
 const HIDDENFIELD="?next="+window.location
-const XMLHTTPURL_GETUSER=BASE_URL+"user/blog/getuser"
+const XMLHTTPURL_GETUSER="user/blog/getuser"
 const URL_NEW_POST=BASE_URL+"post/sendpost"
-const XMLHTTPURL_LOGIN=BASE_URL+"user/login/blog"+HIDDENFIELD
-const XMLHTTPURL_REGISTER=BASE_URL+"user/register/bloguser"+HIDDENFIELD
-const XMLHTTPURL_LOGOUT=BASE_URL+"user/logout/blog"+HIDDENFIELD
+const XMLHTTPURL_LOGIN="user/login/blog"+HIDDENFIELD
+const XMLHTTPURL_REGISTER="user/register/bloguser"+HIDDENFIELD
+const XMLHTTPURL_LOGOUT="user/logout/blog"+HIDDENFIELD
 const MAX_TEXTAREA_NUMBER=21
 const BASE_PHOTO_DIR=BASE_URL+"media/"
-const HTTPURL_CHANGEPASSWORD=BASE_URL+"user/change_password"+HIDDENFIELD
+const HTTPURL_CHANGEPASSWORD="user/change_password"+HIDDENFIELD
 var borderPost="none";
 var borderResponse="1px solid grey";
 var paPostOrResp;
@@ -108,7 +108,7 @@ function createSectionDivSpan(userAdmin,_userThatLogin){
     aBlogCambiaPassword.textContent="Modifica"
     aBlogEsci.textContent="Esci"
     aBlogEntra.setAttribute("class","nav-link")
-    aBlogEsci.setAttribute("href",BASE_URL+"user/logout/blog"+HIDDENFIELD)
+    aBlogEsci.setAttribute("href","user/logout/blog"+HIDDENFIELD)
     aBlogEsci.setAttribute("style","display:block;width:auto;text-align:right;")
     aBlogEsci.setAttribute("id","aEsci")
     liBlogEntra.setAttribute("style","display:inline;width:auto;margin-right:0px;")
@@ -155,11 +155,12 @@ function createSectionDivSpan(userAdmin,_userThatLogin){
       inputSubmit.setAttribute("value","Esci")
       liBlogEsci.setAttribute("id","liBlogEsci")
         if(userThatLogin.userin[0].fields.first_name!=="None")
+        H1Welcome.setAttribute("id","H1Welcome")
+        H1Welcome.style.display='block'
           $(H1Welcome).append('<span class="spanuser">'
           +(userThatLogin.userin[0].fields.first_name).charAt(0).toUpperCase()
           + userThatLogin.userin[0].fields.first_name.slice(1)+"</span>");
-    }
-    H1Welcome.setAttribute("id","H1Welcome")
+        }
     //bH5.appendChild(spanUserName)
     bSection.appendChild(bdiv)
     bdiv.appendChild(firstDivHead)
@@ -596,9 +597,8 @@ function initBlogSGang(u,p){
             jsonLogged=JSON.parse(json)
             userprof=JSON.parse(jsonLogged)
             try {
-              userfirstName={"userin" : JSON.parse(userprof.userLogged)}            //get admin
+              userfirstName={"userin" : JSON.parse(userprof.userLogged)}
               userAuth=userfirstName.userin[0]
-              "e getComment."
             }
             catch (SyntaxError) {
               userfirstName=userprof.userLogged

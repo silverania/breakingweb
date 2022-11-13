@@ -1,0 +1,69 @@
+a#a_download.title {
+    margin-top:20px;
+    display:block;
+    width:auto;
+    max-width:auto;
+    text-decoration: none!important;
+}
+
+.booldoginfo.title{
+    color:orange;
+    opacity:0.4;
+    margin-left:20px;
+    width:auto;
+}
+
+.booldog.booldogtitle {
+    width:auto;
+    height: auto;
+    text-decoration: none;
+    margin-right: auto;
+}
+
+@media screen and (min-width: 576px) {
+    .badgebooldog.title{
+        font-size:1em;
+    }
+    .booldoginfo.title{
+        font-size: 0.6em;
+    }
+    .spanbooldog.title{
+        font-size:1.2rem;
+    }
+}
+
+@media screen and (min-width: 972px) {
+    .badgebooldog.title{
+        font-size:1em;
+    }
+    .booldoginfo.title{
+        font-size: 0.6em;
+    }
+    .spanbooldog.title{
+        font-size:1.3rem;
+    }
+}
+
+@media screen and (min-width: 1400px) {
+.badgebooldog.title{
+    font-size:1.4em;
+}
+ .title .fa-comment-dots{
+    font-size:2em;
+}
+.spanbooldog.title{
+    font-size:1.8rem;
+}
+}
+
+@media screen and (max-width: 576px) {
+    .badgebooldog.title{
+        font-size:0.3em;
+    }
+    .booldoginfo.title{
+        font-size: 0.4em
+    }
+    .spanbooldog.title{
+        font-size:1rem;
+    }
+ }

@@ -10,9 +10,16 @@
 
      {% block photo %}{% get_media_prefix %}{{tutorial.author.photo}}{% endblock photo %}
       {% block content %}
+      <div class="row justify-content-left row_title_content mt-3"><span class="badge bg-light" >Contenuti</span>
+  </div>
+      <div class="list-group list-group-flush col-6 mt-3">
 
-
-          <span class=" badge bg-light s_title_paragraph">Considerazioni</span>
+              <li class="list-group-item pageMenu"><span style="display:inline-block ;margin-right:3%" class="spanMenu "> 1 )</span><a href="#considerazioni">Considerazioni</a></li>
+              <li class="list-group-item pageMenu"><span style="display:inline-block ;margin-right:3%"class="spanMenu"> 2 )</span><a href="#requisiti">requisiti</a></li>
+              <li class="list-group-item pageMenu"><span class="spanMenu"style="display:inline-block ;margin-right:3%">3 )</span><a href="#installazione">Installazione</a></li>
+              </div>
+              <br>
+          <span id="considerazioni" class=" badge bg-light s_title_paragraph">Considerazioni</span>
           <p><kbb>Django</kbb>
           potrebbe essere installato
           con il gestore dei pacchetti del <span title="sistema operativo">OS</span> , tuttavia , per almeno due ragioni, che esporrò , non è la scelta ottimale .
@@ -20,7 +27,7 @@
                 in teoria un numero di <a style="color:blue"   href="/creare_un_ambiente_virtuale_python" target="_blank"> ambienti virtuali</a> infiniti .
           </p>
 
-      <span class="badge bg-light s_title_paragraph">
+      <span id="requisiti" class="badge bg-light s_title_paragraph">
           <b>Requisiti</b>
           </span>
               <p>
@@ -32,20 +39,36 @@
         La seconda opzione alternativa alla prima è mantenere la versione <b>Python2X</b> tenendo presente
         che dovrai installare una versione di <b>Django</b>
         minore o uguale alla <b>1.11</b> , eseguendo:</p><pre><code class="baseStyle">$ pip install django==1.11</code></pre>
-      <span class="badge bg-primary">2 )</span> Un <b>terminale</b> <b>bash</b> o <b>sh</b>
-      <span class="badge bg-primary">3 )</span> Controlla che sia installato il gestore di pacchetti  <b>Python pip</b> eseguendo il comando <b>pip</b> nel terminale: <pre><code>$ pip</code></pre>Se non è installato : installalo : su <b> Debian/Ubuntu</b> ad esempio in questo modo : <pre><code>$ sudo apt install python-pip</code></pre>
-      <span class="badge bg-primary">4 )</span> Un <b>database</b> per memorizzare i dati a cui accederà la pagina/app Web . Django supporta PostgreSQL, MariaDB, MySQL, Oracle e SQLite . E' bene sapere che <b>SQLite</b>
+        <p>
+        <span class="badge bg-light">
+            2 )</span> Un <b>terminale</b> <b>bash</b> o <b>sh</b>
+
+            <p><span class="badge bg-light">
+                3 )</span>
+
+      Controlla che sia installato il gestore di pacchetti  <b>Python pip</b> eseguendo il comando <b>pip</b> nel terminale:</p>
+
+
+     <code class="baseStyle">$ pip</code>
+     <span class="badge bg-light s_title_paragraph">
+         <b>-</b>
+         </span>Se non è installato : installalo : su <b> Debian/Ubuntu</b> ad esempio in questo modo :
+     <code class="baseStyle">$ sudo apt install python-pip</code>
+     </p>
+
+      <p>
+         <span class="badge bg-light"> 4 )</span> Un <b>database</b> per memorizzare i dati a cui accederà la pagina/app Web . Django supporta PostgreSQL, MariaDB, MySQL, Oracle e SQLite . E' bene sapere che <b>SQLite</b>
             sulla maggior parte dei sistemi Linux è gia installato , e <b>Django</b> di default è configurato in<b> settings.py</b> per usarlo .</p>
 
-      <p  id="p_content">
-      <span class=" badge bg-light s_title_paragraph"><b>Installazione</b></span> Se i 4 punti sopra esposti sono soddisfatti , puoi installare <b>Django</b> . Ad oggi 15 ottobre 2022 , la versione stabile è la <b>4.1.2</b> . Installala usando pip , nel seguente modo :
-      <pre class="literal-block"><code>$ pip install Django</code></pre>
+
+      <p><span id="installazione" class=" badge bg-light s_title_paragraph">Installazione</span> Se i 4 punti sopra esposti sono soddisfatti , puoi installare <b>Django</b> . Ad oggi 15 ottobre 2022 , la versione stabile è la <b>4.1.2</b> . Installala usando pip , nel seguente modo :</p>
+      <code class="baseStyle">$ pip install Django</code><br>
 {% endblock content %}
-{% block footer %}
-{% include '_footer.html' %}
-{% endblock footer %}
 {%block blog%}<script id="s_blog">
     $(document).ready(function(){
       initBlogSGang("marioinstdjango","sol-7373");
     })
   </script>{%endblock%}
+{% block footer %}
+{% include '_footer.html' %}
+{% endblock footer %}
