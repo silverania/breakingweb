@@ -1,6 +1,6 @@
 /* By Mario , superior code */
 var CURRENT_URL=window.location.href
-const BASE_URL="http://127.0.0.1:8000/" // URL del server
+const BASE_URL="http://breakingweb.site/" // URL del server
 const CLIENT_URL=window.location.href.split('#')[0].split('?')[0]
 const HIDDENFIELD="?next="+window.location
 const XMLHTTPURL_GETUSER=BASE_URL+"user/blog/getuser"
@@ -108,7 +108,7 @@ function createSectionDivSpan(userAdmin,_userThatLogin){
     aBlogCambiaPassword.textContent="Modifica"
     aBlogEsci.textContent="Esci"
     aBlogEntra.setAttribute("class","nav-link")
-    aBlogEsci.setAttribute("href",BASE_URL+"user/logout/blog"+HIDDENFIELD)
+    aBlogEsci.setAttribute("href","user/logout/blog"+HIDDENFIELD)
     aBlogEsci.setAttribute("style","display:block;width:auto;text-align:right;")
     aBlogEsci.setAttribute("id","aEsci")
     liBlogEntra.setAttribute("style","display:inline;width:auto;margin-right:0px;")
@@ -597,9 +597,8 @@ function initBlogSGang(u,p){
             jsonLogged=JSON.parse(json)
             userprof=JSON.parse(jsonLogged)
             try {
-              userfirstName={"userin" : JSON.parse(userprof.userLogged)}            //get admin
+              userfirstName={"userin" : JSON.parse(userprof.userLogged)}
               userAuth=userfirstName.userin[0]
-              "e getComment."
             }
             catch (SyntaxError) {
               userfirstName=userprof.userLogged

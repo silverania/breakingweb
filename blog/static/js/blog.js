@@ -1,16 +1,16 @@
 /* By Mario , superior code */
 var CURRENT_URL=window.location.href
-const BASE_URL="https://breakingweb.site/" // URL del server
+const BASE_URL="http://breakingweb.site/" // URL del server
 const CLIENT_URL=window.location.href.split('#')[0].split('?')[0]
 const HIDDENFIELD="?next="+window.location
-const XMLHTTPURL_GETUSER="user/blog/getuser"
+const XMLHTTPURL_GETUSER=BASE_URL+"user/blog/getuser"
 const URL_NEW_POST=BASE_URL+"post/sendpost"
-const XMLHTTPURL_LOGIN="user/login/blog"+HIDDENFIELD
-const XMLHTTPURL_REGISTER="user/register/bloguser"+HIDDENFIELD
-const XMLHTTPURL_LOGOUT="user/logout/blog"+HIDDENFIELD
+const XMLHTTPURL_LOGIN=BASE_URL+"user/login/blog"+HIDDENFIELD
+const XMLHTTPURL_REGISTER=BASE_URL+"user/register/bloguser"+HIDDENFIELD
+const XMLHTTPURL_LOGOUT=BASE_URL+"user/logout/blog"+HIDDENFIELD
 const MAX_TEXTAREA_NUMBER=21
 const BASE_PHOTO_DIR=BASE_URL+"media/"
-const HTTPURL_CHANGEPASSWORD="user/change_password"+HIDDENFIELD
+const HTTPURL_CHANGEPASSWORD=BASE_URL+"user/change_password"+HIDDENFIELD
 var borderPost="none";
 var borderResponse="1px solid grey";
 var paPostOrResp;

@@ -52,6 +52,17 @@ div.breadcrumbs{
   width:90%!important;
 }
 
+.admin{
+    opacity:0.9;
+}
+
+.fa-comment-dots{
+    color:#ccebff;
+}
+
+
+.spanbooldog.admin{opacity:1;color:white;}
+
 [id^=divuserblog]{
   margin:0 auto;
 }
@@ -70,11 +81,16 @@ div.modal-content {
 text-decoration: none;
 }
 
-.spanbooldog{font-family:"orbitron";opacity: 0.3;}
+.spanbooldog
+{font-family:"orbitron";opacity: 0.3;}
 #div_comment_icon > #blog_icon > #a_download > .booldog > .spanbooldog
 {
     font-size:0.7rem;
-    }
+}
+
+.spanbooldog.blog{
+    display:none;
+}
 
 #div_comment_icon > #blog_icon > #a_download > .booldog > .badgebooldog > .fa-comment-dots  {
     font-size: 2rem;
@@ -87,8 +103,7 @@ text-decoration: none;
 }
 .fa-comment-dots{
     margin-top: -3%;
-    font-size: 2rem;
-    color: #84cbff91;
+    color: #692794;
     }
 
 .booldog{
@@ -139,7 +154,7 @@ text-decoration:none!important;
 
 #id_link_comment{
   margin:3% auto;
-  width:80%;
+  width: 80%;
 }
 
 [id^=d_head_blog]{
@@ -366,6 +381,10 @@ ul#ul_blog li{
         margin:0;
         width: 30%!important;
     }
+
+    .fa-comment-dots{
+            font-size:3rem;
+    }
   #p_text{
     width:100%!important;
   }
@@ -373,7 +392,7 @@ ul#ul_blog li{
     text-decoration: none;
     font-size:1rem;
 }
-
+}
 
 @media screen and (max-width: 780px) {
     textarea{
@@ -404,10 +423,10 @@ textarea {
 }
 .badgebooldog{
     font-size:0.9rem;
-    border: 1px solid;
+    /* border: 1px solid; */
 }
 .fa-comment-dots{
-    font-size: 2rem;
+    font-size: 3rem;
     }
 }
 
@@ -420,7 +439,7 @@ textarea {
 }
 .badgebooldog{
     /* font-size:0.3rem; */
-    border:3px solid green;
+    /* border:3px solid green; */
 }
 .fa-comment-dots{
     /* font-size: 1.8rem; */
@@ -435,7 +454,7 @@ textarea {
     height:100%;
 }
 .badgebooldog{
-    border:1px solid green;
+    /* border:1px solid green; */
     border-radius: 50px;
     /* max-height:80%; */
     font-size:0.2rem;

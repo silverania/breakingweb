@@ -7,6 +7,8 @@ from user.models import Profile
 from django.conf import settings
 from user.forms import SignUpForm
 import os
+from django.views.decorators.clickjacking import xframe_options_exempt
+from django.template.context_processors import csrf
 Tutorial = Tutorial.objects.all()
 Profile = Profile.objects.all()
 tutorial_all = Tutorial.all()
@@ -20,7 +22,14 @@ class Newpage(View):
         return render(request, newpage, {'form': form})
 
 
+@xframe_options_exempt
 def tutorial_detail(request, slug=""):
+    c = {}
+    c.update(csrf(request))
+    for key, value in c.items():
+        key = str(key)
+        value = str(value)
+    print(str(key)+str(value))
     author_tutorial = ''
     users = []
     if bool(tutorial_all):
@@ -56,11 +65,14 @@ def tutorial_detail(request, slug=""):
         print("Requestpath & template="+str(request.path+template))
         tutorial.visite = tutorial.visite+1
         tutorial.save(update_fields=['visite'])
-    return render(request, template, {'tutorial': tutorial, 'visitato':
-                                      tutorial.visite, 'login': request.user.is_authenticated,
-                                      'tutorial_all': tutorial_all, 'categorie': categorie,
-                                      'photo': photo, 'users': users, 'autore':
-                                      autore})
+    try:
+        return render(request, template, {'tutorial': tutorial, 'visitato':
+                                          tutorial.visite, 'login': request.user.is_authenticated,
+                                          'tutorial_all': tutorial_all, 'categorie': categorie,
+                                          'photo': photo, 'users': users, 'autore':
+                                          autore})
+    except UnboundLocalError:
+        return HttpResponse('<h2>No page found !</h2>')
 
 
 def readInfoClient(request):
@@ -70,7 +82,8 @@ def readInfoClient(request):
 
 class initHome(View):
     def get(self, request):
-        page = """
+        myhost = str(request.get_host())
+        page1 = """
         <!DOCTYPE html>
         <html lang="it" id="page" >
         <head>
@@ -120,7 +133,8 @@ class initHome(View):
         <p class="p_info" id="p_info">Cos'è BoolDog ?</p>
         <p id="p_content" class="p_content">BoolDog è un "software libero" di Hosting Commenti per Siti Web. Lo stesso usato su questo sito.</p>
         <p class="p_info" id="p_info">Installazione</p>
-        <p id="p_content" class="p_content">Registrati <a href="user/register/blog">qui</a>
+        <p id="p_content" class="p_content">Registrati <a href=\""""
+        page2 = """/user/register/blog">qui</a>
         per usare e installare il programma ed avere accesso alla pagina di gestione e moderazione dei messaggi.
         Dopodichè nel codice html del tuo sito , copia e incolla i tag che vedi sotto
         , sostituendo "user" e "password"
@@ -137,7 +151,9 @@ class initHome(View):
         </div>
         </header>
         <div class="container">
-        <div class="row justify-content-left"><a href="booldog/admin/">Pagina Di Amministrazione</a>
+        <div class="row justify-content-left"><a target="_blank" href="
+        """
+        page3 = """/booldog/admin/">Pagina Di Amministrazione</a>
         <div id="div_col_installazione" class="col-lg-12">
 
         <pre primary-lang="html">
@@ -160,7 +176,7 @@ class initHome(View):
         </footer>
         </body>
         </html>"""
-        return HttpResponse(page)
+        return HttpResponse(page1+myhost+page2+page3)
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

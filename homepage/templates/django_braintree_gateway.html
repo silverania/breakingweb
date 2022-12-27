@@ -14,7 +14,7 @@ Pay {% endblock keywords %}
 <div class="row justify-content-center mt-4 "><span class="badge  bg-light text-center" style="display:inline">Contenuti</span>
 
 
-    <div class="list-group list-group-flush list-group-numbered col-3 mt-3">
+    <div class="list-group list-group-flush list-group-numbered col-6 col-md-3 mt-3">
 
         <li class="list-group-item pageMenu"><a href="#requisiti">requisiti</a></li>
         <li class="list-group-item pageMenu"><a href="#obiettivi">obiettivi</a></li>
@@ -24,7 +24,7 @@ Pay {% endblock keywords %}
         <li class="list-group-item pageMenu"><a href="#divkey">recupero <b>id</b> e <b>key</b></a></li>
         <li class="list-group-item pageMenu"><a href="#divsettingspy">modifica di <b>settings.py</b></a></li>
     </div>
-    <div class="list-group list-group-flush list-group-numbered col-3 mt-3">
+    <div class="list-group list-group-flush list-group-numbered col-6 col-md-3 mt-3">
 
         <li class="list-group-item pageMenu"><a href="#dropinhtml">creazione del dropin</a></li>
         <li class="list-group-item pageMenu"><a href="#dropincss">il file css</a></li>
@@ -277,8 +277,8 @@ il client_token è valido per un massimo di 24 ore. Nella seguente tabella sono 
                                          from home import views<br><br>
 
                                          urlpatterns = [<br>
-                                            &nbsp&nbsp&nbsp path('home/', views.page,<br> name="page"),<br>
-                                            path('/page', views.page),
+                                            &nbsp&nbsp&nbsp path('home/', views.page, name="page"),<br>
+                                            &nbsp&nbsp&nbsp&nbsppath('/page', views.page),
                                          ]<br>
                                      </code>
                                  </div>

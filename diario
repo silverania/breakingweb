@@ -1,5 +1,0 @@
-
-- controllare il login con facebook sul server e client
-- modificare la pagina di login sulla pagina admin per visualizzare la label webtalk al posto di django.
-- controlla se il tag di google si trova su tutte le pagine .
-- mettere un icona v ( simbolo Verificato) dopo la registrazione

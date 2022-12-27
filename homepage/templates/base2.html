@@ -1,8 +1,9 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="it" id="page" >
+<html id="page" >
 
 <head>
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
     <meta name="author" content="silverania">
@@ -15,18 +16,18 @@
     <link rel="stylesheet" href="{% static "css/homepage.css" %}">
     <link rel="stylesheet" href="{% static "css/footer.css" %}">
     <link rel="stylesheet" href="{% static "css/all.min.css" %}">
-    <link rel="stylesheet" href="/static/css/blog.css">
+    <link rel="stylesheet" href="https://127.0.0.1:8000/static/css/blog.css">
     <script  src="{% static 'js/jquery.min.js' %}"></script>
     <script src="{% static 'js/all.min.js' %}"></script>
-
+    <link href="https://www.w3schools.com/w3css/4/w3.css" rel="stylesheet">
 
     <script  src="{% static 'node_modules/@popperjs/core/dist/umd/popper.js' %}"></script>
     <script  src="{% static 'node_modules/bootstrap/dist/js/bootstrap.js' %}"></script>
     <script  src="{% static 'js/aside.js' %}"></script>
     <script  src="{% static 'js/progressbar.js' %}"></script>
     <script src="{% static 'js/style.js' %}"></script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1430448184465088"
-    crossorigin="anonymous"></script>
+    <!--script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1430448184465088"
+    crossorigin="anonymous"></script-->
 
     {% block otherscripts %} {% endblock %}
 </head>
@@ -34,7 +35,7 @@
 <body   onscroll="var h=document.body.scrollHeight;getPosition();">
     <div class="container-fluid " id="container_page" >
         <div class="row ">
-            <progress  value="0" max="100" id="progressbar"></progress>
+            <progress  value="0" max="100" disabled id="progressbar"></progress>
         </div>
     </div>
 
@@ -42,8 +43,8 @@
     {% include '_header.html'%}
     {% endblock header %}
     <div id="c_aside" class="container-fluid">
-        <div class="row justify-content-left">
-            <div class="col-3"  id="section_left_navbar">
+        <div class="row justify-content-center">
+            <div class="col-md-3"  id="section_left_navbar">
                 <section role="navigation">
                     <aside>
                         <nav id="nav_top">
@@ -140,7 +141,7 @@
 
         </div>
 
-        <div role="main" class="col-9 col-sm-9 col-md-6">
+        <div role="main" class="col-12 col-sm-12 col-md-6">
             <article>
                 <header>
                     <div class="row mb-5">
@@ -160,7 +161,7 @@
                             </div>
                         </div>
                         </header>
-                <div class="col-12 ">
+                <div class="col-12 col-sm-12 col-md-12">
                     {% block content %}
                     {% endblock content %}
                 </div>
@@ -191,10 +192,17 @@
             </div>
         </div>
     </div>
-
-
-        {% block footer %}{% include '_footer.html' %}{% endblock %}
-        <script  src="{% static 'js/blog.js'%}"></script>
-        {%block blog%}{%endblock%}
+{% block footer %}{% include '_footer.html' %}{% endblock %}
+<div class="row">
+    <iframe onload="iframeLoaded()" id="booldogFrame"  style="margin-bottom:0;overflow-y:hidden;" src='https://127.0.0.1:8000/booldog?url=https://127.0.0.1:9000'></iframe>
+</div>
+<script>function iframeLoaded(){
+    var iframe=document.getElementById('booldogFrame');
+    iframe.height = "";
+        iframe.height = iframe.contentWindow.document.body.scrollHeight + "px";
+    }
+    </script>
+</body>
+</html>
     </body>
     </html>
