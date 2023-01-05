@@ -24,7 +24,7 @@ urlpatterns = [
     path('', include('homepage.urls')),
 
     path('user/', include('user.urls')),
-    path('post/', include('blog.urls', namespace="blog")),
+    #path('post/', include('blog.urls', namespace="blog")),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,

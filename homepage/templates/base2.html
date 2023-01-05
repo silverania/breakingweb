@@ -16,7 +16,6 @@
     <link rel="stylesheet" href="{% static "css/homepage.css" %}">
     <link rel="stylesheet" href="{% static "css/footer.css" %}">
     <link rel="stylesheet" href="{% static "css/all.min.css" %}">
-    <link rel="stylesheet" href="https://127.0.0.1:8000/static/css/blog.css">
     <script  src="{% static 'js/jquery.min.js' %}"></script>
     <script src="{% static 'js/all.min.js' %}"></script>
     <link href="https://www.w3schools.com/w3css/4/w3.css" rel="stylesheet">
@@ -146,7 +145,7 @@
                 <header>
                     <div class="row mb-5">
                         <div id="divuserphoto" class="col-12 col-sm-12 col-md-12">
-                            <img id="imguser" class="img-fluid rounded" src='{% block photo %}{% endblock photo %}'
+                            <img id="imguser" class="img-fluid rounded" src='{% block photo %}{{photo}}{% endblock photo %}'
                             alt="non posso caricare immaggini">
                             <a id="aTitle" href="{{tutorial.slug}}">{% block tut_title %}
                                 <span id="s_title">{% block category %}{{tutorial.category.category}}
@@ -193,15 +192,38 @@
         </div>
     </div>
 {% block footer %}{% include '_footer.html' %}{% endblock %}
-<div class="row">
-    <iframe onload="iframeLoaded()" id="booldogFrame"  style="margin-bottom:0;overflow-y:hidden;" src='https://127.0.0.1:8000/booldog?url=https://127.0.0.1:9000'></iframe>
-</div>
-<script>function iframeLoaded(){
-    var iframe=document.getElementById('booldogFrame');
-    iframe.height = "";
-        iframe.height = iframe.contentWindow.document.body.scrollHeight + "px";
-    }
+<script>
+            var height=""
+        //iframe.style.height = iframe.contentWindow.document.body.scrollHeight + "px";
+             alert("received")
+             window.addEventListener("message", function (event) {
+            if (!(event.origin.includes('https://127.0.0.1:8000'))) {
+                console.log("messaggio ignorato");
+                return -1;
+                ("mancata autorizzazione!")
+                }
+            else{
+                height =event.data.ogetto
+                alert(height)
+                iframe.setAttribute('height',height) ;
+
+                //iframe.style.height = iframe.contentWindow.document.body.scrollHeight + "px";
+                }
+        });
     </script>
+    <script>
+    if(height==""){
+    var iframe=document.createElement("IFRAME")
+    let mainurl=location.href.toString();
+        iframe.setAttribute("id","booldogFrame");
+        iframe.setAttribute("scrolling" ,"no")
+        alert(mainurl)
+        iframe.setAttribute('src','https://127.0.0.1:8000/booldog?url='+mainurl) ;
+        const  body=document.getElementsByTagName("body")[0]
+        body.appendChild(iframe)
+    }
+        </script>
+
 </body>
 </html>
     </body>
