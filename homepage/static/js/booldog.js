@@ -12,6 +12,10 @@ let f = function () {
             width = event.data.base;
             iframe.setAttribute('height', height);
             iframe.setAttribute('width', width);
+            if (event.data.reload === true) {
+                document.getElementById('booldogFrame').src = "https://localbooldog:8000/booldog?mainurl=" + this.location.href.toString();
+                console.log("iframe reload !");
+            }
             //iframe.style.height = iframe.contentWindow.document.body.scrollHeight + "px";
         }
     });
@@ -22,7 +26,7 @@ let f = function () {
         iframe.setAttribute("id", "booldogFrame");
         iframe.setAttribute("scrolling", "no");
         iframe.setAttribute("style", "display:block;margin:100px auto;width:100%;");
-        iframe.setAttribute('src', 'https://localbooldog:8000/booldog?url=' + mainurl);
+        iframe.setAttribute('src', 'https://localbooldog:8000/booldog?mainurl=' + mainurl);
         const body = document.getElementsByTagName("body")[0];
         body.appendChild(iframe);
     }

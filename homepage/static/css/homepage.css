@@ -88,6 +88,10 @@ html {
     min-height:100vh;
 }
 
+[id^='amznBanners'],.my-auto{
+    z-index:99;
+}
+
 #divbooldog{
     display:none;
 }
