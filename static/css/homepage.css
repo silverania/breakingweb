@@ -92,6 +92,9 @@ html {
     display:none;
 }
 
+footer{
+    margin-bottom:5%;
+}
 h2,h3{font-family: '';
       margin-bottom: 40px;}
 

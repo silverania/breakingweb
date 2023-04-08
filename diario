@@ -1,1 +1,9 @@
 homepage view ritorna due volte il template
+
+- Continua con registrazione e login su blogjs
+- blog.js lasciato a riga 773
+
+- risolto problema di ritorno alla pagina next , in seguito al login su blog
+- continuo a migliorare il process odi autenticazione
+. -' inserimento del sito web nella registrazione per admin deVE ESSERE OBBLIGATORIO
+- tgenerare event osu click search in comparazioneprezzi

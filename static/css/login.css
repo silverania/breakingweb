@@ -33,7 +33,7 @@ a:hover {
     margin-left:-5px!important;
 }
 
-
+html,body {width:auto;height: 3;min-height: auto;}
 
 
 

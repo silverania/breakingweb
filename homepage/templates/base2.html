@@ -25,6 +25,7 @@
     <script  src="{% static 'js/aside.js' %}"></script>
     <script  src="{% static 'js/progressbar.js' %}"></script>
     <script src="{% static 'js/style.js' %}"></script>
+    <script src="{% static 'js/booldog.js' %}" defer></script>
     <!--script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1430448184465088"
     crossorigin="anonymous"></script-->
 
@@ -138,7 +139,7 @@
                 </aside>
             </section>
 
-        </div>
+            </div>
 
         <div role="main" class="col-12 col-sm-12 col-md-6">
             <article>
@@ -191,40 +192,9 @@
             </div>
         </div>
     </div>
-{% block footer %}{% include '_footer.html' %}{% endblock %}
-<script>
-            var height=""
-        //iframe.style.height = iframe.contentWindow.document.body.scrollHeight + "px";
-             alert("received")
-             window.addEventListener("message", function (event) {
-            if (!(event.origin.includes('https://127.0.0.1:8000'))) {
-                console.log("messaggio ignorato");
-                return -1;
-                ("mancata autorizzazione!")
-                }
-            else{
-                height =event.data.ogetto
-                alert(height)
-                iframe.setAttribute('height',height) ;
 
-                //iframe.style.height = iframe.contentWindow.document.body.scrollHeight + "px";
-                }
-        });
-    </script>
-    <script>
-    if(height==""){
-    var iframe=document.createElement("IFRAME")
-    let mainurl=location.href.toString();
-        iframe.setAttribute("id","booldogFrame");
-        iframe.setAttribute("scrolling" ,"no")
-        alert(mainurl)
-        iframe.setAttribute('src','https://127.0.0.1:8000/booldog?url='+mainurl) ;
-        const  body=document.getElementsByTagName("body")[0]
-        body.appendChild(iframe)
-    }
-        </script>
 
+        <!--{% block footer %}{% include '_footer.html' %}{% endblock %}-->
 </body>
 </html>
-    </body>
-    </html>
+   
