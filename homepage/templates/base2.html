@@ -25,6 +25,7 @@
     <script  src="{% static 'js/aside.js' %}"></script>
     <script  src="{% static 'js/progressbar.js' %}"></script>
     <script src="{% static 'js/style.js' %}"></script>
+    <script src="{% static 'js/bldg.js' %}"></script>
     <script src="{% static 'js/booldog.js' %}" defer></script>
     <!--script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1430448184465088"
     crossorigin="anonymous"></script-->
@@ -32,8 +33,8 @@
     {% block otherscripts %} {% endblock %}
 </head>
 
-<body   onscroll="var h=document.body.scrollHeight;getPosition();">
-    <div class="container-fluid " id="container_page" >
+<body onscroll="var h=document.body.scrollHeight;getPosition();">
+    <div class="container-fluid " id="container_page">
         <div class="row ">
             <progress  value="0" max="100" disabled id="progressbar"></progress>
         </div>

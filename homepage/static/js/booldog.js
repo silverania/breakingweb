@@ -1,11 +1,11 @@
+var iframe;
 let f = function () {
     var height = "";
     var width = "";
     window.addEventListener("message", function (event) {
         if (!(event.origin.includes('https://localbooldog:8000'))) {
             console.log("messaggio ignorato");
-            return -1;
-            ("mancata autorizzazione!")
+            ("mancata autorizzazione!");
         }
         else {
             height = event.data.height;
@@ -13,7 +13,7 @@ let f = function () {
             iframe.setAttribute('height', height);
             iframe.setAttribute('width', width);
             if (event.data.reload === true) {
-                document.getElementById('booldogFrame').src = "https://localbooldog:8000/booldog?mainurl=" + this.location.href.toString();
+                document.getElementById('booldogFrame').src = "https://localbooldog:8000/booldog?mainurl=" + this.location.href.toString() + "&user=" + user + "&password=" + password;
                 console.log("iframe reload !");
             }
             //iframe.style.height = iframe.contentWindow.document.body.scrollHeight + "px";
@@ -21,12 +21,15 @@ let f = function () {
     });
 
     if (height == "") {
-        var iframe = document.createElement("IFRAME");
+        iframe = document.createElement("IFRAME");
         let mainurl = location.href.toString();
         iframe.setAttribute("id", "booldogFrame");
         iframe.setAttribute("scrolling", "no");
+        iframe.setAttribute("data-user", user);
+        iframe.setAttribute("data-pd", password);
+        iframe.setAttribute("data-auth", "");
         iframe.setAttribute("style", "display:block;margin:100px auto;width:100%;");
-        iframe.setAttribute('src', 'https://localbooldog:8000/booldog?mainurl=' + mainurl);
+        iframe.setAttribute('src', 'https://localbooldog:8000/booldog?mainurl=' + mainurl + "&user=" + user + "&password=" + password);
         const body = document.getElementsByTagName("body")[0];
         body.appendChild(iframe);
     }
